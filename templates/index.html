@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="{{ html_lang_setting }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>korona.kommune.nu</title>
+    <link rel="stylesheet" href="/css/bulma.min.css">
+</head>
+<body>
+<section class="hero has-background-info-light">
+  <div class="hero-body pt-4">
+    <nav class="level">
+  <!-- Left side -->
+<div class="level-left">
+&nbsp; LOGO her?
+</div>
+
+  <!-- Right side -->
+  <div class="level-right ">
+    <p class="level-item"><a class="button is-primary"><strong>Hjem</strong></a></p>
+    <p class="level-item"><a class="button is-primary">Utvalg</a></p>
+    <p class="level-item"><a class="button is-primary">Om tjenesten</a></p>
+  </div>
+</nav>  
+    <div class="container has-text-centered">
+      <h1 class="title is-uppercase is-1">
+        korona.kommune.nu
+      </h1>
+      <h2 class="subtitle is-3">
+        Dagsaktuelle tall for ditt hjemsted
+      </h2>
+    </div>
+  </div>
+</section>
+<nav class="level is-mobile">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Nye smittede</p>
+      <p class="title">618</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Kommuner med smitte</p>
+      <p class="title">212</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Gr&oslash;nne</p>
+      <p class="title">218</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Oransje</p>
+      <p class="title">124</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Røde</p>
+      <p class="title">14</p>
+    </div>
+  </div>
+</nav>
+
+
+
+<section class="section pt-2 pb-1">
+    <div class="container">
+        <h1 class="title"><strong>din kommune</strong>.kommune.nu</h1>
+        <h2 class="subtitle">
+            Denne siden er en oppslagstjeneste slik at alle kan <strong>sjekke gjeldende korona status</strong> for sin kommune, sitt fylke eller landet forøvrig.
+            Tallene hentes regelmessig fra Folkehelseinstituttet og ble sist oppdatert {{ updated }}. Les mer <a href="">om utvalg</a>.
+            Bruk søkemotoren under eller lag <a href="https://sjekk.kommune.nu" title="Sp&oring;rring">din egen spørring</a>.
+        </h2>
+    </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h1 class="title">Statistikk over fylker og kommuner i Norge</h1>
+    <h2 class="subtitle">
+        Siden 2020 er det 11 fylker og 356 kommuner i landet v&aring;rt. Klikk p&aring; ditt fylke for &aring; se de mest relevante korona-tallene:
+<a href="" title="Agder">Agder</a>,
+ <a href="" title="Innlandet">Innlandet</a>,
+ <a href="" title="M&oslash;re og Romsdal">Møre og Romsdal</a>,
+ <a href="" title="Nordland - Nordlánnda">Nordland - Nordlánnda</a>,
+ <a href="" title="Oslo">Oslo</a>,
+ <a href="" title="Rogaland">Rogaland</a>,
+ <a href="" title="Troms og Finnmark - Romsa ja Finnmárku - Tromssa ja Finmarkku">Troms og Finnmark - Romsa ja Finnmárku - Tromssa ja Finmarkku</a>,
+ <a href="" title="Trøndelag - Trööndelage">Trøndelag - Trööndelage</a>,
+ <a href="" title="Vestfold og Telemark">Vestfold og Telemark</a>,
+ <a href="" title="Vestland">Vestland</a>,
+ og <a href="" title="Viken">Viken</a>.</j2>
+ <h2 class="subtitle">
+         Per {{ updated }} er det registrert korona i NN av 356 kommuner. Finn din kommune under:
+
+    </h2>
+  </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="field has-addons pt-3">
+                <form action="/sok/" method="get">
+                <p class="control">
+                    <input name="sok" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*">
+                </p>
+                <p class="control">
+                    <button type="submit" class="button is-large is-primary">Hent</button>
+                </p>
+                </form>
+            </div>
+        </div>
+        <div class="block has-text-centered pb-3">
+            <p class="help has-text-grey">* Lag din egen nøkkel (for eksempel &quot;E6&quot;) på <a href="">denne siden</a>.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section>
+    <footer class="footer has-background-info-light pb-3">
+        <div class="content has-text-centered">
+            <p>
+                Tjenesten <strong>korona.kommune.nu</strong> er laget av <a href="" title="Sigbj&oslash;rn Smelror">Sigbj&oslash;rn Smelror</a> &copy; 2020.
+                <br />
+                Statistikken hentes regelmessig fra <a href="https://fhi.no" title="FHI: Folkehelseinstituttet">FHI: Folkehelseinstituttet</a>.
+            </p>
+        </div>
+</footer>
+</section>
+</body>
+</html>

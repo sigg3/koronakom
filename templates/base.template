@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="{{ html_lang_setting }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ head_title }}</title>
+    <link rel="stylesheet" href="/css/bulma.min.css">
+</head>
+<body>
+<section class="hero has-background-info-light">
+  <div class="hero-body pt-4">
+    <nav class="level">
+  <!-- Left side -->
+<div class="level-left">
+{% block logo %}
+{% if languages == 1 %}
+<span class="tag is-warning"><strong>BETA versjon</strong></span> <!-- only norsk -->
+{% else %}
+<div class="dropdown is-hoverable is-primary">
+  <div class="dropdown-trigger">
+    <button class="button has-icons-right" aria-haspopup="true" aria-controls="dropdown-menu3">
+      <span>{{ lang_selector }}</span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+    <div class="dropdown-content">
+      {% for lang in html_lang %}
+      <a href="/lang/{{lang}}"" class="dropdown-item">
+        {{lang}}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+</div>
+
+  <!-- Right side -->
+  {% block menu %}
+  <div class="level-right ">
+    <p class="level-item"><a href="/" title="Hjem" class="button is-primary"><strong>Hjem</strong></a></p>
+    <p class="level-item"><a href="/utvalg" title="Utvalg" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
+    <p class="level-item"><a href="/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
+  </div>
+  {% endblock %}
+</nav>  
+    <div class="container has-text-centered">
+      <h1 class="title is-uppercase is-1">
+        <a href="{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
+      </h1>
+      <h2 class="subtitle is-3">
+        {{ hero_subtitle }}
+      </h2>
+    </div>
+  </div>
+</section>
+{% block tweety %}
+{% endblock %}
+
+{% block sector_1 %}&nbsp;
+{% endblock %}
+
+{% block sector_2 %}&nbsp;
+{% endblock %}
+
+{% block se_bottom %}
+<section>
+    <div class="container">
+        <div class="columns is-centered">
+           <form action="/sok/" method="get">
+            <div class="field has-addons pt-3">
+                <p class="control">
+                    <input name="sok" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*">
+                </p>
+                <p class="control">
+                    <button type="submit" class="button is-large is-primary">Hent</button>
+                </p>
+            </div>
+           </form>
+        </div>
+        <div class="block has-text-centered pb-3">
+            <p class="help has-text-grey">* Lag din egen nøkkel (for eksempel &quot;E6&quot;) på <a href="">denne siden</a>.</p>
+        </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+<section>
+    <footer class="footer has-background-info-light pb-3 mb-0">
+        <div class="content has-text-centered">
+            <p>
+                Tjenesten <strong>korona.kommune.nu</strong> er laget av <a href="/om" title="Sigbj&oslash;rn Smelror">Sigbj&oslash;rn Smelror</a> &copy; 2020.
+                <br />
+                Statistikken hentes regelmessig fra <a href="https://fhi.no" title="FHI: Folkehelseinstituttet">FHI: Folkehelseinstituttet</a>.
+            </p>
+        </div>
+</footer>
+</section>
+</body>
+</html>
