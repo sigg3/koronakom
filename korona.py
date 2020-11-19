@@ -11,14 +11,14 @@ from norway import Norway
 
 
 # >  R O A D M A P <
-# 0. get code on github                                 [    ]
-# 1. get heroku dyno up (hobby)                         [    ]
+# 0. get code on github                                 [ OK ]
+# 1. get heroku dyno up (hobby)                         [ OK ]
 # 2. get C custom queries up                            [ OK ]
 # 2. get ENV storage key running                        [ OK ]
 # 2  get fylker working                                 [ OK ]
 # 2. create jinjatemplate for error messages            [    ]
 # 2. implement error message template redirects         [    ]
-# 3. get https up and enable https only middleware      [    ]
+# 3. get https up and enable https only middleware      [ OK ]
 # 4. get custom query submission up                     [    ]
 # 5. get subdomains working                             [    ]
 # 6. get languages working (gettext or equiv)           [    ]
