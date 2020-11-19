@@ -4,7 +4,7 @@ from starlette.applications import Starlette
 
 from starlette.middleware import Middleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
-
+from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 #from starlette.endpoints import HTTPEndpoint
 #from starlette.responses import PlainTextResponse
 #from starlette.requests import Request
@@ -69,14 +69,12 @@ async def clean_up_korona():
 # Note: let us do HTTPSRedirectMiddleware when TLS available
 middleware = [
     Middleware(
-        TrustedHostMiddleware, allowed_hosts=[
-                                              'kommune.nu',
-                                              '*.kommune.nu',
-                                              'localhost',
-                                              '*.localhost'
-                                              ]
-            )
+        TrustedHostMiddleware, allowed_hosts=['kommune.nu', '*.kommune.nu']
+            ),
+    Middleware(HTTPSRedirectMiddleware)
         ]
+
+
 
 # subdomain example
 # app = Starlette()
