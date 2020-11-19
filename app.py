@@ -84,7 +84,7 @@ middleware = [
 # app.host('{subdomain}.example.org', kommune_url)
 # kommune_url = Router()
 
-app = Starlette(debug=True, routes=[
+app = Starlette(debug=False, routes=[
 #  Route('/', hjem, methods=["POST"]),
   Route('/', hjem, name="homepage"),
 #  Route('/sjekk/{input:str}', sjekk, methods=["GET"]),
