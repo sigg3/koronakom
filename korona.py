@@ -816,6 +816,9 @@ def setup():
     # -> current data dict as:  FHI.current
     s.FHI = Folkehelseinstituttet(s.store)
 
+    # Test ENV heroku config vars
+    print(f"set store to {s.FHI.store}")
+
     # Setup staten
     s.norge = Norway()
 
