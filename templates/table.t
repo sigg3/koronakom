@@ -14,11 +14,11 @@
 {% for table in result_dict.keys() %}
 {% if only_one %} 
 <div class="tile is-ancestor mt-4 pt-8">
-    <div class="tile is-1">
+    <div class="tile is-3">
         &nbsp;
     </div>
-    <div class="tile is-7">
-        <table class="table is-fullwidth is-size-4">
+    <div class="tile is-5">
+        <table class="table is-fullwidth">
           <thead>
             <tr>
               <th>Utvikling</th>

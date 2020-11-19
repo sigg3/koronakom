@@ -36,7 +36,7 @@
 {% block sector_1 %}
 <section class="section pt-2 pb-1">
     <div class="container">
-        <h1 class="title"><em>din kommune</em>.kommune.nu</h1>
+        <h1 class="title"><em>din</em>.kommune.nu</h1>
         <h2 class="subtitle">
             Denne siden er en oppslagstjeneste for &aring; enkelt kunne <strong>sjekke gjeldende korona status</strong> for sin kommune, sitt fylke eller landet forøvrig.
             Tallene hentes daglig fra Folkehelseinstituttet og ble sist oppdatert {{ nordate }}. <a href="/om" title="Om tall og tjenesten">Les mer her</a>.
