@@ -14,7 +14,7 @@ from norway import Norway
 # 0. get code on github                                 [ OK ]
 # 1. get heroku dyno up (hobby)                         [ OK ]
 # 2. get C custom queries up                            [ OK ]
-# 2. get ENV storage key running                        [ OK ]
+# 2. get ENV storage key running                        [ -- ] <= does not work
 # 2  get fylker working                                 [ OK ]
 # 2. create jinjatemplate for error messages            [    ]
 # 2. implement error message template redirects         [    ]
