@@ -2,7 +2,6 @@ aiofiles==0.6.0
 asyncio==3.4.3
 certifi==2020.11.8
 click==7.1.2
-example==0.1.0
 gunicorn==20.0.4
 h11==0.11.0
 httpcore==0.12.1
@@ -21,4 +20,3 @@ six==1.15.0
 sniffio==1.2.0
 starlette==0.14.1
 uvicorn==0.12.2
-uvloop==0.14.0
