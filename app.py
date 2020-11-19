@@ -70,8 +70,8 @@ async def clean_up_korona():
 middleware = [
     Middleware(
         TrustedHostMiddleware, allowed_hosts=['kommune.nu', '*.kommune.nu']
-            )
-#    Middleware(HTTPSRedirectMiddleware)
+            ),
+    Middleware(HTTPSRedirectMiddleware)
         ]
 
 
