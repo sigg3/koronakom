@@ -285,14 +285,14 @@ async def om_tjenesten(request):
     #print(test)
     #print(request.url)
 
-    subtitle = "Kjapp oversikt med tall fra Folkehelseinstituttet"
+    subtitle = "Kjapp oversikt med tall fra FHI"
     s, response_dat = get_template_vars()
     response_dat.update(
         {
             "request": request,
             "head_title": "Om kommune.nu",
             "hero_link": "/om",
-            "hero_title": "om.kommune.nu",
+            "hero_title": "Om kommune.nu",
             "hero_subtitle": subtitle,
         }
     )
