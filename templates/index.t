@@ -1,6 +1,6 @@
 {% extends "base.template" %}
 {% block tweety %}
-<nav class="level is-mobile">
+<nav class="level">
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Nye smittede</p>

@@ -48,7 +48,7 @@
   {% endblock %}
 </nav>  
     <div class="container has-text-centered">
-      <h1 class="title is-uppercase is-1">
+      <h1 class="title is-uppercase is-2">
         <a href="{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
       </h1>
       <h2 class="subtitle is-3">
