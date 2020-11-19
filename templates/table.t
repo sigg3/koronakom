@@ -97,14 +97,14 @@
         </div>
     </div>
     <div class="tile is-6">
-        <table class="table is-size-5">
+        <table class="table">
           <thead>
             <tr>
-              <th>Utvikling</th>
-              <th>siste to uker</th>
-              <th>siste uken</th>
-              <th>siste tre dager</th>
-              <th>siste 24 timer</th>
+              <th>Utvikling siste</th>
+              <th>to uker</th>
+              <th>uke</th>
+              <th>3 dager</th>
+              <th>24 timer</th>
             </tr>
           </thead>
           <tbody>
@@ -190,14 +190,14 @@
             &nbsp;
         </div>
         <div class="column">
-            <table class="table is-size-5">
+            <table class="table">
                <thead>
                   <tr>
-                    <th>Utvikling</th>
-                    <th>siste to uker</th>
-                    <th>siste uken</th>
-                    <th>siste tre dager</th>
-                    <th>siste 24 timer</th>
+                    <th>Utvikling siste</th>
+                    <th>2 uker</th>
+                    <th>uke</th>
+                    <th>3 dager</th>
+                    <th>24 timer</th>
                   </tr>
                 </thead>
                 <tbody>
