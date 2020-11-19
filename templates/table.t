@@ -22,8 +22,8 @@
           <thead>
             <tr>
               <th>Utvikling siste</th>
-              <th class="has-text-right">to uker</th>
-              <th class="has-text-right">uke</th>
+              <th class="has-text-right">14 dager</th>
+              <th class="has-text-right">7 dager</th>
               <th class="has-text-right">3 dager</th>
               <th class="has-text-right">24 timer</th>
             </tr>
@@ -101,8 +101,8 @@
           <thead>
             <tr>
               <th>Utvikling siste</th>
-              <th>to uker</th>
-              <th>uke</th>
+              <th>14 dager</th>
+              <th>7 dager</th>
               <th>3 dager</th>
               <th>24 timer</th>
             </tr>
@@ -161,7 +161,7 @@
 <div class="block">&nbsp;</div>
 <div class="container">
     <div class="columns">
-        <div class="column is-one-fifth">
+        <div class="column is-one-third">
             &nbsp;
         </div>
         <div class="column">
@@ -186,7 +186,7 @@
         </div>
     </div>
     <div class="columns">
-        <div class="column is-one-fifth">
+        <div class="column is-one-third">
             &nbsp;
         </div>
         <div class="column">
@@ -194,8 +194,8 @@
                <thead>
                   <tr>
                     <th>Utvikling siste</th>
-                    <th>2 uker</th>
-                    <th>uke</th>
+                    <th>14 dager</th>
+                    <th>7 dager</th>
                     <th>3 dager</th>
                     <th>24 timer</th>
                   </tr>
