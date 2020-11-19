@@ -21,11 +21,11 @@
         <table class="table is-fullwidth">
           <thead>
             <tr>
-              <th>Utvikling</th>
-              <th class="has-text-right">siste to uker</th>
-              <th class="has-text-right">siste uken</th>
-              <th class="has-text-right">siste tre dager</th>
-              <th class="has-text-right">siste 24 timer</th>
+              <th>Utvikling siste</th>
+              <th class="has-text-right">to uker</th>
+              <th class="has-text-right">uke</th>
+              <th class="has-text-right">3 dager</th>
+              <th class="has-text-right">24 timer</th>
             </tr>
           </thead>
           <tbody>
