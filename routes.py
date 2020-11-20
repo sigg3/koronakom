@@ -94,11 +94,76 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 #    print(req)
 #    return PlainTextResponse(f"OK ?> requested = {req}")
 
+async def subdomain_kommune(kid, request):
+    """
+    Deals with it
+    For full commentary see fritekst()
+    """
+
+    # Debug
+    print(f"got request = {request}")
+    print(dir(request))
+
+    print(request.url)
+
+    data, skipped_items = korona.app_query([kid])
+    _kingdom = data.pop('0000')
+    s, response_dat = get_template_vars()
+    hero_title = data[list(data.keys())[0]]['name']
+    head_title = f"Korona-status for {hero_title}"
+    hero_link = data[list(data.keys())[0]]['url']
+    subtitle = data[list(data.keys())[0]]['alt']
+    hero_subtitle = "Tall for din kommune "
+    if subtitle:
+        hero_subtitle = data[list(data.keys())[0]]['alt']
+    response_dat.update(
+        {
+            "hero_link": hero_link,
+        }
+    )
+
+    # Build response dict
+    response_dat.update(
+                    {
+                    "request": request,
+                    "head_title": head_title,
+                    "hero_title": hero_title,
+                    "hero_subtitle": hero_subtitle,
+                    "skipped_items": skipped_items,
+                    "result_dict": data,
+                    "only_one": True,
+                    "exactly_two": False
+                    }
+    )
+
+    return templates.TemplateResponse('table.t', response_dat)
+
+
+
 
 async def hjem(request):
     # fetch minimal data
     s, response_dat = get_template_vars()
     today = s.datapoints[0]
+
+    # check subdomain
+    full_url = str(request.url)
+    subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
+    if subdomain in ["korona", "din", "om", "www"]:
+        if subdomain == "om":
+            response = RedirectResponse(url='/om')
+        elif subdomain == "sjekk":
+            response = RedirectResponse(url='/utvalg')
+    else:
+        items, item_type = korona.app_get_items([subdomain])
+        if len(items) == 1:
+            if item_type == 0:
+                await subdomain_kommune(items[0], request)
+            elif item_type == 1:
+                return RedirectResponse(url=f'/f/{items[0]}')
+            else:
+                return RedirectResponse(url=f'/sok/?sok={items[0]}')
+
     try:
         response_dat.update(s.book['ro']['0000'][today])
     except KeyError:
@@ -187,7 +252,7 @@ async def fritekst(request):
             # error no_data (no query hits either..?)
             response = RedirectResponse(url='/') # TBD
 
-        # templat toggle bools
+        # template toggle bools
         only_one = True if returned_items == 1 else False
         exactly_two = True if returned_items == 2 else False
 
@@ -471,6 +536,7 @@ async def fylke(request):
 
 async def kommune(request):
     """ Let the norge.lookup method do the job """
+    print(f"received {request.keys()}")
     try:
         uinput = html.escape(request.path_params['kom'])
     except:
