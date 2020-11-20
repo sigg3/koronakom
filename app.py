@@ -70,9 +70,7 @@ async def clean_up_korona():
 middleware = [
     Middleware(
         TrustedHostMiddleware, allowed_hosts=['kommune.nu',
-                                              '*.kommune.nu',
-                                              'localhost',
-                                              '*.localhost'
+                                              '*.kommune.nu'
                                               ]
             ),
     Middleware(HTTPSRedirectMiddleware)
@@ -124,10 +122,11 @@ middleware = [
 # Application
 app = Starlette(
                 debug=True,
-#                middleware=middleware,
+                middleware=middleware,
                 on_startup=[initialize_korona],
                 on_shutdown=[clean_up_korona]
 )
+
 
 # Routing
 site_main = Router(
