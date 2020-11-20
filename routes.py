@@ -94,18 +94,96 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 #    print(req)
 #    return PlainTextResponse(f"OK ?> requested = {req}")
 
-async def subdomain_kommune(kid, request):
+async def subdomain_vvhf(request):
+    """ Vestre Viken HF subdomene """
+    pass
+
+
+async def subdomain_parser(request):
     """
-    Deals with it
+    Internal route for different subdomains
+    This is the main entry point for requests that are not
+    to "main_site" subdomains (e.g. www, din, korona etc.)
+    """
+    #await request.form()
+
+    # Get korona.Session object "s"
+    s, response_dat = get_template_vars()
+
+    # check subdomain
+    full_url = str(request.url)
+    subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
+
+    items, item_type = korona.app_get_items([subdomain])
+    if len(items) == 1:
+        if item_type == 0:
+            await subdomain_kommune(items[0], request)
+        else:
+            return RedirectResponse(url=f'/sok/?sok={items[0]}')
+    elif item_type == 1:
+        await subdomain_fylke(items, subdomain, request)
+
+
+
+async def subdomain_fylke(flist:list, fname:str, request):
+    """
+    Shows only_one table template for requested county
+    """
+    # query input list
+    data, skipped_items = korona.app_query(flist)
+    _kingdom = data.pop('0000')
+
+    # get session and response dict
+    s, response_dat = get_template_vars()
+
+    # get web template strings
+    q = fname.capitalize()
+    if " og " in q:
+        a, b = fname.split(sep=" og ")
+        q = f"{a.capitalize()} og {b.capitalize()}"
+
+    if q in s.norge.fylker.keys():
+        hero_title = f"Aktuelle tall for {q}"
+    else:
+        fylke = None
+        for k, v in s.norge.alt_name.items():
+            for subkey in v.split(sep=" - "):
+                if q.lower() in subkey.lower():
+                    hero_subtitle = v
+                    hero_title = f"Aktuelle tall for {k}"
+
+    # pick right template type
+    if len(flist) == 1:
+        only_one, exactly_two = True, False
+    elif len(flist) == 2:
+        only_one, exactly_two = False, True
+    else:
+        only_one, exactly_two = False, False
+
+
+    # update response dict
+    response_dat.update(
+                    {
+                    "request": request,
+                    "head_title": head_title,
+                    "hero_title": hero_title,
+                    "hero_subtitle": hero_subtitle,
+                    "skipped_items": skipped_items,
+                    "result_dict": data,
+                    "only_one": only_one,
+                    "exactly_two": exactly_two
+                    }
+    )
+
+    return templates.TemplateResponse('table.t', response_dat)
+
+
+
+async def subdomain_kommune(kid:str, request):
+    """
+    Shows only_one table template for requested muncipality
     For full commentary see fritekst()
     """
-
-    # Debug
-    print(f"got request = {request}")
-    print(dir(request))
-
-    print(request.url)
-
     data, skipped_items = korona.app_query([kid])
     _kingdom = data.pop('0000')
     s, response_dat = get_template_vars()
