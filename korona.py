@@ -14,7 +14,7 @@ from norway import Norway
 # 0. get code on github                                 [ OK ]
 # 1. get heroku dyno up (hobby)                         [ OK ]
 # 2. get C custom queries up                            [ OK ]
-# 2. get ENV storage key running                        [ -- ] <= does not work
+# 2. get ENV storage key running                        [ OK ]
 # 2  get fylker working                                 [ OK ]
 # 2. create jinjatemplate for error messages            [    ]
 # 2. implement error message template redirects         [    ]
@@ -52,7 +52,7 @@ class Session():
     def __init__(self):
         self.max_data_age = 14
         self.age = 14
-        self.store = 'storage.pkl' # on-disk store
+        self.store = self.get_store_target() # on-disk store
         self.is_setup = True
         self.FHI = None # pointer to FHI source object
         self.norge = None  # pointer to norge data object
@@ -62,9 +62,19 @@ class Session():
 
     def get_store_target(self) -> str:
         """ implements HEROKU config var for storage file name """
-        try:
-            store_in = ENV['cloud_storage_loc']
-        except:
+        # TODO ugly workaround, just set heroku config vars
+        CLOUD = Path.cwd() / ".env"
+        if CLOUD.is_file():
+            store_in = None
+            with open(CLOUD, 'r') as f:
+                cloud_environment = f.read()
+            f.close()
+            _, store_in = cloud_environment.split(sep="=")
+            if store_in is None:
+                store_in = 'storage.pkl'
+            else:
+                store_in = store_in.replace("\n", "").replace(" ", "_")
+        else:
             store_in = 'storage.pkl'
         return store_in
 
