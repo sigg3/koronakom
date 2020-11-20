@@ -106,7 +106,7 @@ async def subdomain_parser(request):
     to "main_site" subdomains (e.g. www, din, korona etc.)
     """
     #await request.form()
-
+    print("in subdomain_parser")
     # Get korona.Session object "s"
     s, response_dat = get_template_vars()
 
@@ -115,13 +115,18 @@ async def subdomain_parser(request):
     subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
 
     items, item_type = korona.app_get_items([subdomain])
+
+    print(f"in subdomain_parser: got items {items}")
     if len(items) == 1:
         if item_type == 0:
-            await subdomain_kommune(items[0], request)
+            # Get the url-friendly string
+            
+            print("right before last")
+            return subdomain_kommune(items[0], request)
         else:
             return RedirectResponse(url=f'/sok/?sok={items[0]}')
     elif item_type == 1:
-        await subdomain_fylke(items, subdomain, request)
+        return subdomain_fylke(items, subdomain, request)
 
 
 
@@ -179,7 +184,7 @@ async def subdomain_fylke(flist:list, fname:str, request):
 
 
 
-async def subdomain_kommune(kid:str, request):
+def subdomain_kommune(kid:str, request):
     """
     Shows only_one table template for requested muncipality
     For full commentary see fritekst()
