@@ -99,21 +99,30 @@ class Session():
                 },
                 "ringsyk": {
                         "title":    "Ringerike Sykehus",
-                        "subtitle": "",
+                        "subtitle": "Vestre Viken Helseforetak",
                         "created":  "2020-11-18",
-                        "list":     ('Ringerike')
+                        "list":     ('Flå', 'Gol', 'Hemsedal', 'Hol', 'Hole',
+                                     'Jevnaker', 'Krødsherad', 'Modum',
+                                     'Nesbyen', 'Ringerike', 'Sigdal', 'Ål')
                         },
-                "bærsyk": {
+                "bersyk": {
                         "title":    "Bærum Sykehus",
-                        "subtitle": "",
+                        "subtitle": "Vestre Viken Helseforetak",
                         "created":  "2020-11-18",
                         "list":     ('Asker', 'Bærum')
                         },
                 "dramsyk": {
                         "title":    "Drammen Sykehus",
-                        "subtitle": "",
+                        "subtitle": "Vestre Viken Helseforetak",
                         "created":  "2020-11-18",
                         "list":     ('Drammen', 'Lier')
+                        },
+                "kongsyk": {
+                        "title":    "Kongsberg Sykehus",
+                        "subtitle": "Vestre Viken Helseforetak",
+                        "created":  "2020-11-20",
+                        "list":     ('Flesberg', 'Kongsberg', 'Nore og Uvdal',
+                                     'Rollag', 'Øvre Eiker')
                         },
                 "E6": {
                         "title":    "Europavei 6 sørover",
