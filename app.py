@@ -69,7 +69,9 @@ async def clean_up_korona():
 # Note: let us do HTTPSRedirectMiddleware when TLS available
 middleware = [
     Middleware(
-        TrustedHostMiddleware, allowed_hosts=['kommune.nu', '*.kommune.nu']
+        TrustedHostMiddleware, allowed_hosts=['kommune.nu',
+                                              '*.kommune.nu'
+                                              ]
             ),
     Middleware(HTTPSRedirectMiddleware)
         ]
@@ -84,9 +86,12 @@ middleware = [
 # app.host('{subdomain}.example.org', kommune_url)
 # kommune_url = Router()
 
-app = Starlette(debug=False, routes=[
+#global_domain = 'localhost:8000'
+
+app = Starlette(debug=True, routes=[
 #  Route('/', hjem, methods=["POST"]),
   Route('/', hjem, name="homepage"),
+  Route('{subdomain}.{global_domain}/', subdomain_kommune, name="homes"),
 #  Route('/sjekk/{input:str}', sjekk, methods=["GET"]),
 #  Route('/{input:str}', sjekk, methods=["GET"], subdomain="sjekk"),
   #Route('/?sok={input:str}', sjekk_input, methods=["GET"]),
@@ -104,6 +109,10 @@ app = Starlette(debug=False, routes=[
   #Route('/sjekk', Sjekk),
  # Route('/lang', EndreSpraak)
   Mount('/css', StaticFiles(directory="static"), name="css"),
+  Host(
+        '{kom}.localhost', Route('/k/{kom}', kommune)
+  )
+#  app.host('{subdomain}.example.org', api)
   # Host(
   #       "ringerike.localhost",
   #       app=Router(routes=[Route("/sok/vvhf", endpoint=custom_subdomain)]),
