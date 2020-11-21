@@ -70,10 +70,12 @@ async def clean_up_korona():
 middleware = [
     Middleware(
         TrustedHostMiddleware, allowed_hosts=['kommune.nu',
-                                              '*.kommune.nu'
+                                              '*.kommune.nu',
+                                              'localhost',
+                                              '*.localhost'
                                               ]
-            ),
-    Middleware(HTTPSRedirectMiddleware)
+            )
+#    Middleware(HTTPSRedirectMiddleware)
 ]
 
 
@@ -128,11 +130,22 @@ app = Starlette(
 )
 
 
+
+# TODO
+#din.kommune.nu/utvalg
+#din.kommune.nu/fylker
+#din.kommune.nu/egen
+#sjekk.kommune.nu/ -> fritekst
+
+
+
+
+
 # Routing
 site_main = Router(
      routes=[
         Route('/', hjem, name="homepage"),
-        Route('/sok/{sok:path}', fritekst),
+#        Route('/sok/{sok:path}', fritekst),
         Route('/lang/{set_lang}', endre_spraak),
         Route('/utvalg', utvalg),
         Route('/fylker', utvalg_fylker, methods=["GET", "POST"]),
@@ -140,6 +153,16 @@ site_main = Router(
         Route('/om', om_tjenesten),
         Route('/f/{fylke}', fylke),
         Route('/k/{kom}', kommune),
+        Mount('/css', StaticFiles(directory="static"), name="css")
+        ]
+)
+
+site_search = Router(
+    routes=[
+        Route('/{sok:path}', fritekst, methods=["GET"]),
+        Route('/utvalg', utvalg),
+        Route('/fylker', utvalg_fylker),
+        Route('/egen', utvalg_egen),
         Mount('/css', StaticFiles(directory="static"), name="css")
         ]
 )
@@ -159,5 +182,6 @@ site_vvhf = Router(routes=[Host('/', subdomain_vvhf)])
 app.host('www.localhost', site_main)
 app.host('din.localhost', site_main)
 app.host('korona.localhost', site_main)
+app.host('sjekk.localhost', site_search)
 app.host('vvhf.localhost', site_vvhf)
 app.host('{subdomain}.localhost', site_subdomains)
