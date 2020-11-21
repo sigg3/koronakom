@@ -39,8 +39,8 @@
         <h1 class="title"><em>din</em>.kommune.nu</h1>
         <h2 class="subtitle">
             Denne siden er en oppslagstjeneste for &aring; enkelt kunne <strong>sjekke gjeldende korona status</strong> for sin kommune, sitt fylke eller landet forøvrig.
-            Tallene hentes daglig fra Folkehelseinstituttet og ble sist oppdatert {{ nordate }}. <a href="/om" title="Om tall og tjenesten">Les mer her</a>.
-            Bruk søkemotoren under eller lag <a href="https://sjekk.kommune.nu" title="Sp&oring;rring">din egen spørring</a>.
+            Tallene hentes daglig fra Folkehelseinstituttet og ble sist oppdatert {{ nordate }}. <a href="https://din.kommune.nu/om" title="Om tall og tjenesten">Les mer her</a>.
+            Bruk søkemotoren under eller lag <a href="https://din.kommune.nu/utvalg" title="Sp&oring;rring">din egen spørring</a>.
         </h2>
     </div>
 </section>
@@ -50,21 +50,20 @@
   <div class="container">
     <h1 class="title">Statistikk over fylker og kommuner i Norge</h1>
     <h2 class="subtitle">
-        Siden 2020 er det 11 fylker og 356 kommuner i landet v&aring;rt. Klikk p&aring; ditt fylke for &aring; se de mest relevante korona-tallene:
- <a href="/f/Agder" title="Agder">Agder</a>,
- <a href="/f/Innlandet" title="Innlandet">Innlandet</a>,
- <a href="/f/M&oslash;re og Romsdal" title="M&oslash;re og Romsdal">Møre og Romsdal</a>,
- <a href="/f/Nordland" title="Nordland - Nordlánnda">Nordland - Nordlánnda</a>,
- <a href="/f/Oslo" title="Oslo">Oslo</a>,
- <a href="/f/Rogaland" title="Rogaland">Rogaland</a>,
- <a href="/f/Troms og Finnmark" title="Troms og Finnmark - Romsa ja Finnmárku - Tromssa ja Finmarkku">Troms og Finnmark - Romsa ja Finnmárku - Tromssa ja Finmarkku</a>,
- <a href="/f/Tr&oslash;ndelag" title="Trøndelag - Trööndelage">Trøndelag - Trööndelage</a>,
- <a href="/f/Vestfold og Telemark" title="Vestfold og Telemark">Vestfold og Telemark</a>,
- <a href="/f/Vestland" title="Vestland">Vestland</a>,
- og <a href="/f/Viken" title="Viken">Viken</a>.</j2>
- <h2 class="subtitle">
+         Siden 2020 er det 11 fylker og 356 kommuner i landet v&aring;rt. Klikk p&aring; ditt fylke for &aring; se de mest relevante korona-tallene:
+         <a href="https://agder-fylke.kommune.nu" title="Agder">Agder</a>,
+         <a href="https://innlandet-fylke.kommune.nu" title="Innlandet">Innlandet</a>,
+         <a href="https://more-og-romsdal-fylke.kommune.nu" title="M&oslash;re og Romsdal">Møre og Romsdal</a>,
+         <a href="https://nordland-fylke.kommune.nu" title="Nordland - Nordlánnda">Nordland - Nordlánnda</a>,
+         <a href="https://oslo-fylke.kommune.nu" title="Oslo">Oslo</a>,
+         <a href="https://rogaland-fylke.kommune.nu" title="Rogaland">Rogaland</a>,
+         <a href="https://troms-og-finnmark.kommune.nu" title="Troms og Finnmark - Romsa ja Finnmárku - Tromssa ja Finmarkku">Troms og Finnmark - Romsa ja Finnmárku - Tromssa ja Finmarkku</a>,
+         <a href="https://trondelag-fylke.kommune.nu" title="Trøndelag - Trööndelage">Trøndelag - Trööndelage</a>,
+         <a href="https://vestfold-og-telemark-fylke.nu" title="Vestfold og Telemark">Vestfold og Telemark</a>,
+         <a href="https://vestland-fylke.kommune.nu" title="Vestland">Vestland</a>,
+         og <a href="https://viken-fylke.kommune.nu" title="Viken">Viken</a>.</h2>
+         <h2 class="subtitle">
          Per {{ nordate }} er det registrert korona i {{ infected }} av 356 kommuner. Sjekk din kommune under:
-
     </h2>
   </div>
 </section>
