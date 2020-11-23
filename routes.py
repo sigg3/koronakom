@@ -106,7 +106,7 @@ async def subdomain_parser(request):
     to "main_site" subdomains (e.g. www, din, korona etc.)
     """
     #await request.form()
-    print("in subdomain_parser")
+    #print("in subdomain_parser")
     # Get korona.Session object "s"
     s, response_dat = get_template_vars()
 
@@ -116,25 +116,24 @@ async def subdomain_parser(request):
 
     items, item_type = korona.app_get_items([subdomain])
 
-    print(f"in subdomain_parser: got items {items}")
+    #print(f"in subdomain_parser: got items {items}")
     if len(items) == 1:
         if item_type == 0:
             # Get the url-friendly string
-
-            print("right before last")
             return subdomain_kommune(items[0], request)
         else:
             search_url = "https://sjekk.kommune.nu/?sok"
             return RedirectResponse(url=f'{search_url}={items[0]}')
     elif item_type == 1:
-        return subdomain_fylke(items, subdomain, request)
+        return subdomain_fylke(items, subdomain, request) # ???
 
 
 
-async def subdomain_fylke(flist:list, fname:str, request):
+def subdomain_fylke(flist:list, fname:str, request):
     """
     Shows only_one table template for requested county
     """
+
     # query input list
     data, skipped_items = korona.app_query(flist)
     _kingdom = data.pop('0000')
