@@ -54,7 +54,7 @@ async def initialize_korona():
     and build current database from sources, and save
     to binary pickle file in Settings.store attribute
     """
-    korona.setup()
+    await korona.setup()
 
 
 async def clean_up_korona():
