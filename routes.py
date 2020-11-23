@@ -150,8 +150,8 @@ def subdomain_fylke(flist:list, fname:str, request):
 
 
     # set default subtitle
-    #hero_title = f"Aktuelle tall for {q}"
-    #hero_subtitle = f"{fname}.kommune.nu"
+    hero_title = f"Aktuelle tall for {q}"
+    hero_subtitle = f"{fname}.kommune.nu"
 
     # TODO
     if q in s.norge.fylker.keys():
