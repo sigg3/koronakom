@@ -96,6 +96,14 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 
 async def subdomain_vvhf(request):
     """ Vestre Viken HF subdomene """
+    s, response_dat = get_template_vars()
+
+    # TODO Entry page med
+    # 1. dropdown (velg mellom VVHF queries)
+    # 2. tabell (under)
+
+    # betyr at subdomain vvhf må kunne ta post til self.
+
     return PlainTextResponse("Lol this is VVHF")
 
 

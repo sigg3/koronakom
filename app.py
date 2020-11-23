@@ -174,7 +174,12 @@ site_subdomains = Router(
         ]
 )
 
-site_vvhf = Router(routes=[Host('/', subdomain_vvhf)])
+site_vvhf = Router(
+    routes=[
+        Route('/', subdomain_vvhf),
+        Mount('/css', StaticFiles(directory="static"), name="css")
+        ]
+)
 
 # TODO om, utvalg, sjekk etc. kontakt?
 
