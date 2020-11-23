@@ -134,14 +134,14 @@ def subdomain_fylke(flist:list, fname:str, request):
     Shows only_one table template for requested county
     """
 
-    # query input list
+    # query input list "flist"
     data, skipped_items = korona.app_query(flist)
     _kingdom = data.pop('0000')
 
     # get session and response dict
     s, response_dat = get_template_vars()
 
-    # Lookup fylke name
+    # Lookup fylke name from subdomain
     fylke_names = {
     "agder-fylke": "Agder",
     "innlandet-fylke": "Innlandet",
@@ -150,43 +150,28 @@ def subdomain_fylke(flist:list, fname:str, request):
     "oslo-fylke": "Oslo",
     "rogaland-fylke": "Rogaland",
     "troms-og-finnmark-fylke": "Troms og Finnmark",
+    "romsa-ja-finnmarku": "Troms og Finnmark",
+    "tromssa-ja-finmarkku": "Troms og Finnmark",
     "trondelag-fylke": "Trøndelag",
+    "troondelage": "Trøndelag",
     "vestfold-og-telemark-fylke": "Vestfold og Telemark",
     "vestland-fylke": "Vestland",
     "viken-fylke": "Viken"
     }
 
     # get web template strings
+    subdomain = fname
     fylke = fylke_names[fname]
-    fname = fname.strip("-fylke").replace("-"," ")
+    fylke_alt = None
+    if fylke in s.norge.alt_name.keys():
+        fylke_alt = s.norge.alt_name[fylke]
 
-    #fylke = fylke.replace("More", "Møre")
-    #fylke = fylke.replace("Trondelag", "Trøndelag")
-
-
-    # set default subtitle
-    hero_title = f"Aktuelle tall for {fname}"
-    hero_subtitle = f"{fname}.kommune.nu"
-
-    # TODO
-    #if fname in s.norge.fylker.keys():
-    #    fylke = fname<
-#        hero_title = f"Aktuelle tall for {q}"
-#        hero_sub = s.norge.alt_name.get(q, None)
-#        if hero_sub:
-#            hero_subtitle = hero_sub
-#    else:
-        # This should never happen, we have controlled input...
-#        fylke = None
-
-    for fyl, v in s.norge.alt_name.items():
-        for subkey in v.split(sep=" - "):
-            if fname in subkey.lower():
-                hero_subtitle = v
-                hero_title = f"Aktuelle tall for {fyl}"
-                fylke = fyl
-                break
-
+    # set default title/subtitle
+    hero_title = f"{subdomain}.kommune.nu"
+    hero_subtitle = f"Aktuelle tall for {fylke}"
+    if fylke_alt:
+        hero_subtitle = fylke_alt
+        hero_tutle = f"Aktuelle tall for {fylke}"
 
     # pick right template type
     if len(flist) == 1:
@@ -196,15 +181,11 @@ def subdomain_fylke(flist:list, fname:str, request):
     else:
         only_one, exactly_two = False, False
 
-    if fylke is None:
-        fylke = q
-        pass # return 404 TBD
-
     # update response dict
     response_dat.update(
                     {
                     "request": request,
-                    "head_title": fylke,
+                    "head_title": f"Korona-tall for {fylke}",
                     "hero_title": hero_title,
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
