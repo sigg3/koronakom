@@ -148,15 +148,19 @@ def subdomain_fylke(flist:list, fname:str, request):
         q = f"{a.capitalize()} og {b.capitalize()}"
 
 
+    # TODO
     if q in s.norge.fylker.keys():
         hero_title = f"Aktuelle tall for {q}"
+        fylke = q
     else:
         fylke = None
-        for k, v in s.norge.alt_name.items():
+        for fyl, v in s.norge.alt_name.items():
             for subkey in v.split(sep=" - "):
                 if q.lower() in subkey.lower():
                     hero_subtitle = v
-                    hero_title = f"Aktuelle tall for {k}"
+                    hero_title = f"Aktuelle tall for {fyl}"
+                    fylke = fyl
+                    break
 
 
     # pick right template type
@@ -167,12 +171,14 @@ def subdomain_fylke(flist:list, fname:str, request):
     else:
         only_one, exactly_two = False, False
 
+    if fylke is None:
+        pass # return 404 TBD
 
     # update response dict
     response_dat.update(
                     {
                     "request": request,
-                    "head_title": head_title,
+                    "head_title": fylke,
                     "hero_title": hero_title,
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
