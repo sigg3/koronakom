@@ -147,11 +147,15 @@ def subdomain_fylke(flist:list, fname:str, request):
         a, b = fname.split(sep=" og ")
         q = f"{a.capitalize()} og {b.capitalize()}"
 
+    # set default subtitle
+    hero_subtitle = f"{fname}.kommune.nu"
 
     # TODO
     if q in s.norge.fylker.keys():
         hero_title = f"Aktuelle tall for {q}"
-        fylke = q
+        hero_sub = s.norge.alt_name.get(q, None)
+        if hero_sub is not None:
+            hero_subtitle = hero_sub
     else:
         fylke = None
         for fyl, v in s.norge.alt_name.items():
