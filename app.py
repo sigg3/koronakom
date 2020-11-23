@@ -123,7 +123,7 @@ middleware = [
 
 # Application
 app = Starlette(
-                debug=True,
+                debug=True, # set to false in production
                 middleware=middleware,
                 on_startup=[initialize_korona],
                 on_shutdown=[clean_up_korona]
@@ -169,7 +169,7 @@ site_search = Router(
 
 site_subdomains = Router(
     routes=[
-        Route('/', endpoint=subdomain_parser, name="sub"),
+        Route('/', subdomain_parser, name="sub"),
         Mount('/css', StaticFiles(directory="static"), name="css")
         ]
 )
