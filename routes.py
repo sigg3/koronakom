@@ -157,11 +157,11 @@ def subdomain_fylke(flist:list, fname:str, request):
     }
 
     # get web template strings
-    if q.lower() in fylke_names.keys():
+    if fname.lower() in fylke_names.keys():
         fylke = fylke_names[q.lower()]
     else:
-        q = fname.strip("-fylke").capitalize()
-        if " og " in q:
+        fname = fname.strip("-fylke").capitalize()
+        if " og " in fname:
             a, b = fname.split(sep=" og ")
             fylke = f"{a.capitalize()} og {b.capitalize()}"
 
