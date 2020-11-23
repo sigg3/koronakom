@@ -48,13 +48,13 @@ import korona
 #
 
 # Startup task
-async def initialize_korona():
+def initialize_korona():
     """
     Will run setup() equivalent to main() to download
     and build current database from sources, and save
     to binary pickle file in Settings.store attribute
     """
-    await korona.setup()
+    korona.setup()
 
 
 async def clean_up_korona():
