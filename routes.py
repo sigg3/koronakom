@@ -148,6 +148,7 @@ def subdomain_fylke(flist:list, fname:str, request):
         q = f"{a.capitalize()} og {b.capitalize()}"
 
     # set default subtitle
+    hero_title = f"Aktuelle tall for {q}"
     hero_subtitle = f"{fname}.kommune.nu"
 
     # TODO
