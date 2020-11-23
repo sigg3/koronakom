@@ -70,12 +70,12 @@ async def clean_up_korona():
 middleware = [
     Middleware(
         TrustedHostMiddleware, allowed_hosts=['kommune.nu',
-                                              '*.kommune.nu',
-                                              'localhost',
-                                              '*.localhost'
+                                              '*.kommune.nu'
+#                                              'localhost',
+#                                              '*.localhost'
                                               ]
-            )
-#    Middleware(HTTPSRedirectMiddleware)
+            ),
+    Middleware(HTTPSRedirectMiddleware)
 ]
 
 
@@ -179,9 +179,16 @@ site_vvhf = Router(routes=[Host('/', subdomain_vvhf)])
 # TODO om, utvalg, sjekk etc. kontakt?
 
 # Configure flow
-app.host('www.localhost', site_main)
-app.host('din.localhost', site_main)
-app.host('korona.localhost', site_main)
-app.host('sjekk.localhost', site_search)
-app.host('vvhf.localhost', site_vvhf)
-app.host('{subdomain}.localhost', site_subdomains)
+app.host('www.kommune.nu', site_main)
+app.host('din.kommune.nu', site_main)
+app.host('korona.kommune.nu', site_main)
+app.host('sjekk.kommune.nu', site_search)
+app.host('vvhf.kommune.nu', site_vvhf)
+app.host('{subdomain}.kommune.nu', site_subdomains)
+
+#app.host('www.localhost', site_main)
+#app.host('din.localhost', site_main)
+#app.host('korona.localhost', site_main)
+#app.host('sjekk.localhost', site_search)
+#app.host('vvhf.localhost', site_vvhf)
+#app.host('{subdomain}.localhost', site_subdomains)
