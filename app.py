@@ -69,43 +69,126 @@ async def clean_up_korona():
 # Note: let us do HTTPSRedirectMiddleware when TLS available
 middleware = [
     Middleware(
-        TrustedHostMiddleware, allowed_hosts=['kommune.nu', '*.kommune.nu']
+        TrustedHostMiddleware, allowed_hosts=['kommune.nu',
+                                              '*.kommune.nu'
+#                                              'localhost',
+#                                              '*.localhost'
+                                              ]
             ),
     Middleware(HTTPSRedirectMiddleware)
+]
+
+
+
+#subdomain_app = Router(
+#    routes=[Host("{subdomain}.example.org", app=subdomain_app, name="subdomains")]
+#)
+
+
+
+#
+# test_router = Router(
+#     routes = [Host('www.{global_domain}', app=subdomain_app)]
+#             routes=[Route("/", RedirectResponse('din.localhost'))]
+#         ),
+#         Host(
+#             'korona.{global_domain}',
+#             routes=[Route("/", RedirectResponse('din.localhost'))]
+#         ),
+#         Host(
+#             'din.{global_domain}',
+#             routes=[
+#                  Route('/', hjem, name="homepage"),
+#                  Route('/sok/{sok:path}', fritekst),
+#                  Route('/lang/{set_lang}', endre_spraak),
+#                  Route('/utvalg', utvalg),
+#                  Route('/fylker', utvalg_fylker, methods=["GET", "POST"]),
+#                  Route('/egen', utvalg_egen),
+#                  Route('/om', om_tjenesten),
+#                  Route('/f/{fylke}', fylke),
+#                  Route('/k/{kom}', kommune),
+#                  Mount('/css', StaticFiles(directory="static"), name="css")
+#                  ]
+#              ),
+#         Host(
+#             '{subdomain}.{global_domain}',
+#             routes = [
+#                  Route('/', subdomain_kommune),
+#                  Mount('/css', StaticFiles(directory="static"), name="css")
+#                  ]
+#              )
+#         ]
+# )
+
+
+# Application
+app = Starlette(
+                debug=True,
+                middleware=middleware,
+                on_startup=[initialize_korona],
+                on_shutdown=[clean_up_korona]
+)
+
+
+
+# TODO
+#din.kommune.nu/utvalg
+#din.kommune.nu/fylker
+#din.kommune.nu/egen
+#sjekk.kommune.nu/ -> fritekst
+
+
+
+
+
+# Routing
+site_main = Router(
+     routes=[
+        Route('/', hjem, name="homepage"),
+#        Route('/sok/{sok:path}', fritekst),
+        Route('/lang/{set_lang}', endre_spraak),
+        Route('/utvalg', utvalg),
+        Route('/fylker', utvalg_fylker, methods=["GET", "POST"]),
+        Route('/egen', utvalg_egen),
+        Route('/om', om_tjenesten),
+        Route('/f/{fylke}', fylke),
+        Route('/k/{kom}', kommune),
+        Mount('/css', StaticFiles(directory="static"), name="css")
         ]
+)
 
+site_search = Router(
+    routes=[
+        Route('/{sok:path}', fritekst, methods=["GET"]),
+        Route('/utvalg', utvalg),
+        Route('/fylker', utvalg_fylker),
+        Route('/egen', utvalg_egen),
+        Mount('/css', StaticFiles(directory="static"), name="css")
+        ]
+)
 
+site_subdomains = Router(
+    routes=[
+        Route('/', endpoint=subdomain_parser, name="sub"),
+        Mount('/css', StaticFiles(directory="static"), name="css")
+        ]
+)
 
-# subdomain example
-# app = Starlette()
-# site = Router()  # Use eg. `@site.route()` to configure this.
-# subdomains = Router()  # Use eg. `@subdomains.route()` to configure this.
-# app.host('www.example.org', site)
-# app.host('{subdomain}.example.org', kommune_url)
-# kommune_url = Router()
+site_vvhf = Router(routes=[Host('/', subdomain_vvhf)])
 
-app = Starlette(debug=False, routes=[
-#  Route('/', hjem, methods=["POST"]),
-  Route('/', hjem, name="homepage"),
-#  Route('/sjekk/{input:str}', sjekk, methods=["GET"]),
-#  Route('/{input:str}', sjekk, methods=["GET"], subdomain="sjekk"),
-  #Route('/?sok={input:str}', sjekk_input, methods=["GET"]),
- # Route('/sok', sjekk_input, methods=["GET"]),
-  Route('/sok/{sok:path}', fritekst),
-#  Route('/users/{user_id:int}', user, methods=["GET", "POST"]),
-  Route('/lang/{set_lang}', endre_spraak),
-  Route('/utvalg', utvalg),
-  Route('/fylker', utvalg_fylker, methods=["GET", "POST"]),
-  Route('/egen', utvalg_egen),
-  Route('/om', om_tjenesten),
-#  Route('/vvhf', vestre_viken),
-  Route('/f/{fylke}', fylke),
-  Route('/k/{kom}', kommune),
-  #Route('/sjekk', Sjekk),
- # Route('/lang', EndreSpraak)
-  Mount('/css', StaticFiles(directory="static"), name="css"),
-  # Host(
-  #       "ringerike.localhost",
-  #       app=Router(routes=[Route("/sok/vvhf", endpoint=custom_subdomain)]),
-  #       ),
-], middleware=middleware, on_startup=[initialize_korona], on_shutdown=[clean_up_korona])
+# TODO om, utvalg, sjekk etc. kontakt?
+
+# Configure flow
+app.host('www.kommune.nu', site_main)
+app.host('din.kommune.nu', site_main)
+app.host('korona.kommune.nu', site_main)
+app.host('sjekk.kommune.nu', site_search)
+app.host('vvhf.kommune.nu', site_vvhf)
+app.host('{subdomain}.kommune.nu', site_subdomains)
+
+#app.host('www.localhost', site_main)
+#app.host('din.localhost', site_main)
+#app.host('korona.localhost', site_main)
+#app.host('sjekk.localhost', site_search)
+#app.host('vvhf.localhost', site_vvhf)
+#app.host('{subdomain}.localhost', site_subdomains)

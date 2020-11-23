@@ -41,9 +41,9 @@
   <!-- Right side -->
   {% block menu %}
   <div class="level-right ">
-    <p class="level-item"><a href="/" title="Hjem" class="button is-primary"><strong>Hjem</strong></a></p>
-    <p class="level-item"><a href="/utvalg" title="Utvalg" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
-    <p class="level-item"><a href="/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
+    <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary"><strong>Hjem</strong></a></p>
+    <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Utvalg" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
+    <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
   </div>
   {% endblock %}
 </nav>  
@@ -68,21 +68,21 @@
 
 {% block se_bottom %}
 <section>
-    <div class="container">
+    <div class="container pl-1 pr-1">
         <div class="columns is-centered">
-           <form action="/sok/" method="get">
+           <form action="https://sjekk.kommue.nu/" method="get">
             <div class="field has-addons pt-3">
                 <p class="control">
                     <input name="sok" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*">
                 </p>
                 <p class="control">
-                    <button type="submit" class="button is-large is-primary">Hent</button>
+                    <button type="submit" class="button is-large is-primary">S&oslash;k</button>
                 </p>
             </div>
            </form>
         </div>
         <div class="block has-text-centered pb-3">
-            <p class="help has-text-grey">* Lag din egen nøkkel (for eksempel &quot;E6&quot;) på <a href="/utvalg" title="Sp&oslash;rring">denne siden</a>.</p>
+            <p class="help has-text-grey">* Lag din egen nøkkel (for eksempel &quot;E6&quot;) på <a href="https://din.kommune.nu/egen" title="Sp&oslash;rring">denne siden</a>.</p>
         </div>
     </div>
   </div>
@@ -93,7 +93,7 @@
     <footer class="footer has-background-info-light pb-3 mb-0">
         <div class="content has-text-centered">
             <p>
-                Tjenesten <strong>korona.kommune.nu</strong> er laget av <a href="/om" title="Sigbj&oslash;rn Smelror">Sigbj&oslash;rn Smelror</a> &copy; 2020.
+                Tjenesten <strong>korona.kommune.nu</strong> er laget av <a href="https://din.kommune.nu/om" title="Sigbj&oslash;rn Smelror">Sigbj&oslash;rn Smelror</a> &copy; 2020.
                 <br />
                 Statistikken hentes regelmessig fra <a href="https://fhi.no" title="FHI: Folkehelseinstituttet">FHI: Folkehelseinstituttet</a>.
             </p>

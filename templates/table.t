@@ -2,9 +2,9 @@
 
   {% block menu %}
   <div class="level-right ">
-    <p class="level-item"><a href="/" title="Hjem" class="button is-primary">Hjem</a></p>
-    <p class="level-item"><a href="/utvalg" title="Utvalg" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
-    <p class="level-item"><a href="/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
+    <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary">Hjem</a></p>
+    <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Utvalg" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
+    <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
   </div>
   {% endblock %}
 
@@ -180,8 +180,8 @@
             </h1>
             <h6 class="subtitle">
                 Lenke:
-                <a href="/k/{{ result_dict[table]['name'] }}" title="{{ result_dict[table]['name'] }}">kommune</a>, 
-                <a href="/f/{{ result_dict[table]['fylke'] }}" title="{{ result_dict[table]['fylke'] }}">fylke</a>
+                <a href="https://{{ result_dict[table]['url'] }}" title="{{ result_dict[table]['name'] }}">kommune</a>, 
+                <a href="https://{{ result_dict[table]['fylke-url'] }}" title="{{ result_dict[table]['fylke'] }}">fylke</a>
             </h6>
         </div>
     </div>
@@ -226,7 +226,7 @@
     <div class="tile is-8">
         <div class="container">
             <div class="content has-text-centered">
-                <p class="help">Hva betyr tallene? F&aring; svar p&aring; sp&oslash;rsm&aring;l <a href="/om" title="Om tjenesten">om korona-tallene her</a>.</p>
+                <p class="help">Hva betyr tallene? F&aring; svar p&aring; sp&oslash;rsm&aring;l <a href="https://din.kommune.nu/om" title="Om tjenesten">om korona-tallene her</a>.</p>
             </div>
         </div>
     </div>
@@ -250,7 +250,7 @@
     <div class="tile is-5">
         <div class="tile box">
             <table class="table is-fullwidth">
-                <caption><strong>{{ result_dict[table]['name'] }} kommune</strong> (<a href="/f/{{ result_dict[table]['fylke'] }}" title="{{ result_dict[table]['fylke'] }}">{{ result_dict[table]['fylke'] }}</a>)</caption>
+                <caption><strong>{{ result_dict[table]['name'] }} kommune</strong> (<a href="https://{{ result_dict[table]['fylke-url'] }}" title="{{ result_dict[table]['fylke'] }}">{{ result_dict[table]['fylke'] }}</a>)</caption>
                 <tr>
                     <th><strong>Oppdatert</th>
                     <td>{{ nordate }}</td>

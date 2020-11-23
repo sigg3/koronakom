@@ -76,11 +76,11 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
         nordate = korona.norwegian_date(today, True)
 
     init_dict = {
-                 "head_title": "korona.kommune.nu",
+                 "head_title": "Aktuelle korona tall for din.kommune.nu",
                  "updated": updated,
                  "nordate": nordate,
-                 "hero_title": "korona . kommune . nu",
-                 "hero_link": "/",
+                 "hero_title": "din.kommune.nu",
+                 "hero_link": "https://din.kommune.nu",
                  "hero_subtitle": "Dagsaktuelle tall for ditt hjemsted",
                  "html_lang": lang,
                  "lang_selector": selector,
@@ -94,23 +94,197 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 #    print(req)
 #    return PlainTextResponse(f"OK ?> requested = {req}")
 
+async def subdomain_vvhf(request):
+    """ Vestre Viken HF subdomene """
+    pass
+
+
+async def subdomain_parser(request):
+    """
+    Internal route for different subdomains
+    This is the main entry point for requests that are not
+    to "main_site" subdomains (e.g. www, din, korona etc.)
+    """
+    #await request.form()
+    print("in subdomain_parser")
+    # Get korona.Session object "s"
+    s, response_dat = get_template_vars()
+
+    # check subdomain
+    full_url = str(request.url)
+    subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
+
+    items, item_type = korona.app_get_items([subdomain])
+
+    print(f"in subdomain_parser: got items {items}")
+    if len(items) == 1:
+        if item_type == 0:
+            # Get the url-friendly string
+
+            print("right before last")
+            return subdomain_kommune(items[0], request)
+        else:
+            search_url = "https://sjekk.kommune.nu/?sok"
+            return RedirectResponse(url=f'{search_url}={items[0]}')
+    elif item_type == 1:
+        return subdomain_fylke(items, subdomain, request)
+
+
+
+async def subdomain_fylke(flist:list, fname:str, request):
+    """
+    Shows only_one table template for requested county
+    """
+    # query input list
+    data, skipped_items = korona.app_query(flist)
+    _kingdom = data.pop('0000')
+
+    # get session and response dict
+    s, response_dat = get_template_vars()
+
+    # get web template strings
+    q = fname.capitalize()
+    if " og " in q:
+        a, b = fname.split(sep=" og ")
+        q = f"{a.capitalize()} og {b.capitalize()}"
+
+
+    if q in s.norge.fylker.keys():
+        hero_title = f"Aktuelle tall for {q}"
+    else:
+        fylke = None
+        for k, v in s.norge.alt_name.items():
+            for subkey in v.split(sep=" - "):
+                if q.lower() in subkey.lower():
+                    hero_subtitle = v
+                    hero_title = f"Aktuelle tall for {k}"
+
+
+    # pick right template type
+    if len(flist) == 1:
+        only_one, exactly_two = True, False
+    elif len(flist) == 2:
+        only_one, exactly_two = False, True
+    else:
+        only_one, exactly_two = False, False
+
+
+    # update response dict
+    response_dat.update(
+                    {
+                    "request": request,
+                    "head_title": head_title,
+                    "hero_title": hero_title,
+                    "hero_subtitle": hero_subtitle,
+                    "skipped_items": skipped_items,
+                    "result_dict": data,
+                    "only_one": only_one,
+                    "exactly_two": exactly_two
+                    }
+    )
+
+    return templates.TemplateResponse('table.t', response_dat)
+
+
+
+def subdomain_kommune(kid:str, request):
+    """
+    Shows only_one table template for requested muncipality
+    For full commentary see fritekst()
+    """
+    data, skipped_items = korona.app_query([kid])
+    _kingdom = data.pop('0000')
+    s, response_dat = get_template_vars()
+    hero_title = data[list(data.keys())[0]]['name']
+    head_title = f"Korona-status for {hero_title}"
+    hero_link = data[list(data.keys())[0]]['url']
+    subtitle = data[list(data.keys())[0]]['alt']
+    hero_subtitle = "Tall for din kommune "
+    if subtitle:
+        hero_subtitle = data[list(data.keys())[0]]['alt']
+    response_dat.update(
+        {
+            "hero_link": hero_link,
+        }
+    )
+
+    # Build response dict
+    response_dat.update(
+                    {
+                    "request": request,
+                    "head_title": head_title,
+                    "hero_title": hero_title,
+                    "hero_subtitle": hero_subtitle,
+                    "skipped_items": skipped_items,
+                    "result_dict": data,
+                    "only_one": True,
+                    "exactly_two": False
+                    }
+    )
+
+    return templates.TemplateResponse('table.t', response_dat)
+
+
+
 
 async def hjem(request):
     # fetch minimal data
     s, response_dat = get_template_vars()
     today = s.datapoints[0]
+
+    # check subdomain
+    # full_url = str(request.url)
+    # subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
+    # if subdomain in ["korona", "din", "om", "www"]:
+    #     if subdomain == "om":
+    #         response = RedirectResponse(url='/om')
+    #     elif subdomain == "sjekk":
+    #         response = RedirectResponse(url='/utvalg')
+    # else:
+    #     items, item_type = korona.app_get_items([subdomain])
+    #     if len(items) == 1:
+    #         if item_type == 0:
+    #             await subdomain_kommune(items[0], request)
+    #         elif item_type == 1:
+    #             return RedirectResponse(url=f'/f/{items[0]}')
+    #         else:
+    #             search_url = "https://sjekk.kommune.nu/?sok"
+    #             return RedirectResponse(url=f"{search_url}={items[0]}")
+
     try:
+        # Get data from today
         response_dat.update(s.book['ro']['0000'][today])
     except KeyError:
-        response_dat.update(
+
+        # We can't not show anything, fallback to yesterday's data
+        for datapoint in s.datapoints:
+            try:
+                data_test = s.book['ro']['0000'][datapoint]
+            except KeyError:
+                data_test = None
+
+            if data_test is None:
+                today = None
+            else:
+                today = datapoint
+
+        if today is None:
+            response_dat.update(
                     {
                     'diff_n': 'NA', # number of new infected people last 24 hrs
                     'infected': 'NA', # muncipalities with infected (bool)
-                    'green': 'NA', # muncipalities
                     'orange': 'NA',
+                    'green': 'NA', # muncipalities
                     'red': 'NA'
                    }
-        )
+            )
+        else:
+            updated = today
+            nordate = today
+            if user_lang.active == "norsk":
+                nordate = korona.norwegian_date(today, True)
+
+            response_dat.update(s.book['ro']['0000'][today])
 
     # construct rest of index vars
     response_dat.update({"request": request})
@@ -187,7 +361,7 @@ async def fritekst(request):
             # error no_data (no query hits either..?)
             response = RedirectResponse(url='/') # TBD
 
-        # templat toggle bools
+        # template toggle bools
         only_one = True if returned_items == 1 else False
         exactly_two = True if returned_items == 2 else False
 
@@ -200,21 +374,23 @@ async def fritekst(request):
         hero_subtitle = "Aktulle tall for ditt søk"
 
         if only_one:
-            hero_title = data[list(data.keys())[0]]['name']
-            head_title = f"Korona-status for {hero_title}"
+            item_name = data[list(data.keys())[0]]['name']
+            if query_type == 0:
+                # kommune
+                return RedirectResponse(url=f"https://{item_name}.kommune.nu")
+            elif query_type == 1:
+                fylke_url = s.norge.get_fylke_url(item_name)
+                return RedirectResponse(url=f"https://{fylke_url}")
+
+            hero_title = item_name
+            head_title = f"Korona-status for {item_name}"
 #            hero_title = data[list(data.keys())[0]]['url']
             hero_link = data[list(data.keys())[0]]['url']
             subtitle = data[list(data.keys())[0]]['alt']
             hero_subtitle = "Tall for din kommune "
             if subtitle:
                 hero_subtitle = data[list(data.keys())[0]]['alt']
-
-            response_dat.update(
-                {
-                    "hero_link": hero_link,
-                }
-
-            )
+            response_dat.update({ "hero_link": hero_link })
         elif exactly_two:
             kom_1 = data[list(data.keys())[0]]['name']
             kom_2 = data[list(data.keys())[1]]['name']
@@ -225,24 +401,26 @@ async def fritekst(request):
             nordate = response_dat['nordate']
             hero_subtitle = f"Viser {n_of_n} treff fra oppslag (data fra {nordate})"
 
-        # make a custom hero
-        if query_type == 1:
-            q = uinput[0].capitalize()
-            if " og " in q:
-                a, b = uinput[0].split(sep=" og ")
-                q = f"{a.capitalize()} og {b.capitalize()}"
+        # make a custom hero for fylker
+        # if query_type == 1:
+        #     q = uinput[0].capitalize()
+        #     if " og " in q:
+        #         a, b = uinput[0].split(sep=" og ")
+        #         q = f"{a.capitalize()} og {b.capitalize()}"
+        #
+        #     #print(f"q in {q}")
+        #     if q in s.norge.fylker.keys():
+        #         hero_title = f"Aktuelle tall for {q}"
+        #     else:
+        #         fylke = None
+        #         for k, v in s.norge.alt_name.items():
+        #             for subkey in v.split(sep=" - "):
+        #                 if q.lower() in subkey.lower():
+        #                     hero_subtitle = v
+        #                     hero_title = f"Aktuelle tall for {k}"
 
-            #print(f"q in {q}")
-            if q in s.norge.fylker.keys():
-                hero_title = f"Aktuelle tall for {q}"
-            else:
-                fylke = None
-                for k, v in s.norge.alt_name.items():
-                    for subkey in v.split(sep=" - "):
-                        if q.lower() in subkey.lower():
-                            hero_subtitle = v
-                            hero_title = f"Aktuelle tall for {k}"
-        elif query_type == 2:
+        # custom hero for custom queries
+        if query_type == 2:
             try:
                 hero_title = s.custom_queries[uinput[0]]['title']
                 hero_subtitle = s.custom_queries[uinput[0]]['subtitle']
@@ -291,7 +469,7 @@ async def om_tjenesten(request):
         {
             "request": request,
             "head_title": "Om kommune.nu",
-            "hero_link": "/om",
+            "hero_link": "https://din.kommune.nu/om",
             "hero_title": "Om kommune.nu",
             "hero_subtitle": subtitle,
         }
@@ -322,9 +500,9 @@ async def utvalg(request):
     response_dat.update(
         {
             "request": request,
-            "head_title": "korona.kommune.nu sp&oslash;rring",
+            "head_title": "sjekk.kommune.nu korona sp&oslash;rring",
             "hero_subtitle": "sjekk.kommune.nu",
-            "hero_link": "/utvalg",
+            "hero_link": "https://sjekk.kommune.nu/utvalg",
             "fylker": big_list,
             "utvalg": 0
         }
@@ -466,17 +644,20 @@ async def fylke(request):
     except:
         return RedirectResponse(url='/')
     else:
-        return RedirectResponse(url=f"/sok/?sok={uinput}")
+        search_url = "https://sjekk.kommune.nu/?sok"
+        return RedirectResponse(url=f"{search_url}={uinput}")
 
 
 async def kommune(request):
     """ Let the norge.lookup method do the job """
+    print(f"received {request.keys()}")
     try:
         uinput = html.escape(request.path_params['kom'])
     except:
         return RedirectResponse(url='/')
     else:
-        return RedirectResponse(url=f"/sok/?sok={uinput}")
+        search_url = "https://sjekk.kommune.nu/?sok"
+        return RedirectResponse(url=f"{search_url}={uinput}")
 
 
 #@app.routes('/testing', methods=['POST'])
