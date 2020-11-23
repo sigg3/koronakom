@@ -706,7 +706,7 @@ def app_get_items(query_items: list) -> Tuple[list, bool]:
     sammenslatt = s.norge.sammenslaatt()
 
     # quick lookup for fylker/counties
-    fylke_direct = {
+    fylke_lists = {
     "agder-fylke": s.norge.agder,
     "innlandet-fylke": s.norge.innlandet,
     "more-og-romsdal-fylke": s.norge.more_og_romsdal,
@@ -754,9 +754,9 @@ def app_get_items(query_items: list) -> Tuple[list, bool]:
             if len(query_items) == 1:
                 if is_query_type is None: is_query_type = 1
                 continue
-        elif q.lower() in fylke_direct.keys():
+        elif q.lower() in fylke_lists.keys():
             _ = [ verified_items.append(s.norge.lookup(k))
-                for k in fylke_direct.get(q.lower())
+                for k in fylke_lists.get(q.lower())
                 if s.norge.lookup(k) not in verified_items
                 ]
 

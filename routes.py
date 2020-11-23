@@ -141,12 +141,32 @@ def subdomain_fylke(flist:list, fname:str, request):
     # get session and response dict
     s, response_dat = get_template_vars()
 
-    # get web template strings
-    q = fname.strip("-fylke").capitalize()
-    if " og " in q:
-        a, b = fname.split(sep=" og ")
-        q = f"{a.capitalize()} og {b.capitalize()}"
+    # Lookup fylke name
+    fylke_names = {
+    "agder-fylke": "Agder",
+    "innlandet-fylke": "Innlandet",
+    "more-og-romsdal-fylke": "Møre og Romsdal",
+    "nordland-fylke": "Nordland",
+    "oslo-fylke": "Oslo",
+    "rogaland-fylke": "Rogaland",
+    "troms-og-finnmark-fylke": "Troms og Finnmark",
+    "trondelag-fylke": "Trøndelag",
+    "vestfold-og-telemark-fylke": "Vestfold og Telemark",
+    "vestland-fylke": "Vestland",
+    "viken-fylke": "Viken"
+    }
 
+    # get web template strings
+    if q.lower() in fylke_names.keys():
+        fylke = fylke_names[q.lower()]
+    else:
+        q = fname.strip("-fylke").capitalize()
+        if " og " in q:
+            a, b = fname.split(sep=" og ")
+            fylke = f"{a.capitalize()} og {b.capitalize()}"
+
+        fylke = fylke.replace("More", "Møre")
+        fylke = fylke.replace("Trondelag", "Trøndelag")
 
 
     # set default subtitle
@@ -158,9 +178,10 @@ def subdomain_fylke(flist:list, fname:str, request):
         fylke = q
         hero_title = f"Aktuelle tall for {q}"
         hero_sub = s.norge.alt_name.get(q, None)
-        if hero_sub is not None:
+        if hero_sub:
             hero_subtitle = hero_sub
     else:
+        # This should never happen, we have controlled input...
         fylke = None
         for fyl, v in s.norge.alt_name.items():
             for subkey in v.split(sep=" - "):
