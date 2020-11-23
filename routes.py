@@ -96,7 +96,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 
 async def subdomain_vvhf(request):
     """ Vestre Viken HF subdomene """
-    pass
+    return PlainTextResponse("Lol this is VVHF")
 
 
 async def subdomain_parser(request):
