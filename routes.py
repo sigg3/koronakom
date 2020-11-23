@@ -157,39 +157,35 @@ def subdomain_fylke(flist:list, fname:str, request):
     }
 
     # get web template strings
-    if fname in fylke_names.keys():
-        fylke = fylke_names[fname]
-    else:
-        fname = fname.strip("-fylke").capitalize()
-        if " og " in fname:
-            a, b = fname.split(sep=" og ")
-            fylke = f"{a.capitalize()} og {b.capitalize()}"
+    fylke = fylke_names[fname]
+    fname = fname.strip("-fylke").replace("-"," ")
 
-        fylke = fylke.replace("More", "Møre")
-        fylke = fylke.replace("Trondelag", "Trøndelag")
+    #fylke = fylke.replace("More", "Møre")
+    #fylke = fylke.replace("Trondelag", "Trøndelag")
 
 
     # set default subtitle
-    hero_title = f"Aktuelle tall for {q}"
+    hero_title = f"Aktuelle tall for {fname}"
     hero_subtitle = f"{fname}.kommune.nu"
 
     # TODO
-    if q in s.norge.fylker.keys():
-        fylke = q
-        hero_title = f"Aktuelle tall for {q}"
-        hero_sub = s.norge.alt_name.get(q, None)
-        if hero_sub:
-            hero_subtitle = hero_sub
-    else:
+    #if fname in s.norge.fylker.keys():
+    #    fylke = fname<
+#        hero_title = f"Aktuelle tall for {q}"
+#        hero_sub = s.norge.alt_name.get(q, None)
+#        if hero_sub:
+#            hero_subtitle = hero_sub
+#    else:
         # This should never happen, we have controlled input...
-        fylke = None
-        for fyl, v in s.norge.alt_name.items():
-            for subkey in v.split(sep=" - "):
-                if q.lower() in subkey.lower():
-                    hero_subtitle = v
-                    hero_title = f"Aktuelle tall for {fyl}"
-                    fylke = fyl
-                    break
+#        fylke = None
+
+    for fyl, v in s.norge.alt_name.items():
+        for subkey in v.split(sep=" - "):
+            if fname in subkey.lower():
+                hero_subtitle = v
+                hero_title = f"Aktuelle tall for {fyl}"
+                fylke = fyl
+                break
 
 
     # pick right template type
