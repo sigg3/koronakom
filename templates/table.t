@@ -265,7 +265,7 @@
                 </tr>
                 <tr>
                     <th>Lenke hit</th>
-                    <td><a href="{{ result_dict[table]['url'] }}" title="{{ result_dict[table]['name'] }}">{{ result_dict[table]['url'] }}</a></td>
+                    <td><a href="https://{{ result_dict[table]['url'] }}" title="{{ result_dict[table]['name'] }}">{{ result_dict[table]['url'] }}</a></td>
                 </tr>
             </table>
         </div>
