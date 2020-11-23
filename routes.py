@@ -142,14 +142,14 @@ def subdomain_fylke(flist:list, fname:str, request):
     s, response_dat = get_template_vars()
 
     # get web template strings
-    q = fname.capitalize()
+    q = fname.strip("-fylke").capitalize()
     if " og " in q:
         a, b = fname.split(sep=" og ")
         q = f"{a.capitalize()} og {b.capitalize()}"
 
     # set default subtitle
-    hero_title = f"Aktuelle tall for {q}"
-    hero_subtitle = f"{fname}.kommune.nu"
+    #hero_title = f"Aktuelle tall for {q}"
+    #hero_subtitle = f"{fname}.kommune.nu"
 
     # TODO
     if q in s.norge.fylker.keys():
