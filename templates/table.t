@@ -38,7 +38,11 @@
             <tr>
                <th>per 100k</th>
                {% for v in result_dict[table]['diff_100k'] %}
+               {% if v is number %}
                <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
+               {% else %}
+               <td class="has-text-right">{{ v }}</td>
+               {% endif %}
                {% endfor %}
             </tr>
           </tbody>
@@ -117,7 +121,11 @@
             <tr>
                <th>per 100k</th>
                {% for v in result_dict[table]['diff_100k'] %}
+               {% if v is number %}
                <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
+               {% else %}
+               <td class="has-text-right">{{ v }}</td>
+               {% endif %}
                {% endfor %}
             </tr>
           </tbody>
@@ -210,7 +218,11 @@
                   <tr>
                      <th>per 100k</th>
                      {% for v in result_dict[table]['diff_100k'] %}
+                     {% if v is number %}
                      <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
+                     {% else %}
+                     <td class="has-text-right">{{ v }}</td>
+                     {% endif %}
                      {% endfor %}
                  </tr>
                 </tbody>
