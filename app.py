@@ -147,7 +147,6 @@ site_main = Router(
         Route('/', hjem, name="homepage"),
 #        Route('/sok/{sok:path}', fritekst),
         Route('/lang/{set_lang}', endre_spraak),
-        Route('/{s:path}', fritekst, methods=["GET"]),
         Route('/utvalg', utvalg),
         Route('/fylker', utvalg_fylker, methods=["GET", "POST"]),
         Route('/egen', utvalg_egen),
@@ -160,7 +159,7 @@ site_main = Router(
 
 site_search = Router(
     routes=[
-        Route('/{s:path}', fritekst, methods=["GET"]),
+        Route('/sok/{s:path}', fritekst, methods=["GET"]),
         Route('/utvalg', utvalg),
         Route('/fylker', utvalg_fylker),
         Route('/egen', utvalg_egen),
