@@ -150,24 +150,8 @@ def subdomain_fylke(flist:list, fname:str, request):
     s, response_dat = get_template_vars()
 
     # Lookup fylke name from subdomain
-    fylke_names = {
-    "agder-fylke": "Agder",
-    "innlandet-fylke": "Innlandet",
-    "more-og-romsdal-fylke": "Møre og Romsdal",
-    "nordland-fylke": "Nordland",
-    "oslo-fylke": "Oslo",
-    "rogaland-fylke": "Rogaland",
-    "troms-og-finnmark-fylke": "Troms og Finnmark",
-    "troms-og-finnmark": "Troms og Finnmark",
-    "romsa-ja-finnmarku": "Troms og Finnmark",
-    "tromssa-ja-finmarkku": "Troms og Finnmark",
-    "trondelag-fylke": "Trøndelag",
-    "troondelage": "Trøndelag",
-    "vestfold-og-telemark-fylke": "Vestfold og Telemark",
-    "vestland-fylke": "Vestland",
-    "viken-fylke": "Viken"
-    }
-
+    fylke_names = s.norge.fylke_url_name
+    
     # get web template strings
     subdomain = fname
     fylke = fylke_names[fname]

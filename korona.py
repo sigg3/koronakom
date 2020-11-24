@@ -703,22 +703,11 @@ def app_get_items(query_items: list) -> Tuple[list, bool]:
     query_items = [ x.strip() for x in query_items ]
     verified_items = []
     is_query_type = None
-    sammenslatt = s.norge.sammenslaatt()
 
-    # quick lookup for fylker/counties
-    fylke_lists = {
-    "agder-fylke": s.norge.agder,
-    "innlandet-fylke": s.norge.innlandet,
-    "more-og-romsdal-fylke": s.norge.more_og_romsdal,
-    "nordland-fylke": s.norge.nordland,
-    "oslo-fylke": s.norge.oslo,
-    "rogaland-fylke": s.norge.rogaland,
-    "troms-og-finnmark-fylke": s.norge.troms_og_finnmark,
-    "trondelag-fylke": s.norge.trondelag,
-    "vestfold-og-telemark-fylke": s.norge.vestfold_og_telemark,
-    "vestland-fylke": s.norge.vestland,
-    "viken-fylke": s.norge.viken
-    }
+    # Central resources
+    sammenslatt = s.norge.sammenslaatt() # conjugated names
+    fylke_lists = s.norge.fylke_url_lookup # URL to item list
+    postnummer = s.norge.postal_codes_2020 # lookup 2020 postal codes
 
     #print(f"received {query_items}")
 
@@ -726,7 +715,9 @@ def app_get_items(query_items: list) -> Tuple[list, bool]:
         # if item is four digits (e.g. 3038)
         if item.isdigit() and len(item) == 4:
             rec = s.norge.data.get(item, None)
-            if rec is None: continue
+            if rec is None:
+                rec = postnummer.get(item, None)
+                if rec is None: continue
             if rec == '0000': continue
             verified_items.append(item)
             is_query_type = 0
