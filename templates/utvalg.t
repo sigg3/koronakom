@@ -137,9 +137,9 @@
                         <li>navn på fylke</li>
                     </ul>
                 </div>
-                <p>Man kan bruke <a href="https://sjekk.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</p>
-                <p>Det er også lagt inn samme mulighet for fylker i <a href="https://sjekk.kommune.nu/fylker" title="Fylker">fylke-velgeren</a>.</p>
-                <p>Det er i tillegg mulig å få lagt inn egendefinerte spørringer, les mer om det på <a hrref="https://sjekk.kommune.nu/egen" title="Egendefinerte søk">egendefinerte søk</a>.</p>
+                <p>Man kan bruke <a href="https://din.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</p>
+                <p>Det er også lagt inn samme mulighet for fylker i <a href="https://din.kommune.nu/fylker" title="Fylker">fylke-velgeren</a>.</p>
+                <p>Det er i tillegg mulig å få lagt inn egendefinerte spørringer, les mer om det på <a href="https://din.kommune.nu/egen" title="Egendefinerte søk">egendefinerte søk</a>.</p>
             {% endif %}
 
         </div>
