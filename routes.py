@@ -303,7 +303,7 @@ async def fritekst(request):
     try:
         print("debug")
         print(request.query_params.keys())
-        ui = html.escape(request.query_params['s'])
+        ui = html.escape(request.query_params['sok'])
 
         # /?sok=Salangen
 
