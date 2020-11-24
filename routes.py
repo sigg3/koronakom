@@ -303,9 +303,10 @@ async def fritekst(request):
     try:
         # print(request.query_params.keys())
         ui = html.escape(request.query_params['sok'])
-    except:
+    except Exception as e:
         # could not get input ..? => bail!
-        response = RedirectResponse(url='https://din.kommune.nu') # TBD 404
+        print(f"got exception: {e}")
+        return RedirectResponse(url='https://din.kommune.nu') # TBD 404
 
 
     ui = ui.replace("!  ","").replace("\\","").replace("/","")
