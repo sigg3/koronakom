@@ -14,7 +14,8 @@
 <div class="level-left">
 {% block logo %}
 {% if languages == 1 %}
-<span class="tag is-warning"><strong>BETA versjon</strong></span> <!-- only norsk -->
+<span class="tag is-danger"><strong>Testing pågår</strong></span> <!-- only norsk -->
+<!--<span class="tag is-warning"><strong>BETA versjon</strong></span> <!-- only norsk -->
 {% else %}
 <div class="dropdown is-hoverable is-primary">
   <div class="dropdown-trigger">
