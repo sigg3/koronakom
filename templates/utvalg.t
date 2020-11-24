@@ -8,6 +8,7 @@
   </div>
 {% endblock %}
 
+{% if utvalg != 3 %}
 {% block tweety %}
 <div class="tile is-ancestor">
     <div class="tile is-4">&nbsp;</div>
@@ -24,6 +25,7 @@
 
 <div class="block">&nbsp;</div>
 {% endblock %}
+{% endif %}
 
 
 {% block sector_1 %}
@@ -130,11 +132,11 @@
                 <div class="content">
                     <ul>
                         <li>navn på kommune (enkelt-oppslag)</li>
-                        <li>&quot;&lt;kommune 1&gt; og &lt;kommune 2&gt;&quot; (versus-oppslag)</li>
-                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, &lt;kommune 3&gt;, &lt;kommune 4&gt;&quot; (liste-oppslag)</li>
+                        <li>&quot;&lt;kommune 1&gt; og &lt;kommune 2&gt;&quot; (sammenligning)</li>
+                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, &lt;kommune 3&gt;, &lt;kommune 4&gt;&quot; (liste)</li>
                         <li>firesifret kommunenummer, e.g. 0301 for Oslo</li>
                         <li>N + firesifret postnummer, e.g. både N3401 (Lier) og 3411 (Sylling) går til Lier kommune (primær kommune)</li>
-                        <li>navn på fylke</li>
+                        <li>navn på fylke (gir liste over kommunene)</li>
                     </ul>
                 </div>
                 <p>Man kan bruke <a href="https://din.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</p>
