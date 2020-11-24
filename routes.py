@@ -327,10 +327,11 @@ async def fritekst(request):
         uinput = uinput.split(sep=",")
     else:
         # tillatt folk å bruke "og"
+        print(f"current init = '{uinput}'")
         uinput = uinput.replace(" ",",")
         uinput = [ y for x in uinput.split(sep=",") for y in x.split(sep=",og,")]
 
-    #print(f"current = '{uinput}'")
+    print(f"current = '{uinput}'")
 
 
     # THIS FAILS: Kunne ikke finne: <['Oslo og Bergen']>
@@ -346,8 +347,8 @@ async def fritekst(request):
     # Check that we have input
     items_to_display, query_type = korona.app_get_items(uinput)
 
-    #print(f"debug to_fetch={items_to_display}")
-    #print(f"query_type={query_type}")
+    print(f"debug to_fetch={items_to_display}")
+    print(f"query_type={query_type}")
 
     if len(items_to_display) > 0:
         # Fetch data
