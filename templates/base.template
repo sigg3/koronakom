@@ -90,16 +90,15 @@
 </section>
 {% endblock %}
 
-<section>
-    <footer class="footer has-background-info-light pb-3 mb-0">
-        <div class="content has-text-centered">
-            <p>
-                Tjenesten <strong>korona.kommune.nu</strong> er laget av <a href="https://din.kommune.nu/om" title="Sigbj&oslash;rn Smelror">Sigbj&oslash;rn Smelror</a> &copy; 2020.
-                <br />
-                Statistikken hentes regelmessig fra <a href="https://fhi.no" title="FHI: Folkehelseinstituttet">FHI: Folkehelseinstituttet</a>.
-            </p>
-        </div>
+
+<footer class="footer has-background-info-light pb-3 mb-0">
+    <div class="content has-text-centered">
+        <p>
+            Tjenesten <strong>korona.kommune.nu</strong> er laget av <a href="https://din.kommune.nu/om" title="Sigbj&oslash;rn Smelror">Sigbj&oslash;rn Smelror</a> &copy; 2020.
+            <br />
+            Statistikken hentes regelmessig fra <a href="https://fhi.no" title="FHI: Folkehelseinstituttet">FHI: Folkehelseinstituttet</a>.
+        </p>
+    </div>
 </footer>
-</section>
 </body>
 </html>
