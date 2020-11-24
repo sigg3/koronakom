@@ -138,13 +138,18 @@
                         <li>&quot;&lt;kommune 1&gt; og &lt;kommune 2&gt;&quot; (sammenligning)</li>
                         <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, &lt;kommune 3&gt;, &lt;kommune 4&gt;&quot; (liste)</li>
                         <li>firesifret kommunenummer, e.g. 0301 for Oslo</li>
-                        <li>N + firesifret postnummer, e.g. både N3401 (Lier) og 3411 (Sylling) går til Lier kommune (primær kommune)</li>
+                        <li>N + firesifret postnummer, e.g. både N3401 (Lier) og N3411 (Sylling) går til Lier (primær kommune)</li>
                         <li>navn på fylke (gir liste over kommunene)</li>
                     </ul>
                 </div>
-                <p>Man kan bruke <a href="https://din.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</p>
-                <p>Det er også lagt inn samme mulighet for fylker i <a href="https://din.kommune.nu/fylker" title="Fylker">fylke-velgeren</a>.</p>
-                <p>Det er i tillegg mulig å få lagt inn egendefinerte spørringer, les mer om det på <a href="https://din.kommune.nu/egen" title="Egendefinerte søk">egendefinerte søk</a>.</p>
+                <p>Andre måter å gjøre oppslag på:</p>
+                <div class="content">
+                    <ul>
+                        <li>Man kan bruke <a href="https://din.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</li>
+                        <li>Det er også lagt inn samme mulighet for fylker i <a href="https://din.kommune.nu/fylker" title="Fylker">fylke-velgeren</a>.</li>
+                        <li>Det er i tillegg mulig å få lagt inn egendefinerte spørringer, les mer om det på <a href="https://din.kommune.nu/egen" title="Egendefinerte søk">egendefinerte søk</a>.</li>
+                    </ul>
+                </div>
             {% endif %}
 
         </div>
