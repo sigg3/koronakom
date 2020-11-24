@@ -129,8 +129,10 @@ async def subdomain_parser(request):
         if item_type == 0:
             # Get the url-friendly string
             return subdomain_kommune(items[0], request)
+        elif subdomain == "oslo-fylke":
+            return subdomain_kommune(items[0], request)
         else:
-            search_url = "https://sjekk.kommune.nu/?sok"
+            search_url = "https://sjekk.kommune.nu/?s"
             return RedirectResponse(url=f'{search_url}={items[0]}')
     elif item_type == 1:
         return subdomain_fylke(items, subdomain, request) # ???
@@ -301,8 +303,8 @@ async def hjem(request):
 async def fritekst(request):
     await request.form()
     try:
-        print("debug")
-        print(request.query_params.keys())
+#        print("debug")
+#        print(request.query_params.keys())
         ui = html.escape(request.query_params['s'])
 
         # /?sok=Salangen
