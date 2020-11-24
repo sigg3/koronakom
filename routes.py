@@ -151,7 +151,7 @@ def subdomain_fylke(flist:list, fname:str, request):
 
     # Lookup fylke name from subdomain
     fylke_names = s.norge.fylke_url_name
-    
+
     # get web template strings
     subdomain = fname
     fylke = fylke_names[fname]
@@ -305,34 +305,32 @@ async def fritekst(request):
         ui = html.escape(request.query_params['sok'])
     except:
         # could not get input ..? => bail!
-        response = RedirectResponse(url='/')
+        response = RedirectResponse(url='https://din.kommune.nu') # TBD 404
+
+
+    ui = ui.replace("!  ","").replace("\\","").replace("/","")
+    uinput = ui
+
+    # create response dict for template
+    s, response_dat = get_template_vars()
+    # print(f"current = '{uinput}'")
+    sammenslaatt = s.norge.sammenslaatt()
+
+    if uinput.lower() in sammenslaatt:
+        uinput = uinput.split(sep=",")
     else:
-        ui = ui.replace("!  ","").replace("\\","").replace("/","")
-        uinput = ui
+        # tillatt folk å bruke "og"
+        uinput.replace(" ",",")
+        uinput = [ y for x in uinput.split(sep=",") for y in x.split(sep=",og,")]
 
-        # create response dict for template
-        s, response_dat = get_template_vars()
-        # print(f"current = '{uinput}'")
-        sammenslaatt = s.norge.sammenslaatt()
+    #print(f"current = '{uinput}'")
 
-        if uinput.lower() in sammenslaatt:
-            uinput = uinput.split(sep=",")
-        else:
-            # tillatt folk å bruke "og"
-            uinput.replace(" ",",")
-            uinput = [ y for x in uinput.split(sep=",") for y in x.split(sep=",og,")]
-
-        #print(f"current = '{uinput}'")
-
-        # Nota bene, enkelte søk fungerer ikke:
-        # Oslo, Bergen, og Lavangen gir ...?
-        # Oslo, Bergen og Lavangen gir Lavangen
-        # Oslo og Bergen og Lavangen
-        # Oslo og Lavangen, Bergen
-        # Oslo,Bergen,Lavangen
-
-
-
+    # Nota bene, enkelte søk fungerer ikke:
+    # Oslo, Bergen, og Lavangen gir ...?
+    # Oslo, Bergen og Lavangen gir Lavangen
+    # Oslo og Bergen og Lavangen
+    # Oslo og Lavangen, Bergen
+    # Oslo,Bergen,Lavangen
 
     # Check that we have input
     items_to_display, query_type = korona.app_get_items(uinput)
