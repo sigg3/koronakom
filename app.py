@@ -159,7 +159,7 @@ site_main = Router(
 
 site_search = Router(
     routes=[
-        Route('/sok/{s:path}', fritekst, methods=["GET"]),
+        Route('/{sok:path}', fritekst, methods=["GET"]),
         Route('/utvalg', utvalg),
         Route('/fylker', utvalg_fylker),
         Route('/egen', utvalg_egen),
