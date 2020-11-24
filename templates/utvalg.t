@@ -126,11 +126,20 @@
                 <p>Legg inn spørring for EU-risk-assessment</p>
             {% else %}
                 <h2 class="subtitle">Hjelp med søkeord / nøkler</h2>
-                <p>Alle kommunene i Norge har en fire-sifret kode (f.eks. har Oslo 0301).</p>
-                <p>&nbsp;</p>
-                <p>Denne siden er ikke ferdig utviklet.</p>
-                <p>&nbsp;</p>
-                <p>Legg inn spørring for EU-risk-assessment</p>
+                I utgangspunktet støtter søkemotoren følgende type oppslag:
+                <div class="content">
+                    <ul>
+                        <li>navn på kommune</li>
+                        <li>&quot;&lt;kommune 1&lt; og kommune 2&gt;&quot;
+                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, &lt;kommune 3&gt;, &lt;kommune 4&gt;&quot;
+                        <li>kommunenummer (e.g. 
+                        <li>postnummer (lenkes til primær kommune)</li>
+                        <li>navn på fylke</li>
+                    </ul>
+                </div>
+                <p>Man kan bruke <a href="https://sjekk.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</p>
+                <p>Det er også lagt inn samme mulighet for fylker i <a href="https://sjekk.kommune.nu/fylker" title="Fylker">fylke-velgeren</a>.</p>
+                <p>Det er i tillegg mulig å få lagt inn egendefinerte spørringer, les mer om det på <a hrref="https://sjekk.kommune.nu/egen" title="Egendefinerte søk">egendefinerte søk</a>.</p>
             {% endif %}
 
         </div>
