@@ -175,11 +175,10 @@ def subdomain_fylke(flist:list, fname:str, request):
         fylke_alt = s.norge.alt_name[fylke]
 
     # set default title/subtitle
-    hero_title = f"{subdomain}.kommune.nu"
-    hero_subtitle = f"Aktuelle tall for {fylke}"
+    hero_title = f"Aktuelle tall for {fylke}"
+    hero_subtitle = f"{subdomain}.kommune.nu"
     if fylke_alt:
         hero_subtitle = fylke_alt
-        hero_tutle = f"Aktuelle tall for {fylke}"
 
     # pick right template type
     if len(flist) == 1:
