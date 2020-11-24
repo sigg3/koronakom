@@ -71,10 +71,10 @@
 <section>
     <div class="container pl-1 pr-1">
         <div class="columns is-centered">
-           <form action="https://sjekk.kommue.nu/sok/" method="get">
+           <form action="https://sjekk.kommune.nu/" method="get">
             <div class="field has-addons pt-3">
                 <p class="control">
-                    <input name="sok" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*">
+                    <input name="s" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*">
                 </p>
                 <p class="control">
                     <button type="submit" class="button is-large is-primary">S&oslash;k</button>
