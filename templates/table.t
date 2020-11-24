@@ -96,7 +96,7 @@
                 {% endif %}
             </h1>
             <h4 class="subtitle is-lowercase">
-                <a href="{{ result_dict[table]['url'] }}" title="{{ result_dict[table]['name'] }}">{{ result_dict[table]['name'] }}.kommune.nu</a>
+                <a href="https://{{ result_dict[table]['url'] }}" title="{{ result_dict[table]['name'] }}">{{ result_dict[table]['name'] }}.kommune.nu</a>
             </h4>
         </div>
     </div>
@@ -269,11 +269,11 @@
                 </tr>
                 <tr>
                     <th><strong>Hjemmeside</strong></th>
-                    <td><a href="{{ result_dict[table]['web'] }}" title="{{ result_dict[table]['name'] }} hjemmeside">{{ result_dict[table]['web'] }}</a></td>
+                    <td><a href="https://{{ result_dict[table]['web'] }}" title="{{ result_dict[table]['name'] }} hjemmeside">{{ result_dict[table]['web'] }}</a></td>
                 </tr>
                 <tr>
                     <th><strong>Statistikk</strong></th>
-                    <td><a href="{{ result_dict[table]['ssb'] }}" title="{{ result_dict[table]['name'] }} faktaside">{{ result_dict[table]['ssb']}}</a></td>
+                    <td><a href="https://{{ result_dict[table]['ssb'] }}" title="{{ result_dict[table]['name'] }} faktaside">{{ result_dict[table]['ssb']}}</a></td>
                 </tr>
                 <tr>
                     <th>Lenke hit</th>
