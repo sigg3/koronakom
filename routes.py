@@ -158,6 +158,7 @@ def subdomain_fylke(flist:list, fname:str, request):
     "oslo-fylke": "Oslo",
     "rogaland-fylke": "Rogaland",
     "troms-og-finnmark-fylke": "Troms og Finnmark",
+    "troms-og-finnmark": "Troms og Finnmark",
     "romsa-ja-finnmarku": "Troms og Finnmark",
     "tromssa-ja-finmarkku": "Troms og Finnmark",
     "trondelag-fylke": "Trøndelag",
