@@ -39,7 +39,7 @@
         <h1 class="title"><em>din</em>.kommune.nu</h1>
         <h2 class="subtitle">
             Denne siden er en oppslagstjeneste for &aring; enkelt kunne <strong>sjekke gjeldende korona status</strong> for sin kommune, sitt fylke eller landet forøvrig.
-            Tallene hentes daglig fra Folkehelseinstituttet og ble sist oppdatert {{ nordate }}. <a href="https://din.kommune.nu/om" title="Om tall og tjenesten">Les mer her</a>.
+            Tallene hentes daglig fra Folkehelseinstituttet og ble <span class="tag is-info">sist oppdatert {{ nordate }}.</span> <a href="https://din.kommune.nu/om" title="Om tall og tjenesten">Les mer her</a>.
             Bruk søkemotoren under eller lag <a href="https://din.kommune.nu/utvalg" title="Sp&oring;rring">din egen spørring</a>.
         </h2>
     </div>
