@@ -59,7 +59,7 @@
          <a href="https://rogaland-fylke.kommune.nu" title="Rogaland">Rogaland</a>,
          <a href="https://troms-og-finnmark.kommune.nu" title="Troms og Finnmark - Romsa ja Finnmárku - Tromssa ja Finmarkku">Troms og Finnmark - Romsa ja Finnmárku - Tromssa ja Finmarkku</a>,
          <a href="https://trondelag-fylke.kommune.nu" title="Trøndelag - Trööndelage">Trøndelag - Trööndelage</a>,
-         <a href="https://vestfold-og-telemark-fylke.nu" title="Vestfold og Telemark">Vestfold og Telemark</a>,
+         <a href="https://vestfold-og-telemark-fylke.kommune.nu" title="Vestfold og Telemark">Vestfold og Telemark</a>,
          <a href="https://vestland-fylke.kommune.nu" title="Vestland">Vestland</a>,
          og <a href="https://viken-fylke.kommune.nu" title="Viken">Viken</a>.</h2>
          <h2 class="subtitle">
