@@ -595,7 +595,7 @@ async def utvalg_hjelp(request):
             "request": request,
             "head_title": "korona.kommune.nu sp&oslash;rring",
             "hero_subtitle": "Hjelp til sp&oslash;rring",
-            "hero_link": "/utvalg",
+            "hero_link": "/hjelp",
             "utvalg": 3
         }
     )
