@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ head_title }}</title>
     <link rel="stylesheet" href="https://din.kommune.nu/css/bulma.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="https://din.kommune.nu/css/favicon.ico" />
 </head>
 <body>
 <section class="hero has-background-info-light">
