@@ -55,6 +55,7 @@ def initialize_korona():
     to binary pickle file in Settings.store attribute
     """
     korona.setup()
+    print("initialization complete")
 
 
 async def clean_up_korona():
