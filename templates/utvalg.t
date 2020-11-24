@@ -129,11 +129,11 @@
                 I utgangspunktet støtter søkemotoren følgende type oppslag:
                 <div class="content">
                     <ul>
-                        <li>navn på kommune</li>
-                        <li>&quot;&lt;kommune 1&lt; og kommune 2&gt;&quot;
-                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, &lt;kommune 3&gt;, &lt;kommune 4&gt;&quot;
-                        <li>kommunenummer (e.g. 
-                        <li>postnummer (lenkes til primær kommune)</li>
+                        <li>navn på kommune (enkelt-oppslag)</li>
+                        <li>&quot;&lt;kommune 1&gt; og &lt;kommune 2&gt;&quot; (versus-oppslag)</li>
+                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, &lt;kommune 3&gt;, &lt;kommune 4&gt;&quot; (liste-oppslag)</li>
+                        <li>firesifret kommunenummer, e.g. 0301 for Oslo</li>
+                        <li>N + firesifret postnummer, e.g. både N3401 (Lier) og 3411 (Sylling) går til Lier kommune (primær kommune)</li>
                         <li>navn på fylke</li>
                     </ul>
                 </div>
