@@ -320,7 +320,7 @@ async def fritekst(request):
 
     # create response dict for template
     s, response_dat = get_template_vars()
-    # print(f"current = '{uinput}'")
+    print(f"current = '{uinput}'")
     sammenslaatt = s.norge.sammenslaatt()
 
     if uinput.lower() in sammenslaatt:
@@ -330,7 +330,11 @@ async def fritekst(request):
         uinput.replace(" ",",")
         uinput = [ y for x in uinput.split(sep=",") for y in x.split(sep=",og,")]
 
-    #print(f"current = '{uinput}'")
+    print(f"current = '{uinput}'")
+
+
+    # THIS FAILS: Kunne ikke finne: <['Oslo og Bergen']>
+    #
 
     # Nota bene, enkelte søk fungerer ikke:
     # Oslo, Bergen, og Lavangen gir ...?
@@ -342,8 +346,8 @@ async def fritekst(request):
     # Check that we have input
     items_to_display, query_type = korona.app_get_items(uinput)
 
-    #rint(f"debug to_fetch={items_to_display}")
-    #print(f"query_type={query_type}")
+    print(f"debug to_fetch={items_to_display}")
+    print(f"query_type={query_type}")
 
     if len(items_to_display) > 0:
         # Fetch data
