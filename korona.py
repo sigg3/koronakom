@@ -715,13 +715,20 @@ def app_get_items(query_items: list) -> Tuple[list, bool]:
         # if item is four digits (e.g. 3038)
         if item.isdigit() and len(item) == 4:
             rec = s.norge.data.get(item, None)
-            if rec is None:
-                rec = postnummer.get(item, None)
-                if rec is None: continue
+            if rec is None: continue
             if rec == '0000': continue
             verified_items.append(item)
             is_query_type = 0
             continue
+
+        # check postal codes (prefixed with N, eg. "N0001")
+        if len(item) == 5 and item[:1].upper() == "N":
+            rec = postnummer.get(item.lower(), None)
+            if rec is None:
+                pass
+            else:
+                verified_items.append(rec)
+                is_query_type = 0
 
         # capitalize Query
         if item.lower() in sammenslatt:
