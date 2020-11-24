@@ -302,7 +302,7 @@ async def fritekst(request):
     await request.form()
     try:
         # print(request.query_params.keys())
-        ui = html.escape(request.query_params['sok'])
+        ui = html.escape(request.query_params['s'])
     except Exception as e:
         # could not get input ..? => bail!
         print(f"got exception: {e}")
