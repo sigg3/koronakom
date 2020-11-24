@@ -8,8 +8,10 @@
   </div>
 {% endblock %}
 
-{% if utvalg != 3 %}
 {% block tweety %}
+{% if utvalg == 3 %}
+<div class="block">&nbsp;</div>
+{% else %}
 <div class="tile is-ancestor">
     <div class="tile is-4">&nbsp;</div>
     <div class="tile is-4">
@@ -24,8 +26,9 @@
 </div>
 
 <div class="block">&nbsp;</div>
-{% endblock %}
 {% endif %}
+{% endblock %}
+
 
 
 {% block sector_1 %}

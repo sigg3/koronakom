@@ -593,8 +593,8 @@ async def utvalg_hjelp(request):
     response_dat.update(
         {
             "request": request,
-            "head_title": "korona.kommune.nu sp&oslash;rring",
-            "hero_subtitle": "Hjelp til sp&oslash;rring",
+            "head_title": "korona.kommune.nu spørring",
+            "hero_subtitle": "Hjelp til spørring",
             "hero_link": "/hjelp",
             "utvalg": 3
         }
