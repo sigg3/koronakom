@@ -35,17 +35,25 @@
         <div class="container has-text-centered">
             <div class="level has-text-centered">
                 {% if utvalg == 0 %}
+                <p class="level-item"><a href="https://din.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
                 <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-info"><strong>Kommuner</strong></a></p>
                 <p class="level-item"><a href="https://din.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
                 <p class="level-item"><a href="https://din.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
                 {% elif utvalg == 1 %}
+                <p class="level-item"><a href="https://din.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
                 <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
                 <p class="level-item"><a href="https://din.kommune.nu/fylker" title="Velg etter fylke" class="button is-info"><strong>Fylker</strong></a></p>
                 <p class="level-item"><a href="https://din.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
-                {% else %}
+                {% elif utvalg == 2 %}
+                <p class="level-item"><a href="https://din.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
                 <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
                 <p class="level-item"><a href="https://din.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
                 <p class="level-item"><a href="https://din.kommune.nu/egen" title="Egendefinert utvalg" class="button is-info"><strong>Egendefinert</strong></a></p>
+                {% else %}
+                <p class="level-item"><a href="https://din.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-info"><strong>Nøkler</strong></a></p>
+                <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
+                <p class="level-item"><a href="https://din.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
+                <p class="level-item"><a href="https://din.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
                 {% endif %}
             </div>
         </div>
@@ -109,8 +117,15 @@
                     {% endfor %}
                 </div>
             </div>
-            {% else %}
+            {% elif utvalg == 2 %}
                 <h2 class="subtitle">Egendefinerte sp&oslash;rringer</h2>
+                <p>Alle kommunene i Norge har en fire-sifret kode (f.eks. har Oslo 0301).</p>
+                <p>&nbsp;</p>
+                <p>Denne siden er ikke ferdig utviklet.</p>
+                <p>&nbsp;</p>
+                <p>Legg inn spørring for EU-risk-assessment</p>
+            {% else %}
+                <h2 class="subtitle">Hjelp med søkeord / nøkler</h2>
                 <p>Alle kommunene i Norge har en fire-sifret kode (f.eks. har Oslo 0301).</p>
                 <p>&nbsp;</p>
                 <p>Denne siden er ikke ferdig utviklet.</p>

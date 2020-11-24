@@ -149,6 +149,7 @@ site_main = Router(
 #        Route('/sok/{sok:path}', fritekst),
         Route('/lang/{set_lang}', endre_spraak),
         Route('/utvalg', utvalg),
+        Route('/hjelp', utvalg_hjelp),
         Route('/fylker', utvalg_fylker, methods=["GET", "POST"]),
         Route('/egen', utvalg_egen),
         Route('/om', om_tjenesten),

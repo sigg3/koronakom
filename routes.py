@@ -587,6 +587,20 @@ async def utvalg_fylker(request):
 async def custom_subdomain(request):
     return PlainTextResponse("LOL")
 
+async def utvalg_hjelp(request):
+    # get language settings
+    s, response_dat = get_template_vars()
+    response_dat.update(
+        {
+            "request": request,
+            "head_title": "korona.kommune.nu sp&oslash;rring",
+            "hero_subtitle": "Hjelp til sp&oslash;rring",
+            "hero_link": "/utvalg",
+            "utvalg": 3
+        }
+    )
+    return templates.TemplateResponse('utvalg.t', response_dat)
+
 async def utvalg_egen(request):
     # get language settings
     s, response_dat = get_template_vars()
