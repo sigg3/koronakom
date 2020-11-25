@@ -116,13 +116,7 @@
                     {% endfor %}
                 </tr>
                 <tr>
-                    <td class="border: 0;" colspan="5">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td class="border: 0;" colspan="5">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td class="border: 0;" colspan="5">&nbsp;</td>
+                    <td class="border: 0;" colspan="5">&nbsp;<br />&nbsp;<br /></td>
                 </tr>
                 {% endfor %}
             </table>
