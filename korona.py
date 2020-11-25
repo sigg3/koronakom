@@ -20,10 +20,10 @@ from norway import Norway
 # 2. implement error message template redirects         [    ]
 # 3. get https up and enable https only middleware      [ OK ]
 # 4. get custom query submission up                     [    ]
-# 5. get subdomains working                             [    ]
+# 5. get subdomains working                             [ OK ]
 # 6. get languages working (gettext or equiv)           [    ]
 # 7. various TODOs (optimization) below                 [    ]
-# 8 . add postnummer to search keys                     [    ]
+# 8 . add postnummer to search keys                     [ OK ]
 
 # TODO
 # async httpx fetch loop
