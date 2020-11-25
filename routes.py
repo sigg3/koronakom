@@ -112,7 +112,7 @@ async def subdomain_vvhf(request):
                         "request": request,
                         "head_title": f"Korona-tall for VVHF",
                         "hero_title": "Vestre Viken Helseforetak",
-                        "hero_subtitle": hero_subtitle,
+                        "hero_subtitle": "Alle kommuner under VVHF"
                         "vvhf_sites": vvhf_keys,
                         "current": "vvhf" #landing
                         }
@@ -670,7 +670,7 @@ async def utvalg_egen(request):
                 big_list[f].append((k, kid, url))
 
         s.list_of_muncipalities = big_list
-        
+
     response_dat.update(
         {
             "request": request,
