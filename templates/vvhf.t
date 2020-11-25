@@ -17,26 +17,20 @@
         &nbsp;
     </div>
     <div class="tile is-5">
-        <div class="dropdown">
+        <div class="dropdown is-hoverable is-primary">
             <div class="dropdown-trigger">
-                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-                    <span>Click me</span>
-                    <span class="icon is-small">
-                    <i class="fas fa-angle-down" aria-hidden="true"></i>
-                    </span>
+                <button class="button has-icons-right" aria-haspopup="true" aria-controls="dropdown-menu3">
+                <span>Vestre Viken HF</span>
                 </button>
-          </div>
-          <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-            <div class="dropdown-content">
-                <a href="#" class="dropdown-item">Overview</a>
-                <a href="#" class="dropdown-item">Modifiers</a>
-                {% for key in vvhf_sites %}
-                <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item">{{ key }}</a>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                <div class="dropdown-content">
+                {% for sykehus in vvhf_sites.keys() %}
+                <a href="{{ vvhf_sites['url'] }}" title="{{ vvhf_sites['title'] }}" class="dropdown-item">{{ vvhf_sites['title'] }}</a>
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
-</section>
+
 {% endblock %}

@@ -104,17 +104,25 @@ async def subdomain_vvhf(request):
         # TODO Entry page med
         # 1. dropdown (velg mellom VVHF queries)
         # 2. tabell (under)
+
         vvhf_keys = [ "vvhf", "bersyk", "dramsyk", "kongsyk", "ringsyk"]
-        # betyr at subdomain vvhf må kunne ta post til self.
+        vvhf_sites = {}
+        for key in vvhf_keys:
+            vvhf_sites[key] = {
+                "title": s.custom_queries[key][title],
+                "subtitle": s.custom_queries[key][subtitle],
+                "created": s.custom_queries[key][created],
+                "list":  s.custom_queries[key][list],
+                "url": key
 
         response_dat.update(
                         {
                         "request": request,
-                        "head_title": f"Korona-tall for VVHF",
+                        "head_title": f"Gjeldende korona-tall for kommuner under VVHF",
                         "hero_title": "Vestre Viken Helseforetak",
                         "hero_subtitle": "Alle kommuner under VVHF",
-                        "vvhf_sites": vvhf_keys,
-                        "current": "vvhf" #landing
+                        "vvhf_sites": vvhf_sites,
+                        "current": "vvhf"
                         }
         )
         return templates.TemplateResponse('vvhf.t', response_dat)
