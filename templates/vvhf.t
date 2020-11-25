@@ -13,7 +13,7 @@
 <section class="section pt-2 pb-1">
     <div class="container has-text-centered">
         <h2 class="subtitle">Oppdatert {{ nordate }}</h2>
-        <div class="dropdown is-hoverable is-primary">
+        <div class="dropdown is-hoverable is-primary has-text-left">
             <div class="dropdown-trigger">
                 <button class="button has-icons-right" aria-haspopup="true" aria-controls="dropdown-menu3">
                     <span>Velg ønsket tabell</span>
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="block mt-2 mb-2">
+    <div class="block mt-3 mb-3">
         &nbsp;
     </div>
     <div class="tile is-ancestor">
@@ -106,7 +106,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="block">&nbsp;</div>
+            <div class="block is-clearfix">&nbsp;</div>
             {% endfor %}
         </div>
         <div class="tile is-3">&nbsp;</div>
