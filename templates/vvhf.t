@@ -47,17 +47,17 @@
                 </thead>
                 <tbody>
                     {% for table in result_dict.keys() %}
+                    {% if result_dict[table]['risk'] == 0 %}
+                    <tr class="has-background-success">
+                    {% elif result_dict[table]['risk'] == 1 %}
+                    <tr class="has-background-warning">
+                    {% elif result_dict[table]['danger'] == 2 %}
+                    <tr class="has-background-danger">
+                    {% else %}
                     <tr>
+                    {% endif %}
                         <th>{{ result_dict[table]['name'] }}</th>
-                        {% if result_dict[table]['risk'] == 0 %}
-                        <td colspan="4" class="has-background-success">&nbsp;</td>
-                        {% elif result_dict[table]['risk'] == 1 %}
-                        <td colspan="4" class="has-background-warning">&nbsp;</td>
-                        {% elif result_dict[table]['risk'] == 2 %}
-                        <td colspan="4" class="has-background-danger">&nbsp;</td>
-                        {% else %}
-                        <td colspan="4" class="has-background-light">&nbsp;</td>
-                        {% endif %}
+                        <td colspan="4">&nbsp;</td>
                     </tr>
                     <tr>
                         <th>tilfeller</th>
