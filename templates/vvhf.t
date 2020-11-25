@@ -62,9 +62,9 @@
                         {% if loop.index0 == 0 %}
                         {% if result_dict[table]['risk'] == 0 %}
                         <td class="has-text-right has-background-success">{{ v }}</td>
-                        {% if result_dict[table]['risk'] == 1 %}
+                        {% elif result_dict[table]['risk'] == 1 %}
                         <td class="has-text-right has-background-warning">{{ v }}</td>
-                        {% if result_dict[table]['risk'] == 2 %}
+                        {% elif result_dict[table]['risk'] == 2 %}
                         <td class="has-text-right has-background-danger">{{ v }}</td>
                         {% else %}
                         <td class="has-text-right">{{ v }}</td>
