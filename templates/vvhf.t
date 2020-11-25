@@ -35,10 +35,20 @@
     <div class="tile is-ancestor">
         <div class="tile is-3">&nbsp;</div>
         <div class="tile is-6">
+            {% for table in result_dict.keys() %}
+            <div class="block">&nbsp;</div>
+            {% if result_dict[table]['risk'] == 0 %}
+            <table class="table is-fullwidth is-hoverable has-background-success-light">
+            {% elif result_dict[table]['risk'] == 1 %}
+            <table class="table is-fullwidth is-hoverable has-background-warning-light">
+            {% elif result_dict[table]['risk'] == 2 %}
+            <table class="table is-fullwidth is-hoverable has-background-danger-light">
+            {% else %}
             <table class="table is-fullwidth is-hoverable">
+            {% endif %}
                 <thead>
                     <tr>
-                        <th>Utvikling siste</th>
+                        <th>{{ result_dict[table]['name'] }} siste</th>
                         <th class="has-text-right">14 dager</th>
                         <th class="has-text-right">7 dager</th>
                         <th class="has-text-right">3 dager</th>
@@ -46,42 +56,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for table in result_dict.keys() %}
-                    {% if result_dict[table]['risk'] == 0 %}
-                    <tr class="has-background-success-light">
-                    {% elif result_dict[table]['risk'] == 1 %}
-                    <tr class="has-background-warning-light">
-                    {% elif result_dict[table]['risk'] == 2 %}
-                    <tr class="has-background-danger-light">
-                    {% else %}
                     <tr>
-                    {% endif %}
-                        <th>{{ result_dict[table]['name'] }}</th>
-                        <td colspan="4">&nbsp;</td>
-                    </tr>
-                    {% if result_dict[table]['risk'] == 0 %}
-                    <tr class="has-background-success-light">
-                    {% elif result_dict[table]['risk'] == 1 %}
-                    <tr class="has-background-warning-light">
-                    {% elif result_dict[table]['risk'] == 2 %}
-                    <tr class="has-background-danger-light">
-                    {% else %}
-                    <tr>
-                    {% endif %}
                         <th>tilfeller</th>
+                        
                         {% for v in result_dict[table]['diff_n'] %}
-                        <td class="has-text-right">{{ v }}</td>
+                        <td class="has-text-right">{{ v }} (index: {{ loop.index0 }})</td>
                         {% endfor %}
                     </tr>
-                    {% if result_dict[table]['risk'] == 0 %}
-                    <tr class="has-background-success-light">
-                    {% elif result_dict[table]['risk'] == 1 %}
-                    <tr class="has-background-warning-light">
-                    {% elif result_dict[table]['risk'] == 2 %}
-                    <tr class="has-background-danger-light">
-                    {% else %}
                     <tr>
-                    {% endif %}
                         <th>per 100k</th>
                         {% for v in result_dict[table]['diff_100k'] %}
                         {% if v is number %}
@@ -91,16 +73,10 @@
                         {% endif %}
                         {% endfor %}
                     </tr>
-                    <tr>
-                        <td colspan="5">
-                            <div class="block">&nbsp;</div>
-                            <div class="block">&nbsp;</div>
-                        </td>
-                    </tr>
-                        
-                    {% endfor %}
                 </tbody>
             </table>
+            <div class="block">&nbsp;</div>
+            {% endfor %}
         </div>
         <div class="tile is-3">&nbsp;</div>
     </div>
