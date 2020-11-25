@@ -67,19 +67,7 @@
                 {% endif %}
                     <th>tilfeller</th>
                     {% for v in result_dict[table]['diff_n'] %}
-                    {% if loop.index0 == 0 %}
-                    {% if result_dict[table]['risk'] == 0 %}
-                    <td class="has-text-right has-background-success">{{ v }}</td>
-                    {% elif result_dict[table]['risk'] == 1 %}
-                    <td class="has-text-right has-background-warning">{{ v }}</td>
-                    {% elif result_dict[table]['risk'] == 2 %}
-                    <td class="has-text-right has-background-danger">{{ v }}</td>
-                    {% else %}
                     <td class="has-text-right">{{ v }}</td>
-                    {% endif %}
-                    {% else %}
-                    <td class="has-text-right">{{ v }}</td>
-                    {% endif %}
                     {% endfor %}
                 </tr>
                 {% if result_dict[table]['risk'] == 0 %}
