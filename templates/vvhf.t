@@ -50,11 +50,22 @@
                 {% else %}
                 <tr>
                 {% endif %}
-                    <th><span class="is-size-3 is-upper">{{ result_dict[table]['name'] }}</span></th>
-                    <th class="has-text-right">14 dager</th>
-                    <th class="has-text-right">7 dager</th>
-                    <th class="has-text-right">3 dager</th>
-                    <th class="has-text-right">24 timer</th>
+                    <td colspan="5"><span class="is-size-3 is-upper">{{ result_dict[table]['name'] }}</span></td>
+                </tr>
+                {% if result_dict[table]['risk'] == 0 %}
+                <tr class="has-background-success-light">
+                {% elif result_dict[table]['risk'] == 1 %}
+                <tr class="has-background-warning-light">
+                {% elif result_dict[table]['risk'] == 2 %}
+                <tr class="has-background-danger-light">
+                {% else %}
+                <tr>
+                {% endif %}
+                    <td>&nbsp;</th>
+                    <td class="has-text-right"><strong>14 dager</strong></td>
+                    <td class="has-text-right"><strong>7 dager</strong></td>
+                    <td class="has-text-right"><strong>3 dager</strong></td>
+                    <td class="has-text-right"><strong>24 timer</strong></td>
                 </tr>
                 {% if result_dict[table]['risk'] == 0 %}
                 <tr class="has-background-success-light">
