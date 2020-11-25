@@ -102,6 +102,7 @@ async def subdomain_vvhf(request):
         print("debug")
         full_url = str(request.url)
         print(f"full_url: {full_url}")
+        print(f"query: {request.query_params}")
         s, response_dat = get_template_vars()
 
         # TODO Entry page med
