@@ -121,9 +121,12 @@ async def subdomain_vvhf(request):
                     "url": key
                     }
 
+
+        # Get query param from template/URL
         try:
-            fetching = await request.query_params['vis']
-        except:
+            fetching = request.query_params['vis']
+        except Exception as e:
+            print(f"got exception for query_param: {e}")
             fetching = "vvhf"
 
         # Just make sure
