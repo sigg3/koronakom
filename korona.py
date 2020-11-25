@@ -83,8 +83,8 @@ class Session():
         """ key store for custom queries we call with GET """
         _cq = {
                 "vvhf": {
-                        "title":    "Vestre Viken",
-                        "subtitle": "Alle kommuner for VVHF",
+                        "title":    "Vestre Viken Helseforetak",
+                        "subtitle": "Gjeldende tall for alle kommuner under VVHF",
                         "created":  "2020-11-18",
                         "list":     ('Asker','Bærum','Drammen','Flå','Flesberg',
                                     'Gol','Hemsedal','Hol','Hole','Jevnaker',

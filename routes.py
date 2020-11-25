@@ -129,6 +129,9 @@ async def subdomain_vvhf(request):
         # Just make sure
         if fetching not in s.vvhf_keys: fetching = "vvhf"
 
+        # Update fields
+        page_title = s.custom_queries[fetching]['title']
+        page_subtitle = s.custom_queries[fetching]['subtitle']
 
         items, _ = korona.app_get_items(
             s.custom_queries[fetching]['list']
@@ -139,8 +142,8 @@ async def subdomain_vvhf(request):
             {
             "request": request,
             "head_title": "Gjeldende korona-tall for VVHF kommuner",
-            "hero_title": s.custom_queries[fetching]['title'],
-            "hero_subtitle": s.custom_queries[fetching]['title'],
+            "hero_title": page_title,
+            "hero_subtitle": page_subtitle,
             "vvhf_sites": s.vvhf_sites,
             "result_dict": data,
             "current": fetching
