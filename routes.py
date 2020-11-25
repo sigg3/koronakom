@@ -143,7 +143,6 @@ async def subdomain_vvhf(request):
             "hero_subtitle": s.custom_queries[fetching]['title'],
             "vvhf_sites": s.vvhf_sites,
             "result_dict": data,
-            "nordate": nordate,
             "current": fetching
             }
         )
