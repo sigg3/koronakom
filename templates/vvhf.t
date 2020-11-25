@@ -41,16 +41,8 @@
             <div class="block">&nbsp;</div>            
             <table class="table is-fullwidth">
             {% for table in result_dict.keys() %}
-                {% if result_dict[table]['risk'] == 0 %}
-                <tr class="has-background-success-light">
-                {% elif result_dict[table]['risk'] == 1 %}
-                <tr class="has-background-warning-light">
-                {% elif result_dict[table]['risk'] == 2 %}
-                <tr class="has-background-danger-light">
-                {% else %}
                 <tr>
-                {% endif %}
-                    <td colspan="5"><span class="is-size-3 is-upper">{{ result_dict[table]['name'] }}</span></td>
+                    <td class="border: 0;" colspan="5"><span class="is-size-3 is-upper">{{ result_dict[table]['name'] }}</span></td>
                 </tr>
                 {% if result_dict[table]['risk'] == 0 %}
                 <tr class="has-background-success-light">
