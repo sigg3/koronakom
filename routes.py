@@ -299,8 +299,14 @@ async def hjem(request):
     return templates.TemplateResponse('index.t', response_dat)
 
 
+async def search_parser(request):
+    if request.method == "POST":
+        return PlainTextResponse(f"{data}")
+    else:
+        return fritekst(request)
 
-async def fritekst(request):
+
+def fritekst(request):
     await request.form()
     try:
 #        print("debug")
