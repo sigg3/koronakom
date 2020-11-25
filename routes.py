@@ -300,6 +300,7 @@ async def hjem(request):
 
 
 async def search_parser(request):
+    """ GET/POST conditional for sjekk.kommune.nu subdomain"""
     if request.method == "POST":
         return PlainTextResponse(f"{data}")
     else:
