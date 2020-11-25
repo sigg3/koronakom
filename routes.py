@@ -150,6 +150,7 @@ async def subdomain_vvhf(request):
 
         by_risk = {}
         for item in data.keys():
+            if item == '0000': continue
             score = data[item]['diff_100k'][0]
             by_risk.update({item: score})
 
