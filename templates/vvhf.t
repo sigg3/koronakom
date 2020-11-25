@@ -42,7 +42,7 @@
             <table class="table is-fullwidth">
             {% for table in result_dict.keys() %}
                 <tr>
-                    <td class="border: 0;" colspan="5"><span class="is-size-3 is-upper">{{ result_dict[table]['name'] }}</span></td>
+                    <td class="border: 0;" colspan="5"><span class="is-size-3">{{ result_dict[table]['name'] }}</span></td>
                 </tr>
                 {% if result_dict[table]['risk'] == 0 %}
                 <tr class="has-background-success-light">
