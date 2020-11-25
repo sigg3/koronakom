@@ -532,7 +532,7 @@ def query_data(
                     if doing_all and diff_one > 0:
                         categories_count[3] += 1
 
-                    # EU risk assessment (pro100k diff last 7 days)
+                    # EU risk assessment (pro100k diff last 14 days)
                     if dtype == "total_pro100k":
                         pro100_was = big_book[kid][two_weeks_ago][dtype]
                         pro100_is = big_book[kid][today][dtype]

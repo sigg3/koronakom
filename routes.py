@@ -122,13 +122,13 @@ async def subdomain_vvhf(request):
                     }
 
 
-        # Get query param from template/URL
+        # Get request data
         try:
+            # Get query param from template/URL
             fetching = request.query_params['vis']
-        except Exception as e:
+        except:
+            # or go to default landing page
             fetching = "vvhf"
-
-        print(f"fetching {fetching}")
 
         # Just make sure
         if fetching not in s.vvhf_keys: fetching = "vvhf"
@@ -142,6 +142,19 @@ async def subdomain_vvhf(request):
             )
         data, _ = korona.app_query(items)
 
+        # Sort by cases per 100k # TODO simplify this
+        # Can prolly do this with a quick lambda
+        by_risk = {}
+        for item in data.keys():
+            score = data[item]['diff_100k'][0]
+            by_risk.update({item: score})
+
+        data_ordering = sorted(by_risk, key=by_risk.get, reverse=True)
+        data_sorted = {}
+        for item in data_ordering:
+            data_sorted[item] = data[item]
+
+
         response_dat.update(
             {
             "request": request,
@@ -150,7 +163,7 @@ async def subdomain_vvhf(request):
             "hero_subtitle": page_subtitle,
             "hero_link": "/",
             "vvhf_sites": s.vvhf_sites,
-            "result_dict": data,
+            "result_dict": data_sorted,
             "current": fetching
             }
         )
