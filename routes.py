@@ -112,7 +112,7 @@ async def subdomain_vvhf(request):
                         "request": request,
                         "head_title": f"Korona-tall for VVHF",
                         "hero_title": "Vestre Viken Helseforetak",
-                        "hero_subtitle": "Alle kommuner under VVHF"
+                        "hero_subtitle": "Alle kommuner under VVHF",
                         "vvhf_sites": vvhf_keys,
                         "current": "vvhf" #landing
                         }
