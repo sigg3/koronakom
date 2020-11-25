@@ -189,9 +189,15 @@ async def subdomain_parser(request):
     full_url = str(request.url)
     subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
 
-    items, item_type = korona.app_get_items([subdomain])
+    try:
+        fetch_item = s.norge.id_from_url[subdomain]
+    except:
+        items, item_type = korona.app_get_items([subdomain])
+    else:
+        items, item_type = korona.app_get_items([fetch_item])
 
     #print(f"in subdomain_parser: got items {items}")
+
     if len(items) == 1:
         if item_type == 0:
             # Get the url-friendly string
