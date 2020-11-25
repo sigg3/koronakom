@@ -166,7 +166,7 @@ site_search = Router(
         Route('/', search_parser, methods=["GET", "POST"]),
         Route('/hjelp', utvalg_hjelp),
         Route('/utvalg', utvalg, methods=["POST"]),
-        Route('/fylker', utvalg_fylker, methods=["POST"])),
+        Route('/fylker', utvalg_fylker, methods=["POST"]),
         Route('/egen', utvalg_egen),
         Mount('/css', StaticFiles(directory="static"), name="css")
         ]
