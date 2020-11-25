@@ -301,6 +301,7 @@ async def hjem(request):
 
 async def search_parser(request):
     """ GET/POST conditional for sjekk.kommune.nu subdomain"""
+    await request.form()
     if request.method == "POST":
         return PlainTextResponse(f"{data}")
     else:
@@ -308,7 +309,7 @@ async def search_parser(request):
 
 
 def fritekst(request):
-    await request.form()
+    #await request.form()
     try:
 #        print("debug")
 #        print(request.query_params.keys())
