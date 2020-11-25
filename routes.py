@@ -450,6 +450,11 @@ def fritekst(request):
     # Oslo og Lavangen, Bergen
     # Oslo,Bergen,Lavangen
 
+    # Redirect customs here
+    if uinput in s.custom_queries.keys():
+        if uinput == "vvhf":
+            return RedirectResponse(url='https://vvhf.kommune.nu')
+
     # Check that we have input
     items_to_display, query_type = korona.app_get_items(uinput)
 
