@@ -71,7 +71,7 @@
                         {% endif %}
                         {% else %}
                         <td class="has-text-right">{{ v }}</td>
-                        [% endif %}
+                        {% endif %}
                         {% endfor %}
                     </tr>
                     <tr>
