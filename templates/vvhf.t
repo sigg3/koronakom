@@ -35,7 +35,7 @@
     <div class="tile is-ancestor">
         <div class="tile is-3">&nbsp;</div>
         <div class="tile is-6">
-            <table class="table">
+            <table class="table is-fullwidth is-hoverable">
                 <thead>
                     <tr>
                         <th>Utvikling siste</th>
@@ -48,18 +48,16 @@
                 <tbody>
                     {% for table in result_dict.keys() %}
                     <tr>
-                        <th>{{ table }}</th>
-                        <td colspan="4">
-                            {% if result_dict[table]['risk'] == 0 %}
-                            gr&oslash;nt
-                            {% elif result_dict[table]['risk'] == 1 %}
-                            oransje
-                            {% elif result_dict[table]['risk'] == 2 %}
-                            r&oslash;dt
-                            {% else %}
-                            uklassifisert
-                            {% endif %}
-                        </td>
+                        <th>{{ result_dict[table]['name'] }}</th>
+                        {% if result_dict[table]['risk'] == 0 %}
+                        <td colspand="4" class="has-background-success">&nbsp;</td>
+                        {% elif result_dict[table]['risk'] == 1 %}
+                        <td colspand="4" class="has-background-warning">&nbsp;</td>
+                        {% elif result_dict[table]['risk'] == 2 %}
+                        <td colspand="4" class="has-background-danger">&nbsp;</td>
+                        {% else %}
+                        <td colspand="4" class="has-background-light">&nbsp;</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th>tilfeller</th>
