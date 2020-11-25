@@ -12,7 +12,7 @@
 {% block sector_1 %}
 <section class="section pt-2 pb-1">
     <div class="container has-text-centered">
-        <h2 class="subtitle">Sortert etter tilfeller per 100,000. Oppdatert: {{ nordate }}</h2>
+        <h2 class="subtitle">Sortert etter nye tilfeller per 100k. Oppdatert: {{ nordate }}</h2>
         <div class="dropdown is-hoverable is-primary has-text-left">
             <div class="dropdown-trigger">
                 <button class="button has-icons-right" aria-haspopup="true" aria-controls="dropdown-menu3">
@@ -71,7 +71,7 @@
                 {% else %}
                 <tr>
                 {% endif %}
-                    <th>tilfeller</th>
+                    <th>nye</th>
                     {% for v in result_dict[table]['diff_n'] %}
                     <td class="has-text-right">{{ v }}</td>
                         {% endfor %}
