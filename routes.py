@@ -306,20 +306,36 @@ async def search_parser(request):
         return PlainTextResponse(f"{data}")
     else:
         try:
+            # See if we're searching
             _ = html.escape(request.query_params['s'])
             return fritekst(request)
         except:
+            # Not searching, display regular utvalg page
             s, response_dat = get_template_vars()
+            try:
+                big_list = s.list_of_muncipalities
+            except:
+                big_list = {}
+                for f, klist in s.norge.fylker.items():
+                    big_list[f] = []
+                    for k in klist:
+                        kid = s.norge.id[k]
+                        url = s.norge.data[kid]['url']
+                        big_list[f].append((k, kid, url))
+
+                s.list_of_muncipalities = big_list
+
             response_dat.update(
                 {
                     "request": request,
-                    "head_title": "sjekk.kommune.nu spørring",
-                    "hero_subtitle": "Hjelp til spørring",
-                    "hero_link": "/hjelp",
-                    "utvalg": 3
+                    "head_title": "sjekk.kommune.nu korona spørring",
+                    "hero_title": "sjekk.kommune.nu"
+                    "hero_subtitle": "Velg hvilke kommuner du vil spørre",
+                    "hero_link": "https://sjekk.kommune.nu/utvalg",
+                    "fylker": big_list,
+                    "utvalg": 0
                 }
             )
-            return templates.TemplateResponse('utvalg.t', response_dat)
 
 
 
