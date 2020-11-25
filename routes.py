@@ -451,8 +451,8 @@ def fritekst(request):
     # Oslo,Bergen,Lavangen
 
     # Redirect customs here
-    if uinput in s.custom_queries.keys():
-        if uinput == "vvhf":
+    if uinput[0] in s.custom_queries.keys():
+        if uinput[0] == "vvhf":
             return RedirectResponse(url='https://vvhf.kommune.nu')
 
     # Check that we have input
