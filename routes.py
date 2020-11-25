@@ -329,7 +329,7 @@ async def search_parser(request):
                 {
                     "request": request,
                     "head_title": "sjekk.kommune.nu korona spørring",
-                    "hero_title": "sjekk.kommune.nu"
+                    "hero_title": "sjekk.kommune.nu",
                     "hero_subtitle": "Velg hvilke kommuner du vil spørre",
                     "hero_link": "https://sjekk.kommune.nu/utvalg",
                     "fylker": big_list,
