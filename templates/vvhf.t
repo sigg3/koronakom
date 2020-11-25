@@ -32,5 +32,10 @@
             </div>
         </div>
     </div>
+    <div class="tile is-ancestor">
+        <div class="tile is-4">&nbsp;</div>
+        <div class="tile is-4">table goes here</div>
+        <div class="tile is-4">&nbsp;</div>
+    </div>
 </section>
 {% endblock %}
