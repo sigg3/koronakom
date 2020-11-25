@@ -118,4 +118,6 @@
 </section>
 {% endblock %}
 
-&nbsp;
+
+{% block se_bottom %}
+{% endblock %}
