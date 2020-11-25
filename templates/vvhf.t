@@ -13,7 +13,7 @@
 <section class="section pt-2 pb-1">
     <div class="container has-text-centered">
         <h2 class="subtitle">Oppdatert {{ nordate }}</h2>
-        <div class="dropdown is-hoverable is-primary has-text-left">
+        <div class="dropdown is-hoverable is-primary as-text-left">
             <div class="dropdown-trigger">
                 <button class="button has-icons-right" aria-haspopup="true" aria-controls="dropdown-menu3">
                     <span>Velg ønsket tabell</span>
@@ -38,76 +38,95 @@
     <div class="tile is-ancestor">
         <div class="tile is-3">&nbsp;</div>
         <div class="tile is-6">
-            <div class="block">&nbsp;</div>
-            
+            <div class="block">&nbsp;</div>            
+            <table class="table is-fullwidth">
             {% for table in result_dict.keys() %}
-            
-            {% if result_dict[table]['risk'] == 0 %}
-            <table class="table is-fullwidth has-background-success-light">
-            {% elif result_dict[table]['risk'] == 1 %}
-            <table class="table is-fullwidth has-background-warning-light">
-            {% elif result_dict[table]['risk'] == 2 %}
-            <table class="table is-fullwidth has-background-danger-light">
-            {% else %}
-            <table class="table is-fullwidth is-hoverable">
-            {% endif %}
-                <thead>
-                    <tr>
-                        <th>{{ result_dict[table]['name'] }} siste</th>
-                        <th class="has-text-right">14 dager</th>
-                        <th class="has-text-right">7 dager</th>
-                        <th class="has-text-right">3 dager</th>
-                        <th class="has-text-right">24 timer</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>tilfeller</th>
-                        {% for v in result_dict[table]['diff_n'] %}
-                        {% if loop.index0 == 0 %}
-                        {% if result_dict[table]['risk'] == 0 %}
-                        <td class="has-text-right has-background-success">{{ v }}</td>
-                        {% elif result_dict[table]['risk'] == 1 %}
-                        <td class="has-text-right has-background-warning">{{ v }}</td>
-                        {% elif result_dict[table]['risk'] == 2 %}
-                        <td class="has-text-right has-background-danger">{{ v }}</td>
-                        {% else %}
-                        <td class="has-text-right">{{ v }}</td>
-                        {% endif %}
-                        {% else %}
-                        <td class="has-text-right">{{ v }}</td>
-                        {% endif %}
-                        {% endfor %}
-                    </tr>
-                    <tr>
-                        <th>per 100k</th>
-                        {% for v in result_dict[table]['diff_100k'] %}
-                        {% if v is number %}
-                        {% if loop.index0 == 0 %}                        
-                        {% if result_dict[table]['risk'] == 0 %}
-                        <td class="has-text-right has-background-success">
-                        {% elif result_dict[table]['risk'] == 1 %}
-                        <td class="has-text-right has-background-warning">
-                        {% elif result_dict[table]['risk'] == 2 %}
-                        <td class="has-text-right has-background-danger has-text-white">
-                        {% else %}
-                        <td class="has-text-right">
-                        {% endif %}
-                        
-                        <strong>{{ "{:.2f}".format(v) }}</strong>
-                        </td>
-                        {% else %}
-                        <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
-                        {% endif %}
-                        {% else %}
-                        <td class="has-text-right">{{ v }}</td>
-                        {% endif %}
-                        {% endfor %}
-                    </tr>
-                </tbody>
+                {% if result_dict[table]['risk'] == 0 %}
+                <tr class="has-background-success-light">
+                {% elif result_dict[table]['risk'] == 1 %}
+                <tr class="has-background-warning-light">
+                {% elif result_dict[table]['risk'] == 2 %}
+                <tr class="has-background-danger-light">
+                {% else %}
+                <tr>
+                {% endif %}
+                    <th>{{ result_dict[table]['name'] }}</th>
+                    <th class="has-text-right">14 dager</th>
+                    <th class="has-text-right">7 dager</th>
+                    <th class="has-text-right">3 dager</th>
+                    <th class="has-text-right">24 timer</th>
+                </tr>
+                {% if result_dict[table]['risk'] == 0 %}
+                <tr class="has-background-success-light">
+                {% elif result_dict[table]['risk'] == 1 %}
+                <tr class="has-background-warning-light">
+                {% elif result_dict[table]['risk'] == 2 %}
+                <tr class="has-background-danger-light">
+                {% else %}
+                <tr>
+                {% endif %}
+                    <th>tilfeller</th>
+                    {% for v in result_dict[table]['diff_n'] %}
+                    {% if loop.index0 == 0 %}
+                    {% if result_dict[table]['risk'] == 0 %}
+                    <td class="has-text-right has-background-success">{{ v }}</td>
+                    {% elif result_dict[table]['risk'] == 1 %}
+                    <td class="has-text-right has-background-warning">{{ v }}</td>
+                    {% elif result_dict[table]['risk'] == 2 %}
+                    <td class="has-text-right has-background-danger">{{ v }}</td>
+                    {% else %}
+                    <td class="has-text-right">{{ v }}</td>
+                    {% endif %}
+                    {% else %}
+                    <td class="has-text-right">{{ v }}</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                {% if result_dict[table]['risk'] == 0 %}
+                <tr class="has-background-success-light">
+                {% elif result_dict[table]['risk'] == 1 %}
+                <tr class="has-background-warning-light">
+                {% elif result_dict[table]['risk'] == 2 %}
+                <tr class="has-background-danger-light">
+                {% else %}
+                <tr>
+                {% endif %}
+                    <th>per 100k</th>
+                    {% for v in result_dict[table]['diff_100k'] %}
+                    {% if v is number %}
+                    {% if loop.index0 == 0 %}                        
+                    {% if result_dict[table]['risk'] == 0 %}
+                    <td class="has-text-right has-background-success">
+                    {% elif result_dict[table]['risk'] == 1 %}
+                    <td class="has-text-right has-background-warning">
+                    {% elif result_dict[table]['risk'] == 2 %}
+                    <td class="has-text-right has-background-danger has-text-white">
+                    {% else %}
+                    <td class="has-text-right">
+                    {% endif %}
+                    
+                    <strong>{{ "{:.2f}".format(v) }}</strong>
+                    </td>
+                    {% else %}
+                    <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
+                    {% endif %}
+                    {% else %}
+                    <td class="has-text-right">{{ v }}</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td colspan="5">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="5">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="5">&nbsp;</td>
+                </tr>
+                {% endfor %}
             </table>
-            <div class="block is-clearfix">&nbsp;</div>
-            {% endfor %}
+            <div class="block">&nbsp;</div>
         </div>
         <div class="tile is-3">&nbsp;</div>
     </div>
