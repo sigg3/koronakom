@@ -670,16 +670,14 @@ async def utvalg_egen(request):
                 big_list[f].append((k, kid, url))
 
         s.list_of_muncipalities = big_list
-
-    #print(f"debug = {big_list}")
-#    print(f"request is {request}")
-
+        
     response_dat.update(
         {
             "request": request,
-            "head_title": "korona.kommune.nu sp&oslash;rring",
-            "hero_subtitle": "sjekk.kommune.nu",
-            "hero_link": "/utvalg",
+            "head_title": "korona.kommune.nu spørring",
+            "hero_title": "sjekk.kommune.nu",
+            "hero_subtitle": "Egendefinerte spørringer",
+            "hero_link": "/egen",
             "fylker": big_list,
             "utvalg": 2
         }
