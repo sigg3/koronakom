@@ -78,7 +78,19 @@
                         <th>per 100k</th>
                         {% for v in result_dict[table]['diff_100k'] %}
                         {% if v is number %}
+                        {% if loop.index0 == 0 %}                        
+                        {% if result_dict[table]['risk'] == 0 %}
+                        <td class="has-text-right has-background-success">{{ "{:.2f}".format(v) }}</td>
+                        {% elif result_dict[table]['risk'] == 1 %}
+                        <td class="has-text-right has-background-warning">{{ "{:.2f}".format(v) }}</td>
+                        {% elif result_dict[table]['risk'] == 2 %}
+                        <td class="has-text-right has-background-danger">{{ "{:.2f}".format(v) }}</td>
+                        {% else %}
                         <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
+                        {% endif %}
+                        {% else %}
+                        <td class="has-text-right">{{ v }}</td>
+                        {% endif %}
                         {% else %}
                         <td class="has-text-right">{{ v }}</td>
                         {% endif %}
