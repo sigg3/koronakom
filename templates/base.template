@@ -75,7 +75,7 @@
            <form action="https://sjekk.kommune.nu/" method="get">
             <div class="field has-addons pt-3">
                 <p class="control">
-                    <input name="s" class="input is-large" type="text" size="14" placeholder="Kommune, fylke eller nøkkel*">
+                    <input name="s" class="input is-large" type="text" size="13" placeholder="Kommune, fylke eller nøkkel*">
                 </p>
                 <p class="control">
                     <button type="submit" class="button is-large is-primary">S&oslash;k</button>
