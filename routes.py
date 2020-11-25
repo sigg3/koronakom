@@ -336,7 +336,7 @@ async def search_parser(request):
                     "utvalg": 0
                 }
             )
-
+    return templates.TemplateResponse('utvalg.t', response_dat)
 
 
 def fritekst(request):
