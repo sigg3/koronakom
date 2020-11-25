@@ -191,12 +191,16 @@ async def subdomain_parser(request):
 
     try:
         fetch_item = s.norge.id_from_url[subdomain]
-    except:
+    except KeyError:
         items, item_type = korona.app_get_items([subdomain])
     else:
         items, item_type = korona.app_get_items([fetch_item])
 
     #print(f"in subdomain_parser: got items {items}")
+
+    # TODO
+    # if len(items) == 0:
+    # show sjekk.kommune.nu help text with notificatio atop
 
     if len(items) == 1:
         if item_type == 0:
