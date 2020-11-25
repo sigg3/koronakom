@@ -39,7 +39,7 @@
         <div class="tile is-3">&nbsp;</div>
         <div class="tile is-6">
             <div class="block">&nbsp;</div>            
-            <table class="table is-fullwidth">
+            <table class="table is-fullwidth" style="border: 0em;">
             {% for table in result_dict.keys() %}
                 {% if result_dict[table]['risk'] == 0 %}
                 <tr class="has-background-success-light">
