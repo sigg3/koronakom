@@ -305,7 +305,22 @@ async def search_parser(request):
     if request.method == "POST":
         return PlainTextResponse(f"{data}")
     else:
-        return fritekst(request)
+        try:
+            _ = html.escape(request.query_params['s'])
+            return fritekst(request)
+        except:
+            s, response_dat = get_template_vars()
+            response_dat.update(
+                {
+                    "request": request,
+                    "head_title": "sjekk.kommune.nu spørring",
+                    "hero_subtitle": "Hjelp til spørring",
+                    "hero_link": "/hjelp",
+                    "utvalg": 3
+                }
+            )
+            return templates.TemplateResponse('utvalg.t', response_dat)
+
 
 
 def fritekst(request):
