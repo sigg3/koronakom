@@ -96,15 +96,28 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 
 async def subdomain_vvhf(request):
     """ Vestre Viken HF subdomene """
-    s, response_dat = get_template_vars()
+    if request.method == "POST":
+        return PlainTextResponse("post to VVHF")
+    else:
+        s, response_dat = get_template_vars()
 
-    # TODO Entry page med
-    # 1. dropdown (velg mellom VVHF queries)
-    # 2. tabell (under)
+        # TODO Entry page med
+        # 1. dropdown (velg mellom VVHF queries)
+        # 2. tabell (under)
+        vvhf_keys = [ "vvhf", "bersyk", "dramsyk", "kongsyk", "ringsyk"]
+        # betyr at subdomain vvhf må kunne ta post til self.
 
-    # betyr at subdomain vvhf må kunne ta post til self.
-
-    return PlainTextResponse("Lol this is VVHF")
+        response_dat.update(
+                        {
+                        "request": request,
+                        "head_title": f"Korona-tall for VVHF",
+                        "hero_title": "Vestre Viken Helseforetak",
+                        "hero_subtitle": hero_subtitle,
+                        "vvhf_sites": vvhf_keys,
+                        "current": "vvhf" #landing
+                        }
+        )
+        return templates.TemplateResponse('vvhf.t', response_dat)
 
 
 async def subdomain_parser(request):
@@ -624,9 +637,6 @@ async def utvalg_fylker(request):
             }
         )
         return templates.TemplateResponse('utvalg.t', response_dat)
-
-async def custom_subdomain(request):
-    return PlainTextResponse("LOL")
 
 async def utvalg_hjelp(request):
     # get language settings
