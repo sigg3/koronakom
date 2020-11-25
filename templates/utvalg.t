@@ -3,7 +3,7 @@
 {% block menu %}
   <div class="level-right ">
     <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary">Hjem</a></p>
-    <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Utvalg" alt="Lag eget utvalg" class="button is-primary"><strong>Sp&oslash;rring</strong></a></p>
+    <p class="level-item"><a href="https://sjekk.kommune.nu/" title="Utvalg" alt="Lag eget utvalg" class="button is-primary"><strong>Sp&oslash;rring</strong></a></p>
     <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
   </div>
 {% endblock %}
@@ -40,25 +40,25 @@
         <div class="container has-text-centered">
             <div class="level has-text-centered">
                 {% if utvalg == 0 %}
-                <p class="level-item"><a href="https://din.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-info"><strong>Kommuner</strong></a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-info"><strong>Kommuner</strong></a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
                 {% elif utvalg == 1 %}
-                <p class="level-item"><a href="https://din.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/fylker" title="Velg etter fylke" class="button is-info"><strong>Fylker</strong></a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-info"><strong>Fylker</strong></a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
                 {% elif utvalg == 2 %}
-                <p class="level-item"><a href="https://din.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/egen" title="Egendefinert utvalg" class="button is-info"><strong>Egendefinert</strong></a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-info"><strong>Egendefinert</strong></a></p>
                 {% else %}
-                <p class="level-item"><a href="https://din.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-info"><strong>Nøkler</strong></a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
-                <p class="level-item"><a href="https://din.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-info"><strong>Nøkler</strong></a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
                 {% endif %}
             </div>
         </div>
@@ -145,9 +145,9 @@
                 <p>Andre måter å gjøre oppslag på:</p>
                 <div class="content">
                     <ul>
-                        <li>Man kan bruke <a href="https://din.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</li>
-                        <li>Det er også lagt inn samme mulighet for fylker i <a href="https://din.kommune.nu/fylker" title="Fylker">fylke-velgeren</a>.</li>
-                        <li>Det er i tillegg mulig å få lagt inn egendefinerte spørringer, les mer om det på <a href="https://din.kommune.nu/egen" title="Egendefinerte søk">egendefinerte søk</a>.</li>
+                        <li>Man kan bruke <a href="https://sjekk.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</li>
+                        <li>Det er også lagt inn samme mulighet for fylker i <a href="https://sjekk.kommune.nu/fylker" title="Fylker">fylke-velgeren</a>.</li>
+                        <li>Det er i tillegg mulig å få lagt inn egendefinerte spørringer, les mer om det på <a href="https://sjekk.kommune.nu/egen" title="Egendefinerte søk">egendefinerte søk</a>.</li>
                     </ul>
                 </div>
             {% endif %}

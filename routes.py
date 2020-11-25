@@ -330,7 +330,7 @@ async def search_parser(request):
                     "request": request,
                     "head_title": "sjekk.kommune.nu korona spørring",
                     "hero_title": "sjekk.kommune.nu",
-                    "hero_subtitle": "Velg hvilke kommuner du vil spørre",
+                    "hero_subtitle": "Velg hvilke kommuner du vil se",
                     "hero_link": "https://sjekk.kommune.nu/utvalg",
                     "fylker": big_list,
                     "utvalg": 0
@@ -551,14 +551,15 @@ async def utvalg(request):
     #print(f"request is {request}")
 
     response_dat.update(
-        {
-            "request": request,
-            "head_title": "sjekk.kommune.nu korona sp&oslash;rring",
-            "hero_subtitle": "sjekk.kommune.nu",
-            "hero_link": "https://sjekk.kommune.nu/utvalg",
-            "fylker": big_list,
-            "utvalg": 0
-        }
+            {
+                "request": request,
+                "head_title": "sjekk.kommune.nu korona spørring",
+                "hero_title": "sjekk.kommune.nu",
+                "hero_subtitle": "Velg hvilke kommuner du vil se",
+                "hero_link": "https://sjekk.kommune.nu/utvalg",
+                "fylker": big_list,
+                "utvalg": 0
+            }
     )
     return templates.TemplateResponse('utvalg.t', response_dat)
 

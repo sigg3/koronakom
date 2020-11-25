@@ -188,12 +188,16 @@ site_vvhf = Router(
 
 # TODO om, utvalg, sjekk etc. kontakt?
 
-# Configure flow
+# Main page aliases
 app.host('www.kommune.nu', site_main)
 app.host('din.kommune.nu', site_main)
 app.host('korona.kommune.nu', site_main)
+
+# Domain specific subdomains
 app.host('sjekk.kommune.nu', site_search)
 app.host('vvhf.kommune.nu', site_vvhf)
+
+# Wildcard (either muncipality or county)
 app.host('{subdomain}.kommune.nu', site_subdomains)
 
 #app.host('www.localhost', site_main)
