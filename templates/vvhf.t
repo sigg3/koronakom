@@ -50,7 +50,7 @@
                 {% else %}
                 <tr>
                 {% endif %}
-                    <th class="is-medium">{{ result_dict[table]['name'] }}</th>
+                    <th><span class="is-medium">{{ result_dict[table]['name'] }}</span></th>
                     <th class="has-text-right">14 dager</th>
                     <th class="has-text-right">7 dager</th>
                     <th class="has-text-right">3 dager</th>
