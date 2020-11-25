@@ -99,6 +99,9 @@ async def subdomain_vvhf(request):
     if request.method == "POST":
         return PlainTextResponse("post to VVHF")
     else:
+        print("debug")
+        full_url = str(request.url)
+        print(f"full_url: {full_url}")
         s, response_dat = get_template_vars()
 
         # TODO Entry page med
