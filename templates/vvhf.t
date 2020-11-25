@@ -33,16 +33,18 @@
         </div>
     </div>
     <div class="tile is-ancestor">
-        {% for table in result_dict.keys() %}
         <div class="tile is-3">&nbsp;</div>
         <div class="tile is-6">
             <div class="block">&nbsp;</div>
+            
+            {% for table in result_dict.keys() %}
+            
             {% if result_dict[table]['risk'] == 0 %}
-            <table class="table is-fullwidth is-hoverable has-background-success-light">
+            <table class="table is-fullwidth has-background-success-light">
             {% elif result_dict[table]['risk'] == 1 %}
-            <table class="table is-fullwidth is-hoverable has-background-warning-light">
+            <table class="table is-fullwidth has-background-warning-light">
             {% elif result_dict[table]['risk'] == 2 %}
-            <table class="table is-fullwidth is-hoverable has-background-danger-light">
+            <table class="table is-fullwidth has-background-danger-light">
             {% else %}
             <table class="table is-fullwidth is-hoverable">
             {% endif %}
@@ -80,14 +82,17 @@
                         {% if v is number %}
                         {% if loop.index0 == 0 %}                        
                         {% if result_dict[table]['risk'] == 0 %}
-                        <td class="has-text-right has-background-success">{{ "{:.2f}".format(v) }}</td>
+                        <td class="has-text-right has-background-success">
                         {% elif result_dict[table]['risk'] == 1 %}
-                        <td class="has-text-right has-background-warning">{{ "{:.2f}".format(v) }}</td>
+                        <td class="has-text-right has-background-warning">
                         {% elif result_dict[table]['risk'] == 2 %}
-                        <td class="has-text-right has-background-danger">{{ "{:.2f}".format(v) }}</td>
+                        <td class="has-text-right has-background-danger has-text-white">
                         {% else %}
-                        <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
+                        <td class="has-text-right">
                         {% endif %}
+                        
+                        <strong>{{ "{:.2f}".format(v) }}</strong>
+                        </td>
                         {% else %}
                         <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
                         {% endif %}
@@ -99,9 +104,9 @@
                 </tbody>
             </table>
             <div class="block">&nbsp;</div>
+            {% endfor %}
         </div>
         <div class="tile is-3">&nbsp;</div>
-        {% endfor %}
     </div>
 </section>
 {% endblock %}
