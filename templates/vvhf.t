@@ -48,24 +48,40 @@
                 <tbody>
                     {% for table in result_dict.keys() %}
                     {% if result_dict[table]['risk'] == 0 %}
-                    <tr class="has-background-success">
+                    <tr class="has-background-success-light">
                     {% elif result_dict[table]['risk'] == 1 %}
-                    <tr class="has-background-warning">
-                    {% elif result_dict[table]['danger'] == 2 %}
-                    <tr class="has-background-danger">
+                    <tr class="has-background-warning-light">
+                    {% elif result_dict[table]['risk'] == 2 %}
+                    <tr class="has-background-danger-light">
                     {% else %}
                     <tr>
                     {% endif %}
                         <th>{{ result_dict[table]['name'] }}</th>
                         <td colspan="4">&nbsp;</td>
                     </tr>
+                    {% if result_dict[table]['risk'] == 0 %}
+                    <tr class="has-background-success-light">
+                    {% elif result_dict[table]['risk'] == 1 %}
+                    <tr class="has-background-warning-light">
+                    {% elif result_dict[table]['risk'] == 2 %}
+                    <tr class="has-background-danger-light">
+                    {% else %}
                     <tr>
+                    {% endif %}
                         <th>tilfeller</th>
                         {% for v in result_dict[table]['diff_n'] %}
                         <td class="has-text-right">{{ v }}</td>
                         {% endfor %}
                     </tr>
+                    {% if result_dict[table]['risk'] == 0 %}
+                    <tr class="has-background-success-light">
+                    {% elif result_dict[table]['risk'] == 1 %}
+                    <tr class="has-background-warning-light">
+                    {% elif result_dict[table]['risk'] == 2 %}
+                    <tr class="has-background-danger-light">
+                    {% else %}
                     <tr>
+                    {% endif %}
                         <th>per 100k</th>
                         {% for v in result_dict[table]['diff_100k'] %}
                         {% if v is number %}
@@ -77,6 +93,7 @@
                     </tr>
                     <tr>
                         <td colspan="5">
+                            <div class="block">&nbsp;</div>
                             <div class="block">&nbsp;</div>
                         </td>
                     </tr>
