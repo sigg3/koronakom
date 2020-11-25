@@ -126,9 +126,10 @@ async def subdomain_vvhf(request):
         try:
             fetching = request.query_params['vis']
         except Exception as e:
-            print(f"got exception for query_param: {e}")
             fetching = "vvhf"
 
+        print(f"fetching {fetching}")
+        
         # Just make sure
         if fetching not in s.vvhf_keys: fetching = "vvhf"
 
