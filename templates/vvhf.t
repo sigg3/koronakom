@@ -33,9 +33,9 @@
         </div>
     </div>
     <div class="tile is-ancestor">
+        {% for table in result_dict.keys() %}
         <div class="tile is-3">&nbsp;</div>
         <div class="tile is-6">
-            {% for table in result_dict.keys() %}
             <div class="block">&nbsp;</div>
             {% if result_dict[table]['risk'] == 0 %}
             <table class="table is-fullwidth is-hoverable has-background-success-light">
@@ -58,9 +58,20 @@
                 <tbody>
                     <tr>
                         <th>tilfeller</th>
-                        
                         {% for v in result_dict[table]['diff_n'] %}
-                        <td class="has-text-right">{{ v }} (index: {{ loop.index0 }})</td>
+                        {% if loop.index0 == 0 %}
+                        {% if result_dict[table]['risk'] == 0 %}
+                        <td class="has-text-right has-background-success">{{ v }}</td>
+                        {% if result_dict[table]['risk'] == 1 %}
+                        <td class="has-text-right has-background-warning">{{ v }}</td>
+                        {% if result_dict[table]['risk'] == 2 %}
+                        <td class="has-text-right has-background-danger">{{ v }}</td>
+                        {% else %}
+                        <td class="has-text-right">{{ v }}</td>
+                        {% endif %}
+                        {% else %}
+                        <td class="has-text-right">{{ v }}</td>
+                        [% endif %}
                         {% endfor %}
                     </tr>
                     <tr>
@@ -76,9 +87,9 @@
                 </tbody>
             </table>
             <div class="block">&nbsp;</div>
-            {% endfor %}
         </div>
         <div class="tile is-3">&nbsp;</div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}
