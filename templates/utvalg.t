@@ -103,7 +103,7 @@
                 {% for kommune in k %}
                 <label class="checkbox" style="width: 14em;">
                     <input type="checkbox" name="{{ kommune[1] }}">
-                    <a href="https://{{ kommune[1] }}" title="{{ kommune[0] }}">{{ kommune[0] }}</a>
+                    <a href="https://{{ kommune[2] }}" title="{{ kommune[0] }}">{{ kommune[0] }}</a>
                 </label>
                 {% endfor %}
                 <div class="block">&nbsp;</div>
