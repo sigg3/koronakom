@@ -114,7 +114,8 @@ async def subdomain_vvhf(request):
                 "created": s.custom_queries[key][created],
                 "list":  s.custom_queries[key][list],
                 "url": key
-
+                }
+        
         response_dat.update(
                         {
                         "request": request,
