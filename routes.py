@@ -95,11 +95,14 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 #    return PlainTextResponse(f"OK ?> requested = {req}")
 
 async def subdomain_vvhf(request):
-    """ Vestre Viken HF subdomene """
+    """
+    Vestre Viken HF subdomene
+    Relies on selections from custom_queries attr in Session object
+    """
     if request.method == "POST":
         return PlainTextResponse("post to VVHF")
     else:
-        s, response_dat = get_template_vars()
+        s, response_dat = get_template_vars() # Get session
         try:
             _ = s.vvhf_keys
         except:
