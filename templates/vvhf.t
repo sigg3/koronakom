@@ -32,6 +32,9 @@
             </div>
         </div>
     </div>
+    <div class="block mt-2 mb-2">
+        &nbsp;
+    </div>
     <div class="tile is-ancestor">
         <div class="tile is-3">&nbsp;</div>
         <div class="tile is-6">
