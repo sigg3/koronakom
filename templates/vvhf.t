@@ -50,7 +50,7 @@
                 {% else %}
                 <tr>
                 {% endif %}
-                    <th><span class="is-capitalized">{{ result_dict[table]['name'] }}</span></th>
+                    <th><span class="is-size-3 is-upper">{{ result_dict[table]['name'] }}</span></th>
                     <th class="has-text-right">14 dager</th>
                     <th class="has-text-right">7 dager</th>
                     <th class="has-text-right">3 dager</th>
@@ -68,7 +68,7 @@
                     <th>tilfeller</th>
                     {% for v in result_dict[table]['diff_n'] %}
                     <td class="has-text-right">{{ v }}</td>
-                    {% endfor %}
+                        {% endfor %}
                 </tr>
                 {% if result_dict[table]['risk'] == 0 %}
                 <tr class="has-background-success-light">
