@@ -70,7 +70,7 @@
 
 {% block se_bottom %}
 <section>
-    <div class="container pl-1 pr-1">
+    <div class="container">
         <div class="columns is-centered">
            <form action="https://sjekk.kommune.nu/" method="get">
             <div class="field has-addons pt-3">
