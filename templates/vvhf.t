@@ -11,19 +11,22 @@
 
 {% block sector_1 %}
 <section class="section pt-2 pb-1">
-    <div class="container">
-        <h1 class="title">{{ hero_title }}</h1>
-        <h2 class="subtitle">{{ hero_subtitle }}</h2>
+    <div class="container has-text-centered">
+        <h2 class="subtitle">{{ vvhf_sites[current]['title'] }}</h2>
         <div class="dropdown is-hoverable is-primary">
             <div class="dropdown-trigger">
                 <button class="button has-icons-right" aria-haspopup="true" aria-controls="dropdown-menu3">
-                    <span>Vestre Viken HF</span>
+                    <span>Velg ønsket tabell</span>
                 </button>
             </div>
             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
                 <div class="dropdown-content">
                 {% for sykehus in vvhf_sites.keys() %}
-                <a href="{{ vvhf_sites['url'] }}" title="{{ vvhf_sites['title'] }}" class="dropdown-item">{{ vvhf_sites['title'] }}</a>
+                {% if vvhf_sites[sykehus]['url'] == current %}
+                <a href="/{{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item is-active">{{ vvhf_sites[sykehus]['title'] }}</a>
+                {% else %}
+                <a href="/{{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item">{{ vvhf_sites[sykehus]['title'] }}</a>
+                [% endif %}
                 {% endfor %}
                 </div>
             </div>

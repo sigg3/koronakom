@@ -25,7 +25,7 @@
 <section class="section">
     <div class="container">
         <h2 class="title">Om tjenesten</h2>
-        <p>Den minste bestanddelen p&aring; <span class="tag is-primary is-light is-medium"><strong>kommune.nu</strong></span> er <em>kommunen</em>. Man kan spørre etter enkelte kommuner, etter fylker eller sammenligne <a href="https://sjekk.kommune.nu/sok/?Karasjok+og+stavanger" titl="Karasjok og Stavanger">tilfeldig utvalgte kommuner</a>. For eksempel kan man sjekke alle kommunene langs E6. Klikk på lenken <a href="https://din.kommune.nu/utvalg" title="utvalg">sp&oslash;rring</a> for å gjøre arbitrære utvalg.</p>
+        <p>Den minste bestanddelen p&aring; <span class="tag is-primary is-light is-medium"><strong>kommune.nu</strong></span> er <em>kommunen</em>. Man kan spørre etter enkelte kommuner, etter fylker eller sammenligne <a href="https://sjekk.kommune.nu/?s=Karasjok+og+stavanger" titl="Karasjok og Stavanger">tilfeldig utvalgte kommuner</a>. For eksempel kan man sjekke <a href="https://sjekk.kommune.nu/?s=E6" title="sjekk korona status for E6 sørover">alle kommunene langs E6</a>. Klikk på lenken <a href="https://sjekk.kommune.nu/utvalg" title="utvalg">sp&oslash;rring</a> for å gjøre arbitrære utvalg.</p>
         <p>Jeg mottar med takk oversettelser av fraser og linjer med tekst fra <span class="tag is-primary is-light is-medium"><strong>kommune.nu</strong></span> til andre språk. Hvis du er interessert i å oversette fra norsk eller engelsk til f.eks. samisk, kvensk, polsk etc. så er dette absolutt verdifullt. <a href="https://github.com/sigg3/koronakom/issues" title="github issues">Ta kontakt med meg her</a>. Oversettelser kan gjøres i programvare eller i notisblokk (så legger jeg det inn eventuelt).</p>
     </div>
 </section>
