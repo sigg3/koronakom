@@ -129,7 +129,7 @@ async def subdomain_vvhf(request):
             fetching = "vvhf"
 
         print(f"fetching {fetching}")
-        
+
         # Just make sure
         if fetching not in s.vvhf_keys: fetching = "vvhf"
 
@@ -148,6 +148,7 @@ async def subdomain_vvhf(request):
             "head_title": "Gjeldende korona-tall for VVHF kommuner",
             "hero_title": page_title,
             "hero_subtitle": page_subtitle,
+            "hero_link": "/",
             "vvhf_sites": s.vvhf_sites,
             "result_dict": data,
             "current": fetching

@@ -22,8 +22,8 @@
             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
                 <div class="dropdown-content">
                 {% for sykehus in vvhf_sites.keys() %}
-                {% if vvhf_sites[sykehus]['url'] == current %}
-                <a href="/?vis={{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item is-active">{{ vvhf_sites[sykehus]['title'] }}</a>
+                {% if vvhf_sites[sykehus]['url'] == "vvhf" %}
+                <a href="/" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item">{{ vvhf_sites[sykehus]['title'] }}</a>
                 {% else %}
                 <a href="/?vis={{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item">{{ vvhf_sites[sykehus]['title'] }}</a>
                 {% endif %}
@@ -33,9 +33,55 @@
         </div>
     </div>
     <div class="tile is-ancestor">
-        <div class="tile is-4">&nbsp;</div>
-        <div class="tile is-4">table goes here</div>
-        <div class="tile is-4">&nbsp;</div>
+        <div class="tile is-3">&nbsp;</div>
+        <div class="tile is-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Utvikling siste</th>
+                        <th class="has-text-right">14 dager</th>
+                        <th class="has-text-right">7 dager</th>
+                        <th class="has-text-right">3 dager</th>
+                        <th class="has-text-right">24 timer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for table in result_dict.keys() %}
+                    <tr>
+                        <th>{{ table }}</th>
+                        <td colspan="4">
+                            {% if result_dict[table]['risk'] == 0 %}
+                            gr&oslash;nt
+                            {% elif result_dict[table]['risk'] == 1 %}
+                            oransje
+                            {% elif result_dict[table]['risk'] == 2 %}
+                            r&oslash;dt
+                            {% else %}
+                            uklassifisert
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>tilfeller</th>
+                        {% for v in result_dict[table]['diff_n'] %}
+                        <td class="has-text-right">{{ v }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>per 100k</th>
+                        {% for v in result_dict[table]['diff_100k'] %}
+                        {% if v is number %}
+                        <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
+                        {% else %}
+                        <td class="has-text-right">{{ v }}</td>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="tile is-3">&nbsp;</div>
     </div>
 </section>
 {% endblock %}
