@@ -12,7 +12,7 @@
 {% block sector_1 %}
 <section class="section pt-2 pb-1">
     <div class="container has-text-centered">
-        <h2 class="subtitle">{{ vvhf_sites[current]['title'] }}</h2>
+        <h2 class="subtitle">Oppdatert {{ nordate }}</h2>
         <div class="dropdown is-hoverable is-primary">
             <div class="dropdown-trigger">
                 <button class="button has-icons-right" aria-haspopup="true" aria-controls="dropdown-menu3">
@@ -23,9 +23,9 @@
                 <div class="dropdown-content">
                 {% for sykehus in vvhf_sites.keys() %}
                 {% if vvhf_sites[sykehus]['url'] == current %}
-                <a href="/?s={{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item is-active">{{ vvhf_sites[sykehus]['title'] }}</a>
+                <a href="/?vis={{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item is-active">{{ vvhf_sites[sykehus]['title'] }}</a>
                 {% else %}
-                <a href="/?s={{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item">{{ vvhf_sites[sykehus]['title'] }}</a>
+                <a href="/?vis={{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item">{{ vvhf_sites[sykehus]['title'] }}</a>
                 {% endif %}
                 {% endfor %}
                 </div>

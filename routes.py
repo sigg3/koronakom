@@ -99,36 +99,50 @@ async def subdomain_vvhf(request):
     if request.method == "POST":
         return PlainTextResponse("post to VVHF")
     else:
-        print("debug")
-        full_url = str(request.url)
-        print(f"full_url: {full_url}")
-        print(f"query: {request.query_params}")
         s, response_dat = get_template_vars()
+        try:
+            _ = s.vvhf_keys
+        except:
+            s.vvhf_keys = [ "vvhf", "bersyk", "dramsyk", "kongsyk", "ringsyk"]
 
-        # TODO Entry page med
-        # 1. dropdown (velg mellom VVHF queries)
-        # 2. tabell (under)
+        try:
+            _ = s.vvhf_sites
+        except:
+            s.vvhf_sites = {}
+            for key in s.vvhf_keys:
+                s.vvhf_sites[key] = {
+                    "title": s.custom_queries[key]['title'],
+                    "subtitle": s.custom_queries[key]['subtitle'],
+                    "created": s.custom_queries[key]['created'],
+                    "list":  s.custom_queries[key]['list'],
+                    "url": key
+                    }
 
-        vvhf_keys = [ "vvhf", "bersyk", "dramsyk", "kongsyk", "ringsyk"]
-        vvhf_sites = {}
-        for key in vvhf_keys:
-            vvhf_sites[key] = {
-                "title": s.custom_queries[key]['title'],
-                "subtitle": s.custom_queries[key]['subtitle'],
-                "created": s.custom_queries[key]['created'],
-                "list":  s.custom_queries[key]['list'],
-                "url": key
-                }
+        try:
+            fetching = await request.query_params['vis']
+        except:
+            fetching = "vvhf"
+
+        # Just make sure
+        if fetching not in s.vvhf_keys: fetching = "vvhf"
+
+
+        items, _ = korona.app_get_items(
+            s.custom_queries[fetching]['list']
+            )
+        data, _ = korona.app_query(items)
 
         response_dat.update(
-                        {
-                        "request": request,
-                        "head_title": f"Gjeldende korona-tall for kommuner under VVHF",
-                        "hero_title": "Vestre Viken Helseforetak",
-                        "hero_subtitle": "Alle kommuner under VVHF",
-                        "vvhf_sites": vvhf_sites,
-                        "current": "vvhf"
-                        }
+            {
+            "request": request,
+            "head_title": "Gjeldende korona-tall for VVHF kommuner",
+            "hero_title": s.custom_queries[fetching]['title'],
+            "hero_subtitle": s.custom_queries[fetching]['title'],
+            "vvhf_sites": s.vvhf_sites,
+            "result_dict": data,
+            "nordate": nordate,
+            "current": fetching
+            }
         )
         return templates.TemplateResponse('vvhf.t', response_dat)
 
