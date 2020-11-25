@@ -50,13 +50,13 @@
                     <tr>
                         <th>{{ result_dict[table]['name'] }}</th>
                         {% if result_dict[table]['risk'] == 0 %}
-                        <td colspand="4" class="has-background-success">&nbsp;</td>
+                        <td colspan="4" class="has-background-success">&nbsp;</td>
                         {% elif result_dict[table]['risk'] == 1 %}
-                        <td colspand="4" class="has-background-warning">&nbsp;</td>
+                        <td colspan="4" class="has-background-warning">&nbsp;</td>
                         {% elif result_dict[table]['risk'] == 2 %}
-                        <td colspand="4" class="has-background-danger">&nbsp;</td>
+                        <td colspan="4" class="has-background-danger">&nbsp;</td>
                         {% else %}
-                        <td colspand="4" class="has-background-light">&nbsp;</td>
+                        <td colspan="4" class="has-background-light">&nbsp;</td>
                         {% endif %}
                     </tr>
                     <tr>
@@ -75,6 +75,12 @@
                         {% endif %}
                         {% endfor %}
                     </tr>
+                    <tr>
+                        <td colspan="5">
+                            <div class="block">&nbsp;</div>
+                        </td>
+                    </tr>
+                        
                     {% endfor %}
                 </tbody>
             </table>
