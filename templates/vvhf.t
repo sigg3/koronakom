@@ -115,8 +115,8 @@
                     {% endif %}
                     {% endfor %}
                 </tr>
-                <tr rowspan="3">
-                    <td class="border: 0;" colspan="5">&nbsp;</td>
+                <tr>
+                    <td class="border: 0;" rowspan="2" colspan="5">&nbsp;</td>
                 </tr>
                 {% endfor %}
             </table>
