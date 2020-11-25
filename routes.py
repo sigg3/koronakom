@@ -144,6 +144,10 @@ async def subdomain_vvhf(request):
 
         # Sort by cases per 100k # TODO simplify this
         # Can prolly do this with a quick lambda
+
+        print("debug")
+        print(f"data = {data}")
+
         by_risk = {}
         for item in data.keys():
             score = data[item]['diff_100k'][0]
