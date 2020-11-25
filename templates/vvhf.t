@@ -89,7 +89,7 @@
                         <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
                         {% endif %}
                         {% else %}
-                        <td class="has-text-right">{{ v }}</td>
+                        <td class="has-text-right">{{ "{:.2f}".format(v) }}</td>
                         {% endif %}
                         {% else %}
                         <td class="has-text-right">{{ v }}</td>
