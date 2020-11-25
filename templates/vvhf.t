@@ -26,7 +26,7 @@
                 <a href="/{{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item is-active">{{ vvhf_sites[sykehus]['title'] }}</a>
                 {% else %}
                 <a href="/{{ vvhf_sites[sykehus]['url'] }}" title="{{ vvhf_sites[sykehus]['title'] }}" class="dropdown-item">{{ vvhf_sites[sykehus]['title'] }}</a>
-                [% endif %}
+                {% endif %}
                 {% endfor %}
                 </div>
             </div>
