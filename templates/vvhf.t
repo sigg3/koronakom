@@ -13,7 +13,7 @@
 <section class="section pt-2 pb-1">
     <div class="container has-text-centered">
         <h2 class="subtitle">Oppdatert {{ nordate }}</h2>
-        <div class="dropdown is-hoverable is-primary as-text-left">
+        <div class="dropdown is-hoverable is-primary has-text-left">
             <div class="dropdown-trigger">
                 <button class="button has-icons-right" aria-haspopup="true" aria-controls="dropdown-menu3">
                     <span>Velg ønsket tabell</span>
@@ -39,7 +39,7 @@
         <div class="tile is-3">&nbsp;</div>
         <div class="tile is-6">
             <div class="block">&nbsp;</div>            
-            <table class="table is-fullwidth" style="border: 0em;">
+            <table class="table is-fullwidth">
             {% for table in result_dict.keys() %}
                 {% if result_dict[table]['risk'] == 0 %}
                 <tr class="has-background-success-light">
@@ -115,14 +115,8 @@
                     {% endif %}
                     {% endfor %}
                 </tr>
-                <tr>
-                    <td colspan="5">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="5">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="5">&nbsp;</td>
+                <tr rowspan="3">
+                    <td class="border: 0;" colspan="5">&nbsp;</td>
                 </tr>
                 {% endfor %}
             </table>
