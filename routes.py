@@ -615,9 +615,10 @@ async def utvalg_fylker(request):
         response_dat.update(
             {
                 "request": request,
-                "head_title": "korona.kommune.nu sp&oslash;rring",
-                "hero_subtitle": "sjekk.kommune.nu",
-                "hero_link": "/utvalg",
+                "head_title": "sjekk.kommune.nu korona spørring",
+                "hero_title": "sjekk.kommune.nu",
+                "hero_subtitle": "Velg hvilke fylker du vil sjekke",
+                "hero_link": "/fylker",
                 "fylker": big_list,
                 "utvalg": 1
             }
@@ -634,6 +635,7 @@ async def utvalg_hjelp(request):
         {
             "request": request,
             "head_title": "korona.kommune.nu spørring",
+            "hero_title": "sjekk.kommune.nu",
             "hero_subtitle": "Hjelp til spørring",
             "hero_link": "/hjelp",
             "utvalg": 3
