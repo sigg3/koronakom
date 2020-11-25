@@ -109,13 +109,13 @@ async def subdomain_vvhf(request):
         vvhf_sites = {}
         for key in vvhf_keys:
             vvhf_sites[key] = {
-                "title": s.custom_queries[key][title],
-                "subtitle": s.custom_queries[key][subtitle],
-                "created": s.custom_queries[key][created],
-                "list":  s.custom_queries[key][list],
+                "title": s.custom_queries[key]['title'],
+                "subtitle": s.custom_queries[key]['subtitle'],
+                "created": s.custom_queries[key]['created'],
+                "list":  s.custom_queries[key]['list'],
                 "url": key
                 }
-        
+
         response_dat.update(
                         {
                         "request": request,
