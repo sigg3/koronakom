@@ -66,7 +66,7 @@ class Session():
     def get_store_target(self) -> str:
         """ implements HEROKU config var for storage file name """
         # TODO ugly workaround, just set heroku config vars
-        return datetime.datetime.now().isoformat().split(sep="T")[0]
+        return datetime.datetime.now().isoformat().split(sep="T")[1]
         CLOUD = Path.cwd() / ".env"
         if CLOUD.is_file():
             store_in = None
@@ -199,7 +199,8 @@ async def db_refresh(
     """
     # Get it online
     msis_url = query_object.msis_url(date)
-    data_file, get_status = await dl_csv_data(msis_url)
+    #data_file, get_status = await dl_csv_data(msis_url)
+    data_file, get_status = dl_csv_data(msis_url)
     if get_status == '200':
         print(f" -> msis for {date}")
         df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
