@@ -915,17 +915,17 @@ def setup():
 
     if setup_loop and setup_loop.is_running():
         # secondary workers get additonal sleep module
-        from time import sleep
+        #from time import sleep
 
         print("refresh: blocking until done")
         while setup_loop.is_running():
-            sleep(0.3)
+            asyncio.sleep(0.5)
 #        asyncio.run_coroutine_threadsafe(
 #            refresh_data(datapoints, book, store, FHI), setup_loop
 #        )
 #        from time import sleep
 #        sleep(5) # block
-    
+
     else:
         print('retfresh: starting setup_loop')
         asyncio.run(refresh_data(datapoints, book, store, FHI))
