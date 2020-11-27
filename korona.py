@@ -914,7 +914,7 @@ def app_korona_setup():
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
-    asyncio.run(setup(is_local=True))
+    setup(is_local=True)
 
 
 async def setup(**kwargs):
