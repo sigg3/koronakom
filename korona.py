@@ -912,11 +912,15 @@ def setup():
     except RuntimeError:
         setup_loop = None
 
-    if setup_loop and setup_loop.is_running():
+    if setup_loop:
         #print('refresh: append to running loop')
         #_task = setup_loop.create_task(refresh_data(datapoints, book, store, FHI))
         # ^-- https://docs.python.org/3/library/asyncio-task.html#task-object
-        pass
+        from time import sleep
+        while setup_loop.is_running():
+            sleep(0.3)
+    #    pass
+    #    await asyncio.wait(list(tasks), loop=loop)    
     else:
         print('refresh: starting new setup_loop')
         asyncio.run(refresh_data(datapoints, book, store, FHI))
