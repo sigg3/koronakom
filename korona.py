@@ -482,6 +482,10 @@ def query_data(
     # skipped items
     skipped_items = []
 
+    # skip calc items
+    # break loop if >= 10 skipped consecutive items
+    skip_calc_counter = 0
+
     # If the selection encompasses ALL DATA, we save it to big dict
     # This decreases time spent analyzing data dramatically
     # A cron job will execute the equivalent of main() regularly
@@ -577,7 +581,13 @@ def query_data(
                     big_book[kid][dtitle] = ['NA', 'NA', 'NA', 'NA']
                     big_book[kid]["risk"] = 3 # N/A
                     print(f"Warning: got skip_calc for {kid}")
+                    skip_calc_counter += 1
+                    if skip_calc_counter >= 10:
+                        break
                 else:
+                    skip_calc_counter = 0 # reset
+
+
                     diff_one = now - diff_one
                     diff_three = now - diff_three
                     diff_five = now - diff_five
