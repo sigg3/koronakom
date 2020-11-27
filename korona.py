@@ -198,8 +198,8 @@ async def db_refresh(
     """
     # Get it online
     msis_url = query_object.msis_url(date)
-    #data_file, get_status = await dl_csv_data(msis_url)
-    data_file, get_status = dl_csv_data(msis_url)
+    data_file, get_status = await dl_csv_data(msis_url)
+    #data_file, get_status = dl_csv_data(msis_url)
     if get_status == '200':
         print(f" -> msis for {date}")
         df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
@@ -914,10 +914,10 @@ def app_korona_setup():
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
-    setup(is_local=True)
+    asyncio.run(setup(is_local=True))
 
 
-def setup(**kwargs):
+async def setup(**kwargs):
     """
     Entry point or FULL setup (not minimal)
     From app, only use this in startup, otherwise use
@@ -978,7 +978,7 @@ def setup(**kwargs):
     else:
         # but on heroku we use >1 worker and get Runtime error
         # so we can just run it async synchronously
-        refresh_data(datapoints, book, store, FHI)
+        await refresh_data(datapoints, book, store, FHI)
 
 
     all = list(norge.data.keys())
