@@ -8,7 +8,6 @@ from pandas.tseries.offsets import BDay
 import pickle
 import asyncio
 from io import StringIO
-from sys import version_info
 from pathlib import Path
 from norway import Norway
 
@@ -901,11 +900,7 @@ def setup():
     # refresh dict and local storage
     # will fetch new data from FHI repository
     print('refresh data') # debug
-
-    if version_info.major <= 3 and version_info.minor < 7:
-        print("Requirement not met: python 3")
-    else:
-        asyncio.run(refresh_data(datapoints, book, store, FHI))
+    asyncio.run(refresh_data(datapoints, book, store, FHI))
 
     # close the on-disk store
     #try:
