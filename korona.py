@@ -914,16 +914,17 @@ def setup():
         setup_loop = None
 
     if setup_loop and setup_loop.is_running():
-        asyncio.run_coroutine_threadsafe(
-            refresh_data(datapoints, book, store, FHI), setup_loop
-        )
-        from time import sleep
-        sleep(5) # block
+#        asyncio.run_coroutine_threadsafe(
+#            refresh_data(datapoints, book, store, FHI), setup_loop
+#        )
+#        from time import sleep
+#        sleep(5) # block
 
-
-
+        task = setup_loop.create_task(refresh_data(datapoints, book, store, FHI))
+        await task
     else:
         print('starting new setup_loop')
+        task = asyncio.create_task(refresh_data(datapoints, book, store, FHI))
         asyncio.run(refresh_data(datapoints, book, store, FHI))
 
 
