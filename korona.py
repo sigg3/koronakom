@@ -66,6 +66,7 @@ class Session():
     def get_store_target(self) -> str:
         """ implements HEROKU config var for storage file name """
         # TODO ugly workaround, just set heroku config vars
+        return datetime.datetime.now().isoformat().split(sep="T")[0]
         CLOUD = Path.cwd() / ".env"
         if CLOUD.is_file():
             store_in = None
