@@ -15,7 +15,7 @@
     </a>
     <a class="navbar-item">Hjem</a>
     <a class="navbar-item">Spørring</a>
-    <a class="navbar-item">Om tjenesten</a>
+    <a class="navbar-item">Om</a>
     
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
       <span aria-hidden="true"></span>
