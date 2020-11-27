@@ -913,9 +913,10 @@ def setup():
         setup_loop = None
 
     if setup_loop and setup_loop.is_running():
-        print('refresh: append to running loop')
-        _task = setup_loop.create_task(refresh_data(datapoints, book, store, FHI))
+        #print('refresh: append to running loop')
+        #_task = setup_loop.create_task(refresh_data(datapoints, book, store, FHI))
         # ^-- https://docs.python.org/3/library/asyncio-task.html#task-object
+        pass
     else:
         print('refresh: starting new setup_loop')
         asyncio.run(refresh_data(datapoints, book, store, FHI))
