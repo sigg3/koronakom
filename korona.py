@@ -977,10 +977,11 @@ def setup():
         setup_loop = None
 
     if setup_loop and setup_loop.is_running():
-        asyncio.run_coroutine_threadsafe(
+        future = asyncio.run_coroutine_threadsafe(
             refresh_data(datapoints, book, store, FHI),
             setup_loop
         )
+        _ = future.result()
     else:
         print('retfresh: starting setup_loop')
         setup_loop = asyncio.run(refresh_data(datapoints, book, store, FHI), debug=True)
