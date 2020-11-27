@@ -3,7 +3,7 @@
 {% block menu %}
   <div class="level-right ">
     <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary">Hjem</a></p>
-    <p class="level-item"><a href="https://sjekk.kommune.nu" title="Utvalg" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
+    <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Utvalg" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
     <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary"><strong>Om tjenesten</strong></a></p>
   </div>
 {% endblock %}
