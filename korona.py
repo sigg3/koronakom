@@ -961,7 +961,7 @@ def setup(**kwargs):
     else:
         # but on heroku we use >1 worker and get Runtime error
         # so we can just run it async synchronously
-        await refresh_data(datapoints, book, store, FHI)
+        refresh_data(datapoints, book, store, FHI)
 
 
     all = list(norge.data.keys())
