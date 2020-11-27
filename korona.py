@@ -907,28 +907,19 @@ def setup():
     # but on heroku we use >1 worker and get Runtime error
     # instead, add task to running loop
     print('refresh data') # debug
-#     try:
-#         setup_loop = asyncio.get_running_loop()
-#     except RuntimeError:
-#         setup_loop = None
-#
-#     if setup_loop and setup_loop.is_running():
-#         await refresh_data(datapoints, book, store, FHI)
-# #        asyncio.run_coroutine_threadsafe(
-# #            asyncio.run(
-# #                refresh_data(datapoints, book, store, FHI)
-# #            ), setup_loop
-# #        )
-#     else:
-#         print('starting new setup_loop')
-#         #asyncio.run(refresh_data(datapoints, book, store, FHI))
-#         asyncio.run_coroutine_threadsafe(
-#             refresh_data(datapoints, book, store, FHI), setup_loop
-#         )
+    try:
+        setup_loop = asyncio.get_running_loop()
+    except RuntimeError:
+        setup_loop = None
 
-    asyncio.run_coroutine_threadsafe(
-        refresh_data(datapoints, book, store, FHI), loop
-    )
+    if setup_loop and setup_loop.is_running():
+        asyncio.run_coroutine_threadsafe(
+            refresh_data(datapoints, book, store, FHI), setup_loop
+        )
+    else:
+        print('starting new setup_loop')
+        asyncio.run(refresh_data(datapoints, book, store, FHI))
+        
 
     # close the on-disk store
     #try:
