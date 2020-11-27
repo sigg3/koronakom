@@ -48,7 +48,7 @@ import korona
 #
 
 # Startup task
-def initialize_korona():
+async def initialize_korona():
     """
     Will run setup() equivalent to main() to download
     and build current database from sources, and save
