@@ -902,17 +902,8 @@ def setup():
     # will fetch new data from FHI repository
     print('refresh data') # debug
 
-    if version_info.major < 3:
+    if version_info.major <= 3 and version_info.minor < 7:
         print("Requirement not met: python 3")
-    elif version_info.major == 3 and version_info.minor < 7:
-        #import nest_asyncio
-        #nest_asyncio.apply()
-        loop = asyncio.new_event_loop()
-        #loop = asyncio.get_event_loop()
-        loop.run_until_complete(
-            await refresh_data(datapoints, book, store, FHI)
-        )
-        loop.close()
     else:
         asyncio.run(refresh_data(datapoints, book, store, FHI))
 
