@@ -899,8 +899,26 @@ def setup():
 
     # refresh dict and local storage
     # will fetch new data from FHI repository
+
+
+    # Run refresh asynchronous
+    # This works in cli:
+    # asyncio.run(refresh_data(datapoints, book, store, FHI))
+    # but on heroku we use >1 worker and get Runtime error
+    # instead, add task to running loop
     print('refresh data') # debug
-    asyncio.run(refresh_data(datapoints, book, store, FHI))
+    try:
+        setup_loop = asyncio.get_running_loop()
+    except RuntimeError:
+        setup_loop = None
+
+    if setup_loop and setup_loop.is_running():
+        print('refresh: append to running loop')
+        _task = setup_loop.create_task(refresh_data(datapoints, book, store, FHI))
+        # ^-- https://docs.python.org/3/library/asyncio-task.html#task-object
+    else:
+        print('refresh: starting new setup_loop')
+        asyncio.run(refresh_data(datapoints, book, store, FHI))
 
     # close the on-disk store
     #try:
