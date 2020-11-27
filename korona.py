@@ -218,7 +218,7 @@ async def db_refresh(
                 n, po, pro = row.n, row['pop'], row.pr100000
                 big_book['ro'][date]['0000'] =  (n, po, pro, 'Norge')
     else:
-        print(f" xx msis for {date} skipped:{get_status}")
+        print(f" xx msis for {date} skipped:{data_file.status_code}")
 
 
 async def refresh_data(
