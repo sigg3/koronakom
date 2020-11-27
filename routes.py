@@ -444,7 +444,7 @@ def fritekst(request):
     else:
         # tillatt folk å bruke "og"
         print(f"current init = '{uinput}'")
-        uinput = uinput.replace(" ",",").replace("og",",").replace(",,",",")
+        uinput = uinput.replace(" ",",").replace("og","").replace(",,",",")
         uinput = [ y for x in uinput.split(sep=",") for y in x.split(sep=",og,")]
 
     print(f"current = '{uinput}'")
