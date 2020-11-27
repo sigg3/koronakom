@@ -191,6 +191,7 @@ site_vvhf = Router(
 # Main page aliases
 app.host('www.kommune.nu', site_main)
 app.host('din.kommune.nu', site_main)
+app.host('min.kommune.nu', site_main)
 app.host('korona.kommune.nu', site_main)
 
 # Domain specific subdomains
