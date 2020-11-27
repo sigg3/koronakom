@@ -914,7 +914,9 @@ def setup():
         setup_loop = None
 
     if setup_loop and setup_loop.is_running():
+        # secondary workers get additonal sleep module
         from time import sleep
+
         print("refresh: blocking until done")
         while setup_loop.is_running():
             sleep(0.3)
@@ -923,8 +925,7 @@ def setup():
 #        )
 #        from time import sleep
 #        sleep(5) # block
-        from time import sleep:
-
+    
     else:
         print('retfresh: starting setup_loop')
         asyncio.run(refresh_data(datapoints, book, store, FHI))
