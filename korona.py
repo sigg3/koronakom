@@ -239,7 +239,7 @@ async def refresh_data(
                 big_book['ro'][date]
             except KeyError:
                 big_book['ro'][date] = {}
-            db_refresh(date, big_book, query_object)
+            await db_refresh(date, big_book, query_object)
 
     save_to_file(big_book, storage)
 
