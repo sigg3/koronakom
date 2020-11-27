@@ -913,10 +913,11 @@ def setup():
         setup_loop = None
 
     if setup_loop and setup_loop.is_running():
-        print('setup_loop already running (blocking this routine)')
-        #_task = setup_loop.create_task(refresh_data(datapoints, book, store, FHI))
-        while setup_loop.is_running():
-            await asyncio.sleep(1)
+        asyncio.run_coroutine_threadsafe(
+            asyncio.run(
+                refresh_data(datapoints, book, store, FHI)
+            ), setup_loop
+        )
     else:
         print('starting new setup_loop')
         asyncio.run(refresh_data(datapoints, book, store, FHI))
