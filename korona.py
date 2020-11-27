@@ -981,10 +981,12 @@ def setup():
             refresh_data(datapoints, book, store, FHI),
             setup_loop
         )
-        _ = future.result()
+        asyncio.run_until_complete(future)
     else:
         print('retfresh: starting setup_loop')
-        setup_loop = asyncio.run(refresh_data(datapoints, book, store, FHI), debug=True)
+        setup_loop = asyncio.run_until_complete(
+            refresh_data(datapoints, book, store, FHI), debug=True
+            )
         asyncio.set_event_loop(None)
 
 
