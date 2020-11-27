@@ -285,6 +285,7 @@ def read_data(
 
     # TODO optimization
     # Consider deep copy instead and just remove() keys not in selection...?
+    # Wait: cloud storage unstable
 
     # target dict
     kom_dat = {}
@@ -330,44 +331,44 @@ def read_data(
     return kom_dat
 
 
-def read_data_obsolete(
-              dates:list,
-              storage: str # was HDFStore
-              ) -> dict:
-    """ Read local h5 storage into dictionary """
-    kom_dat = {}
-    kom_dat['ro'] = {}
-    target = kom_dat['ro']
-
-    # Note keys are iso date strings (prefixed with h5 "/")
-    for key in storage.keys():
-        print(f"key={key}")
-        date = key[1:] # e.g. 2020-11-09
-        if date in dates:
-            print(f"date={date}")
-            for _, row in storage[key].iterrows():
-                k = row.location_name
-                enn = row.n
-                population = row['pop']
-                pro100k = row.pr100000
-                values = (enn, population, pro100k)
-                print(f"k={k}, values={values}")
-
-                try:
-                    target[date]
-                except KeyError:
-                    target[date] = {}
-                try:
-                    target[date][k]
-                except KeyError:
-                    target[date][k] = {}
-
-                # saves 'values' tuple: (n, population, pro100k)
-                target[date][k] = values
-        else:
-            print("skip impertinent date")
-
-    return kom_dat
+# def read_data_obsolete(
+#               dates:list,
+#               storage: str # was HDFStore
+#               ) -> dict:
+#     """ Read local h5 storage into dictionary """
+#     kom_dat = {}
+#     kom_dat['ro'] = {}
+#     target = kom_dat['ro']
+#
+#     # Note keys are iso date strings (prefixed with h5 "/")
+#     for key in storage.keys():
+#         print(f"key={key}")
+#         date = key[1:] # e.g. 2020-11-09
+#         if date in dates:
+#             print(f"date={date}")
+#             for _, row in storage[key].iterrows():
+#                 k = row.location_name
+#                 enn = row.n
+#                 population = row['pop']
+#                 pro100k = row.pr100000
+#                 values = (enn, population, pro100k)
+#                 print(f"k={k}, values={values}")
+#
+#                 try:
+#                     target[date]
+#                 except KeyError:
+#                     target[date] = {}
+#                 try:
+#                     target[date][k]
+#                 except KeyError:
+#                     target[date][k] = {}
+#
+#                 # saves 'values' tuple: (n, population, pro100k)
+#                 target[date][k] = values
+#         else:
+#             print("skip impertinent date")
+#
+#     return kom_dat
 
 
 def is_fresh_data(url:str) -> bool:
