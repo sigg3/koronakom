@@ -919,7 +919,7 @@ def setup():
 
         print("refresh: blocking until done")
         while setup_loop.is_running():
-            asyncio.sleep(0.5)
+            await asyncio.sleep(0.5)
 #        asyncio.run_coroutine_threadsafe(
 #            refresh_data(datapoints, book, store, FHI), setup_loop
 #        )
