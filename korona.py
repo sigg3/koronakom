@@ -200,7 +200,7 @@ async def db_refresh(
     msis_url = query_object.msis_url(date)
     data_file = await dl_csv_data(msis_url)
     #data_file, get_status = dl_csv_data(msis_url)
-    if data_file.status_code == '200':
+    if data_file.status_code == 200:
         print(f" -> msis for {date}")
         df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
         for _, row in df.iterrows():
