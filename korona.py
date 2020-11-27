@@ -626,8 +626,14 @@ def query_data(
                 # Save to small book too
                 small_book[kid][dtitle] = big_book[kid][dtitle]
 
+                if skip_calc_counter >= 10:
+                    break
+
             # Set risk assessment for muncipality
             small_book[kid]["risk"] = big_book[kid]["risk"]
+
+            if skip_calc_counter >= 10:
+                break
 
 
     # national info
