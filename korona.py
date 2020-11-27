@@ -183,7 +183,7 @@ async def dl_csv_data(msis_url: str) -> Tuple[str, str]:
     """ Downloads msis data as csv """
     async with httpx.AsyncClient() as client:
         data_file = await client.get(msis_url)
-    return (data_file.content, data_file.status)
+    return (data_file)
 
 
 async def db_refresh(
@@ -198,9 +198,9 @@ async def db_refresh(
     """
     # Get it online
     msis_url = query_object.msis_url(date)
-    data_file, get_status = await dl_csv_data(msis_url)
+    data_file = await dl_csv_data(msis_url)
     #data_file, get_status = dl_csv_data(msis_url)
-    if get_status == '200':
+    if data_file.status_code == '200':
         print(f" -> msis for {date}")
         df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
         for _, row in df.iterrows():
