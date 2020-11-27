@@ -918,9 +918,10 @@ def setup():
         # ^-- https://docs.python.org/3/library/asyncio-task.html#task-object
         from time import sleep
         while setup_loop.is_running():
+            print(f"refresh: loop is running={setup_loop.is_running()}")
             sleep(0.3)
     #    pass
-    #    await asyncio.wait(list(tasks), loop=loop)    
+    #    await asyncio.wait(list(tasks), loop=loop)
     else:
         print('refresh: starting new setup_loop')
         asyncio.run(refresh_data(datapoints, book, store, FHI))
