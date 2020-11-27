@@ -914,7 +914,7 @@ def app_korona_setup():
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
-    setup(is_local=True)
+    asyncio.run(setup(is_local=True))
 
 
 async def setup(**kwargs):
@@ -972,13 +972,15 @@ async def setup(**kwargs):
 
     # Run refresh asynchronous
     print('refresh data') # debug
-    if is_single_threaded:
-        # is-single-threaded
-        asyncio.run(refresh_data(datapoints, book, store, FHI))
-    else:
-        # but on heroku we use >1 worker and get Runtime error
-        # so we can just run it async synchronously
-        await refresh_data(datapoints, book, store, FHI)
+    await refresh_data(datapoints, book, store, FHI)
+
+#    if is_single_threaded:
+#        # is-single-threaded
+#        asyncio.run(refresh_data(datapoints, book, store, FHI))
+#    else:
+#        # but on heroku we use >1 worker and get Runtime error
+#        # so we can just run it async synchronously
+#        await refresh_data(datapoints, book, store, FHI)
 
 
     all = list(norge.data.keys())
