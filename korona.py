@@ -6,6 +6,8 @@ from typing import Tuple, Type
 import datetime
 from pandas.tseries.offsets import BDay
 import pickle
+import asyncio
+from io import StringIO
 from pathlib import Path
 from norway import Norway
 
@@ -177,7 +179,9 @@ class Folkehelseinstituttet():
         return f"{self.git}/{self.fhi}/{self.surveillance_data}/{self.msis}"
 
 
-def refresh_data(
+
+
+async def refresh_data(
                  dates: list,
                  big_book: dict,
                  storage: str,
@@ -188,9 +192,11 @@ def refresh_data(
     downloads CSV files for dates in list we don't already have locally
     and appends to our local "big book" hash table data store
     """
+
+
+
     for date in dates:
         # check if data is in store already
-
         if date in big_book['ro'].keys():
             continue
         else:
@@ -203,13 +209,18 @@ def refresh_data(
             # Get it online
             msis_url = query_object.msis_url(date)
             try:
-                # TODO async httpx with Client
-                test = httpx.get(msis_url)
-                if test.status_code == 200:
+                async with httpx.AsyncClient() as client:
+                    data_file = await client.get(msis_url) # headers={"Range": "bytes=0-100"}
+                if data_file.status_code == 200:
                     print(f" -> msis for {date}")
-                    df = pd.read_csv(msis_url)
-#                    for _, row in df.where(granularity_geo="municip").iterrows():
-#                    df = df.where(granularity_geo="municip").iterrows():
+                    #dat = data_file.content
+                    #df = await pd.read_csv(print(dat))
+                    df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
+
+
+                    # df = await pd.read_csv(msis_url)
+#                           for _, row in df.where(granularity_geo="municip").iterrows():
+#                           df = df.where(granularity_geo="municip").iterrows():
                     for _, row in df.iterrows():
                         if row.granularity_geo == 'municip':
                             k = row.location_name
@@ -224,7 +235,6 @@ def refresh_data(
                         elif row.granularity_geo == 'nation':
                             n, po, pro = row.n, row['pop'], row.pr100000
                             big_book['ro'][date]['0000'] =  (n, po, pro, 'Norge')
-
                 else:
                     continue
             except:
@@ -890,7 +900,7 @@ def setup():
     # refresh dict and local storage
     # will fetch new data from FHI repository
     print('refresh data') # debug
-    refresh_data(datapoints, book, store, FHI)
+    asyncio.run(refresh_data(datapoints, book, store, FHI))
 
 
     # close the on-disk store
