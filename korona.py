@@ -905,10 +905,12 @@ def setup():
     if version_info.major < 3:
         print("Requirement not met: python 3")
     elif version_info.major == 3 and version_info.minor < 7:
-        print("gotta fix this asap")
-        # loop = asyncio.get_event_loop()
-        # loop.run_until_complete(refresh_data(datapoints, book, store, FHI))
-        # loop.close()
+        #import nest_asyncio
+        #nest_asyncio.apply()
+        loop = asyncio.new_event_loop()
+        #loop = asyncio.get_event_loop()
+        loop.run_until_complete(refresh_data(datapoints, book, store, FHI))
+        loop.close()
     else:
         asyncio.run(refresh_data(datapoints, book, store, FHI))
 
