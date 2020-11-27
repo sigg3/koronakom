@@ -180,6 +180,46 @@ class Folkehelseinstituttet():
 
 
 
+async def dl_csv_data(msis_url: str): -> Tuple[str, str]:
+    """ Downloads msis data as csv """
+    async with httpx.AsyncClient() as client:
+        data_file = await client.get(msis_url)
+    return (data_file.content, data_file.status)
+
+
+async def db_refresh(
+                 date: str,
+                 big_book: dict,
+                 query_object: Type[Folkehelseinstituttet]
+                 ):
+    """
+    depends on FHI object created in main() or supply one yourself
+    downloads CSV files for dates in list we don't already have locally
+    and appends to our local "big book" hash table data store
+    """
+    # Get it online
+    msis_url = query_object.msis_url(date)
+    data_file, get_status = await dl_csv_data(msis_url)
+    if get_status == '200'
+        print(f" -> msis for {date}")
+        df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
+        for _, row in df.iterrows():
+            if row.granularity_geo == 'municip':
+                k = row.location_name
+                kid = row.location_code
+                if kid[:7] == 'municip':
+                    kid = kid[7:]
+                else:
+                    continue # drop record
+                dest = kid
+                n, po, pro = row.n, row['pop'], row.pr100000
+                big_book['ro'][date][kid] = (n, po, pro, k)
+            elif row.granularity_geo == 'nation':
+                n, po, pro = row.n, row['pop'], row.pr100000
+                big_book['ro'][date]['0000'] =  (n, po, pro, 'Norge')
+    else:
+        print(f" xx msis for {date} skipped:{get_status}")
+
 
 async def refresh_data(
                  dates: list,
@@ -192,57 +232,66 @@ async def refresh_data(
     downloads CSV files for dates in list we don't already have locally
     and appends to our local "big book" hash table data store
     """
-
-
-
     for date in dates:
-        # check if data is in store already
         if date in big_book['ro'].keys():
             continue
         else:
-            # setup ro sub dict
             try:
                 big_book['ro'][date]
             except KeyError:
                 big_book['ro'][date] = {}
+            db_refresh(date, big_book, query_object)
 
-            # Get it online
-            msis_url = query_object.msis_url(date)
-            try:
-                async with httpx.AsyncClient() as client:
-                    data_file = await client.get(msis_url) # headers={"Range": "bytes=0-100"}
-                if data_file.status_code == 200:
-                    print(f" -> msis for {date}")
-                    #dat = data_file.content
-                    #df = await pd.read_csv(print(dat))
-                    df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
-
-
-                    # df = await pd.read_csv(msis_url)
-#                           for _, row in df.where(granularity_geo="municip").iterrows():
-#                           df = df.where(granularity_geo="municip").iterrows():
-                    for _, row in df.iterrows():
-                        if row.granularity_geo == 'municip':
-                            k = row.location_name
-                            kid = row.location_code
-                            if kid[:7] == 'municip':
-                                kid = kid[7:]
-                            else:
-                                continue # drop record
-                            dest = kid
-                            n, po, pro = row.n, row['pop'], row.pr100000
-                            big_book['ro'][date][kid] = (n, po, pro, k)
-                        elif row.granularity_geo == 'nation':
-                            n, po, pro = row.n, row['pop'], row.pr100000
-                            big_book['ro'][date]['0000'] =  (n, po, pro, 'Norge')
-                else:
-                    continue
-            except:
-                # page not found (source not released yet)
-                continue
-
-    # dump to disk
     save_to_file(big_book, storage)
+
+#     for date in dates:
+#         # check if data is in store already
+#         if date in big_book['ro'].keys():
+#             continue
+#         else:
+#             # setup ro sub dict
+#             try:
+#                 big_book['ro'][date]
+#             except KeyError:
+#                 big_book['ro'][date] = {}
+#
+#             # Get it online
+#             msis_url = query_object.msis_url(date)
+#             try:
+#                 async with httpx.AsyncClient() as client:
+#                     data_file = await client.get(msis_url) # headers={"Range": "bytes=0-100"}
+#                 if data_file.status_code == 200:
+#                     print(f" -> msis for {date}")
+#                     #dat = data_file.content
+#                     #df = await pd.read_csv(print(dat))
+#                     df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
+#
+#
+#                     # df = await pd.read_csv(msis_url)
+# #                           for _, row in df.where(granularity_geo="municip").iterrows():
+# #                           df = df.where(granularity_geo="municip").iterrows():
+#                     for _, row in df.iterrows():
+#                         if row.granularity_geo == 'municip':
+#                             k = row.location_name
+#                             kid = row.location_code
+#                             if kid[:7] == 'municip':
+#                                 kid = kid[7:]
+#                             else:
+#                                 continue # drop record
+#                             dest = kid
+#                             n, po, pro = row.n, row['pop'], row.pr100000
+#                             big_book['ro'][date][kid] = (n, po, pro, k)
+#                         elif row.granularity_geo == 'nation':
+#                             n, po, pro = row.n, row['pop'], row.pr100000
+#                             big_book['ro'][date]['0000'] =  (n, po, pro, 'Norge')
+#                 else:
+#                     continue
+#             except:
+#                 # page not found (source not released yet)
+#                 continue
+#
+#     # dump to disk
+#     save_to_file(big_book, storage)
 
 #def recompress_database(storage: HDFStore):
 #    """ periodically re-build h5 file (reduce size) """
@@ -851,6 +900,7 @@ def main():
     print("run setup() from __main__ (background task)")
     setup()
 
+
 def setup():
     """
     Entry point or FULL setup (not minimal)
@@ -908,39 +958,36 @@ def setup():
     # but on heroku we use >1 worker and get Runtime error
     # instead, add task to running loop
     print('refresh data') # debug
+
+
+    # Build tasks
+    # tasks = []
+    # for date in datapoints:
+    #     if date in book['ro'].keys():
+    #         continue
+    #     else:
+    #         tasks.append(date)
+    #
+    # queue = asyncio.Queue()
+    # for task in tasks:
+    #     queue.put_nowait(task)
+
     try:
         setup_loop = asyncio.get_running_loop()
     except RuntimeError:
         setup_loop = None
 
     if setup_loop and setup_loop.is_running():
-        # secondary workers get additonal sleep module
-        #from time import sleep
-
-        print("refresh: blocking until done")
-        while setup_loop.is_running():
-            await asyncio.sleep(0.5)
-#        asyncio.run_coroutine_threadsafe(
-#            refresh_data(datapoints, book, store, FHI), setup_loop
-#        )
-#        from time import sleep
-#        sleep(5) # block
-
+        asyncio.run_coroutine_threadsafe(
+            refresh_data(datapoints, book, store, FHI),
+            setup_loop
+        )
     else:
         print('retfresh: starting setup_loop')
-        asyncio.run(refresh_data(datapoints, book, store, FHI))
+        setup_loop = asyncio.run(refresh_data(datapoints, book, store, FHI), debug=True)
         asyncio.set_event_loop(None)
 
-    # close the on-disk store
-    #try:
-    #    FHI.store.close()
-    #except:
-    #    pass
 
-    # analyze and retrieve desired data
-    # since this is an initialization, we fetch ALL muncipalities
-    # this is not strictly necessary ...
-    #all_muncipalities = nor.muncipalities
     all = list(norge.data.keys())
     print('fetch ALL') # debug
     s.FHI.current, _trash = query_data(datapoints, book, all, norge)
