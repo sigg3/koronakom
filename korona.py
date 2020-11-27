@@ -913,13 +913,13 @@ def setup():
         setup_loop = None
 
     if setup_loop and setup_loop.is_running():
-        print('refresh: append to running loop')
-        _task = setup_loop.create_task(refresh_data(datapoints, book, store, FHI))
-        # ^-- https://docs.python.org/3/library/asyncio-task.html#task-object
+        print('setup_loop already running (blocking this routine)')
+        #_task = setup_loop.create_task(refresh_data(datapoints, book, store, FHI))
+        while setup_loop.is_running():
+            await asyncio.sleep(1)
     else:
-        print('refresh: starting new setup_loop')
-        #asyncio.run(refresh_data(datapoints, book, store, FHI))
-        asyncio.run_until_complete(refresh_data(datapoints, book, store, FHI))
+        print('starting new setup_loop')
+        asyncio.run(refresh_data(datapoints, book, store, FHI))
 
     # close the on-disk store
     #try:
