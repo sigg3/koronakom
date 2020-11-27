@@ -909,7 +909,9 @@ def setup():
         #nest_asyncio.apply()
         loop = asyncio.new_event_loop()
         #loop = asyncio.get_event_loop()
-        loop.run_until_complete(refresh_data(datapoints, book, store, FHI))
+        loop.run_until_complete(
+            await refresh_data(datapoints, book, store, FHI)
+        )
         loop.close()
     else:
         asyncio.run(refresh_data(datapoints, book, store, FHI))
