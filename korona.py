@@ -897,16 +897,18 @@ def app_korona_setup():
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
-    setup()
+    setup(is_local=True)
 
 
-def setup():
+def setup(**kwargs):
     """
     Entry point or FULL setup (not minimal)
     From app, only use this in startup, otherwise use
     app_korona_setup() inside starlette.
     This exemplifies how this could be run conventionally
     """
+
+    is_single_threaded = kwargs.get('is_local', False)
 
     print('init')
     elapsed = datetime.datetime.now().timestamp()
@@ -952,42 +954,14 @@ def setup():
 
 
     # Run refresh asynchronous
-    # This works in cli:
-    # asyncio.run(refresh_data(datapoints, book, store, FHI))
-    # but on heroku we use >1 worker and get Runtime error
-    # instead, add task to running loop
     print('refresh data') # debug
-
-
-    # Build tasks
-    # tasks = []
-    # for date in datapoints:
-    #     if date in book['ro'].keys():
-    #         continue
-    #     else:
-    #         tasks.append(date)
-    #
-    # queue = asyncio.Queue()
-    # for task in tasks:
-    #     queue.put_nowait(task)
-
-    try:
-        setup_loop = asyncio.get_running_loop()
-    except RuntimeError:
-        setup_loop = None
-
-    if setup_loop and setup_loop.is_running():
-        future = asyncio.run_coroutine_threadsafe(
-            refresh_data(datapoints, book, store, FHI),
-            setup_loop
-        )
-        asyncio.run_until_complete(future)
+    if is_single_threaded:
+        # is-single-threaded
+        asyncio.run(refresh_data(datapoints, book, store, FHI))
     else:
-        print('retfresh: starting setup_loop')
-        setup_loop = asyncio.run_until_complete(
-            refresh_data(datapoints, book, store, FHI), debug=True
-            )
-        asyncio.set_event_loop(None)
+        # but on heroku we use >1 worker and get Runtime error
+        # so we can just run it async synchronously
+        await refresh_data(datapoints, book, store, FHI)
 
 
     all = list(norge.data.keys())
