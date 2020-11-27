@@ -583,7 +583,8 @@ def query_data(
             n, po, *pro = big_book['ro'][today]['0000']
             pro = pro[0]
             try:
-                diff_n = big_book['ro']['2020-11-11']['0000'][0]
+#                diff_n = big_book['ro']['2020-11-11']['0000'][0] # WTF
+                diff_n = big_book['ro'][two_weeks_ago]['0000'][0]
                 if type(diff_n) is str:
                     pass
                 else:
@@ -916,10 +917,15 @@ def setup():
         asyncio.run_coroutine_threadsafe(
             refresh_data(datapoints, book, store, FHI), setup_loop
         )
+        from time import sleep
+        sleep(5) # block
+
+
+
     else:
         print('starting new setup_loop')
         asyncio.run(refresh_data(datapoints, book, store, FHI))
-        
+
 
     # close the on-disk store
     #try:
