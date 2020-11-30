@@ -217,7 +217,7 @@ async def subdomain_parser(request):
         if item_type == 0:
             # Get the url-friendly string
             return subdomain_kommune(items[0], request)
-        elif subdomain == "oslo-fylke" or subdomain == "oslo":
+        elif subdomain == "oslo-fylke" or subdomain == "oslo": # override
             return subdomain_kommune(items[0], request)
         else:
             search_url = "https://sjekk.kommune.nu/?s"
@@ -287,20 +287,17 @@ def subdomain_kommune(kid:str, request):
     For full commentary see fritekst()
     """
     data, skipped_items = korona.app_query([kid])
+    mini_dict = data[list(data.keys())[0]]
     _kingdom = data.pop('0000')
     s, response_dat = get_template_vars()
-    hero_title = data[list(data.keys())[0]]['name']
+    hero_title = mini_dict['name']
     head_title = f"Korona-status for {hero_title}"
-    hero_link = data[list(data.keys())[0]]['url']
-    subtitle = data[list(data.keys())[0]]['alt']
+    hero_link = mini_dict['url']
+    subtitle = mini_dict['alt']
     hero_subtitle = "Tall for din kommune "
     if subtitle:
-        hero_subtitle = data[list(data.keys())[0]]['alt']
-    response_dat.update(
-        {
-            "hero_link": hero_link,
-        }
-    )
+        hero_subtitle = mini_dict['alt']
+    response_dat['hero_link'] = hero_link
 
     # Build response dict
     response_dat.update(
