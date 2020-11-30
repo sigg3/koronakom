@@ -190,7 +190,18 @@ async def subdomain_parser(request):
     subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
 
     try:
-        fetch_item = s.norge.id_from_url[subdomain]
+        fetch_item = s.norge.id_from_url.get(subdomain, None)
+        if fetch_item is None:
+            fetch_item = subdomain.replace("-", " ")
+            if " og " in fetch_item:
+                a, b, **c = fetch_item.split(sep=" ")
+                fetch_item = f"{a.capitalize()} og {c.capitalize()}"
+            else:
+                fetch_item = fetch_item.capitalize()
+
+            fetch_item = s.norge.id.get(fetch_item, None)
+            if fetch_item is None:
+                print(f"weird edge case: {fetch_item}")
     except KeyError:
         items, item_type = korona.app_get_items([subdomain])
     else:
