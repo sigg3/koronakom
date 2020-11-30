@@ -90,7 +90,7 @@
         &nbsp;
     </div>
     <div class="tile is-vcentered is-3">
-        <div class="container has-text-right pr-3">
+        <div class="container has-text-right pr-3 mr-1">
             <div class="block">&nbsp;</div>
             <h1 class="title">
                 {% if result_dict[table]['alt'] %}{{ result_dict[table]['alt'] }}
@@ -103,7 +103,7 @@
             </h4>
         </div>
     </div>
-    <div class="tile is-3">
+    <div class="tile is-3 pl-1 pr-1">
         <table class="table">
           <thead>
             <tr>
