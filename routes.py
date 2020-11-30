@@ -189,15 +189,20 @@ async def subdomain_parser(request):
     full_url = str(request.url)
     subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
 
-    if "-og-" in subdomain:
-        a, b, *c = subdomain.split(sep="-")
-        fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
-    elif "-" in subdomain:
-        a, *b = subdomain.split(sep="-")
-        fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
+    input_category = subdomain.split(sep="-")
+    if len(input_category) == 1:
+        fetch_item = subdomain
+    elif "-fylke" in subdomain:
+        fetch_item = subdomain
+        pass
     else:
-        fetch_item = subdomain.capitalize()
-
+        if len(input_category) > 2:
+            a, b, *c = subdomain.split(sep="-")
+            fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
+        else:
+            a, *b = subdomain.split(sep="-")
+            fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
+    
     items, item_type = korona.app_get_items([fetch_item])
 
     if len(items) == 1:
