@@ -196,11 +196,7 @@ async def subdomain_parser(request):
         a, *b = subdomain.split(sep="-")
         fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
     else:
-        try:
-            fetch_item = s.norge.id_from_url[subdomain]
-        except KeyError:
-            print(f"weird edge case: {fetch_item}")
-            return PlainTextResponse(f"Kunne ikke finne: <{fetch_item}>")
+        fetch_item = subdomain.capitalize()
 
     items, item_type = korona.app_get_items([fetch_item])
 
