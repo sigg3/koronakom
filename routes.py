@@ -189,30 +189,20 @@ async def subdomain_parser(request):
     full_url = str(request.url)
     subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
 
-    try:
-        fetch_item = s.norge.id_from_url.get(subdomain, None)
-        if fetch_item is None:
-            if "-og-" in subdomain:
-                a, b, *c = subdomain.split(sep="-")
-                fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
-            elif "-" in subdomain:
-                a, *b = subdomain.split(sep="-")
-                fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
-
-            fetch_item = s.norge.id.get(fetch_item, None)
-            if fetch_item is None:
-                print(f"weird edge case: {fetch_item}")
-                return PlainTextResponse(f"Kunne ikke finne: <{uinput}>")
-    except KeyError:
-        items, item_type = korona.app_get_items([subdomain])
+    if "-og-" in subdomain:
+        a, b, *c = subdomain.split(sep="-")
+        fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
+    elif "-" in subdomain:
+        a, *b = subdomain.split(sep="-")
+        fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
     else:
-        items, item_type = korona.app_get_items([fetch_item])
+        try:
+            fetch_item = s.norge.id_from_url[subdomain]
+        except KeyError:
+            print(f"weird edge case: {fetch_item}")
+            return PlainTextResponse(f"Kunne ikke finne: <{fetch_item}>")
 
-    #print(f"in subdomain_parser: got items {items}")
-
-    # TODO
-    # if len(items) == 0:
-    # show sjekk.kommune.nu help text with notificatio atop
+    items, item_type = korona.app_get_items([fetch_item])
 
     if len(items) == 1:
         if item_type == 0:
