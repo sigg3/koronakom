@@ -100,7 +100,7 @@
             </h4>
         </div>
     </div>
-    <div class="tile is-6">
+    <div class="tile is-4">
         <table class="table">
           <thead>
             <tr>
@@ -159,7 +159,7 @@
                 </article>
         </div>
     </div>
-    <div class="tile is-2">
+    <div class="tile is-4">
         &nbsp;
     </div>
 </div>
