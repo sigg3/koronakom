@@ -103,7 +103,7 @@
             </h4>
         </div>
     </div>
-    <div class="tile is-3 pl-1 pr-1">
+    <div class="tile is-3 pl-1 pr-1 has-text-right">
         <table class="table">
           <thead>
             <tr>
