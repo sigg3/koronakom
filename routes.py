@@ -194,7 +194,7 @@ async def subdomain_parser(request):
         if fetch_item is None:
             fetch_item = subdomain.replace("-", " ")
             if " og " in fetch_item:
-                a, b, **c = fetch_item.split(sep=" ")
+                a, b, c** = fetch_item.split(sep=" ")
                 fetch_item = f"{a.capitalize()} og {c.capitalize()}"
             else:
                 fetch_item = fetch_item.capitalize()
