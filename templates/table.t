@@ -86,6 +86,9 @@
 {% elif exactly_two %}
 <div class="block">&nbsp;</div>
 <div class="tile is-ancestor">
+    <div class="tile is-1">
+        &nbsp;
+    </div>
     <div class="tile is-vcentered is-3">
         <div class="container has-text-right pr-3">
             <div class="block">&nbsp;</div>
@@ -100,7 +103,7 @@
             </h4>
         </div>
     </div>
-    <div class="tile is-4">
+    <div class="tile is-3">
         <table class="table">
           <thead>
             <tr>
