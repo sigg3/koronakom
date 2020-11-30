@@ -297,7 +297,7 @@ def subdomain_kommune(kid:str, request):
     hero_subtitle = "Tall for din kommune "
     if subtitle:
         hero_subtitle = mini_dict['alt']
-    response_dat['hero_link'] = hero_link
+    response_dat['hero_link'] = f"https://{hero_link}"
 
     # Build response dict
     response_dat.update(
