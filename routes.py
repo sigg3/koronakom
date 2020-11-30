@@ -193,7 +193,7 @@ async def subdomain_parser(request):
         fetch_item = s.norge.id_from_url.get(subdomain, None)
         if fetch_item is None:
             if "-og-" in subdomain:
-                a, b, *c = fetch_item.split(sep="-")
+                a, b, *c = subdomain.split(sep="-")
                 fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
             elif "-" in subdomain:
                 a, *b = subdomain.split(sep="-")
