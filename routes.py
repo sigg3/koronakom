@@ -508,26 +508,33 @@ def fritekst(request):
         hero_title = "sjekk.kommune.nu"
         hero_subtitle = "Aktulle tall for ditt søk"
 
+        # Quickie
+        short_dict = data[list(data.keys())[0]]
+
         if only_one:
-            item_name = data[list(data.keys())[0]]['name']
+            item_name = short_dict['name']
             if query_type == 0:
                 # kommune
-                return RedirectResponse(url=f"https://{item_name}.kommune.nu")
+                item_url = short_dict['url']
+                return RedirectResponse(url=f"https://{item_url}")
             elif query_type == 1:
-                fylke_url = s.norge.get_fylke_url(item_name)
+                try:
+                    fylke_url = short_dict['fylke-url']
+                except:
+                    fylke_url = s.norge.get_fylke_url(item_name)
                 return RedirectResponse(url=f"https://{fylke_url}")
 
             hero_title = item_name
             head_title = f"Korona-status for {item_name}"
 #            hero_title = data[list(data.keys())[0]]['url']
-            hero_link = data[list(data.keys())[0]]['url']
-            subtitle = data[list(data.keys())[0]]['alt']
+            hero_link = short_dict['url']
+            subtitle = short_dict['alt']
             hero_subtitle = "Tall for din kommune "
             if subtitle:
-                hero_subtitle = data[list(data.keys())[0]]['alt']
+                hero_subtitle = short_dict['alt']
             response_dat.update({ "hero_link": hero_link })
         elif exactly_two:
-            kom_1 = data[list(data.keys())[0]]['name']
+            kom_1 = short_dict['name']
             kom_2 = data[list(data.keys())[1]]['name']
             hero_subtitle = f"{kom_1} og {kom_2}"
             head_title = f"Korona-status for {kom_1} og {kom_2}"
