@@ -579,6 +579,7 @@ def fritekst(request):
 
         # custom hero for custom queries
         if query_type == 2:
+            hero_isurl = False
             try:
                 hero_title = s.custom_queries[uinput[0]]['title']
                 hero_subtitle = s.custom_queries[uinput[0]]['subtitle']
