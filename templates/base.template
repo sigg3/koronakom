@@ -1,78 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ html_lang_setting }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ head_title }}</title>
-    <link rel="stylesheet" href="/css/bulma.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="/css/favicon.ico" />
-</head>
-<body>
-<section class="hero has-background-info-light">
-  <div class="hero-body pt-4">
-    <nav class="level">
-  <!-- Left side -->
-<div class="level-left">
-{% block logo %}
-{% if languages == 1 %}
-<span class="tag is-danger"><strong>Testing pågår</strong></span> <!-- only norsk -->
-<!--<span class="tag is-warning"><strong>BETA versjon</strong></span> -->
-{% else %}
-<div class="dropdown is-hoverable is-primary">
-  <div class="dropdown-trigger">
-    <button class="button has-icons-right" aria-haspopup="true" aria-controls="dropdown-menu3">
-      <span>{{ lang_selector }}</span>
-    </button>
-  </div>
-  <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-    <div class="dropdown-content">
-      {% for lang in html_lang %}
-      <a href="/lang/{{lang}}"" class="dropdown-item">
-        {{lang}}
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-{% endif %}
-{% endblock %}
-
-
-</div>
-
-  <!-- Right side -->
-  {% block menu %}
-  <div class="level-right is-grouped-right is-hidden-tablet"> <!-- cell-phone only -->
-    <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary"><strong>Hjem</strong></a></p>
-    <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Sp&oslash;rring" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
-    <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om</a></p>
-    <p class="level-item">&nbsp;</p><!-- bugfix -->
-  </div>
-  <div class="level-right is-grouped-right is-hidden-mobile"> <!-- any other viewer -->
-    <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary"><strong>Hjem</strong></a></p>
-    <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Sp&oslash;rring" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
-    <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
-  </div>
-  {% endblock %}
-</nav>  
-    <div class="container has-text-centered">
-      <h1 class="title is-uppercase is-2">
-        <a href="{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
-      </h1>
-      <h2 class="subtitle is-3">
-        {{ hero_subtitle }}
-      </h2>
-    </div>
-  </div>
-</section>
+{% extends "menu.template" %}
 {% block tweety %}
 {% endblock %}
 
 {% block sector_1 %}&nbsp;
-{% endblock %}
+{% endblock sector_1 %}
 
 {% block sector_2 %}&nbsp;
-{% endblock %}
+{% endblock sector_2 %}
 
 {% block se_bottom %}
 <section">
@@ -95,7 +29,7 @@
     </div>
   </div>
 </section>
-{% endblock %}
+{% endblock se_bottom %}
 
 
 <footer class="footer has-background-info-light pb-3 mb-0">
