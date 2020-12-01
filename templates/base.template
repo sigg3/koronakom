@@ -57,13 +57,22 @@
   {% endblock %}
 </nav>
     <div class="container has-text-centered">
-      <h1 class="title is-uppercase is-2">
+      <h1 class="title is-uppercase is-2 is-hidden-mobile"><!-- desktop -->
         {% if hero_isurl %}
         <a href="https://{{ hero_title }}.kommune.nu" title="{{ hero_title }}.kommune.nu" class="has-text-black">{{ hero_title }}<wbr>.kommune.nu</a>
         {% else %}
         <a href="{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
         {% endif %}
       </h1>
+      <h1 class="title is-uppercase is-2 is-hidden-tablet"><!-- mobile-->
+        {% if hero_isurl %}
+        <a href="https://{{ hero_title }}.kommune.nu" title="{{ hero_title }}.kommune.nu" class="has-text-black">{{ hero_title }}<wbr>.kommune.nu</a>
+        {% else %}
+        <a href="{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
+        {% endif %}
+      </h1>      
+      
+      
       <h2 class="subtitle is-3">
         {{ hero_subtitle }}
       </h2>
