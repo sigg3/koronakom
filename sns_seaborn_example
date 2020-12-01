@@ -21,3 +21,17 @@ sns.lineplot(x="timepoint", y="signal",
              data=fmri)
 
 pd.DataFrame(d.items())
+
+
+
+sns.lineplot(x = "Year", y = "Profit", data=data_plot)
+ax.set_xticklabels(xticklabels, rotation = 45, ha="right")
+
+
+
+
+sns.lineplot(x="dato", y="Per 100K innbygger", data= my_data_dict)
+# xticklabels = my_data_dict['dato'][::2]
+xticklabels = my_data_dict['dato'][::-2] # every other date xtick (incl last)
+xticklabels.reverse()
+plt.xticks(xticklabels, rotation=45, ha="right")
