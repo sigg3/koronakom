@@ -185,25 +185,34 @@ async def subdomain_parser(request):
     # Get korona.Session object "s"
     s, response_dat = get_template_vars()
 
-    # check subdomain
+    # grab string from subdomain
     full_url = str(request.url)
     subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
 
-    input_category = subdomain.split(sep="-")
-    if len(input_category) == 1:
-        fetch_item = subdomain
-    elif "-fylke" in subdomain:
-        fetch_item = subdomain
-        pass
-    else:
-        if len(input_category) > 2:
-            a, b, *c = subdomain.split(sep="-")
-            fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
+    # check string against norway data
+    fetch_id = s.norge.id_from_url.get(subdomain, None)
+
+    # if no hits, traverse options
+    if fetch_id is None:
+        input_category = subdomain.split(sep="-")
+        if len(input_category) == 1:
+            fetch_item = subdomain
+        elif "-fylke" in subdomain:
+            fetch_item = subdomain
         else:
-            a, *b = subdomain.split(sep="-")
-            fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
-    
+            # two or more words: conjunctive or name containing dash
+            if len(input_category) > 2:
+                a, b, *c = subdomain.split(sep="-")
+                fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
+            else:
+                a, *b = subdomain.split(sep="-")
+                fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
+    else:
+        fetch_item = fetch_id
+
+    # Get the deets
     items, item_type = korona.app_get_items([fetch_item])
+
 
     if len(items) == 1:
         if item_type == 0:
