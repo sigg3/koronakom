@@ -8,20 +8,19 @@
   </div>
   {% endblock %}
 
-<!-- <div class="block">&nbsp;</div> -->
 
 {% if only_one %}
-<div class="block">&nbsp;</div>
+    <div class="block">&nbsp;</div>
 {% else %}
-{% if exactly_two %}
-<div class="block">&nbsp;</div>
-{% else %}
-<div class="tile is-12 has-text-centered">
-    <div class="container has-text-centered">
-        <p>Tall fra {{ nordate }}, sortering: uten sortering</p>
-    </div>
-</div>
-{% endif %}
+    {% if exactly_two %}
+        <div class="block">&nbsp;</div>
+    {% else %}
+        <div class="tile is-12 has-text-centered">
+            <div class="container has-text-centered">
+                <p>Tall fra {{ nordate }}, sortering: uten sortering</p>
+            </div>
+        </div>
+    {% endif %}
 {% endif %}
 
 
