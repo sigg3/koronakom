@@ -79,7 +79,8 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
                  "head_title": "Aktuelle korona tall for din.kommune.nu",
                  "updated": updated,
                  "nordate": nordate,
-                 "hero_title": "din.kommune.nu",
+                 "hero_title": "din",
+                 "hero_isurl": True,
                  "hero_link": "https://din.kommune.nu",
                  "hero_subtitle": "Dagsaktuelle tall for ditt hjemsted",
                  "html_lang": lang,
@@ -164,6 +165,7 @@ async def subdomain_vvhf(request):
             "request": request,
             "head_title": "Gjeldende korona-tall for VVHF kommuner",
             "hero_title": page_title,
+            "hero_isurl": False,
             "hero_subtitle": page_subtitle,
             "hero_link": "/",
             "vvhf_sites": s.vvhf_sites,
@@ -270,6 +272,7 @@ def subdomain_fylke(flist:list, fname:str, request):
                     "request": request,
                     "head_title": f"Korona-tall for {fylke}",
                     "hero_title": hero_title,
+                    "hero_isurl": False,
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
@@ -306,6 +309,7 @@ def subdomain_kommune(kid:str, request):
                     "request": request,
                     "head_title": head_title,
                     "hero_title": hero_title,
+                    "hero_isurl": False,
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
@@ -415,7 +419,8 @@ async def search_parser(request):
                 {
                     "request": request,
                     "head_title": "sjekk.kommune.nu korona spørring",
-                    "hero_title": "sjekk.kommune.nu",
+                    "hero_title": "sjekk",
+                    "hero_isurl": True,
                     "hero_subtitle": "Velg hvilke kommuner du vil se",
                     "hero_link": "https://sjekk.kommune.nu/utvalg",
                     "fylker": big_list,
@@ -514,7 +519,7 @@ def fritekst(request):
 
         # default header
         head_title = "sjekk.kommune.nu"
-        hero_title = "sjekk.kommune.nu"
+        hero_title = "sjekk"
         hero_subtitle = "Aktulle tall for ditt søk"
 
         # Quickie
@@ -586,6 +591,7 @@ def fritekst(request):
                         "request": request,
                         "head_title": head_title,
                         "hero_title": hero_title,
+                        "hero_isurl": False,
                         "hero_subtitle": hero_subtitle,
                         "skipped_items": skipped_items,
                         "result_dict": data,
@@ -622,6 +628,7 @@ async def om_tjenesten(request):
             "head_title": "Om kommune.nu",
             "hero_link": "https://din.kommune.nu/om",
             "hero_title": "Om kommune.nu",
+            "hero_isurl": False,
             "hero_subtitle": subtitle,
         }
     )
@@ -652,7 +659,8 @@ async def utvalg(request):
             {
                 "request": request,
                 "head_title": "sjekk.kommune.nu korona spørring",
-                "hero_title": "sjekk.kommune.nu",
+                "hero_title": "sjekk",
+                "hero_isurl": True,
                 "hero_subtitle": "Velg hvilke kommuner du vil se",
                 "hero_link": "https://sjekk.kommune.nu/utvalg",
                 "fylker": big_list,
@@ -714,7 +722,8 @@ async def utvalg_fylker(request):
             {
                 "request": request,
                 "head_title": "sjekk.kommune.nu korona spørring",
-                "hero_title": "sjekk.kommune.nu",
+                "hero_title": "sjekk",
+                "hero_isurl": True,
                 "hero_subtitle": "Velg hvilke fylker du vil sjekke",
                 "hero_link": "/fylker",
                 "fylker": big_list,
@@ -730,7 +739,8 @@ async def utvalg_hjelp(request):
         {
             "request": request,
             "head_title": "korona.kommune.nu spørring",
-            "hero_title": "sjekk.kommune.nu",
+            "hero_title": "sjekk",
+            "hero_isurl": True,
             "hero_subtitle": "Hjelp til spørring",
             "hero_link": "/hjelp",
             "utvalg": 3
@@ -760,7 +770,8 @@ async def utvalg_egen(request):
         {
             "request": request,
             "head_title": "korona.kommune.nu spørring",
-            "hero_title": "sjekk.kommune.nu",
+            "hero_title": "sjekk",
+            "hero_isurl": True,
             "hero_subtitle": "Egendefinerte spørringer",
             "hero_link": "/egen",
             "fylker": big_list,
