@@ -36,22 +36,33 @@
 </div>
 {% endif %}
 {% endblock %}
-
-
 </div>
 
   <!-- Right side -->
   {% block menu %}
-  <div class="level-right ">
+  <div class="field is-grouped level-right is-hidden-tablet"> <!-- cell-phone only -->
+    <p class="level-item">&nbsp;</p><!-- bugfix -->
     <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary"><strong>Hjem</strong></a></p>
-    <p class="level-item"><a href="https://sjekk.kommune.nu/" title="Sp&oslash;rring" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
+    <p class="level-item">&nbsp;</p><!-- bugfix -->
+    <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Sp&oslash;rring" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
+    <p class="level-item">&nbsp;</p><!-- bugfix -->
+    <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om</a></p>
+    <p class="level-item">&nbsp;</p><!-- bugfix -->
+  </div>
+  <div class="field is-grouped level-right is-hidden-mobile"> <!-- any other viewer -->
+    <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary"><strong>Hjem</strong></a></p>
+    <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Sp&oslash;rring" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
     <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
   </div>
   {% endblock %}
-</nav>  
+</nav>
     <div class="container has-text-centered">
       <h1 class="title is-uppercase is-2">
+        {% if hero_isurl %}
+        <a href="https://{{ hero_title }}.kommune.nu" title="{{ hero_title }}.kommune.nu" class="has-text-black">{{ hero_title }}<wbr>.kommune.nu</a>
+        {% else %}
         <a href="{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
+        {% endif %}
       </h1>
       <h2 class="subtitle is-3">
         {{ hero_subtitle }}
@@ -75,7 +86,7 @@
            <form action="https://sjekk.kommune.nu/" method="get">
             <div class="field has-addons pt-3">
                 <p class="control">
-                    <input name="s" class="input is-large" type="text" size="13" placeholder="Kommune, fylke eller nøkkel*">
+                    <input name="s" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                 </p>
                 <p class="control">
                     <button type="submit" class="button is-large is-primary">S&oslash;k</button>

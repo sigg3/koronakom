@@ -48,13 +48,13 @@ import korona
 #
 
 # Startup task
-def initialize_korona():
+async def initialize_korona():
     """
     Will run setup() equivalent to main() to download
     and build current database from sources, and save
     to binary pickle file in Settings.store attribute
     """
-    korona.setup()
+    await korona.setup()
     print("initialization complete")
 
 
@@ -191,6 +191,7 @@ site_vvhf = Router(
 # Main page aliases
 app.host('www.kommune.nu', site_main)
 app.host('din.kommune.nu', site_main)
+app.host('min.kommune.nu', site_main)
 app.host('korona.kommune.nu', site_main)
 
 # Domain specific subdomains

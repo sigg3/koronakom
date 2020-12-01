@@ -79,7 +79,8 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
                  "head_title": "Aktuelle korona tall for din.kommune.nu",
                  "updated": updated,
                  "nordate": nordate,
-                 "hero_title": "din.kommune.nu",
+                 "hero_title": "din",
+                 "hero_isurl": True,
                  "hero_link": "https://din.kommune.nu",
                  "hero_subtitle": "Dagsaktuelle tall for ditt hjemsted",
                  "html_lang": lang,
@@ -164,6 +165,7 @@ async def subdomain_vvhf(request):
             "request": request,
             "head_title": "Gjeldende korona-tall for VVHF kommuner",
             "hero_title": page_title,
+            "hero_isurl": False,
             "hero_subtitle": page_subtitle,
             "hero_link": "/",
             "vvhf_sites": s.vvhf_sites,
@@ -185,28 +187,40 @@ async def subdomain_parser(request):
     # Get korona.Session object "s"
     s, response_dat = get_template_vars()
 
-    # check subdomain
+    # grab string from subdomain
     full_url = str(request.url)
     subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
 
-    try:
-        fetch_item = s.norge.id_from_url[subdomain]
-    except KeyError:
-        items, item_type = korona.app_get_items([subdomain])
+    # check string against norway data
+    fetch_id = s.norge.id_from_url.get(subdomain, None)
+
+    # if no hits, traverse options
+    if fetch_id is None:
+        input_category = subdomain.split(sep="-")
+        if len(input_category) == 1:
+            fetch_item = subdomain
+        elif "-fylke" in subdomain:
+            fetch_item = subdomain
+        else:
+            # two or more words: conjunctive or name containing dash
+            if len(input_category) > 2:
+                a, b, *c = subdomain.split(sep="-")
+                fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
+            else:
+                a, *b = subdomain.split(sep="-")
+                fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
     else:
-        items, item_type = korona.app_get_items([fetch_item])
+        fetch_item = fetch_id
 
-    #print(f"in subdomain_parser: got items {items}")
+    # Get the deets
+    items, item_type = korona.app_get_items([fetch_item])
 
-    # TODO
-    # if len(items) == 0:
-    # show sjekk.kommune.nu help text with notificatio atop
 
     if len(items) == 1:
         if item_type == 0:
             # Get the url-friendly string
             return subdomain_kommune(items[0], request)
-        elif subdomain == "oslo-fylke" or subdomain == "oslo":
+        elif subdomain == "oslo-fylke" or subdomain == "oslo": # override
             return subdomain_kommune(items[0], request)
         else:
             search_url = "https://sjekk.kommune.nu/?s"
@@ -258,6 +272,7 @@ def subdomain_fylke(flist:list, fname:str, request):
                     "request": request,
                     "head_title": f"Korona-tall for {fylke}",
                     "hero_title": hero_title,
+                    "hero_isurl": False,
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
@@ -276,20 +291,17 @@ def subdomain_kommune(kid:str, request):
     For full commentary see fritekst()
     """
     data, skipped_items = korona.app_query([kid])
+    mini_dict = data[list(data.keys())[0]]
     _kingdom = data.pop('0000')
     s, response_dat = get_template_vars()
-    hero_title = data[list(data.keys())[0]]['name']
+    hero_title = mini_dict['name']
     head_title = f"Korona-status for {hero_title}"
-    hero_link = data[list(data.keys())[0]]['url']
-    subtitle = data[list(data.keys())[0]]['alt']
+    hero_link = mini_dict['url']
+    subtitle = mini_dict['alt']
     hero_subtitle = "Tall for din kommune "
     if subtitle:
-        hero_subtitle = data[list(data.keys())[0]]['alt']
-    response_dat.update(
-        {
-            "hero_link": hero_link,
-        }
-    )
+        hero_subtitle = mini_dict['alt']
+    response_dat['hero_link'] = f"https://{hero_link}"
 
     # Build response dict
     response_dat.update(
@@ -297,6 +309,7 @@ def subdomain_kommune(kid:str, request):
                     "request": request,
                     "head_title": head_title,
                     "hero_title": hero_title,
+                    "hero_isurl": False,
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
@@ -406,7 +419,8 @@ async def search_parser(request):
                 {
                     "request": request,
                     "head_title": "sjekk.kommune.nu korona spørring",
-                    "hero_title": "sjekk.kommune.nu",
+                    "hero_title": "sjekk",
+                    "hero_isurl": True,
                     "hero_subtitle": "Velg hvilke kommuner du vil se",
                     "hero_link": "https://sjekk.kommune.nu/utvalg",
                     "fylker": big_list,
@@ -444,7 +458,7 @@ def fritekst(request):
     else:
         # tillatt folk å bruke "og"
         print(f"current init = '{uinput}'")
-        uinput = uinput.replace(" ",",")
+        uinput = uinput.replace(" ",",").replace("og","").replace(",,",",")
         uinput = [ y for x in uinput.split(sep=",") for y in x.split(sep=",og,")]
 
     print(f"current = '{uinput}'")
@@ -505,29 +519,38 @@ def fritekst(request):
 
         # default header
         head_title = "sjekk.kommune.nu"
-        hero_title = "sjekk.kommune.nu"
+        hero_title = "sjekk"
+        hero_isurl = True
         hero_subtitle = "Aktulle tall for ditt søk"
 
+        # Quickie
+        short_dict = data[list(data.keys())[0]]
+
         if only_one:
-            item_name = data[list(data.keys())[0]]['name']
+            item_name = short_dict['name']
             if query_type == 0:
                 # kommune
-                return RedirectResponse(url=f"https://{item_name}.kommune.nu")
+                item_url = short_dict['url']
+                return RedirectResponse(url=f"https://{item_url}")
             elif query_type == 1:
-                fylke_url = s.norge.get_fylke_url(item_name)
+                try:
+                    fylke_url = short_dict['fylke-url']
+                except:
+                    fylke_url = s.norge.get_fylke_url(item_name)
                 return RedirectResponse(url=f"https://{fylke_url}")
 
             hero_title = item_name
+            hero_isurl = False
             head_title = f"Korona-status for {item_name}"
 #            hero_title = data[list(data.keys())[0]]['url']
-            hero_link = data[list(data.keys())[0]]['url']
-            subtitle = data[list(data.keys())[0]]['alt']
+            hero_link = short_dict['url']
+            subtitle = short_dict['alt']
             hero_subtitle = "Tall for din kommune "
             if subtitle:
-                hero_subtitle = data[list(data.keys())[0]]['alt']
+                hero_subtitle = short_dict['alt']
             response_dat.update({ "hero_link": hero_link })
         elif exactly_two:
-            kom_1 = data[list(data.keys())[0]]['name']
+            kom_1 = short_dict['name']
             kom_2 = data[list(data.keys())[1]]['name']
             hero_subtitle = f"{kom_1} og {kom_2}"
             head_title = f"Korona-status for {kom_1} og {kom_2}"
@@ -570,6 +593,7 @@ def fritekst(request):
                         "request": request,
                         "head_title": head_title,
                         "hero_title": hero_title,
+                        "hero_isurl": hero_isurl,
                         "hero_subtitle": hero_subtitle,
                         "skipped_items": skipped_items,
                         "result_dict": data,
@@ -606,6 +630,7 @@ async def om_tjenesten(request):
             "head_title": "Om kommune.nu",
             "hero_link": "https://din.kommune.nu/om",
             "hero_title": "Om kommune.nu",
+            "hero_isurl": False,
             "hero_subtitle": subtitle,
         }
     )
@@ -636,7 +661,8 @@ async def utvalg(request):
             {
                 "request": request,
                 "head_title": "sjekk.kommune.nu korona spørring",
-                "hero_title": "sjekk.kommune.nu",
+                "hero_title": "sjekk",
+                "hero_isurl": True,
                 "hero_subtitle": "Velg hvilke kommuner du vil se",
                 "hero_link": "https://sjekk.kommune.nu/utvalg",
                 "fylker": big_list,
@@ -698,7 +724,8 @@ async def utvalg_fylker(request):
             {
                 "request": request,
                 "head_title": "sjekk.kommune.nu korona spørring",
-                "hero_title": "sjekk.kommune.nu",
+                "hero_title": "sjekk",
+                "hero_isurl": True,
                 "hero_subtitle": "Velg hvilke fylker du vil sjekke",
                 "hero_link": "/fylker",
                 "fylker": big_list,
@@ -714,7 +741,8 @@ async def utvalg_hjelp(request):
         {
             "request": request,
             "head_title": "korona.kommune.nu spørring",
-            "hero_title": "sjekk.kommune.nu",
+            "hero_title": "sjekk",
+            "hero_isurl": True,
             "hero_subtitle": "Hjelp til spørring",
             "hero_link": "/hjelp",
             "utvalg": 3
@@ -744,7 +772,8 @@ async def utvalg_egen(request):
         {
             "request": request,
             "head_title": "korona.kommune.nu spørring",
-            "hero_title": "sjekk.kommune.nu",
+            "hero_title": "sjekk",
+            "hero_isurl": True,
             "hero_subtitle": "Egendefinerte spørringer",
             "hero_link": "/egen",
             "fylker": big_list,

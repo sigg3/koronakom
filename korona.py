@@ -6,6 +6,8 @@ from typing import Tuple, Type
 import datetime
 from pandas.tseries.offsets import BDay
 import pickle
+import asyncio
+from io import StringIO
 from pathlib import Path
 from norway import Norway
 
@@ -177,7 +179,49 @@ class Folkehelseinstituttet():
         return f"{self.git}/{self.fhi}/{self.surveillance_data}/{self.msis}"
 
 
-def refresh_data(
+async def dl_csv_data(msis_url: str) -> Tuple[str, str]:
+    """ Downloads msis data as csv """
+    async with httpx.AsyncClient() as client:
+        data_file = await client.get(msis_url)
+    return (data_file)
+
+
+async def db_refresh(
+                 date: str,
+                 big_book: dict,
+                 query_object: Type[Folkehelseinstituttet]
+                 ):
+    """
+    depends on FHI object created in main() or supply one yourself
+    downloads CSV files for dates in list we don't already have locally
+    and appends to our local "big book" hash table data store
+    """
+    # Get it online
+    msis_url = query_object.msis_url(date)
+    data_file = await dl_csv_data(msis_url)
+    #data_file, get_status = dl_csv_data(msis_url)
+    if data_file.status_code == 200:
+        print(f" -> msis for {date}")
+        df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
+        for _, row in df.iterrows():
+            if row.granularity_geo == 'municip':
+                k = row.location_name
+                kid = row.location_code
+                if kid[:7] == 'municip':
+                    kid = kid[7:]
+                else:
+                    continue # drop record
+                dest = kid
+                n, po, pro = row.n, row['pop'], row.pr100000
+                big_book['ro'][date][kid] = (n, po, pro, k)
+            elif row.granularity_geo == 'nation':
+                n, po, pro = row.n, row['pop'], row.pr100000
+                big_book['ro'][date]['0000'] =  (n, po, pro, 'Norge')
+    else:
+        print(f" xx msis for {date} skipped:{data_file.status_code}")
+
+
+async def refresh_data(
                  dates: list,
                  big_book: dict,
                  storage: str,
@@ -189,50 +233,65 @@ def refresh_data(
     and appends to our local "big book" hash table data store
     """
     for date in dates:
-        # check if data is in store already
-
         if date in big_book['ro'].keys():
             continue
         else:
-            # setup ro sub dict
             try:
                 big_book['ro'][date]
             except KeyError:
                 big_book['ro'][date] = {}
+            await db_refresh(date, big_book, query_object)
 
-            # Get it online
-            msis_url = query_object.msis_url(date)
-            try:
-                # TODO async httpx with Client
-                test = httpx.get(msis_url)
-                if test.status_code == 200:
-                    print(f" -> msis for {date}")
-                    df = pd.read_csv(msis_url)
-#                    for _, row in df.where(granularity_geo="municip").iterrows():
-#                    df = df.where(granularity_geo="municip").iterrows():
-                    for _, row in df.iterrows():
-                        if row.granularity_geo == 'municip':
-                            k = row.location_name
-                            kid = row.location_code
-                            if kid[:7] == 'municip':
-                                kid = kid[7:]
-                            else:
-                                continue # drop record
-                            dest = kid
-                            n, po, pro = row.n, row['pop'], row.pr100000
-                            big_book['ro'][date][kid] = (n, po, pro, k)
-                        elif row.granularity_geo == 'nation':
-                            n, po, pro = row.n, row['pop'], row.pr100000
-                            big_book['ro'][date]['0000'] =  (n, po, pro, 'Norge')
-
-                else:
-                    continue
-            except:
-                # page not found (source not released yet)
-                continue
-
-    # dump to disk
     save_to_file(big_book, storage)
+
+#     for date in dates:
+#         # check if data is in store already
+#         if date in big_book['ro'].keys():
+#             continue
+#         else:
+#             # setup ro sub dict
+#             try:
+#                 big_book['ro'][date]
+#             except KeyError:
+#                 big_book['ro'][date] = {}
+#
+#             # Get it online
+#             msis_url = query_object.msis_url(date)
+#             try:
+#                 async with httpx.AsyncClient() as client:
+#                     data_file = await client.get(msis_url) # headers={"Range": "bytes=0-100"}
+#                 if data_file.status_code == 200:
+#                     print(f" -> msis for {date}")
+#                     #dat = data_file.content
+#                     #df = await pd.read_csv(print(dat))
+#                     df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
+#
+#
+#                     # df = await pd.read_csv(msis_url)
+# #                           for _, row in df.where(granularity_geo="municip").iterrows():
+# #                           df = df.where(granularity_geo="municip").iterrows():
+#                     for _, row in df.iterrows():
+#                         if row.granularity_geo == 'municip':
+#                             k = row.location_name
+#                             kid = row.location_code
+#                             if kid[:7] == 'municip':
+#                                 kid = kid[7:]
+#                             else:
+#                                 continue # drop record
+#                             dest = kid
+#                             n, po, pro = row.n, row['pop'], row.pr100000
+#                             big_book['ro'][date][kid] = (n, po, pro, k)
+#                         elif row.granularity_geo == 'nation':
+#                             n, po, pro = row.n, row['pop'], row.pr100000
+#                             big_book['ro'][date]['0000'] =  (n, po, pro, 'Norge')
+#                 else:
+#                     continue
+#             except:
+#                 # page not found (source not released yet)
+#                 continue
+#
+#     # dump to disk
+#     save_to_file(big_book, storage)
 
 #def recompress_database(storage: HDFStore):
 #    """ periodically re-build h5 file (reduce size) """
@@ -285,6 +344,7 @@ def read_data(
 
     # TODO optimization
     # Consider deep copy instead and just remove() keys not in selection...?
+    # Wait: cloud storage unstable
 
     # target dict
     kom_dat = {}
@@ -330,44 +390,44 @@ def read_data(
     return kom_dat
 
 
-def read_data_obsolete(
-              dates:list,
-              storage: str # was HDFStore
-              ) -> dict:
-    """ Read local h5 storage into dictionary """
-    kom_dat = {}
-    kom_dat['ro'] = {}
-    target = kom_dat['ro']
-
-    # Note keys are iso date strings (prefixed with h5 "/")
-    for key in storage.keys():
-        print(f"key={key}")
-        date = key[1:] # e.g. 2020-11-09
-        if date in dates:
-            print(f"date={date}")
-            for _, row in storage[key].iterrows():
-                k = row.location_name
-                enn = row.n
-                population = row['pop']
-                pro100k = row.pr100000
-                values = (enn, population, pro100k)
-                print(f"k={k}, values={values}")
-
-                try:
-                    target[date]
-                except KeyError:
-                    target[date] = {}
-                try:
-                    target[date][k]
-                except KeyError:
-                    target[date][k] = {}
-
-                # saves 'values' tuple: (n, population, pro100k)
-                target[date][k] = values
-        else:
-            print("skip impertinent date")
-
-    return kom_dat
+# def read_data_obsolete(
+#               dates:list,
+#               storage: str # was HDFStore
+#               ) -> dict:
+#     """ Read local h5 storage into dictionary """
+#     kom_dat = {}
+#     kom_dat['ro'] = {}
+#     target = kom_dat['ro']
+#
+#     # Note keys are iso date strings (prefixed with h5 "/")
+#     for key in storage.keys():
+#         print(f"key={key}")
+#         date = key[1:] # e.g. 2020-11-09
+#         if date in dates:
+#             print(f"date={date}")
+#             for _, row in storage[key].iterrows():
+#                 k = row.location_name
+#                 enn = row.n
+#                 population = row['pop']
+#                 pro100k = row.pr100000
+#                 values = (enn, population, pro100k)
+#                 print(f"k={k}, values={values}")
+#
+#                 try:
+#                     target[date]
+#                 except KeyError:
+#                     target[date] = {}
+#                 try:
+#                     target[date][k]
+#                 except KeyError:
+#                     target[date][k] = {}
+#
+#                 # saves 'values' tuple: (n, population, pro100k)
+#                 target[date][k] = values
+#         else:
+#             print("skip impertinent date")
+#
+#     return kom_dat
 
 
 def is_fresh_data(url:str) -> bool:
@@ -421,6 +481,10 @@ def query_data(
 
     # skipped items
     skipped_items = []
+
+    # skip calc items
+    # break loop if >= 10 skipped consecutive items
+    skip_calc_counter = 0
 
     # If the selection encompasses ALL DATA, we save it to big dict
     # This decreases time spent analyzing data dramatically
@@ -517,7 +581,13 @@ def query_data(
                     big_book[kid][dtitle] = ['NA', 'NA', 'NA', 'NA']
                     big_book[kid]["risk"] = 3 # N/A
                     print(f"Warning: got skip_calc for {kid}")
+                    skip_calc_counter += 1
+                    if skip_calc_counter >= 10:
+                        break
                 else:
+                    skip_calc_counter = 0 # reset
+
+
                     diff_one = now - diff_one
                     diff_three = now - diff_three
                     diff_five = now - diff_five
@@ -556,8 +626,14 @@ def query_data(
                 # Save to small book too
                 small_book[kid][dtitle] = big_book[kid][dtitle]
 
+                if skip_calc_counter >= 10:
+                    break
+
             # Set risk assessment for muncipality
             small_book[kid]["risk"] = big_book[kid]["risk"]
+
+            if skip_calc_counter >= 10:
+                break
 
 
     # national info
@@ -572,7 +648,8 @@ def query_data(
             n, po, *pro = big_book['ro'][today]['0000']
             pro = pro[0]
             try:
-                diff_n = big_book['ro']['2020-11-11']['0000'][0]
+#                diff_n = big_book['ro']['2020-11-11']['0000'][0] # WTF
+                diff_n = big_book['ro'][two_weeks_ago]['0000'][0]
                 if type(diff_n) is str:
                     pass
                 else:
@@ -837,15 +914,18 @@ def app_korona_setup():
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
-    setup()
+    asyncio.run(setup(is_local=True))
 
-def setup():
+
+async def setup(**kwargs):
     """
     Entry point or FULL setup (not minimal)
     From app, only use this in startup, otherwise use
     app_korona_setup() inside starlette.
     This exemplifies how this could be run conventionally
     """
+
+    is_single_threaded = kwargs.get('is_local', False)
 
     print('init')
     elapsed = datetime.datetime.now().timestamp()
@@ -888,20 +968,21 @@ def setup():
 
     # refresh dict and local storage
     # will fetch new data from FHI repository
+
+
+    # Run refresh asynchronous
     print('refresh data') # debug
-    refresh_data(datapoints, book, store, FHI)
+    await refresh_data(datapoints, book, store, FHI)
+
+#    if is_single_threaded:
+#        # is-single-threaded
+#        asyncio.run(refresh_data(datapoints, book, store, FHI))
+#    else:
+#        # but on heroku we use >1 worker and get Runtime error
+#        # so we can just run it async synchronously
+#        await refresh_data(datapoints, book, store, FHI)
 
 
-    # close the on-disk store
-    #try:
-    #    FHI.store.close()
-    #except:
-    #    pass
-
-    # analyze and retrieve desired data
-    # since this is an initialization, we fetch ALL muncipalities
-    # this is not strictly necessary ...
-    #all_muncipalities = nor.muncipalities
     all = list(norge.data.keys())
     print('fetch ALL') # debug
     s.FHI.current, _trash = query_data(datapoints, book, all, norge)

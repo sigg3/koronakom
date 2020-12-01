@@ -3,7 +3,7 @@
   {% block menu %}
   <div class="level-right ">
     <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary">Hjem</a></p>
-    <p class="level-item"><a href="https://sjekk.kommune.nu/" title="Utvalg" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
+    <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Utvalg" alt="Lag eget utvalg" class="button is-primary">Sp&oslash;rring</a></p>
     <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
   </div>
   {% endblock %}
@@ -89,8 +89,11 @@
 {% elif exactly_two %}
 <div class="block">&nbsp;</div>
 <div class="tile is-ancestor">
+    <div class="tile is-1">
+        &nbsp;
+    </div>
     <div class="tile is-vcentered is-3">
-        <div class="container has-text-right pr-3">
+        <div class="container has-text-right pr-3 mr-1">
             <div class="block">&nbsp;</div>
             <h1 class="title">
                 {% if result_dict[table]['alt'] %}{{ result_dict[table]['alt'] }}
@@ -103,7 +106,7 @@
             </h4>
         </div>
     </div>
-    <div class="tile is-6">
+    <div class="tile is-3 pl-1 pr-1 has-text-right">
         <table class="table">
           <thead>
             <tr>
@@ -162,7 +165,7 @@
                 </article>
         </div>
     </div>
-    <div class="tile is-2">
+    <div class="tile is-4">
         &nbsp;
     </div>
 </div>
