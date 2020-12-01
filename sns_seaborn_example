@@ -1,0 +1,23 @@
+from pandas.tseries.offsets import BDay
+import datetime
+import seaborn as sns 
+sns.set_theme(style="darkgrid")
+
+use_dates = datepoints
+use_dates.reverse()
+
+check = https://stackoverflow.com/questions/18837262/convert-python-dict-into-a-dataframe
+
+plot_dict = {}
+target_id = "5401" 
+for int_date in datapoints: 
+    data_is = test_data['ro'][int_date][target_id] 
+    data_dict.update({int_date: data_is}) 
+
+
+# Plot the responses for different events and regions
+sns.lineplot(x="timepoint", y="signal",
+             hue="region", style="event",
+             data=fmri)
+
+pd.DataFrame(d.items())
