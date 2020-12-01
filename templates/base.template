@@ -3,10 +3,10 @@
 {% endblock %}
 
 {% block sector_1 %}&nbsp;
-{% endblock sector_1 %}
+{% endblock %}
 
 {% block sector_2 %}&nbsp;
-{% endblock sector_2 %}
+{% endblock %}
 
 {% block se_bottom %}
 <section">
@@ -29,7 +29,7 @@
     </div>
   </div>
 </section>
-{% endblock se_bottom %}
+{% endblock %}
 
 
 <footer class="footer has-background-info-light pb-3 mb-0">
