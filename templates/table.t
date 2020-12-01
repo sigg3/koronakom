@@ -8,21 +8,7 @@
   </div>
   {% endblock %}
 
-
-{% if only_one %}
-    <div class="block">&nbsp;</div>
-{% else %}
-    {% if exactly_two %}
-        <div class="block">&nbsp;</div>
-    {% else %}
-        <div class="tile is-12 has-text-centered">
-            <div class="container has-text-centered">
-                <p>Tall fra {{ nordate }}, sortering: uten sortering</p>
-            </div>
-        </div>
-    {% endif %}
-{% endif %}
-
+<div class="block">&nbsp;</div>
 
 {% block sector_1 %}
 {% for table in result_dict.keys() %}
