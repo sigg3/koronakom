@@ -12,7 +12,8 @@
 
 {% if only_one %}
 <div class="block">&nbsp;</div>
-{% elif exactly_two %}
+{% else %}
+{% if exactly_two %}
 <div class="block">&nbsp;</div>
 {% else %}
 <div class="tile is-12 has-text-centered">
@@ -20,6 +21,7 @@
         <p>Tall fra {{ nordate }}, sortering: uten sortering</p>
     </div>
 </div>
+{% endif %}
 {% endif %}
 
 
