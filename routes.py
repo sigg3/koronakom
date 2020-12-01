@@ -79,7 +79,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
                  "head_title": "Aktuelle korona tall for din.kommune.nu",
                  "updated": updated,
                  "nordate": nordate,
-                 "hero_title": "din.kommune.nu",
+                 "hero_title": "din.<wbr>kommune.nu",
                  "hero_link": "https://din.kommune.nu",
                  "hero_subtitle": "Dagsaktuelle tall for ditt hjemsted",
                  "html_lang": lang,
