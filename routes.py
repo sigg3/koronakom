@@ -520,6 +520,7 @@ def fritekst(request):
         # default header
         head_title = "sjekk.kommune.nu"
         hero_title = "sjekk"
+        hero_isurl = True
         hero_subtitle = "Aktulle tall for ditt søk"
 
         # Quickie
@@ -539,6 +540,7 @@ def fritekst(request):
                 return RedirectResponse(url=f"https://{fylke_url}")
 
             hero_title = item_name
+            hero_isurl = False
             head_title = f"Korona-status for {item_name}"
 #            hero_title = data[list(data.keys())[0]]['url']
             hero_link = short_dict['url']
@@ -591,7 +593,7 @@ def fritekst(request):
                         "request": request,
                         "head_title": head_title,
                         "hero_title": hero_title,
-                        "hero_isurl": False,
+                        "hero_isurl": hero_isurl,
                         "hero_subtitle": hero_subtitle,
                         "skipped_items": skipped_items,
                         "result_dict": data,
