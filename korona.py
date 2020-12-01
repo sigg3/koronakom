@@ -227,7 +227,7 @@ async def refresh_data(
                  storage: str,
                  query_object: Type[Folkehelseinstituttet]
                  ):
-    """
+    """(n, po, pro, k)
     depends on FHI object created in main() or supply one yourself
     downloads CSV files for dates in list we don't already have locally
     and appends to our local "big book" hash table data store
@@ -883,6 +883,44 @@ def app_query(query_items: list) -> dict:
     return data, skipped_items
 
 
+async def app_get_plotdata(item_id: str, data_type: int) -> dict:
+    """
+    Returns data dict for item ID to be used in panda/seaborn
+    data_types in 0-2 from tuple: (n, po, pro, k)
+    """
+    s = app_verify_setup()
+
+    # Will always return valid dict for seaborn
+    if data_type in [0,1,2]:
+        pass
+    else:
+        data_type = 0
+
+    if item_id in s.norge.data.keys():
+        pass
+    else:
+        item_id = '0000'
+
+    # Get data
+    x_axis = [ x for x in s.datapoints ] # want values not references
+    x.axis.reverse()
+    y_axis = [ s.book['ro'][y][item_id][data_type] for y in x_axis ]
+
+    # set labels
+    if data_type == 0:
+        x_label, y_label = "dato", "Tilfeller"
+    elif data_type == 1:
+        x_label, y_label = "dato", "Populasjon"
+    elif data_type == 2:
+        x_label, y_label = "dato", "Per 100K innbygger"
+
+    # Return dict for pd.DataFrame / Seaborn
+    # dat = pd.DataFrame(korona.app_get_plotdata(5401,0))
+    return {f"{x_label}":x_axis, f"{y_label}":y_axis}
+
+    # Year = [2012, 2014, 2016, 2020, 2021, 2022, 2018]
+    # Profit = [80, 75.8, 74, 65, 99.5, 19, 33.6]
+    # data_plot = pd.DataFrame({"Year":Year, "Profit":Profit})
 
 
 def app_korona_setup():
@@ -909,7 +947,6 @@ def app_korona_setup():
     s.current, _trash = query_data(s.datapoints, s.book, tromso, s.norge)
 
     return s
-
 
 def main():
     """ Original main() used to setup stuff """
