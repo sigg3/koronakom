@@ -35,3 +35,7 @@ sns.lineplot(x="dato", y="Per 100K innbygger", data= my_data_dict)
 xticklabels = my_data_dict['dato'][::-2] # every other date xtick (incl last)
 xticklabels.reverse()
 plt.xticks(xticklabels, rotation=45, ha="right")
+
+# Render base64 data in stream (flask):
+https://stackoverflow.com/questions/34492197/how-to-render-and-return-plot-to-view-in-flask
+
