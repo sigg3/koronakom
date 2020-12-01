@@ -1,4 +1,4 @@
-{% extends "upper.template" %}
+{% extends "upper.t" %}
   <!-- Right side -->
   {% block menu %}
   <div class="level-right is-grouped-right is-hidden-tablet"> <!-- cell-phone only -->

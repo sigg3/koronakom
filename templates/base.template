@@ -1,4 +1,4 @@
-{% extends "menu.template" %}
+{% extends "menu.t" %}
 {% block tweety %}
 {% endblock %}
 
