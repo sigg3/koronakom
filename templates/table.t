@@ -14,6 +14,9 @@
 {% for table in result_dict.keys() %}
 {% if only_one %} 
 <div class="tile is-ancestor mt-4 pt-8">
+    <div class="tile is-12 has-text-centered">
+        <p>Tall fra {{ nordate }}, sortering: uten sortering</p>
+    </div>
     <div class="tile is-3">
         &nbsp;
     </div>
