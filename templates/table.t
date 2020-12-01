@@ -10,6 +10,15 @@
 
 <div class="block">&nbsp;</div>
 
+{% if only_one %}
+<div class="tile is-12 has-text-centered">
+    <div class="container has-text-centered">
+        <p>Tall fra {{ nordate }}, sortering: uten sortering</p>
+    </div>
+</div>
+{% endif %}
+
+
 {% block sector_1 %}
 {% for table in result_dict.keys() %}
 {% if only_one %} 
@@ -170,9 +179,6 @@
 {% else %}
 
 <div class="block">&nbsp;</div>
-<div class="tile is-12 has-text-centered">
-    <p>Tall fra {{ nordate }}, sortering: uten sortering</p>
-</div>
 <div class="container">
     <div class="columns">
         <div class="column is-one-third">
