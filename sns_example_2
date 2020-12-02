@@ -1,0 +1,22 @@
+import seaborn as sns
+import matplotlib.pyplot as plt 
+import pandas as pd
+item = '5401'
+df = pd.DataFrame(korona.app_get_plotdata(item, 2)
+df['diff'] = df['Per 100K innbygger'].diff()
+nor = pd.DataFrame(korona.app_get_plotdata('0000',2)
+
+
+sns.lineplot(x="dato", y="Per 100K innbygger", data=plot_data_pro, linewidth = 4)
+plt.legend(labels=['Kommune', 'Norge'])
+plt.xlabel('')
+plt.ylabel('')
+sns.set_theme(style="white")
+sns.set_context("talk", rc={"lines.linewidth":4})
+sns.despine(offset=10, trim=True, left=True)
+xticklabels = plot_data_pro['dato'][::-4]
+xticklabels.reverse()
+plt.xticks(xticklabels)
+plt.savefig("test_line4.png", format="png", bbox_inches="tight")
+plt.show()
+

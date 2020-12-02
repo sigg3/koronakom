@@ -31,10 +31,19 @@ ax.set_xticklabels(xticklabels, rotation = 45, ha="right")
 
 
 sns.lineplot(x="dato", y="Per 100K innbygger", data= my_data_dict)
+plt.xlabel('')
+plt.ylabel('')
+#sns.despine()
+sns.set_theme(style="whitegrid")
+#sns.despine(left=True)
+sns.despine(offset=10, trim=True, left=True)
+
 # xticklabels = my_data_dict['dato'][::2]
 xticklabels = my_data_dict['dato'][::-2] # every other date xtick (incl last)
 xticklabels.reverse()
 plt.xticks(xticklabels, rotation=45, ha="right")
+plt.savefig("my_svg.svg", format="svg", bbox_inches="tight")
+plt.show() # to display live
 
 # Render base64 data in stream (flask):
 https://stackoverflow.com/questions/34492197/how-to-render-and-return-plot-to-view-in-flask
