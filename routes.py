@@ -21,7 +21,6 @@ from pathlib import Path
 from norway import Norway
 import korona
 import multipart
-import asyncio
 
 # Set html template dir
 templates = Jinja2Templates(directory='templates')
@@ -301,7 +300,7 @@ async def subdomain_kommune(kid:str, request):
     _kingdom = data.pop('0000')
 
     # Get plot data dictionary
-    plot_data_n = asyncio.run(korona.app_get_plotdata(kid, 0))
+    plot_data_n =  await korona.app_get_plotdata(kid, 0)
     #plot_data_n = await korona.app_get_plotdata(kid, 0)
     #plot_data_pro = await korona.app_get_plotdata(kid, 2)
 
