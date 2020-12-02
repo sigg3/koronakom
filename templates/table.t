@@ -13,7 +13,16 @@
 <div class="block">&nbsp;</div>
 {% else %}
 {% block tweety %}
-<nav class="level">
+
+is-hidden-mobile
+
+<nav class="level is-mobile">
+  <div class="level-item has-text-centered is-hidden-mobile">
+    <div>
+      <p class="heading"> </p>
+      <p class="title"> </p>
+    </div>
+  </div>
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Røde</p>
@@ -30,6 +39,12 @@
     <div>
       <p class="heading">Grønne</p>
       <p class="title">{{ green_orange_red[0] }}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered is-hidden-mobile">
+    <div>
+      <p class="heading"> </p>
+      <p class="title"> </p>
     </div>
   </div>
 </nav>
