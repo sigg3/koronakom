@@ -256,7 +256,8 @@ def subdomain_fylke(flist:list, fname:str, request):
 
     # set default title/subtitle
     hero_title = f"Aktuelle tall for {fylke}"
-    hero_subtitle = f"{subdomain}.kommune.nu"
+    hero_link = f"{subdomain}.kommune.nu"
+    hero_subtitle = hero_link
     if fylke_alt:
         hero_subtitle = fylke_alt
 
@@ -275,6 +276,7 @@ def subdomain_fylke(flist:list, fname:str, request):
                     "head_title": f"Korona-tall for {fylke}",
                     "hero_title": hero_title,
                     "hero_isurl": False,
+                    "hero_link": f"https://{hero_link}",
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
@@ -325,6 +327,7 @@ def subdomain_kommune(kid:str, request):
                     "head_title": head_title,
                     "hero_title": hero_title,
                     "hero_isurl": False,
+                    "hero_link": hero_link,
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
@@ -535,6 +538,7 @@ def fritekst(request):
 
         # default header
         head_title = "sjekk.kommune.nu"
+        hero_link = head_title
         hero_title = "sjekk"
         hero_isurl = True
         hero_subtitle = "Aktulle tall for ditt søk"
@@ -611,6 +615,7 @@ def fritekst(request):
                         "head_title": head_title,
                         "hero_title": hero_title,
                         "hero_isurl": hero_isurl,
+                        "hero_link": f"https://{hero_link}",
                         "hero_subtitle": hero_subtitle,
                         "skipped_items": skipped_items,
                         "result_dict": data,

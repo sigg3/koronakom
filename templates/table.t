@@ -8,7 +8,32 @@
   </div>
   {% endblock %}
 
+{% if "-fylke" in hero_link %}
+{% block tweety %}
+<nav class="level">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Røde</p>
+      <p class="title">_reds_</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Oransje</p>
+      <p class="title">_orange_</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Grønne</p>
+      <p class="title">_greens_</p>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+{% else %}
 <div class="block">&nbsp;</div>
+{%endif}%
 
 {% block sector_1 %}
 {% for table in result_dict.keys() %}
