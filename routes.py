@@ -219,11 +219,11 @@ async def subdomain_parser(request):
     if len(items) == 1:
         if item_type == 0:
             # Get the url-friendly string
-            #return subdomain_kommune(items[0], request)
-            await subdomain_kommune(items[0], request)
+            return subdomain_kommune(items[0], request)
+            #await subdomain_kommune(items[0], request)
         elif subdomain == "oslo-fylke" or subdomain == "oslo": # override
-            # return subdomain_kommune(items[0], request)
-            await subdomain_kommune(items[0], request)
+             return subdomain_kommune(items[0], request)
+            #await subdomain_kommune(items[0], request)
         else:
             search_url = "https://sjekk.kommune.nu/?s"
             return RedirectResponse(url=f'{search_url}={items[0]}')
@@ -287,7 +287,7 @@ def subdomain_fylke(flist:list, fname:str, request):
 
 
 
-async def subdomain_kommune(kid:str, request):
+def subdomain_kommune(kid:str, request):
     """
     Shows only_one table template for requested muncipality
     For full commentary see fritekst()
@@ -300,8 +300,10 @@ async def subdomain_kommune(kid:str, request):
     _kingdom = data.pop('0000')
 
     # Get plot data dictionary
-    plot_data_n =  await korona.app_get_plotdata(kid, 0)
-    plot_data_pro = await korona.app_get_plotdata(kid, 2)
+    #plot_data_n =  await korona.app_get_plotdata(kid, 0)
+    #plot_data_pro = await korona.app_get_plotdata(kid, 2)
+    plot_data_n =  korona.app_get_plotdata(kid, 0)
+    plot_data_pro = korona.app_get_plotdata(kid, 2)
 
     # DEBUG
     print(f"plot_data_pro = {plot_data_pro}")
@@ -331,9 +333,9 @@ async def subdomain_kommune(kid:str, request):
                     }
     )
 
-    print("still okay") # DEBUG
-    test_weird = templates.TemplateResponse('table.t', response_dat)
-    return test_weird
+    #test_weird = templates.TemplateResponse('table.t', response_dat)
+    #return test_weird
+    return templates.TemplateResponse('table.t', response_dat)
 
 
 
