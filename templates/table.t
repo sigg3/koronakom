@@ -14,8 +14,6 @@
 {% else %}
 {% block tweety %}
 
-is-hidden-mobile
-
 <nav class="level is-mobile">
   <div class="level-item has-text-centered is-hidden-mobile">
     <div>
