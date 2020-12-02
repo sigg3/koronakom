@@ -320,7 +320,7 @@ def subdomain_kommune(kid:str, request):
 
 
     # DEBUG
-    print(f"df_kid = {df_kid}")
+    print(f"df_kid = {df_kid.to_dict()}")
 
     # Set strings
     hero_title = mini_dict['name']
