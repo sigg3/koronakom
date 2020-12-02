@@ -241,6 +241,8 @@ def subdomain_fylke(flist:list, fname:str, request):
     data, skipped_items = korona.app_query(flist)
     _kingdom = data.pop('0000')
 
+    print(f"fylke_data = {data}")
+
     # get session and response dict
     s, response_dat = get_template_vars()
 
