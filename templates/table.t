@@ -9,10 +9,7 @@
   {% endblock %}
 
 {% block tweety %}
-{% if "-fylke" in hero_link %}
-{% if "oslo" in hero_link %}
-<div class="block">&nbsp;</div>
-{% else %}
+{% if "-fylke" in hero_link and "oslo" not in hero_link %}
 <nav class="level is-mobile">
   <div class="level-item has-text-centered is-hidden-mobile">
     <div>
@@ -45,9 +42,6 @@
     </div>
   </div>
 </nav>
-{% endif %}
-{% else %}
-<div class="block">&nbsp;</div>
 {% endif %}
 {% endblock %}
 
