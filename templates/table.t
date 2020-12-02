@@ -33,7 +33,7 @@
 {% endblock %}
 {% else %}
 <div class="block">&nbsp;</div>
-{%endif}%
+{% endif %}
 
 {% block sector_1 %}
 {% for table in result_dict.keys() %}
