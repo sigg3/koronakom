@@ -333,8 +333,8 @@ async def subdomain_kommune(kid:str, request):
     )
 
     print("still okay") # DEBUG
-
-    return templates.TemplateResponse('table.t', response_dat)
+    scope['type'] == 'http'
+    await templates.TemplateResponse('table.t', response_dat)
 
 
 
