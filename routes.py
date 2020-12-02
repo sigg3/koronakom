@@ -301,8 +301,7 @@ async def subdomain_kommune(kid:str, request):
 
     # Get plot data dictionary
     plot_data_n =  await korona.app_get_plotdata(kid, 0)
-    #plot_data_n = await korona.app_get_plotdata(kid, 0)
-    #plot_data_pro = await korona.app_get_plotdata(kid, 2)
+    plot_data_pro = await korona.app_get_plotdata(kid, 2)
 
     # DEBUG
     print(f"plot_data_pro = {plot_data_pro}")
