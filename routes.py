@@ -333,8 +333,8 @@ async def subdomain_kommune(kid:str, request):
 
     print("still okay") # DEBUG
 
-    repon = templates.TemplateResponse('table.t', response_dat)
-    await repon(scope, receive, send)
+    #repon = templates.TemplateResponse('table.t', response_dat)
+    await templates.TemplateResponse('table.t', response_dat)
     #return templates.TemplateResponse('table.t', response_dat)
 
 
