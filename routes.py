@@ -332,8 +332,8 @@ async def subdomain_kommune(kid:str, request):
     )
 
     print("still okay") # DEBUG
-    test_weird = templates.TemplateResponse('table.t', response_dat)
-    await test_weird
+    test_weird = await templates.TemplateResponse('table.t', response_dat)
+    return test_weird
 
 
 
