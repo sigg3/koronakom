@@ -308,7 +308,7 @@ def subdomain_kommune(kid:str, request):
     plot_data_pro = korona.app_get_plotdata(kid, 2)
 
     # DEBUG
-    print(f"plot_data_pro = {plot_data_pro}")
+    #print(f"plot_data_pro = {plot_data_pro}")
 
     # Set strings
     hero_title = mini_dict['name']
