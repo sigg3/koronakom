@@ -220,10 +220,10 @@ async def subdomain_parser(request):
         if item_type == 0:
             # Get the url-friendly string
             #return subdomain_kommune(items[0], request)
-            await subdomain_kommune(items[0], request)
+            return subdomain_kommune(items[0], request)
         elif subdomain == "oslo-fylke" or subdomain == "oslo": # override
             # return subdomain_kommune(items[0], request)
-            await subdomain_kommune(items[0], request)
+            return subdomain_kommune(items[0], request)
         else:
             search_url = "https://sjekk.kommune.nu/?s"
             return RedirectResponse(url=f'{search_url}={items[0]}')
@@ -333,7 +333,6 @@ async def subdomain_kommune(kid:str, request):
 
     print("still okay") # DEBUG
     return templates.TemplateResponse('table.t', response_dat)
-
 
 
 
