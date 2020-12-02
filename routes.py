@@ -340,7 +340,8 @@ def subdomain_kommune(kid:str, request):
                     "skipped_items": skipped_items,
                     "result_dict": data,
                     "only_one": True,
-                    "exactly_two": False
+                    "exactly_two": False,
+                    "green_orange_red": []
                     }
     )
 
