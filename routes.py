@@ -628,7 +628,8 @@ def fritekst(request):
                         "skipped_items": skipped_items,
                         "result_dict": data,
                         "only_one": only_one,
-                        "exactly_two": exactly_two
+                        "exactly_two": exactly_two,
+                        "green_orange_red": []
                         }
         )
 
