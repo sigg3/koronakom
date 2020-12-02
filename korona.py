@@ -908,11 +908,11 @@ def app_get_plotdata(item_id: str, data_type: int) -> dict:
 
     # set labels
     if data_type == 0:
-        x_label, y_label = "dato", "Tilfeller"
+        x_label, y_label = "dato", "total_n"
     elif data_type == 1:
-        x_label, y_label = "dato", "Populasjon"
+        x_label, y_label = "dato", "total_pop"
     elif data_type == 2:
-        x_label, y_label = "dato", "Per 100K innbygger"
+        x_label, y_label = "dato", "per_100k"
 
     # Return dict for pd.DataFrame / Seaborn
     # dat = pd.DataFrame(korona.app_get_plotdata(5401,0))
