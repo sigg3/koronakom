@@ -315,8 +315,8 @@ def subdomain_kommune(kid:str, request):
     #plot_data_n =  korona.app_get_plotdata(kid, 0)
     df_kid = pd.DataFrame(korona.app_get_plotdata(kid, 2))
     df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
-    df_kid['diff_k'] = df_kid["per_100k"].diff()
-    df_kid['diff_n'] = df_nor["per_100k"].diff()
+    #df_kid['diff_k'] = df_kid["per_100k"].diff()
+    #df_kid['diff_n'] = df_nor["per_100k"].diff()
     df_kid['per_100k_n'] = df_nor["per_100k"]
 
     # DEBUG
