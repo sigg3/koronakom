@@ -330,6 +330,8 @@ async def subdomain_kommune(kid:str, request):
                     "exactly_two": False
                     }
     )
+    
+    print("still okay") # DEBUG
 
     return templates.TemplateResponse('table.t', response_dat)
 
