@@ -9,28 +9,32 @@
   {% endblock %}
 
 {% if "-fylke" in hero_link %}
+{% if "oslo" in hero_link %}
+<div class="block">&nbsp;</div>
+{% else %}
 {% block tweety %}
 <nav class="level">
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Røde</p>
-      <p class="title">_reds_</p>
+      <p class="title">{{ green_orange_red[2] }}</p>
     </div>
   </div>
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Oransje</p>
-      <p class="title">_orange_</p>
+      <p class="title">{{ green_orange_red[1] }}</p>
     </div>
   </div>
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Grønne</p>
-      <p class="title">_greens_</p>
+      <p class="title">{{ green_orange_red[0] }}</p>
     </div>
   </div>
 </nav>
 {% endblock %}
+{% endif %}
 {% else %}
 <div class="block">&nbsp;</div>
 {% endif %}

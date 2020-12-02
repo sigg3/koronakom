@@ -241,7 +241,12 @@ def subdomain_fylke(flist:list, fname:str, request):
     data, skipped_items = korona.app_query(flist)
     _kingdom = data.pop('0000')
 
-    print(f"fylke_data = {data}")
+    # get category count
+    # legend data['4224']['risk'] = 0|1|2
+    green_orange_red = [0, 0, 0]
+    for m in data.keys():
+        green_orange_red[data[m]['risk']] += 1
+
 
     # get session and response dict
     s, response_dat = get_template_vars()
@@ -282,6 +287,7 @@ def subdomain_fylke(flist:list, fname:str, request):
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
+                    "green_orange_red": green_orange_red,
                     "only_one": only_one,
                     "exactly_two": exactly_two
                     }
