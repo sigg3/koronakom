@@ -8,12 +8,11 @@
   </div>
   {% endblock %}
 
+{% block tweety %}
 {% if "-fylke" in hero_link %}
 {% if "oslo" in hero_link %}
 <div class="block">&nbsp;</div>
 {% else %}
-{% block tweety %}
-
 <nav class="level is-mobile">
   <div class="level-item has-text-centered is-hidden-mobile">
     <div>
@@ -46,11 +45,12 @@
     </div>
   </div>
 </nav>
-{% endblock %}
 {% endif %}
 {% else %}
 <div class="block">&nbsp;</div>
 {% endif %}
+{% endblock %}
+
 
 {% block sector_1 %}
 {% for table in result_dict.keys() %}
