@@ -330,10 +330,12 @@ async def subdomain_kommune(kid:str, request):
                     "exactly_two": False
                     }
     )
-    
+
     print("still okay") # DEBUG
 
-    return templates.TemplateResponse('table.t', response_dat)
+    repon = templates.TemplateResponse('table.t', response_dat)
+    await repon(scope, receive, send)
+    #return templates.TemplateResponse('table.t', response_dat)
 
 
 
