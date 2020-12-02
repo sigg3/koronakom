@@ -902,8 +902,8 @@ async def app_get_plotdata(item_id: str, data_type: int) -> dict:
         item_id = '0000'
 
     # Get data
-    x_axis = [ x for x in s.datapoints ] # want values not references
-    x.axis.reverse()
+    x_axis = [ x for x in s.datapoints ] # values not references
+    x_axis.reverse() # order
     y_axis = [ s.book['ro'][y][item_id][data_type] for y in x_axis ]
 
     # set labels
