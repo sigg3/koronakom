@@ -883,7 +883,7 @@ def app_query(query_items: list) -> dict:
     return data, skipped_items
 
 
-async def app_get_plotdata(item_id: str, data_type: int) -> dict:
+def app_get_plotdata(item_id: str, data_type: int) -> dict:
     """
     Returns data dict for item ID to be used in panda/seaborn
     data_types in 0-2 from tuple: (n, po, pro, k)
