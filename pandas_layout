@@ -4,8 +4,39 @@
 # df = df.set_index(['date'])
 
 
+
 # save_to_file()
 df.to_pickle(file_name)
 
 # read_from_file()
 df = pd.read_pickle(file_name)
+
+
+
+
+# when downloading:
+df = pd.read_csv(StringIO(data_file.content.decode('utf-8')))
+
+big_book =
+
+# selecting rows based on condition
+results = df.loc[(df['granularity_geo'] == 'municip')]
+
+# tested: df.loc[(df['dato'] == "2020-12-01")]
+
+
+
+# make this change in Session()
+s.store_postfix = "store.pkl"
+
+# and we can just save each csv into separate file
+df.to_pickle(f"{date}_{s.store_postfix}")
+
+
+However, it's better to have
+        '0000','5401','4444','8888'
+date_1    x       g
+date_2    y       h     etc.
+date_3    z       i
+
+because _date_can be indexed, and col just specified in codes
