@@ -61,14 +61,14 @@
         {% if hero_isurl %}
         <a href="https://{{ hero_title }}.kommune.nu" title="{{ hero_title }}.kommune.nu" class="has-text-black">{{ hero_title }}<wbr>.kommune.nu</a>
         {% else %}
-        <a href="{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
+        <a href="https://{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
         {% endif %}
       </h1>
       <h1 class="title is-uppercase is-3 is-hidden-tablet"><!-- mobile-->
         {% if hero_isurl %}
         <a href="https://{{ hero_title }}.kommune.nu" title="{{ hero_title }}.kommune.nu" class="has-text-black">{{ hero_title }}<wbr>.kommune.nu</a>
         {% else %}
-        <a href="{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
+        <a href="https://{{ hero_link }}" title="{{ hero_title }}" class="has-text-black">{{ hero_title }}</a>
         {% endif %}
       </h1>      
       <h2 class="subtitle is-3 is-hidden-mobile">{{ hero_subtitle }}</h2><!-- desktop -->
