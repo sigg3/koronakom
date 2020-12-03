@@ -81,7 +81,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
                  "nordate": nordate,
                  "hero_title": "din",
                  "hero_isurl": True,
-                 "hero_link": "https://din.kommune.nu",
+                 "hero_link": "din.kommune.nu",
                  "hero_subtitle": "Dagsaktuelle tall for ditt hjemsted",
                  "html_lang": lang,
                  "lang_selector": selector,
@@ -167,7 +167,7 @@ async def subdomain_vvhf(request):
             "hero_title": page_title,
             "hero_isurl": False,
             "hero_subtitle": page_subtitle,
-            "hero_link": "/",
+            "hero_link": "vvhf.kommune.nu",
             "vvhf_sites": s.vvhf_sites,
             "result_dict": data_sorted,
             "current": fetching
@@ -283,7 +283,7 @@ def subdomain_fylke(flist:list, fname:str, request):
                     "head_title": f"Korona-tall for {fylke}",
                     "hero_title": hero_title,
                     "hero_isurl": False,
-                    "hero_link": f"https://{hero_link}",
+                    "hero_link": hero_link,
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
@@ -330,7 +330,7 @@ def subdomain_kommune(kid:str, request):
     hero_subtitle = "Tall for din kommune "
     if subtitle:
         hero_subtitle = mini_dict['alt']
-    response_dat['hero_link'] = f"https://{hero_link}"
+    response_dat['hero_link'] = hero_link
 
     # Build response dict
     response_dat.update(
@@ -454,7 +454,7 @@ async def search_parser(request):
                     "hero_title": "sjekk",
                     "hero_isurl": True,
                     "hero_subtitle": "Velg hvilke kommuner du vil se",
-                    "hero_link": "https://sjekk.kommune.nu/utvalg",
+                    "hero_link": "sjekk.kommune.nu/utvalg",
                     "fylker": big_list,
                     "utvalg": 0
                 }
@@ -628,7 +628,7 @@ def fritekst(request):
                         "head_title": head_title,
                         "hero_title": hero_title,
                         "hero_isurl": hero_isurl,
-                        "hero_link": f"https://{hero_link}",
+                        "hero_link": hero_link,
                         "hero_subtitle": hero_subtitle,
                         "skipped_items": skipped_items,
                         "result_dict": data,
@@ -664,7 +664,7 @@ async def om_tjenesten(request):
         {
             "request": request,
             "head_title": "Om kommune.nu",
-            "hero_link": "https://din.kommune.nu/om",
+            "hero_link": "din.kommune.nu/om",
             "hero_title": "Om kommune.nu",
             "hero_isurl": False,
             "hero_subtitle": subtitle,
@@ -700,7 +700,7 @@ async def utvalg(request):
                 "hero_title": "sjekk",
                 "hero_isurl": True,
                 "hero_subtitle": "Velg hvilke kommuner du vil se",
-                "hero_link": "https://sjekk.kommune.nu/utvalg",
+                "hero_link": "sjekk.kommune.nu/utvalg",
                 "fylker": big_list,
                 "utvalg": 0
             }
@@ -763,7 +763,7 @@ async def utvalg_fylker(request):
                 "hero_title": "sjekk",
                 "hero_isurl": True,
                 "hero_subtitle": "Velg hvilke fylker du vil sjekke",
-                "hero_link": "/fylker",
+                "hero_link": "sjekk.kommune.nu/fylker",
                 "fylker": big_list,
                 "utvalg": 1
             }
@@ -780,7 +780,7 @@ async def utvalg_hjelp(request):
             "hero_title": "sjekk",
             "hero_isurl": True,
             "hero_subtitle": "Hjelp til spørring",
-            "hero_link": "/hjelp",
+            "hero_link": "sjekk.kommune.nu/hjelp",
             "utvalg": 3
         }
     )
@@ -811,7 +811,7 @@ async def utvalg_egen(request):
             "hero_title": "sjekk",
             "hero_isurl": True,
             "hero_subtitle": "Egendefinerte spørringer",
-            "hero_link": "/egen",
+            "hero_link": "sjekk.kommune.nu/egen",
             "fylker": big_list,
             "utvalg": 2
         }
