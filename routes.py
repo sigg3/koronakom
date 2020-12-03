@@ -90,10 +90,13 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 
     return (s, init_dict)
 
-#async def user(request):
-#    req = request.path_params['user_id']
-#    print(req)
-#    return PlainTextResponse(f"OK ?> requested = {req}")
+
+async def mini_plots(item:str, pro100k:str) -> Tuple[bytes, bytes]:
+    """ Returns matplotlib base64 encoded pngs as tuple of bytes"""
+
+
+    pass
+
 
 async def subdomain_vvhf(request):
     """
