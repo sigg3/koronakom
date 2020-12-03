@@ -179,7 +179,7 @@ class Folkehelseinstituttet():
         return f"{self.git}/{self.fhi}/{self.surveillance_data}/{self.msis}"
 
 
-async def dl_csv_data(msis_url: str) -> Type(httpx.response:)
+async def dl_csv_data(msis_url: str) -> Type(httpx.response):
     """ Downloads msis data as csv """
     async with httpx.AsyncClient() as client:
         data_file = await client.get(msis_url)
