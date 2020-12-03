@@ -95,7 +95,12 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 
 
 async def mini_plot_risk(pro100k:str) -> Type[bytes]:
-    """ Returns matplotlib base64 encoded png """
+    """
+    Simple "gauge" type graphic, not really a plot.
+    Gives an impression of current risk level,
+    e.g. orange-close-to-green or close-to-red..
+    Returns matplotlib base64 encoded png as bytes
+    """
     pro100k = float(pro100k)
     calc_ylim = round(pro100k)+50
     if calc_ylim < 200: calc_ylim = 200
@@ -124,7 +129,11 @@ async def mini_plot_risk(pro100k:str) -> Type[bytes]:
 
 
 async def mini_plot_trend(data:dict) -> Type[bytes]:
-    """TODO"""
+    """
+    Small lineplot to depict 14-day development
+    x-axis is date, and y diff cases per 100k or per n
+    Returns matplotlib base64 encoded png as bytes
+    """
     pass
 
 
