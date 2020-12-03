@@ -1,1 +1,11 @@
 # df layout to replace dicts in korona.py
+
+
+# df = df.set_index(['date'])
+
+
+# save_to_file()
+df.to_pickle(file_name)
+
+# read_from_file()
+df = pd.read_pickle(file_name)
