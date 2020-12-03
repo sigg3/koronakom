@@ -15,8 +15,11 @@ import pandas as pd
 #import numpy as np
 import datetime
 from pandas.tseries.offsets import BDay
+import matplotlib.pyplot as plt
+import io
+import base64
 from typing import Tuple, Type
-import pickle
+import pickle # not in use here?
 from pathlib import Path
 from norway import Norway
 import korona
@@ -91,11 +94,33 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
     return (s, init_dict)
 
 
-async def mini_plots(item:str, pro100k:str) -> Tuple[bytes, bytes]:
-    """ Returns matplotlib base64 encoded pngs as tuple of bytes"""
-
-
-    pass
+async def mini_plot_risk(pro100k:str) -> Type[bytes]:
+    """ Returns matplotlib base64 encoded png """
+    pro100k = float(pro100k)
+    calc_ylim = round(pro100k)+50
+    if calc_ylim < 200: calc_ylim = 200
+    fig, ax = plt.subplots()
+    ax.margins(0)
+    ax.axhspan(0,24.9, facecolor="green", alpha=0.5)
+    ax.axhspan(25,149.9, facecolor="orange", alpha=0.50)
+    ax.axhspan(150, 600, facecolor="red", alpha=0.5)
+    plt.xlim(0, 1)
+    plt.ylim(0, calc_ylim)
+    plt.xlabel("")
+    plt.ylabel("")
+    plt.title(pro100k)
+    plt.axhline(linewidth=4, color='black', y=pro100k, xmin=0.1, xmax=0.9, linestyle='solid', dash_capstyle='round')
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_position(('outward', 10))
+    fig.set_size_inches(2,2)
+    plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+    fig.tight_layout()
+    img = io.BytesIO()
+    plt.savefig(img, format="png")
+    img.seek(0)
+    return base64.b64encode(img.read())
 
 
 async def subdomain_vvhf(request):
