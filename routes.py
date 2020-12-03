@@ -242,8 +242,8 @@ def subdomain_fylke(flist:list, fname:str, request):
     _kingdom = data.pop('0000')
 
     # get category count
-    # legend data['4224']['risk'] = 0|1|2
-    green_orange_red = [0, 0, 0]
+    # legend data['4224']['risk'] = 0|1|2 (3=NA)
+    green_orange_red = [0, 0, 0, 0]
     for m in data.keys():
         green_orange_red[data[m]['risk']] += 1
 
@@ -315,9 +315,9 @@ def subdomain_kommune(kid:str, request):
     #plot_data_n =  korona.app_get_plotdata(kid, 0)
     df_kid = pd.DataFrame(korona.app_get_plotdata(kid, 2))
     df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
-    #df_kid['diff_k'] = df_kid["per_100k"].diff()
-    #df_kid['diff_n'] = df_nor["per_100k"].diff()
-    df_kid['per_100k_n'] = df_nor["per_100k"]
+    df_kid['diff_k'] = df_kid["per_100k"].diff()
+    df_kid['diff_n'] = df_nor["per_100k"].diff()
+    #df_kid['per_100k_n'] = df_nor["per_100k"]
 
     # DEBUG
     print(f"df_kid = {df_kid.to_dict()}")
