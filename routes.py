@@ -123,6 +123,11 @@ async def mini_plot_risk(pro100k:str) -> Type[bytes]:
     return base64.b64encode(img.read())
 
 
+async def mini_plot_trend(data:dict) -> Type[bytes]:
+    """TODO"""
+    pass
+
+
 async def subdomain_vvhf(request):
     """
     Vestre Viken HF subdomene
