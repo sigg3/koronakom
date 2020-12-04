@@ -50,9 +50,11 @@
 {% for table in result_dict.keys() %}
 {% if only_one %}
 <div class="columns is-mobile is-centered is-vcentered">
-    <div class="column">
-        <img src="data:image/png;base64,{{ trend_plot }}" style="width: 600px;height: 300px;padding-right: 0px;" />
-        <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 300px;padding-left: 0px;" />
+    <div class="column is-two-thirds">
+        <img src="data:image/png;base64,{{ trend_plot }}" style="width: 600px;height: 300px;" />
+    </div>
+    <div class="column is-one-third">
+        <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 300px;" />
     </div>
 </div>
 <div class="tile is-ancestor mt-4 pt-8">
