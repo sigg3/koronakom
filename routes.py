@@ -149,7 +149,7 @@ async def mini_plot_trend(kid:str) -> Type[bytes]:
     sns.set_style("whitegrid")
     sns.set_context("talk")
     sns.despine(offset=5, trim=True, left=False)
-    xticklabels = list(df.to_dict()['dato'].values())
+    xticklabels = list(df_kid.to_dict()['dato'].values())
     xticklabels = xticklabels[::-4]
     xticklabels.reverse()
     plt.xticks(xticklabels)
