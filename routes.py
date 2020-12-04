@@ -12,10 +12,12 @@ import app
 import httpx
 import html
 import pandas as pd
+from numpy import nan
 #import numpy as np
 import datetime
 from pandas.tseries.offsets import BDay
 import matplotlib.pyplot as plt
+import seaborn as sns
 import io
 import base64
 from typing import Tuple, Type
@@ -133,17 +135,33 @@ async def mini_plot_trend(kid:str) -> Type[bytes]:
     """
     Small lineplot to depict 14-day development
     x-axis is date, and y diff cases per 100k
-    Returns matplotlib base64 encoded png as bytes
+    Returns matplotlib/seaborn base64 encoded png as bytes
     """
     df_kid = pd.DataFrame(korona.app_get_plotdata(kid, 2))
-    df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
+    #df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
     df_kid['diff_kom'] = df_kid["per_100k"].diff()
-    df_kid['diff_nor'] = df_nor["per_100k"].diff()
+    #df_kid['diff_nor'] = df_nor["per_100k"].diff()
+    del df['per_100k'] # don't need N just diff
 
-
-
-
-    pass
+    fig, ax = plt.subplots(figsize=(6,3))
+    sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df, linewidth=5)
+    sns.set_style("whitegrid")
+    sns.set_context("talk")
+    sns.despine(offset=5, trim=True, left=False)
+    xticklabels = list(df.to_dict()['dato'].values())
+    xticklabels = xticklabels[::-4]
+    xticklabels.reverse()
+    plt.xticks(xticklabels)
+    plt.yticks()
+    plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
+    plt.ylabel('')
+    plt.xlabel('')
+    fig.tight_layout()
+    img = io.BytesIO()
+    plt.savefig(img, format="png")
+    img.seek(0)
+    plt.close() # Not sure this is needed
+    return base64.b64encode(img.read())
 
 
 async def subdomain_vvhf(request):
@@ -362,9 +380,9 @@ def subdomain_kommune(kid:str, request):
 
     # Get plot data dictionary
     # Fetches base64 encoded bytestring of plot images
-    pro100k_last_14days = data[kid]['diff_100k'][0]
+    diff_pro100k = data[kid]['diff_100k'][0] # reelvant for risk
     trend_plot = await mini_plot_trend(kid)
-    level_plot = await mini_plot_risk(pro100k_last_14days)
+    level_plot = await mini_plot_risk(diff_pro100k)
 
     # Set strings
     hero_title = mini_dict['name']
