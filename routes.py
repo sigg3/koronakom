@@ -126,15 +126,24 @@ async def mini_plot_risk(pro100k:str) -> Type[bytes]:
     img = io.BytesIO()
     plt.savefig(img, format="png")
     img.seek(0)
+    plt.close() # Not sure this is needed
     return base64.b64encode(img.read())
 
 
-async def mini_plot_trend(data:dict) -> Type[bytes]:
+async def mini_plot_trend(kid:str) -> Type[bytes]:
     """
     Small lineplot to depict 14-day development
-    x-axis is date, and y diff cases per 100k or per n
+    x-axis is date, and y diff cases per 100k
     Returns matplotlib base64 encoded png as bytes
     """
+    df_kid = pd.DataFrame(korona.app_get_plotdata(kid, 2))
+    df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
+    df_kid['diff_kom'] = df_kid["per_100k"].diff()
+    df_kid['diff_nor'] = df_nor["per_100k"].diff()
+
+
+
+
     pass
 
 
@@ -358,9 +367,14 @@ def subdomain_kommune(kid:str, request):
     #plot_data_n =  korona.app_get_plotdata(kid, 0)
     df_kid = pd.DataFrame(korona.app_get_plotdata(kid, 2))
     df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
-    df_kid['diff_k'] = df_kid["per_100k"].diff()
-    df_kid['diff_n'] = df_nor["per_100k"].diff()
-    #df_kid['per_100k_n'] = df_nor["per_100k"]
+    df_kid['diff_kom'] = df_kid["per_100k"].diff()
+    df_kid['diff_nor'] = df_nor["per_100k"].diff()
+
+    # Fetches base64 encoded bytestring of plot images
+    #
+    current_pro100k = 
+    trend_plot = await mini_plot_trend(kid)
+    level_plot = await mini_plot_risk(kid)
 
     # DEBUG
     print(f"df_kid = {df_kid.to_dict()}")
