@@ -94,7 +94,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
     return (s, init_dict)
 
 
-async def mini_plot_risk(pro100k:str) -> Type[bytes]:
+async def mini_plot_risk(pro100k:float) -> Type[bytes]:
     """
     Simple "gauge" type graphic, not really a plot.
     Gives an impression of current risk level,
@@ -102,7 +102,6 @@ async def mini_plot_risk(pro100k:str) -> Type[bytes]:
     Returns matplotlib base64 encoded png as bytes
     Note: badly behaved async def, no awaits() ....
     """
-    pro100k = float(pro100k)
     calc_ylim = round(pro100k)+50
     if calc_ylim < 200: calc_ylim = 200
     fig, ax = plt.subplots()
@@ -362,22 +361,10 @@ def subdomain_kommune(kid:str, request):
     _kingdom = data.pop('0000')
 
     # Get plot data dictionary
-    #plot_data_n =  await korona.app_get_plotdata(kid, 0)
-    #plot_data_pro = await korona.app_get_plotdata(kid, 2)
-    #plot_data_n =  korona.app_get_plotdata(kid, 0)
-    df_kid = pd.DataFrame(korona.app_get_plotdata(kid, 2))
-    df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
-    df_kid['diff_kom'] = df_kid["per_100k"].diff()
-    df_kid['diff_nor'] = df_nor["per_100k"].diff()
-
     # Fetches base64 encoded bytestring of plot images
-    #
-    current_pro100k = 
+    pro100k_last_14days = data[kid]['diff_100k'][0]
     trend_plot = await mini_plot_trend(kid)
-    level_plot = await mini_plot_risk(kid)
-
-    # DEBUG
-    print(f"df_kid = {df_kid.to_dict()}")
+    level_plot = await mini_plot_risk(pro100k_last_14days)
 
     # Set strings
     hero_title = mini_dict['name']
@@ -400,6 +387,8 @@ def subdomain_kommune(kid:str, request):
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
+                    "trend_plot": trend_plot,
+                    "level_plot": level_plot,
                     "only_one": True,
                     "exactly_two": False,
                     "green_orange_red": []
