@@ -117,6 +117,7 @@ def mini_plot_risk(pro100k:float) -> Type[bytes]:
     plt.xlabel("")
     plt.ylabel("")
     #plt.title(pro100k)
+    plt.title("Risiko nivå")
     plt.axhline(
         linewidth=3,
         color="black",
