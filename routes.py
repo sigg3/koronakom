@@ -288,11 +288,11 @@ async def subdomain_parser(request):
     if len(items) == 1:
         if item_type == 0:
             # Get the url-friendly string
-            # return subdomain_kommune(items[0], request)
-            await subdomain_kommune(items[0], request)
+            return subdomain_kommune(items[0], request)
+            #await subdomain_kommune(items[0], request)
         elif subdomain == "oslo-fylke" or subdomain == "oslo": # override
-            # return subdomain_kommune(items[0], request)
-            await subdomain_kommune(items[0], request)
+            return subdomain_kommune(items[0], request)
+            #await subdomain_kommune(items[0], request)
         else:
             search_url = "https://sjekk.kommune.nu/?s"
             return RedirectResponse(url=f'{search_url}={items[0]}')
@@ -369,7 +369,7 @@ async def subdomain_endpoint(template:str, response_dat:dict):
     return templates.TemplateResponse(template, response_dat)
 
 
-async def subdomain_kommune(kid:str, request):
+def subdomain_kommune(kid:str, request):
     """
     Shows only_one table template for requested muncipality
     For full commentary see fritekst()
@@ -384,8 +384,8 @@ async def subdomain_kommune(kid:str, request):
     # Get plot data dictionary
     # Fetches base64 encoded bytestring of plot images
     diff_pro100k = data[kid]['diff_100k'][0] # reelvant for risk
-    trend_plot = await mini_plot_trend(kid)
-    level_plot = await mini_plot_risk(diff_pro100k)
+    trend_plot = mini_plot_trend(kid)
+    level_plot = mini_plot_risk(diff_pro100k)
 
     # Set strings
     hero_title = mini_dict['name']
@@ -418,8 +418,8 @@ async def subdomain_kommune(kid:str, request):
 
     #test_weird = templates.TemplateResponse('table.t', response_dat)
     #return test_weird
-    return await subdomain_endpoint('table.t', response_dat)
-    #return templates.TemplateResponse('table.t', response_dat)
+    #return await subdomain_endpoint('table.t', response_dat)
+    return templates.TemplateResponse('table.t', response_dat)
 
 
 
