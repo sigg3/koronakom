@@ -169,7 +169,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
 
     # Get Norwegian labels for xtics datestamps
     xtic_lab = list(df_kid.to_dict()['dato'].values())
-    use_tic = [ xtic_lab.reverse()[0], xtic_lab.reverse()[-2] ]
+    use_tic = [ xtic_lab[0], xtic_lab[-2] ] # samme som xtics_nor utgangspunkt
 
 
     xtics_nor = [xtic_lab[0], xtic_lab[-2]] # note: on purpose, [0] is NaN
