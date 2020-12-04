@@ -125,7 +125,7 @@ async def mini_plot_risk(pro100k:float) -> Type[bytes]:
     plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
     fig.tight_layout()
     img = io.BytesIO()
-    await plt.savefig(img, format="png")
+    plt.savefig(img, format="png")
     img.seek(0)
     plt.close() # Not sure this is needed
     return base64.b64encode(img.read())
@@ -158,7 +158,7 @@ async def mini_plot_trend(kid:str) -> Type[bytes]:
     plt.xlabel('')
     fig.tight_layout()
     img = io.BytesIO()
-    await plt.savefig(img, format="png")
+    plt.savefig(img, format="png")
     img.seek(0)
     plt.close() # Not sure this is needed
     return base64.b64encode(img.read())
