@@ -117,7 +117,7 @@ def mini_plot_risk(pro100k:float) -> Type[bytes]:
     plt.xlabel("")
     plt.ylabel("")
     #plt.title(pro100k)
-    plt.title("Risiko nivå", fontsize='small')
+    plt.title("Risiko nivå", fontsize='x-small')
     plt.axhline(
         linewidth=3,
         color="black",
@@ -192,7 +192,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
     plt.ylabel('')
     plt.xlabel('')
-    plt.title("Tilfeller per 100K per dag", fontsize='medium')
+    plt.title("Tilfeller per 100K per dag", fontsize='x-small')
     fig.tight_layout()
     img = io.BytesIO()
     plt.savefig(img, format="png")
