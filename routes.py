@@ -182,7 +182,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
 
     print(f"xtics_nor: {xtics_nor}")
     print(f"xtics_lab: {xtic_lab}")
-    print(f"use_tic: {use_tic})
+    print(f"use_tic: {use_tic}")
 
     plt.yticks()
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
