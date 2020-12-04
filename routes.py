@@ -96,7 +96,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
     return (s, init_dict)
 
 
-async def mini_plot_risk(pro100k:float) -> Type[bytes]:
+def mini_plot_risk(pro100k:float) -> Type[bytes]:
     """
     Simple "gauge" type graphic, not really a plot.
     Gives an impression of current risk level,
@@ -131,7 +131,7 @@ async def mini_plot_risk(pro100k:float) -> Type[bytes]:
     return base64.b64encode(img.read())
 
 
-async def mini_plot_trend(kid:str) -> Type[bytes]:
+def mini_plot_trend(kid:str) -> Type[bytes]:
     """
     Small lineplot to depict 14-day development
     x-axis is date, and y diff cases per 100k
