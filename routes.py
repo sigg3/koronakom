@@ -418,7 +418,7 @@ async def subdomain_kommune(kid:str, request):
 
     #test_weird = templates.TemplateResponse('table.t', response_dat)
     #return test_weird
-    await subdomain_endpoint('table.t', response_dat)
+    return await subdomain_endpoint('table.t', response_dat)
     #return templates.TemplateResponse('table.t', response_dat)
 
 
