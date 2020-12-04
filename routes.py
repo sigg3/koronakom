@@ -142,10 +142,10 @@ async def mini_plot_trend(kid:str) -> Type[bytes]:
     #df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
     df_kid['diff_kom'] = df_kid["per_100k"].diff()
     #df_kid['diff_nor'] = df_nor["per_100k"].diff()
-    del df['per_100k'] # don't need N just diff
+    del df_kid['per_100k'] # don't need N just diff
 
     fig, ax = plt.subplots(figsize=(6,3))
-    sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df, linewidth=5)
+    sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df_kid, linewidth=5)
     sns.set_style("whitegrid")
     sns.set_context("talk")
     sns.despine(offset=5, trim=True, left=False)
