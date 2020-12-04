@@ -116,9 +116,9 @@ def mini_plot_risk(pro100k:float) -> Type[bytes]:
     plt.ylim(0, calc_ylim)
     plt.xlabel("")
     plt.ylabel("")
-    plt.title(pro100k)
+    #plt.title(pro100k)
     # xmin=0.1, xmax=0.9,
-    plt.axhline(linewidth=4, color='black', y=pro100k, linestyle='solid', dash_capstyle='round')
+    plt.axhline(linewidth=3, color="black", y=pro100k, linestyle="solid", dash_capstyle="round")
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
