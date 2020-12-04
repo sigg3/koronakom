@@ -119,10 +119,14 @@
 </div>
 <div class="container">
     <h3>Testing plots</h3>
-    <img src="data:image/png;base64,{{ trend_plot }}">
+    <figure class="image">
+        <img src="data:image/png;base64,{{ trend_plot }}" style="width: 600px;height: 300px;">
+    </figure>
 
     <br />
-    <img src="data:image/png;base64,{{ level_plot }}">
+    <figure class="image">
+        <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 200px;">
+    </figure>
 </div>
 
 
