@@ -158,6 +158,9 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     #df_kid['diff_nor'] = df_nor["per_100k"].diff()
     del df_kid['per_100k'] # don't need N just diff
 
+    # debug control data
+    print(f"data control: df_kid = {df_kid}")
+
     fig, ax = plt.subplots(figsize=(6,3))
     sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df_kid, linewidth=5)
     sns.set_style("whitegrid")
@@ -173,6 +176,10 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     xtics_nor = [ x.replace(" 2020","").replace(" 2021","") for x in xtics_nor ]
     ax.set_xticks(["", xtic_lab[1], xtic_lab[-1]])
     ax.set_xticklabels(["", xtics_nor[0], xtics_nor[1]])
+
+    print(f"xtics_nor: {xtics_nor}")
+    print(f"xtics_lab: {xtics_lab}")
+
     plt.yticks()
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
     plt.ylabel('')
