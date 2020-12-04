@@ -155,8 +155,8 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     xtic_lab = list(df_kid.to_dict()['dato'].values())
     xtics_nor = [xtic_lab[0], xtic_lab[-1]]
 
-    xtic_lab = xticlab[::-4] # superfluous
-    xtic_lab.reverse()  # superfluous
+    #xtic_lab = xtic_lab[::-4] # superfluous
+    #xtic_lab.reverse()  # superfluous
     xtics_nor.reverse() #
 
     # Norwegian labels for xtic labels
