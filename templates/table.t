@@ -50,10 +50,10 @@
 {% for table in result_dict.keys() %}
 {% if only_one %}
 <div class="columns is-mobile is-centered is-gapless">
-    <div class="column is-two-thirds">
+    <div class="column is-half">
         <img src="data:image/png;base64,{{ trend_plot }}" style="width: 600px;height: 300px;" class="is-pulled-right" />
     </div>
-    <div class="column is-one-third">
+    <div class="column is-half">
         <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 300px;" class="is-pulled-left" />
     </div>
 </div>
