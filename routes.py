@@ -125,11 +125,10 @@ async def mini_plot_risk(pro100k:float) -> Type[bytes]:
     plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
     fig.tight_layout()
     img = io.BytesIO()
-    plt.savefig(img, format="png")
+    await plt.savefig(img, format="png")
     img.seek(0)
     plt.close() # Not sure this is needed
-    image_file = await base64.b64encode(img.read())
-    return image_file
+    return base64.b64encode(img.read())
 
 
 async def mini_plot_trend(kid:str) -> Type[bytes]:
@@ -145,7 +144,7 @@ async def mini_plot_trend(kid:str) -> Type[bytes]:
     del df_kid['per_100k'] # don't need N just diff
 
     fig, ax = plt.subplots(figsize=(6,3))
-    sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df_kid, linewidth=5)
+    await sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df_kid, linewidth=5)
     sns.set_style("whitegrid")
     sns.set_context("talk")
     sns.despine(offset=5, trim=True, left=False)
@@ -159,11 +158,10 @@ async def mini_plot_trend(kid:str) -> Type[bytes]:
     plt.xlabel('')
     fig.tight_layout()
     img = io.BytesIO()
-    plt.savefig(img, format="png")
+    await plt.savefig(img, format="png")
     img.seek(0)
     plt.close() # Not sure this is needed
-    image_file = await base64.b64encode(img.read())
-    return image_file
+    return base64.b64encode(img.read())
 
 
 async def subdomain_vvhf(request):
