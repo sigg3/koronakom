@@ -150,10 +150,12 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     sns.set_style("whitegrid")
     sns.set_context("talk")
     sns.despine(offset=5, trim=True, left=False)
-    xticklabels = list(df_kid.to_dict()['dato'].values())
-    xticklabels = xticklabels[::-4]
-    xticklabels.reverse()
-    plt.xticks(xticklabels)
+    xticks = list(df_kid.to_dict()['dato'].values())
+    xticks = xticks[::-4]
+    xticks.reverse()
+    xticks = [ korona.norwegian_date(x) for x in xticks ]
+    xticks = [ x.replace(" 2020","").replace(" 2021","") for x in xticks ]
+    plt.xticks(xticks)
     plt.yticks()
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
     plt.ylabel('')
