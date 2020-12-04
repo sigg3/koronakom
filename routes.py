@@ -320,7 +320,7 @@ def subdomain_kommune(kid:str, request):
     #df_kid['per_100k_n'] = df_nor["per_100k"]
 
     # DEBUG
-    print(f"df_kid = {df_kid.to_dict()}")
+    #print(f"df_kid = {df_kid.to_dict()}")
 
     # Set strings
     hero_title = mini_dict['name']
@@ -331,6 +331,10 @@ def subdomain_kommune(kid:str, request):
     if subtitle:
         hero_subtitle = mini_dict['alt']
     response_dat['hero_link'] = hero_link
+
+
+    # # DEBUG:
+    print(f"result_dict = {result_dict}")
 
     # Build response dict
     response_dat.update(
