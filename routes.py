@@ -100,6 +100,7 @@ async def mini_plot_risk(pro100k:str) -> Type[bytes]:
     Gives an impression of current risk level,
     e.g. orange-close-to-green or close-to-red..
     Returns matplotlib base64 encoded png as bytes
+    Note: badly behaved async def, no awaits() ....
     """
     pro100k = float(pro100k)
     calc_ylim = round(pro100k)+50
