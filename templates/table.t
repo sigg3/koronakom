@@ -48,7 +48,17 @@
 
 {% block sector_1 %}
 {% for table in result_dict.keys() %}
-{% if only_one %} 
+{% if only_one %}
+<div class="columns is-mobile is-centered">
+    <div class="column is-half">
+        <figure class="image">
+            <img src="data:image/png;base64,{{ trend_plot }}" style="width: 600px;height: 300px;">
+        </figure>
+        <figure class="image">
+            <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 300px;">
+        </figure>
+    </div>
+</div>
 <div class="tile is-ancestor mt-4 pt-8">
     <div class="tile is-3">
         &nbsp;
@@ -117,18 +127,7 @@
         &nbsp;
     </div>
 </div>
-<div class="columns">
-    <div class="column is-half has-text-right">
-        <figure class="image is-pulled-right">
-            <img src="data:image/png;base64,{{ trend_plot }}" style="width: 600px;height: 300px;">
-        </figure>
-    </div>
-    <div class="column is-half has-text-left">
-        <figure class="image is-pulled-left">
-            <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 300px;">
-        </figure>
-    </div>
-</div>
+
 
 {% elif exactly_two %}
 <div class="block">&nbsp;</div>
