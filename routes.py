@@ -161,8 +161,8 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     plt.savefig(img, format="png")
     img.seek(0)
     plt.close() # Not sure this is needed
-#    return base64.b64encode(img.read())
-    return base64.b64encode(img.getvalue())
+    return base64.b64encode(img.read())
+
 
 async def subdomain_vvhf(request):
     """
@@ -408,8 +408,8 @@ def subdomain_kommune(kid:str, request):
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
-                    "trend_plot": trend_plot,
-                    "level_plot": level_plot,
+                    "trend_plot": trend_plot.decode('utf-8'),
+                    "level_plot": level_plot.decode('utf-8'),
                     "only_one": True,
                     "exactly_two": False,
                     "green_orange_red": []
