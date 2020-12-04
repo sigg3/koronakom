@@ -164,7 +164,8 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
 
     fig, ax = plt.subplots(figsize=(6,3))
     sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df_kid, linewidth=5)
-    sns.set_style("whitegrid")
+    #sns.set_style("whitegrid")
+    sns.set_style("white")
     sns.set_context("talk")
     sns.despine(offset=5, trim=True, left=False)
 
