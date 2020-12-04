@@ -128,7 +128,8 @@ async def mini_plot_risk(pro100k:float) -> Type[bytes]:
     plt.savefig(img, format="png")
     img.seek(0)
     plt.close() # Not sure this is needed
-    return base64.b64encode(img.read())
+    image_file = await base64.b64encode(img.read())
+    return image_file
 
 
 async def mini_plot_trend(kid:str) -> Type[bytes]:
@@ -161,7 +162,8 @@ async def mini_plot_trend(kid:str) -> Type[bytes]:
     plt.savefig(img, format="png")
     img.seek(0)
     plt.close() # Not sure this is needed
-    return base64.b64encode(img.read())
+    image_file = await base64.b64encode(img.read())
+    return image_file
 
 
 async def subdomain_vvhf(request):
