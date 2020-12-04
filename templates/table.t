@@ -49,12 +49,12 @@
 {% block sector_1 %}
 {% for table in result_dict.keys() %}
 {% if only_one %}
-<div class="columns is-mobile is-centered is-vcentered">
+<div class="columns is-mobile is-centered is-gapless">
     <div class="column is-two-thirds">
-        <img src="data:image/png;base64,{{ trend_plot }}" style="width: 600px;height: 300px;" />
+        <img src="data:image/png;base64,{{ trend_plot }}" style="width: 600px;height: 300px;" class="is-pulled-right" />
     </div>
     <div class="column is-one-third">
-        <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 300px;" />
+        <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 300px;" class="is-pulled-left" />
     </div>
 </div>
 <div class="tile is-ancestor mt-4 pt-8">
