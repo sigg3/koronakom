@@ -161,8 +161,8 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     plt.savefig(img, format="png")
     img.seek(0)
     plt.close() # Not sure this is needed
-    return base64.b64encode(img.read())
-
+#    return base64.b64encode(img.read())
+    return base64.b64encode(img.getvalue())
 
 async def subdomain_vvhf(request):
     """
