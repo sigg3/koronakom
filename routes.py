@@ -159,7 +159,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     del df_kid['per_100k'] # don't need N just diff
 
     # debug control data
-    print(f"data control: df_kid = {df_kid}")
+    #print(f"data control: df_kid = {df_kid}")
 
     fig, ax = plt.subplots(figsize=(6,3))
     sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df_kid, linewidth=5)
@@ -169,7 +169,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
 
     # Get Norwegian labels for xtics datestamps
     xtic_lab = list(df_kid.to_dict()['dato'].values())
-    use_tic = [ xtic_lab[1], xtic_lab[-1] ] # samme som xtics_nor utgangspunkt
+    #use_tic = [ xtic_lab[1], xtic_lab[-1] ] # samme som xtics_nor utgangspunkt
 
 
     xtics_nor = [xtic_lab[1], xtic_lab[-1]] # note: on purpose, [0] is NaN
@@ -180,10 +180,10 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     ax.set_xticks([xtic_lab[0], xtic_lab[-2]])
 
 
-    print(f"xtics_nor: {xtics_nor}")
-    print(f"xtics_lab: {xtic_lab}")
-    print(f"lab slice: {xtic_lab[1]},{xtic_lab[-1]}")
-    print(f"use_tic: {use_tic}")
+    #print(f"xtics_nor: {xtics_nor}")
+    #print(f"xtics_lab: {xtic_lab}")
+    #print(f"lab slice: {xtic_lab[1]},{xtic_lab[-1]}")
+    #print(f"use_tic: {use_tic}")
 
     ax.set_xticklabels([xtics_nor[0], xtics_nor[1]])
 
@@ -191,6 +191,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
     plt.ylabel('')
     plt.xlabel('')
+    plt.title("Tilfeller per 100K per dag")
     fig.tight_layout()
     img = io.BytesIO()
     plt.savefig(img, format="png")
