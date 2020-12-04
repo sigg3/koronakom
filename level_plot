@@ -29,9 +29,11 @@ plt.ylabel("")
 #plt.title("2020-12-03")
 # Draw a thick red hline at y=0 that spans the xrange
 #pro100k = 137.07
-plt.title(pro100k)
+#plt.title(pro100k)
 #plt.axhline(linewidth=4, color='black', y=pro100k, xmin=0.1, xmax=0.9, linestyle='dashed', dash_capstyle='round')
-plt.axhline(linewidth=4, color='black', y=pro100k, xmin=0.1, xmax=0.9, linestyle='solid', dash_capstyle='round')
+
+#plt.axhline(linewidth=4, color='black', y=pro100k, xmin=0.1, xmax=0.9, linestyle='solid', dash_capstyle='round')
+plt.axhline(linewidth=3, color="black", y=pro100k, linestyle="solid", dash_capstyle="round")
 
 # solid_capstyle='round'
 ax.spines['right'].set_visible(False)
