@@ -152,14 +152,18 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     sns.despine(offset=5, trim=True, left=False)
 
     # Get xtics
-    xticklabels = list(df_kid.to_dict()['dato'].values())
-    xticklabels = xticklabels[::-4]
-    xticklabels.reverse()
+    xtic_lab = list(df_kid.to_dict()['dato'].values())
+    xtics_nor = [xtic_lab[0], xtic_lab[-1]]
+
+    xtic_lab = xticlab[::-4] # superfluous
+    xtic_lab.reverse()  # superfluous
+    xtics_nor.reverse() #
 
     # Norwegian labels for xtic labels
-    xticks = [ korona.norwegian_date(x, True) for x in xticklabels ]
-    xticks = [ x.replace(" 2020","").replace(" 2021","") for x in xticks ]
-    plt.xticks(xticks)
+    xtics_nor = [ korona.norwegian_date(x, True) for x in xtics_nor ]
+    xtics_nor = [ x.replace(" 2020","").replace(" 2021","") for x in xtics_nor ]
+
+    plt.xticks(xtics_nor)
     plt.yticks()
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
     plt.ylabel('')
