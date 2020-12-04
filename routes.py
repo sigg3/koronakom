@@ -104,6 +104,7 @@ def mini_plot_risk(pro100k:float) -> Type[bytes]:
     Returns matplotlib base64 encoded png as bytes
     Note: badly behaved async def, no awaits() ....
     """
+    pro100k = float(f"{pro100k:.2f}")
     calc_ylim = round(pro100k)+50
     if calc_ylim < 200: calc_ylim = 200
     fig, ax = plt.subplots()
@@ -116,7 +117,8 @@ def mini_plot_risk(pro100k:float) -> Type[bytes]:
     plt.xlabel("")
     plt.ylabel("")
     plt.title(pro100k)
-    plt.axhline(linewidth=4, color='black', y=pro100k, xmin=0.1, xmax=0.9, linestyle='solid', dash_capstyle='round')
+    # xmin=0.1, xmax=0.9,
+    plt.axhline(linewidth=4, color='black', y=pro100k, linestyle='solid', dash_capstyle='round')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
