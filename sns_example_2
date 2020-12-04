@@ -12,11 +12,11 @@ plt.legend(labels=['Kommune', 'Norge'])
 plt.xlabel('')
 plt.ylabel('')
 sns.set_theme(style="white")
-sns.set_context("talk", rc={"lines.linewidth":4})
+sns.set_context("talk")
 sns.despine(offset=10, trim=True, left=True)
 xticklabels = plot_data_pro['dato'][::-4]
 xticklabels.reverse()
 plt.xticks(xticklabels)
-plt.savefig("test_line4.png", format="png", bbox_inches="tight")
+#plt.savefig("test_line4.png", format="png", bbox_inches="tight")
 plt.show()
 
