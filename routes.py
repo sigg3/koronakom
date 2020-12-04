@@ -144,7 +144,7 @@ async def mini_plot_trend(kid:str) -> Type[bytes]:
     del df_kid['per_100k'] # don't need N just diff
 
     fig, ax = plt.subplots(figsize=(6,3))
-    await sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df_kid, linewidth=5)
+    sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df_kid, linewidth=5)
     sns.set_style("whitegrid")
     sns.set_context("talk")
     sns.despine(offset=5, trim=True, left=False)
