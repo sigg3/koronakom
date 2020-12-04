@@ -334,7 +334,7 @@ def subdomain_kommune(kid:str, request):
 
 
     # # DEBUG:
-    print(f"result_dict = {result_dict}")
+    print(f"data = {data}")
 
     # Build response dict
     response_dat.update(
