@@ -20,3 +20,37 @@ plt.xticks(xticklabels)
 #plt.savefig("test_line4.png", format="png", bbox_inches="tight")
 plt.show()
 
+
+
+
+
+# to add different lines just do more times
+plt.plot(x, np.sin(x))
+plt.plot(x, np.cos(x));
+
+
+
+fig, ax = plt.subplots()
+
+dates = list(D.keys())           # list() needed for python 3.x
+prices = list(D.values())        # ditto
+ax.plot_date(dates, prices, '-') # this will show date at the x-axis
+
+
+
+sns.lineplot(x='Year', y='value', hue='variable', 
+             data=pd.melt(data_preproc, ['Year']))
+
+sns.lineplot(x="Year", y="signal", hue="label", data=data_preproc)
+
+
+
+from numpy import nan
+
+sns.lineplot(x='Year', y='value', hue='variable', 
+             data=pd.melt(data_preproc, ['Year']))
+             
+             
+
+sns.lineplot(x="dato", y="value", hue="variable", data=pd.melt(df, ['dato']))
+
