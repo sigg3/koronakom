@@ -12,11 +12,16 @@ import app
 import httpx
 import html
 import pandas as pd
+from numpy import nan
 #import numpy as np
 import datetime
 from pandas.tseries.offsets import BDay
+import matplotlib.pyplot as plt
+import seaborn as sns
+import io
+import base64
 from typing import Tuple, Type
-import pickle
+import pickle # not in use here?
 from pathlib import Path
 from norway import Norway
 import korona
@@ -90,10 +95,76 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
 
     return (s, init_dict)
 
-#async def user(request):
-#    req = request.path_params['user_id']
-#    print(req)
-#    return PlainTextResponse(f"OK ?> requested = {req}")
+
+async def mini_plot_risk(pro100k:float) -> Type[bytes]:
+    """
+    Simple "gauge" type graphic, not really a plot.
+    Gives an impression of current risk level,
+    e.g. orange-close-to-green or close-to-red..
+    Returns matplotlib base64 encoded png as bytes
+    Note: badly behaved async def, no awaits() ....
+    """
+    calc_ylim = round(pro100k)+50
+    if calc_ylim < 200: calc_ylim = 200
+    fig, ax = plt.subplots()
+    ax.margins(0)
+    ax.axhspan(0,24.9, facecolor="green", alpha=0.5)
+    ax.axhspan(25,149.9, facecolor="orange", alpha=0.50)
+    ax.axhspan(150, 600, facecolor="red", alpha=0.5)
+    plt.xlim(0, 1)
+    plt.ylim(0, calc_ylim)
+    plt.xlabel("")
+    plt.ylabel("")
+    plt.title(pro100k)
+    plt.axhline(linewidth=4, color='black', y=pro100k, xmin=0.1, xmax=0.9, linestyle='solid', dash_capstyle='round')
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_position(('outward', 10))
+    fig.set_size_inches(2,2)
+    plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+    fig.tight_layout()
+    img = io.BytesIO()
+    plt.savefig(img, format="png")
+    img.seek(0)
+    plt.close() # Not sure this is needed
+    image_file = await base64.b64encode(img.read())
+    return image_file
+
+
+async def mini_plot_trend(kid:str) -> Type[bytes]:
+    """
+    Small lineplot to depict 14-day development
+    x-axis is date, and y diff cases per 100k
+    Returns matplotlib/seaborn base64 encoded png as bytes
+    """
+    df_kid = pd.DataFrame(korona.app_get_plotdata(kid, 2))
+    #df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
+    df_kid['diff_kom'] = df_kid["per_100k"].diff()
+    #df_kid['diff_nor'] = df_nor["per_100k"].diff()
+    del df['per_100k'] # don't need N just diff
+
+    fig, ax = plt.subplots(figsize=(6,3))
+    sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df, linewidth=5)
+    sns.set_style("whitegrid")
+    sns.set_context("talk")
+    sns.despine(offset=5, trim=True, left=False)
+    xticklabels = list(df.to_dict()['dato'].values())
+    xticklabels = xticklabels[::-4]
+    xticklabels.reverse()
+    plt.xticks(xticklabels)
+    plt.yticks()
+    plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
+    plt.ylabel('')
+    plt.xlabel('')
+    fig.tight_layout()
+    img = io.BytesIO()
+    plt.savefig(img, format="png")
+    img.seek(0)
+    plt.close() # Not sure this is needed
+    image_file = await base64.b64encode(img.read())
+    return image_file
+
 
 async def subdomain_vvhf(request):
     """
@@ -309,6 +380,12 @@ def subdomain_kommune(kid:str, request):
     mini_dict = data[list(data.keys())[0]]
     _kingdom = data.pop('0000')
 
+    # Get plot data dictionary
+    # Fetches base64 encoded bytestring of plot images
+    diff_pro100k = data[kid]['diff_100k'][0] # reelvant for risk
+    trend_plot = await mini_plot_trend(kid)
+    level_plot = await mini_plot_risk(diff_pro100k)
+
     # Set strings
     hero_title = mini_dict['name']
     head_title = f"Korona-status for {hero_title}"
@@ -330,6 +407,8 @@ def subdomain_kommune(kid:str, request):
                     "hero_subtitle": hero_subtitle,
                     "skipped_items": skipped_items,
                     "result_dict": data,
+                    "trend_plot": trend_plot,
+                    "level_plot": level_plot,
                     "only_one": True,
                     "exactly_two": False,
                     "green_orange_red": []
