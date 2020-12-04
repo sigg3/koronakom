@@ -117,14 +117,27 @@ def mini_plot_risk(pro100k:float) -> Type[bytes]:
     plt.xlabel("")
     plt.ylabel("")
     #plt.title(pro100k)
-    # xmin=0.1, xmax=0.9,
-    plt.axhline(linewidth=3, color="black", y=pro100k, linestyle="solid", dash_capstyle="round")
+    plt.axhline(
+        linewidth=3,
+        color="black",
+        y=pro100k,
+        xmin=0.05,
+        xmax=0.95,
+        linestyle="solid",
+        dash_capstyle="round"
+    )
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_position(('outward', 10))
     fig.set_size_inches(2,2)
-    plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+    plt.tick_params(
+        axis='x',
+        which='both',
+        bottom=False,
+        top=False,
+        labelbottom=False
+    )
     fig.tight_layout()
     img = io.BytesIO()
     plt.savefig(img, format="png")
@@ -154,7 +167,6 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     # Get xtics
     xtic_lab = list(df_kid.to_dict()['dato'].values())
     xtics_nor = [xtic_lab[0], xtic_lab[-1]]
-
     #xtic_lab = xtic_lab[::-4] # superfluous
     #xtic_lab.reverse()  # superfluous
     xtics_nor.reverse() #
@@ -163,7 +175,10 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     xtics_nor = [ korona.norwegian_date(x, True) for x in xtics_nor ]
     xtics_nor = [ x.replace(" 2020","").replace(" 2021","") for x in xtics_nor ]
 
-    plt.xticks(xtics_nor)
+    ax.set_xticks([xtic_lab[0], xtic_lab[-1]])
+    ax.set_xticklabels(xtics_nor)
+
+    #plt.xticks(xtics_nor)
     plt.yticks()
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
     plt.ylabel('')
