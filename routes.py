@@ -309,19 +309,6 @@ def subdomain_kommune(kid:str, request):
     mini_dict = data[list(data.keys())[0]]
     _kingdom = data.pop('0000')
 
-    # Get plot data dictionary
-    #plot_data_n =  await korona.app_get_plotdata(kid, 0)
-    #plot_data_pro = await korona.app_get_plotdata(kid, 2)
-    #plot_data_n =  korona.app_get_plotdata(kid, 0)
-    df_kid = pd.DataFrame(korona.app_get_plotdata(kid, 2))
-    df_nor = pd.DataFrame(korona.app_get_plotdata('0000', 2))
-    df_kid['diff_k'] = df_kid["per_100k"].diff()
-    df_kid['diff_n'] = df_nor["per_100k"].diff()
-    #df_kid['per_100k_n'] = df_nor["per_100k"]
-
-    # DEBUG
-    #print(f"df_kid = {df_kid.to_dict()}")
-
     # Set strings
     hero_title = mini_dict['name']
     head_title = f"Korona-status for {hero_title}"
@@ -331,10 +318,6 @@ def subdomain_kommune(kid:str, request):
     if subtitle:
         hero_subtitle = mini_dict['alt']
     response_dat['hero_link'] = hero_link
-
-
-    # # DEBUG:
-    print(f"data = {data}")
 
     # Build response dict
     response_dat.update(
