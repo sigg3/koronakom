@@ -131,7 +131,7 @@ def mini_plot_risk(pro100k:float) -> Type[bytes]:
     ax.spines['top'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_position(('outward', 10))
-    fig.set_size_inches(2,2)
+    fig.set_size_inches(2,3)
     plt.tick_params(
         axis='x',
         which='both',

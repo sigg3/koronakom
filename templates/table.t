@@ -125,7 +125,7 @@
     </div>
     <div class="column is-half has-text-left">
         <figure class="image is-pulled-left">
-            <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 200px;">
+            <img src="data:image/png;base64,{{ level_plot }}" style="width: 200px;height: 300px;">
         </figure>
     </div>
 </div>
