@@ -178,7 +178,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     xtics_nor = [ korona.norwegian_date(x, True) for x in xtics_nor ]
     xtics_nor = [ x.replace(" 2020","").replace(" 2021","") for x in xtics_nor ]
     ax.set_xticks([xtic_lab[0], xtic_lab[-2]])
-    #ax.set_xticklabels(["", xtics_nor[0], xtics_nor[1]])
+    ax.set_xticklabels([xtics_nor])
 
     print(f"xtics_nor: {xtics_nor}")
     print(f"xtics_lab: {xtic_lab}")
