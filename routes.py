@@ -1038,11 +1038,10 @@ async def muncip_or_county(request, key:str):
 
 
 async def fylke(request):
-    return muncip_or_county(request, 'fylke')
+    await muncip_or_county(request, 'fylke')
 
 async def kommune(request):
-    print(request.params.items())
-    return muncip_or_county(request, 'kom')
+    await muncip_or_county(request, 'kom')
 
 #@app.routes('/testing', methods=['POST'])
 #async def ipn_post(request):
