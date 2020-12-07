@@ -135,7 +135,7 @@
                     <input name="s" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                 </p>
                 <p class="control is-hidden-tablet"><!-- mobile -->
-                    &nbsp;<input name="s" class="input" type="text" size="24" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
+                    <input name="s" class="input" type="text" size="28" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                 </p>
                 <p class="control is-hidden-mobile">
                     <button type="submit" class="button is-large is-primary">S&oslash;k</button>
