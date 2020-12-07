@@ -160,7 +160,7 @@ site_main = Router(
 #        Route('/egen', utvalg_egen), # TODO remove
         Route('/om', om_tjenesten),
         Route('/f/{fylke}', fylke), # TODO remove
-        Route('/k/{kom}', kommune), # TODO remove
+        Route('/k/{kom}', muncip_or_county('kom')), # TODO remove
         Mount('/css', StaticFiles(directory="static"), name="css")
         ]
 )
