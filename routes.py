@@ -1028,15 +1028,13 @@ async def endre_spraak(request):
 
 async def kom_fylk(request):
     """ Deals with legacy /k or /f requests """
-    print(request.path_params)
     try:
-        key = request.path_params.values()[0]
+        key = list(request.path_params.values())[0]
     except:
         re_url = "hjelp"
     else:
         re_url = f"?s={key}"
     finally:
-        print(f"redir-to={re_url}")
         url = "https://sjekk.kommune.nu"
         RedirectResponse(url=f"{url}/{re_url}")
 
