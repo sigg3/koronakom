@@ -130,12 +130,20 @@
     <div class="container pl-1 pr-1">
         <div class="columns is-centered">
            <form action="https://sjekk.kommune.nu/" method="get">
-            <div class="field has-addons pt-3">
+            <div class="field has-addons is-hidden-mobile pt-3"> <!-- desktop -->
                 <p class="control">
                     <input name="s" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                 </p>
                 <p class="control">
                     <button type="submit" class="button is-large is-primary">S&oslash;k</button>
+                </p>
+            </div>
+            <div class="field has-addons is-hidden-tablet pt-3"><!-- mobile  -->
+                <p class="control">
+                    <input name="s" class="input" type="text" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
+                </p>
+                <p class="control">
+                    <button type="submit" class="button is-primary">S&oslash;k</button>
                 </p>
             </div>
            </form>
