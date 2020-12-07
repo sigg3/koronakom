@@ -2,6 +2,9 @@
 <html lang="{{ html_lang_setting }}">
 <head>
     <meta charset="utf-8">
+    <meta name="description" content="Oppslagstjeneste for å enkelt sjekke gjeldende korona status i din kommune, ditt fylke eller landet forøvrig.">
+    <meta name="keywords" content="korona, covid-19, corona, korona-tall, korona-statisikk, korona i norge, norge, kommuner, fylker, statistikk, folkehelseinstituttet">
+    <meta name="author" content="Sigbjørn Smelror">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ head_title }}</title>
     <link rel="stylesheet" href="/css/bulma.min.css">
