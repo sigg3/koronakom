@@ -1041,6 +1041,8 @@ async def fylke(request):
     await muncip_or_county(request, 'fylke')
 
 async def kommune(request):
+    print("got to kommune()")
+    print(request.path_params.items())
     await muncip_or_county(request, 'kom')
 
 #@app.routes('/testing', methods=['POST'])
