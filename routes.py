@@ -1041,6 +1041,7 @@ async def fylke(request):
     return muncip_or_county(request, 'fylke')
 
 async def kommune(request):
+    print(request.params.items())
     return muncip_or_county(request, 'kom')
 
 #@app.routes('/testing', methods=['POST'])
