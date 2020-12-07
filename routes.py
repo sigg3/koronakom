@@ -212,7 +212,7 @@ async def subdomain_vvhf(request):
 
     # push css (http2/http3)
     await request.send_push_promise("/css")
-    
+
     if request.method == "POST":
         return PlainTextResponse("post to VVHF")
     else:
@@ -439,7 +439,7 @@ def subdomain_kommune(kid:str, request):
     head_title = f"Korona-status for {hero_title}"
     hero_link = mini_dict['url']
     subtitle = mini_dict['alt']
-    hero_subtitle = "Tall for din kommune "
+    hero_subtitle = "Tall for din kommune"
     if subtitle:
         hero_subtitle = mini_dict['alt']
     response_dat['hero_link'] = hero_link
