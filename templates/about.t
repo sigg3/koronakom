@@ -27,11 +27,11 @@
         <h2 class="title">Teknisk og juridisk</h2>
         <p>Denne websiden eller &laquo;appen&raquo; best&aring;r hovedsaklig av <strong>Python 3</strong> skrevet av undertegnede, og som leveres v.h.a. <strong><a href="https://www.starlette.io" title="Starlette">Starlette</a></strong> med <strong><a href="https://jinja.palletsprojects.com/en/2.11.x/" title="Jinja">jinja2</a></strong> maler og <strong><a href="https://bulma.io/" title="Bulma CSS">Bulma CSS</a></strong>. <span class="tag is-warning">Det finnes ikke JavaScript på siden.</span></p>
         <p>Kildekoden er <strong><a href="https://www.gnu.org/philosophy/free-sw.html" title="What is Free Software?">fri programvare</a></strong> og distribueres under <a href="https://www.gnu.org/licenses/agpl-3.0.html" title="GNU Affero License 3.0"><span class="tag is-light is-medium">GNU Affero License</span></a> versjon 3. Med andre ord: ikke skyld på meg hvis det ikke virker, men <a href="https://github.com/sigg3/koronakom/issues" title="github issues">gi meg gjerne beskjed</a>!
-        <div class="container has-text-centered">
-            <div class="tags has-addons has-text-centered">
-                <span class="tag">github</span>
-                <span class="tag is-primary"><a href="https://github.com/sigg3/koronakom" title="Koronakom på Github" class="has-text-white">koronakom</a></span>
-            </div>
+    </div>
+    <div class="container has-text-centered">
+        <div class="tags has-addons has-text-centered">
+            <span class="tag">github</span>
+            <span class="tag is-primary"><a href="https://github.com/sigg3/koronakom" title="Koronakom på Github" class="has-text-white">koronakom</a></span>
         </div>
     </div>
 </section>
