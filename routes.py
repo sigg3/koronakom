@@ -1033,10 +1033,10 @@ async def kom_fylk(request):
     try:
         uinput = html.escape(request.path_params[key])
     except:
-        url=""
+        url = ""
     else:
         fetch_item = await find_muncipality_in(uinput)
-        url=f"?sok={fetch_item}"
+        url = f"?sok={fetch_item}"
     finally:
         search_url = f"https://sjekk.kommune.nu/{url}"
         return RedirectResponse(url=search_url)
