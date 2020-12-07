@@ -306,7 +306,7 @@ async def find_muncipality_in(req: str) -> str:
     s, _ = get_template_vars()
 
     # # DEBUG:
-    print("inside find_muncipality_in()")
+    #print("inside find_muncipality_in()")
 
     # check string against norway data
     fetch_id = s.norge.id_from_url.get(req, None)
@@ -1035,6 +1035,7 @@ async def kom_fylk(request):
     else:
         re_url = f"?s={key}"
     finally:
+        print(f"redir-to={re_url}")
         url = "https://sjekk.kommune.nu"
         RedirectResponse(url=f"{url}/{re_url}")
 
