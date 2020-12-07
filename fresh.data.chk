@@ -1,0 +1,19 @@
+# Need this file to check state of page. It contains a tuple showing:
+# 0 = Up-to-date
+# 1 = Stale (viz. it SHOULD have been updated, perhaps something happened)
+# 2 = NA, NA, NA (all values are NA)
+#
+# and
+# 
+# date of data in
+# last business day or "NA"
+#
+# e.g.
+# (1, 2020-12-0
+# (2, NA) = restart dyno
+
+
+## Alternatively,
+# When any user calls the frontpage, setup a background task to check the
+# page content and restart if necessary.
+# However ==> 4 secs downtime. Perhaps make a sync version to httpx faster.
