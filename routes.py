@@ -1026,21 +1026,14 @@ async def endre_spraak(request):
 async def kom_fylk(request):
     """ Deals with legacy /k or /f requests """
     try:
-        key = request.path_params.keys()[0]
+        key = request.path_params.values()[0]
     except:
-        key = "kom"
-
-    try:
-        uinput = html.escape(request.path_params[key])
-    except:
-        url = ""
+        re_url = "hjelp"
     else:
-        fetch_item = await find_muncipality_in(uinput)
-        url = f"?sok={fetch_item}"
+        re_url = f"?s={key}"
     finally:
-        search_url = f"https://sjekk.kommune.nu/{url}"
-        return RedirectResponse(url=search_url)
-
+        url = "https://sjekk.kommune.nu"
+        RedirectResponse(url=f"{url}/{re_url}")
 
 #@app.routes('/testing', methods=['POST'])
 #async def ipn_post(request):
