@@ -5,6 +5,8 @@ from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
+from starlette.middleware.cors import CORSMiddleware
+
 #from starlette.endpoints import HTTPEndpoint
 #from starlette.responses import PlainTextResponse
 #from starlette.requests import Request
@@ -76,7 +78,8 @@ middleware = [
 #                                              '*.localhost'
                                               ]
             ),
-    Middleware(HTTPSRedirectMiddleware)
+    Middleware(HTTPSRedirectMiddleware),
+    Middleware(CORSMiddleware, allow_origins_regex='https://.*\.kommune\.nu')
 ]
 
 
