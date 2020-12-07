@@ -1,12 +1,5 @@
 {% extends "base.template" %}
 
-{% block menu %}
-  <div class="level-right ">
-    <p class="level-item"><a href="https://din.kommune.nu" title="Hjem" class="button is-primary">Hjem</a></p>
-    <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Utvalg" alt="Lag eget utvalg" class="button is-primary"><strong>Sp&oslash;rring</strong></a></p>
-    <p class="level-item"><a href="https://din.kommune.nu/om" title="Om tjenesten" alt="Om tjenesten" class="button is-primary">Om tjenesten</a></p>
-  </div>
-{% endblock %}
   
 <div class="block">&nbsp;</div>
 
