@@ -209,6 +209,10 @@ async def subdomain_vvhf(request):
     Vestre Viken HF subdomene
     Relies on selections from custom_queries attr in Session object
     """
+
+    # push css (http2/http3)
+    await request.send_push_promise("/css")
+    
     if request.method == "POST":
         return PlainTextResponse("post to VVHF")
     else:
@@ -295,6 +299,9 @@ async def subdomain_parser(request):
     #print("in subdomain_parser")
     # Get korona.Session object "s"
     s, response_dat = get_template_vars()
+
+    # push css (http2/http3)
+    await request.send_push_promise("/css")
 
     # grab string from subdomain
     full_url = str(request.url)
@@ -467,6 +474,8 @@ async def hjem(request):
     # fetch minimal data
     s, response_dat = get_template_vars()
     today = s.datapoints[0]
+
+    await request.send_push_promise("/css")
 
     # check subdomain
     # full_url = str(request.url)
@@ -773,7 +782,7 @@ async def om_tjenesten(request):
     #print(test)
     #print(request.url)
 
-    await request.send_push_promise("/css") # testing
+    await request.send_push_promise("/css")
 
     subtitle = "Kjapp oversikt med tall fra FHI"
     s, response_dat = get_template_vars()
