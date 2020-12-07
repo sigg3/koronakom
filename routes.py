@@ -773,6 +773,8 @@ async def om_tjenesten(request):
     #print(test)
     #print(request.url)
 
+    await request.send_push_promise("/css") # testing
+
     subtitle = "Kjapp oversikt med tall fra FHI"
     s, response_dat = get_template_vars()
     response_dat.update(
