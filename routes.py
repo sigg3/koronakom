@@ -1035,9 +1035,8 @@ async def kom_fylk(request):
     else:
         re_url = f"?s={key}"
     finally:
-        print(f"redir-to={re_url}")
         url = "https://sjekk.kommune.nu"
-        RedirectResponse(url=f"{url}/{re_url}")
+        return RedirectResponse(url=f"{url}/{re_url}")
 
 #@app.routes('/testing', methods=['POST'])
 #async def ipn_post(request):
