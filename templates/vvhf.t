@@ -35,7 +35,7 @@
                 <tr>
                     <td class="border: 0;" colspan="5">
                         <div class="block">&nbsp;</div>
-                        <span class="is-size-3 has-text-black"><a href="https://{{ result_dict[table]['url'] }}" title="{{ result_dict[table]['name'] }} kommune">{{ result_dict[table]['name'] }}</a></span>
+                        <span class="is-size-3"><a href="https://{{ result_dict[table]['url'] }}" title="{{ result_dict[table]['name'] }} kommune" class="has-text-black">{{ result_dict[table]['name'] }}</a></span>
                     </td>
                 </tr>
                 {% if result_dict[table]['risk'] == 0 %}
