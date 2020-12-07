@@ -151,6 +151,7 @@ app = Starlette(
 site_main = Router(
      routes=[
         Route('/', hjem, name="homepage"),
+        Route('/robots.txt', robots_txt),
 #        Route('/sok/{sok:path}', fritekst),
         Route('/lang/{set_lang}', endre_spraak),
 #        Route('/utvalg', utvalg), # TODO remove
@@ -169,6 +170,7 @@ site_search = Router(
 #        Route('/', utvalg_hjelp, methods=["GET"]),
 #        Route('/{s:path}', fritekst, methods=["POST"])),
         Route('/', search_parser, methods=["GET", "POST"]),
+        Route('/robots.txt', robots_txt),
         Route('/hjelp', utvalg_hjelp),
         Route('/utvalg', utvalg, methods=["GET", "POST"]),
         Route('/fylker', utvalg_fylker, methods=["GET", "POST"]),
@@ -180,6 +182,7 @@ site_search = Router(
 site_subdomains = Router(
     routes=[
         Route('/', subdomain_parser, name="sub"),
+        Route('/robots.txt', robots_txt),
         Mount('/css', StaticFiles(directory="static"), name="css")
         ]
 )
@@ -187,6 +190,7 @@ site_subdomains = Router(
 site_vvhf = Router(
     routes=[
         Route('/', subdomain_vvhf),
+        Route('/robots.txt', norobots_txt),
         Mount('/css', StaticFiles(directory="static"), name="css")
         ]
 )
