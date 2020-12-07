@@ -1028,6 +1028,7 @@ async def endre_spraak(request):
 
 async def kom_fylk(request):
     """ Deals with legacy /k or /f requests """
+    print(request.path_params)
     try:
         key = request.path_params.values()[0]
     except:
