@@ -159,7 +159,7 @@ site_main = Router(
 #        Route('/fylker', utvalg_fylker, methods=["GET", "POST"]), # TODO remove
 #        Route('/egen', utvalg_egen), # TODO remove
         Route('/om', om_tjenesten),
-        Route('/f/{fylke}', fylke), # TODO remove
+        Route('/f/{fylke}', muncip_or_county('fylke')), # TODO remove
         Route('/k/{kom}', muncip_or_county('kom')), # TODO remove
         Mount('/css', StaticFiles(directory="static"), name="css")
         ]
@@ -175,8 +175,8 @@ site_search = Router(
         Route('/utvalg', utvalg, methods=["GET", "POST"]),
         Route('/fylker', utvalg_fylker, methods=["GET", "POST"]),
         Route('/egen', utvalg_egen),
-        Route('/f/{fylke}', fylke), # TODO remove
-        Route('/k/{kom}', kommune), # TODO remove
+        Route('/f/{fylke}', muncip_or_county('fylke')), # TODO remove
+        Route('/k/{kom}', muncip_or_county('kom')), # TODO remove
         Mount('/css', StaticFiles(directory="static"), name="css")
         ]
 )

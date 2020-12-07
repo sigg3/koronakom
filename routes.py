@@ -1037,13 +1037,6 @@ async def muncip_or_county(request, key:str):
         return RedirectResponse(url=search_url)
 
 
-async def fylke(request):
-    await muncip_or_county(request, 'fylke')
-
-async def kommune(request):
-    print(request.path_params.items())
-    await muncip_or_county(request, 'kom')
-
 #@app.routes('/testing', methods=['POST'])
 #async def ipn_post(request):
 #    print('hi')
