@@ -1023,7 +1023,7 @@ async def endre_spraak(request):
     #return PlainTextResponse(f"OK ?> requested = {lang_req}") # debug
 
 
-async def muncip_or_county(request, key:str):
+async def kom_fylk(request, key:str):
     """ Deals with /k or /f requests """
     try:
         uinput = html.escape(request.path_params[key])
