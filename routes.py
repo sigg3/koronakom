@@ -305,6 +305,9 @@ async def find_muncipality_in(req: str) -> str:
     """
     s, _ = get_template_vars()
 
+    # # DEBUG:
+    print("inside find_muncipality_in()")
+
     # check string against norway data
     fetch_id = s.norge.id_from_url.get(req, None)
 
