@@ -299,6 +299,34 @@ async def subdomain_vvhf(request):
         return templates.TemplateResponse('vvhf.t', response_dat)
 
 
+async def find_muncipality_in(req: str) -> str:
+    """
+    Test GET string for actionable requests
+    """
+    s, _ = get_template_vars()
+
+    # check string against norway data
+    fetch_id = s.norge.id_from_url.get(req, None)
+
+    # if no hits, traverse options
+    if fetch_id is None:
+        input_category = req.split(sep="-")
+        if len(input_category) == 1:
+            return req
+        elif "-fylke" in req:
+            return req
+        else:
+            # two or more words: conjunctive or name containing dash
+            if len(input_category) > 2:
+                a, b, *c = req.split(sep="-")
+                return f"{a.capitalize()} og {c[0].capitalize()}"
+            else:
+                a, *b = req.split(sep="-")
+                return f"{a.capitalize()}-{b[0].capitalize()}"
+    else:
+        return fetch_id
+
+
 async def subdomain_parser(request):
     """
     Internal route for different subdomains
@@ -317,26 +345,28 @@ async def subdomain_parser(request):
     full_url = str(request.url)
     subdomain = full_url.split(sep="//")[1].split(sep=".")[0].lower()
 
-    # check string against norway data
-    fetch_id = s.norge.id_from_url.get(subdomain, None)
+    # # check string against norway data
+    # fetch_id = s.norge.id_from_url.get(subdomain, None)
+    #
+    # # if no hits, traverse options
+    # if fetch_id is None:
+    #     input_category = subdomain.split(sep="-")
+    #     if len(input_category) == 1:
+    #         fetch_item = subdomain
+    #     elif "-fylke" in subdomain:
+    #         fetch_item = subdomain
+    #     else:
+    #         # two or more words: conjunctive or name containing dash
+    #         if len(input_category) > 2:
+    #             a, b, *c = subdomain.split(sep="-")
+    #             fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
+    #         else:
+    #             a, *b = subdomain.split(sep="-")
+    #             fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
+    # else:
+    #     fetch_item = fetch_id
 
-    # if no hits, traverse options
-    if fetch_id is None:
-        input_category = subdomain.split(sep="-")
-        if len(input_category) == 1:
-            fetch_item = subdomain
-        elif "-fylke" in subdomain:
-            fetch_item = subdomain
-        else:
-            # two or more words: conjunctive or name containing dash
-            if len(input_category) > 2:
-                a, b, *c = subdomain.split(sep="-")
-                fetch_item = f"{a.capitalize()} og {c[0].capitalize()}"
-            else:
-                a, *b = subdomain.split(sep="-")
-                fetch_item = f"{a.capitalize()}-{b[0].capitalize()}"
-    else:
-        fetch_item = fetch_id
+    fetch_item = await find_muncipality_in(subdomain)
 
     # Get the deets
     items, item_type = korona.app_get_items([fetch_item])
@@ -355,6 +385,9 @@ async def subdomain_parser(request):
             return RedirectResponse(url=f'{search_url}={items[0]}')
     elif item_type == 1:
         return subdomain_fylke(items, subdomain, request) # ???
+    else:
+        search_url = "https://sjekk.kommune.nu/"
+        return RedirectResponse(url=f"{search_url}")
 
 
 
