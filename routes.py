@@ -1023,8 +1023,13 @@ async def endre_spraak(request):
     #return PlainTextResponse(f"OK ?> requested = {lang_req}") # debug
 
 
-async def kom_fylk(request, key:str):
-    """ Deals with /k or /f requests """
+async def kom_fylk(request):
+    """ Deals with legacy /k or /f requests """
+    try:
+        key = request.path_params.keys()[0]
+    except:
+        key = "kom"
+
     try:
         uinput = html.escape(request.path_params[key])
     except:
