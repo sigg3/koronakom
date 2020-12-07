@@ -40,6 +40,7 @@ try:
 except:
     user_lang = LanguageTracker()
 
+
 # Template languages
 def get_language_settings() -> Tuple[LanguageTracker, list, str, int]:
     """
@@ -90,7 +91,8 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
                  "hero_subtitle": "Dagsaktuelle tall for ditt hjemsted",
                  "html_lang": lang,
                  "lang_selector": selector,
-                 "languages": langs
+                 "languages": langs,
+                 "menu_selected": 0 # 1 = hjem, 2=sp, 3=om
                  }
 
     return (s, init_dict)
@@ -521,7 +523,12 @@ async def hjem(request):
             response_dat.update(s.book['ro']['0000'][today])
 
     # construct rest of index vars
-    response_dat.update({"request": request})
+    response_dat.update(
+        {
+            "request": request,
+            "menu_selected": 1 # 1 = hjem, 2=sp, 3=om
+        }
+    )
 
     # Return index template with vars
     return templates.TemplateResponse('index.t', response_dat)
@@ -562,7 +569,8 @@ async def search_parser(request):
                     "hero_subtitle": "Velg hvilke kommuner du vil se",
                     "hero_link": "sjekk.kommune.nu/utvalg",
                     "fylker": big_list,
-                    "utvalg": 0
+                    "utvalg": 0,
+                    "menu_selected": 2 # 1 = hjem, 2=sp, 3=om
                 }
             )
     return templates.TemplateResponse('utvalg.t', response_dat)
@@ -740,6 +748,7 @@ def fritekst(request):
                         "result_dict": data,
                         "only_one": only_one,
                         "exactly_two": exactly_two,
+                        "menu_selected": 2, # 1 = hjem, 2=sp, 3=om
                         "green_orange_red": []
                         }
         )
@@ -774,6 +783,7 @@ async def om_tjenesten(request):
             "hero_title": "Om kommune.nu",
             "hero_isurl": False,
             "hero_subtitle": subtitle,
+            "menu_selected": 3 # 1 = hjem, 2=sp, 3=om
         }
     )
     return templates.TemplateResponse('about.t', response_dat)
@@ -808,7 +818,8 @@ async def utvalg(request):
                 "hero_subtitle": "Velg hvilke kommuner du vil se",
                 "hero_link": "sjekk.kommune.nu/utvalg",
                 "fylker": big_list,
-                "utvalg": 0
+                "utvalg": 0,
+                "menu_selected": 2 # 1 = hjem, 2=sp, 3=om
             }
     )
     return templates.TemplateResponse('utvalg.t', response_dat)
@@ -871,6 +882,7 @@ async def utvalg_fylker(request):
                 "hero_subtitle": "Velg hvilke fylker du vil sjekke",
                 "hero_link": "sjekk.kommune.nu/fylker",
                 "fylker": big_list,
+                "menu_selected": 2, # 1 = hjem, 2=sp, 3=om
                 "utvalg": 1
             }
         )
@@ -887,6 +899,7 @@ async def utvalg_hjelp(request):
             "hero_isurl": True,
             "hero_subtitle": "Hjelp til spørring",
             "hero_link": "sjekk.kommune.nu/hjelp",
+            "menu_selected": 2, # 1 = hjem, 2=sp, 3=om
             "utvalg": 3
         }
     )
@@ -919,6 +932,7 @@ async def utvalg_egen(request):
             "hero_subtitle": "Egendefinerte spørringer",
             "hero_link": "sjekk.kommune.nu/egen",
             "fylker": big_list,
+            "menu_selected": 2, # 1 = hjem, 2=sp, 3=om
             "utvalg": 2
         }
     )
