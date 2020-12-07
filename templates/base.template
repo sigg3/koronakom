@@ -134,8 +134,8 @@
                 <p class="control is-hidden-mobile"><!-- desktop -->
                     <input name="s" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                 </p>
-                <p class="control ml-2 is-hidden-tablet"><!-- mobile -->
-                    <input name="s" class="input" type="text" size="26" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
+                <p class="control is-hidden-tablet"><!-- mobile -->
+                    &nbsp;<input name="s" class="input" type="text" size="27" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                 </p>
                 <p class="control is-hidden-mobile">
                     <button type="submit" class="button is-large is-primary">S&oslash;k</button>
