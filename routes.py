@@ -1023,28 +1023,25 @@ async def endre_spraak(request):
     #return PlainTextResponse(f"OK ?> requested = {lang_req}") # debug
 
 
-async def fylke(request):
-    """ Let the norge.lookup method do the job """
+async def muncip_or_county(request, key:str):
+    """ Deals with /k or /f requests """
     try:
-        uinput = html.escape(request.path_params['fylke'])
+        uinput = html.escape(request.path_params[key])
     except:
-        return RedirectResponse(url='https://sjekk.kommune.nu/')
+        url=""
     else:
-        search_url = "https://sjekk.kommune.nu/?sok"
-        return RedirectResponse(url=f"{search_url}={uinput}")
+        fetch_item = await find_muncipality_in(uinput)
+        url=f"?sok={fetch_item}"
+    finally:
+        search_url = f"https://sjekk.kommune.nu/{url}"
+        return RedirectResponse(url=search_url)
 
+
+async def fylke(request):
+    return muncip_or_county(request, 'fylke')
 
 async def kommune(request):
-    """ Let the norge.lookup method do the job """
-    print(f"received {request.keys()}")
-    try:
-        uinput = html.escape(request.path_params['kom'])
-    except:
-        return RedirectResponse(url='https://sjekk.kommune.nu/')
-    else:
-        search_url = "https://sjekk.kommune.nu/?sok"
-        return RedirectResponse(url=f"{search_url}={uinput}")
-
+    return muncip_or_county(request, 'kom')
 
 #@app.routes('/testing', methods=['POST'])
 #async def ipn_post(request):
