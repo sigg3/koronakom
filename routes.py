@@ -98,14 +98,14 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
     return (s, init_dict)
 
 
+async def robots_txt(request):
+    """ simple robots.txt file """
+    return PlainTextResponse("User-agent: * Disallow:")
+
+
 async def norobots_txt(request):
     """ simple deny-all robots.txt file """
     return PlainTextResponse("User-agent: * Disallow: /")
-
-
-async def robotx_txt(request):
-    """ simple robots.txt file """
-    return PlainTextResponse("User-agent: * Disallow:")
 
 
 def mini_plot_risk(pro100k:float) -> Type[bytes]:
