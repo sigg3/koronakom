@@ -995,7 +995,7 @@ async def fylke(request):
     try:
         uinput = html.escape(request.path_params['fylke'])
     except:
-        return RedirectResponse(url='/')
+        return RedirectResponse(url='https://sjekk.kommune.nu/')
     else:
         search_url = "https://sjekk.kommune.nu/?sok"
         return RedirectResponse(url=f"{search_url}={uinput}")
@@ -1007,7 +1007,7 @@ async def kommune(request):
     try:
         uinput = html.escape(request.path_params['kom'])
     except:
-        return RedirectResponse(url='/')
+        return RedirectResponse(url='https://sjekk.kommune.nu/')
     else:
         search_url = "https://sjekk.kommune.nu/?sok"
         return RedirectResponse(url=f"{search_url}={uinput}")
