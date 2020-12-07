@@ -175,6 +175,8 @@ site_search = Router(
         Route('/utvalg', utvalg, methods=["GET", "POST"]),
         Route('/fylker', utvalg_fylker, methods=["GET", "POST"]),
         Route('/egen', utvalg_egen),
+        Route('/f/{fylke}', fylke), # TODO remove
+        Route('/k/{kom}', kommune), # TODO remove
         Mount('/css', StaticFiles(directory="static"), name="css")
         ]
 )
