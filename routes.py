@@ -221,7 +221,7 @@ async def subdomain_vvhf(request):
     """
 
     # push css (http2/http3)
-    await request.send_push_promise("/css")
+    await request.send_push_promise("/css/bulma.min.css")
 
     if request.method == "POST":
         return PlainTextResponse("post to VVHF")
@@ -311,7 +311,7 @@ async def subdomain_parser(request):
     s, response_dat = get_template_vars()
 
     # push css (http2/http3)
-    await request.send_push_promise("/css")
+    await request.send_push_promise("/css/bulma.min.css")
 
     # grab string from subdomain
     full_url = str(request.url)
@@ -485,7 +485,7 @@ async def hjem(request):
     s, response_dat = get_template_vars()
     today = s.datapoints[0]
 
-    await request.send_push_promise("/css")
+    await request.send_push_promise("/css/bulma.min.css")
 
     # check subdomain
     # full_url = str(request.url)
@@ -792,7 +792,7 @@ async def om_tjenesten(request):
     #print(test)
     #print(request.url)
 
-    await request.send_push_promise("/css")
+    await request.send_push_promise("/css/bulma.min.css")
 
     subtitle = "Kjapp oversikt med tall fra FHI"
     s, response_dat = get_template_vars()
