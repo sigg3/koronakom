@@ -79,7 +79,9 @@ middleware = [
                                               ]
             ),
     Middleware(HTTPSRedirectMiddleware),
-    Middleware(CORSMiddleware, allow_origins_regex='https://.*\.kommune\.nu')
+    Middleware(CORSMiddleware,
+               allow_origin_regex='https://.*\.kommune\.nu',
+               allow_methods=['*'])
 ]
 
 
