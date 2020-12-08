@@ -657,9 +657,11 @@ def fritekst(request):
 #        print("debug")
 #        print(request.query_params.keys())
         ui = html.escape(request.query_params['s'])
-        print(f"debug ui={ui.items()}")
-        print(f"path_params:" {html.escape(request.path_params.items())}")
-        print(f"query_params:" {html.escape(request.query_params.items())}")
+        meh = html.escape(request.path_params.items())
+        print(f"debug ui: {ui.items()}")
+        uitoo = html.escape(request.query_params.items())
+        print(f"debug ui: {uitoo}")
+        print(f"path_params: {meh}")
         # /?sok=Salangen
 
     except Exception as e:
