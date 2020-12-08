@@ -613,6 +613,7 @@ async def search_parser(request):
     if request.method == "POST":
         return PlainTextResponse(f"{data}")
     else:
+        print(f"debug qparams = {request.query_params.items()}")
         try:
             # See if we're searching
             _ = html.escape(request.query_params['s'])
@@ -659,8 +660,8 @@ def fritekst(request):
         ui = html.escape(request.query_params['s'])
         #meh = html.escape(request.path_params.items())
         print(f"debug ui: {ui}")
-        #uitoo = html.escape(request.query_params.items())
-        #print(f"debug ui: {uitoo}")
+        uitoo = html.escape(request.query_params.items())
+        print(f"debug ui: {uitoo}")
         #print(f"path_params: {meh}")
         # /?sok=Salangen
 
