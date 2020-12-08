@@ -616,8 +616,8 @@ async def search_parser(request):
         try:
             # See if we're searching
             _ = html.escape(request.query_params['s'])
-            meh = html.escape(request.query_params['s'])
-            print(f"debug meh = {meh}")
+            meh = html.escape(request.query_params.items())
+            print(f"debug meh = {meh} [search_parser]")
             return fritekst(request)
         except:
             # Not searching, display regular utvalg page
