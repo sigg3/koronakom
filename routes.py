@@ -220,7 +220,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
 async def debug_output_state(request):
     """ Simple debug output for korona.py """
     s, response_dat = get_template_vars() # Get session
-    data, _ = korona.app_query('5401')
+    data, _ = korona.app_query(['5401', '3007'])
     response_dat.update(
         {
         "s": dir(s),
@@ -229,7 +229,7 @@ async def debug_output_state(request):
     )
     print(response_dat.items()) # debug in cli
     dbgstr = ""
-    for k,v in data.items(): dbgstr += f"{k}={v} \n"
+    for k,v in data.items(): dbgstr += f"{k} = {v} \n"
     return PlainTextResponse(f"{dbgstr}")
 
 async def subdomain_vvhf(request):
