@@ -224,8 +224,6 @@ async def debug_output_state(request):
     response_dat.update(
         {
         "s": dir(s),
-        "today": today,
-        "datapoints": s.datapoints,
         "data": data
         }
     )
