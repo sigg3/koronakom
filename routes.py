@@ -102,6 +102,9 @@ async def robots_txt(request):
     """ simple robots.txt file """
     return PlainTextResponse("User-agent: * Disallow:")
 
+async def robots_nodebug_txt(request):
+    """ simple deny-all robots.txt file """
+    return PlainTextResponse("User-agent: * Disallow: /debug_info")
 
 async def norobots_txt(request):
     """ simple deny-all robots.txt file """
@@ -213,6 +216,23 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     plt.close() # Not sure this is needed
     return base64.b64encode(img.read())
 
+
+async def debug_output_state(request):
+    """ Simple debug output for korona.py """
+    s, response_dat = get_template_vars() # Get session
+    data, _ = korona.app_query('5401')
+    response_dat.update(
+        {
+        "s": dir(s),
+        "today": today,
+        "datapoints": s.datapoints,
+        "data": data
+        }
+    )
+    return PlainTextResponse(
+        for k, v in response_dat.items():
+            print(f"{k} = {v}")
+    )
 
 async def subdomain_vvhf(request):
     """
