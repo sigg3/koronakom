@@ -227,7 +227,8 @@ async def debug_output_state(request):
         "data": data
         }
     )
-    return PlainTextResponse(response_dat.items())
+
+    return PlainTextResponse(print(response_dat.items())
 
 async def subdomain_vvhf(request):
     """
