@@ -229,7 +229,7 @@ async def debug_output_state(request):
     )
     print(response_dat.items()) # debug in cli
     long_str = ""
-    for k,v in data:
+    for k,v in data.items():
         long_string += f"{k}={v} \n"
     return PlainTextResponse(print(long_string))
 
