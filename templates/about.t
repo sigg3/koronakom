@@ -29,7 +29,7 @@
         <p>Kildekoden er <strong><a href="https://www.gnu.org/philosophy/free-sw.html" title="What is Free Software?">fri programvare</a></strong> og distribueres under <a href="https://www.gnu.org/licenses/agpl-3.0.html" title="GNU Affero License 3.0"><span class="tag is-light is-medium">GNU Affero License</span></a> versjon 3. Med andre ord: ikke skyld på meg hvis det ikke virker, men <a href="https://github.com/sigg3/koronakom/issues" title="github issues">gi meg gjerne beskjed</a>!
     </div>
     <div class="container has-text-centered">
-        <a href="https://github.com/sigg3/koronakom" title="Koronakom på Github" class="has-text-white pt-5"><button class="button is-success is-rounded">github: <strong>Koronakom</strong></button></a>
+        <a href="https://github.com/sigg3/koronakom" title="Koronakom på Github" class="has-text-white mt-5"><button class="button is-success is-rounded">github: <strong>Koronakom</strong></button></a>
     </div>
     
     
