@@ -620,7 +620,8 @@ async def search_parser(request):
             meh = html.escape(request.query_params.items())
             print(f"debug meh = {meh} [search_parser]")
             return fritekst(request)
-        except:
+        except Exception as e:
+            print(f" debug e = ''{e}''")
             # Not searching, display regular utvalg page
             s, response_dat = get_template_vars()
             try:
