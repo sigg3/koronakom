@@ -229,10 +229,7 @@ async def debug_output_state(request):
         "data": data
         }
     )
-    return PlainTextResponse(
-        for k, v in response_dat.items():
-            print(f"{k} = {v}")
-    )
+    return PlainTextResponse(response_dat.items())
 
 async def subdomain_vvhf(request):
     """
