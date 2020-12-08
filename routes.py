@@ -227,8 +227,11 @@ async def debug_output_state(request):
         "data": data
         }
     )
-
-    return PlainTextResponse(print(response_dat.items()))
+    print(response_dat.items()) # debug in cli
+    long_str = ""
+    for k,v in data:
+        long_string += f"{k}={v} \n"
+    return PlainTextResponse(print(long_string))
 
 async def subdomain_vvhf(request):
     """
