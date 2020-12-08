@@ -613,14 +613,11 @@ async def search_parser(request):
     if request.method == "POST":
         return PlainTextResponse(f"{data}")
     else:
-        print(f"debug qparams = {request.query_params.items()}")
         try:
             # See if we're searching
             _ = html.escape(request.query_params['s'])
-            print("will return fritekst()")
             return fritekst(request)
         except Exception as e:
-            print(f" debug e = ''{e}''")
             # Not searching, display regular utvalg page
             s, response_dat = get_template_vars()
             try:
@@ -658,10 +655,12 @@ def fritekst(request):
 #        print("debug")
 #        print(request.query_params.keys())
         ui = html.escape(request.query_params['s'])
+        print(f"debug ui = {ui}")
+        print(f"debug type = {type(ui)}")
         #meh = html.escape(request.path_params.items())
-        print(f"debug ui: {ui}")
-        uitoo = html.escape(request.query_params.items())
-        print(f"debug ui: {uitoo}")
+        #print(f"debug ui: {ui}")
+        #uitoo = html.escape(request.query_params.items())
+        #print(f"debug ui: {uitoo}")
         #print(f"path_params: {meh}")
         # /?sok=Salangen
 
