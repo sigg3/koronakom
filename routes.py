@@ -617,7 +617,7 @@ async def search_parser(request):
             # See if we're searching
             _ = html.escape(request.query_params['s'])
             return fritekst(request)
-        except Exception as e:
+        except:
             # Not searching, display regular utvalg page
             s, response_dat = get_template_vars()
             try:
@@ -652,18 +652,11 @@ async def search_parser(request):
 def fritekst(request):
     #await request.form()
     try:
-#        print("debug")
-#        print(request.query_params.keys())
         ui = html.escape(request.query_params['s'])
-        print(f"debug ui = {ui}")
-        print(f"debug type = {type(ui)}")
-        #meh = html.escape(request.path_params.items())
-        #print(f"debug ui: {ui}")
-        #uitoo = html.escape(request.query_params.items())
-        #print(f"debug ui: {uitoo}")
-        #print(f"path_params: {meh}")
         # /?sok=Salangen
-
+        if type(ui) != "str":
+            print("debug: GET query param is not a string")
+        # Please note that
     except Exception as e:
         # could not get input ..? => bail!
         print(f"got exception: {e}")
@@ -836,6 +829,7 @@ def fritekst(request):
 
 
     # display Could not find <your stupid query>
+    #return RedirectResponse(url='https://sjekk.kommune.nu/hjelp')
     return PlainTextResponse(f"Kunne ikke finne: <{uinput}>")
 
 
