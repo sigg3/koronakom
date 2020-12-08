@@ -78,10 +78,10 @@ middleware = [
 #                                              '*.localhost'
                                               ]
             ),
-    Middleware(HTTPSRedirectMiddleware)
-#    Middleware(CORSMiddleware,
-#               allow_origin_regex='https://.*\.kommune\.nu',
-#               allow_methods=['*'])
+    Middleware(HTTPSRedirectMiddleware),
+    Middleware(CORSMiddleware,
+               allow_origin_regex='https://.*\.kommune\.nu',
+               allow_methods=['*'])
 ]
 
 
