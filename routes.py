@@ -617,8 +617,7 @@ async def search_parser(request):
         try:
             # See if we're searching
             _ = html.escape(request.query_params['s'])
-            meh = html.escape(request.query_params.items())
-            print(f"debug meh = {meh} [search_parser]")
+            print("will return fritekst()")
             return fritekst(request)
         except Exception as e:
             print(f" debug e = ''{e}''")
