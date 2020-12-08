@@ -227,10 +227,12 @@ async def debug_output_state(request):
         "data": data
         }
     )
-    print(response_dat.items()) # debug in cli
+    #print(response_dat.items()) # debug in cli
+    print("Debug: Outputting data dict to web viewer")
     dbgstr = ""
     for k,v in data.items(): dbgstr += f"{k} = {v} \n"
     return PlainTextResponse(f"{dbgstr}")
+
 
 async def subdomain_vvhf(request):
     """
