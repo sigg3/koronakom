@@ -979,7 +979,7 @@ def app_korona_setup():
     return s
 
 
-def missing_data(control: list, data: dict) -> bool:
+async def missing_data(control: list, data: dict) -> bool:
     """ tests list in 'chk' for missing data """
     bad = ['NA', 'NA', 'NA', 'NA'] # diff_n if incorrect input
     test = [ k for k in data.keys() if data[k]['diff_n'] == bad ]
@@ -997,7 +997,7 @@ async def check_data_integrity():
                      '3813','1135','5439','5440','3007']
         data, _ = app_query(pls_check)
         _kingdom = data.pop('0000')
-        corrupted = missing_data(pls_check, data)
+        corrupted = await missing_data(pls_check, data)
         if corrupted:
             print('Result: data corrupted')
             # TODO restart dyno or remove file and dict (start anew)
@@ -1010,7 +1010,7 @@ async def check_data_integrity():
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
-    asyncio.run(check_data_integrity)
+    asyncio.run(check_data_integrity())
     asyncio.run(setup(is_local=True))
 
 async def setup(**kwargs):
