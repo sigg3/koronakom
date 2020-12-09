@@ -66,7 +66,7 @@ def get_language_settings() -> Tuple[LanguageTracker, list, str, int]:
     l_num = len(l_list)
     return (user_lang, l_list, selector, l_num)
 
-def real_today() -> str:
+def get_real_today() -> str:
     """ Output iso 8601 date """
     today = datetime.datetime.today()
     return today.isoformat().split(sep="T")[0]
@@ -82,7 +82,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
     today = s.datapoints[0]
     updated = today
     nordate = today
-    real_today = real_today()
+    real_today = get_real_today()
     if user_lang.active == "norsk":
         nordate = korona.norwegian_date(today, True)
 
