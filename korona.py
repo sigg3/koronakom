@@ -988,11 +988,11 @@ def missing_data(control: list, data: dict) -> bool:
     return False
 
 
-def check_and_setup():
+async def check_data_integrity():
     """ Same as setup, but will delete big_book if corrupted """
     s = app_verify_setup()
+    print('Data integrity check (n=10)')
     if Path(s.store).is_file():
-        print('Running data integrity check (n=10)')
         pls_check = ['4214','4215','1144','3812','5414',
                      '3813','1135','5439','5440','3007']
         data, _ = app_query(pls_check)
@@ -1003,14 +1003,14 @@ def check_and_setup():
             # TODO restart dyno or remove file and dict (start anew)
         else:
             print('Result: data OK')
-
-    # Run normal routine
-    asyncio.run(setup(is_local=False))
+    else:
+        print('Result: skipped (no data file present)')
 
 
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
+    asyncio.run(check_data_integrity)
     asyncio.run(setup(is_local=True))
 
 async def setup(**kwargs):
