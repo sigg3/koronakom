@@ -489,9 +489,9 @@ async def subdomain_endpoint(template:str, response_dat:dict):
 
 
 def zerofill_plot() -> bytes:
-    """ Returns transparent 1x1 png (avoids crash on missing data)"""
-    return b'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQ\
-    VR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=='
+    """ Return transparent 1x1 png (crash workaround)"""
+    return b'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcS\
+    JAAAADUlEQVR42mNkq3hbDwAD4wHsxcevJAAAAABJRU5ErkJggg=='
 
 
 def subdomain_kommune(kid:str, request):
