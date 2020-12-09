@@ -147,6 +147,26 @@ class Session():
                                     'Lillestrøm','Lørenskog','Oslo','Ås',
                                     'Frogn','Vestby','Moss','Råde','Sarpsborg',
                                     'Fredrikstad','Halden')
+                },
+                "byer" {
+                    "title":    "Byer i Norge",
+                    "subtitle": "Tilstanden i norske by-kommuner",
+                    "created":  "2020-12-09",
+                    "list":     ('Alta', 'Arendal', 'Bergen', 'Bodø', 'Drammen',
+                                'Elverum', 'Farsund', 'Fauske', 'Flekkefjord',
+                                'Fredrikstad', 'Gjøvik', 'Grimstad', 'Halden',
+                                'Hamar','Hammerfest','Harstad','Haugesund',
+                                'Holmestrand', 'Horten', 'Kongsberg',
+                                'Kongsvinger', 'Kragerø', 'Kristiansand',
+                                'Kristiansund', 'Larvik', 'Levanger',
+                                'Lillehammer', 'Lillesand', 'Lillestrøm',
+                                'Lyngdal', 'Molde', 'Moss', 'Namsos', 'Narvik',
+                                'Notodden', 'Oslo', 'Porsgrunn', 'Risør',
+                                'Røros', 'Sandefjord', 'Sandnes', 'Sarpsborg',
+                                'Sauda', 'Skien', 'Sortland', 'Stavanger',
+                                'Steinkjer', 'Stord', 'Tromsø', 'Trondheim',
+                                'Tvedestrand', 'Tønsberg', 'Vadsø', 'Vardø',
+                                'Ålesund')
                 }
         }
         return _cq
