@@ -90,6 +90,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
                  "head_title": "Aktuelle korona tall for din.kommune.nu",
                  "updated": updated,
                  "nordate": nordate,
+                 "real_today": real_today,
                  "hero_title": "din",
                  "hero_isurl": True,
                  "hero_link": "din.kommune.nu",
@@ -509,7 +510,7 @@ def subdomain_kommune(kid:str, request):
     # Fetches base64 encoded bytestring of plot images
     diff_pro100k = data[kid]['diff_100k'][0] # reelvant for risk
     try:
-        s.book['ro'][response_dat['today']][kid]
+        s.book['ro'][response_dat['updated']][kid]
     except:
         trend_plot = zerofill_plot()
         level_plot = zerofill_plot()

@@ -40,7 +40,7 @@
         <h2 class="subtitle">
             Dette er en oppslagstjeneste for &aring; enkelt kunne <strong>sjekke gjeldende korona status</strong> for din kommune, ditt fylke eller landet forøvrig.
             Tallene hentes daglig fra Folkehelseinstituttet og ble 
-            {% if today == real_today %}
+            {% if updated == real_today %}
             <span class="tag is-success is-light is-medium">
             {% else %}
             <span class="tag is-info is-light is-medium">
