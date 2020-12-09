@@ -148,7 +148,7 @@ class Session():
                                     'Frogn','Vestby','Moss','Råde','Sarpsborg',
                                     'Fredrikstad','Halden')
                 },
-                "byer" {
+                "byer": {
                     "title":    "Byer i Norge",
                     "subtitle": "Tilstanden i norske by-kommuner",
                     "created":  "2020-12-09",
