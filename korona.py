@@ -450,6 +450,16 @@ def read_data(
 #     return kom_dat
 
 
+def missing_data(chk: list, data: dict) -> bool:
+    """ tests list in 'chk' for missing data """
+    ctrl = len(chk)
+    bad = ['NA', 'NA', 'NA', 'NA'] # diff_n if incorrect input
+    test = [ k for k in data.keys() if data[k]['diff_n'] == bad ]
+    if len(test) == ctrl:
+        return True
+    return False
+
+
 def is_fresh_data(url:str) -> bool:
     """ Checks whether URL is live or 404 """
     ok_status = [200, 201, 202, 203, 204, 205, 206]
@@ -968,11 +978,40 @@ def app_korona_setup():
 
     return s
 
+
+def missing_data(control: list, data: dict) -> bool:
+    """ tests list in 'chk' for missing data """
+    bad = ['NA', 'NA', 'NA', 'NA'] # diff_n if incorrect input
+    test = [ k for k in data.keys() if data[k]['diff_n'] == bad ]
+    if len(test) == len(control):
+        return True
+    return False
+
+
+def check_and_setup():
+    """ Same as setup, but will delete big_book if corrupted """
+    s = app_verify_setup()
+    if Path(s.store).is_file():
+        print('Running data integrity check (n=10)')
+        pls_check = ['4214','4215','1144','3812','5414',
+                     '3813','1135','5439','5440','3007']
+        data, _ = app_query(pls_check)
+        _kingdom = data.pop('0000')
+        corrupted = missing_data(pls_check, data)
+        if corrupted:
+            print('Result: data corrupted')
+            # TODO restart dyno or remove file and dict (start anew)
+        else:
+            print('Result: data OK')
+
+    # Run normal routine
+    asyncio.run(setup(is_local=False))
+
+
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
     asyncio.run(setup(is_local=True))
-
 
 async def setup(**kwargs):
     """
