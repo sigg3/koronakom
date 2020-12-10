@@ -662,7 +662,7 @@ async def search_parser(request):
                     "hero_subtitle": "Velg hvilke kommuner du vil se",
                     "hero_link": "sjekk.kommune.nu/utvalg",
                     "fylker": big_list,
-                    "utvalg": 2, # 2 => hjelp page
+                    "utvalg": 3, # 3 => hjelp page
                     "menu_selected": 2 # 1 = hjem, 2=sp, 3=om
                 }
             )
