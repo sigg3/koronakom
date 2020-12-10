@@ -66,6 +66,10 @@ def get_language_settings() -> Tuple[LanguageTracker, list, str, int]:
     l_num = len(l_list)
     return (user_lang, l_list, selector, l_num)
 
+def get_real_today() -> str:
+    """ Output iso 8601 date """
+    today = datetime.datetime.today()
+    return today.isoformat().split(sep="T")[0]
 
 def get_template_vars() -> Tuple[korona.Session, dict]:
     """ Output default template vars for jinja """
@@ -78,6 +82,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
     today = s.datapoints[0]
     updated = today
     nordate = today
+    real_today = get_real_today()
     if user_lang.active == "norsk":
         nordate = korona.norwegian_date(today, True)
 
@@ -85,6 +90,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
                  "head_title": "Aktuelle korona tall for din.kommune.nu",
                  "updated": updated,
                  "nordate": nordate,
+                 "real_today": real_today,
                  "hero_title": "din",
                  "hero_isurl": True,
                  "hero_link": "din.kommune.nu",
@@ -482,6 +488,12 @@ async def subdomain_endpoint(template:str, response_dat:dict):
     return templates.TemplateResponse(template, response_dat)
 
 
+def zerofill_plot() -> bytes:
+    """ Return transparent 1x1 png (crash workaround)"""
+    return b'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcS\
+    JAAAADUlEQVR42mNkq3hbDwAD4wHsxcevJAAAAABJRU5ErkJggg=='
+
+
 def subdomain_kommune(kid:str, request):
     """
     Shows only_one table template for requested muncipality
@@ -497,8 +509,14 @@ def subdomain_kommune(kid:str, request):
     # Get plot data dictionary
     # Fetches base64 encoded bytestring of plot images
     diff_pro100k = data[kid]['diff_100k'][0] # reelvant for risk
-    trend_plot = mini_plot_trend(kid)
-    level_plot = mini_plot_risk(diff_pro100k)
+    try:
+        s.book['ro'][response_dat['updated']][kid]
+    except:
+        trend_plot = zerofill_plot()
+        level_plot = zerofill_plot()
+    else:
+        trend_plot = mini_plot_trend(kid)
+        level_plot = mini_plot_risk(diff_pro100k)
 
     # Set strings
     hero_title = mini_dict['name']

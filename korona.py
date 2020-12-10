@@ -147,6 +147,26 @@ class Session():
                                     'Lillestrøm','Lørenskog','Oslo','Ås',
                                     'Frogn','Vestby','Moss','Råde','Sarpsborg',
                                     'Fredrikstad','Halden')
+                },
+                "byer": {
+                    "title":    "Byer i Norge",
+                    "subtitle": "Tilstanden i norske by-kommuner",
+                    "created":  "2020-12-09",
+                    "list":     ('Alta', 'Arendal', 'Bergen', 'Bodø', 'Drammen',
+                                'Elverum', 'Farsund', 'Fauske', 'Flekkefjord',
+                                'Fredrikstad', 'Gjøvik', 'Grimstad', 'Halden',
+                                'Hamar','Hammerfest','Harstad','Haugesund',
+                                'Holmestrand', 'Horten', 'Kongsberg',
+                                'Kongsvinger', 'Kragerø', 'Kristiansand',
+                                'Kristiansund', 'Larvik', 'Levanger',
+                                'Lillehammer', 'Lillesand', 'Lillestrøm',
+                                'Lyngdal', 'Molde', 'Moss', 'Namsos', 'Narvik',
+                                'Notodden', 'Oslo', 'Porsgrunn', 'Risør',
+                                'Røros', 'Sandefjord', 'Sandnes', 'Sarpsborg',
+                                'Sauda', 'Skien', 'Sortland', 'Stavanger',
+                                'Steinkjer', 'Stord', 'Tromsø', 'Trondheim',
+                                'Tvedestrand', 'Tønsberg', 'Vadsø', 'Vardø',
+                                'Ålesund')
                 }
         }
         return _cq
@@ -428,6 +448,16 @@ def read_data(
 #             print("skip impertinent date")
 #
 #     return kom_dat
+
+
+def missing_data(chk: list, data: dict) -> bool:
+    """ tests list in 'chk' for missing data """
+    ctrl = len(chk)
+    bad = ['NA', 'NA', 'NA', 'NA'] # diff_n if incorrect input
+    test = [ k for k in data.keys() if data[k]['diff_n'] == bad ]
+    if len(test) == ctrl:
+        return True
+    return False
 
 
 def is_fresh_data(url:str) -> bool:
@@ -948,11 +978,40 @@ def app_korona_setup():
 
     return s
 
+
+async def missing_data(control: list, data: dict) -> bool:
+    """ tests list in 'chk' for missing data """
+    bad = ['NA', 'NA', 'NA', 'NA'] # diff_n if incorrect input
+    test = [ k for k in data.keys() if data[k]['diff_n'] == bad ]
+    if len(test) == len(control):
+        return True
+    return False
+
+
+async def check_data_integrity():
+    """ Same as setup, but will delete big_book if corrupted """
+    s = app_verify_setup()
+    print('Data integrity check (n=10)')
+    if Path(s.store).is_file():
+        pls_check = ['4214','4215','1144','3812','5414',
+                     '3813','1135','5439','5440','3007']
+        data, _ = app_query(pls_check)
+        _kingdom = data.pop('0000')
+        corrupted = await missing_data(pls_check, data)
+        if corrupted:
+            print('Result: data corrupted')
+            # TODO restart dyno or remove file and dict (start anew)
+        else:
+            print('Result: data OK')
+    else:
+        print('Result: skipped (no data file present)')
+
+
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
+    asyncio.run(check_data_integrity())
     asyncio.run(setup(is_local=True))
-
 
 async def setup(**kwargs):
     """
