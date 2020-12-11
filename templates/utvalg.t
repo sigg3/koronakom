@@ -137,7 +137,9 @@
                 <div class="columns is-centered is-hidden-tablet"><!-- mobile  -->
                     <form action="https://sjekk.kommune.nu/" method="get">
                         <div class="field has-addons pt-3">
-                            <p class="control is-hidden-tablet">&nbsp;</p>
+                            <p class="control is-hidden-tablet">
+                                <span>&nbsp;</span>
+                            </p>
                             <p class="control is-hidden-tablet"><!-- mobile -->
                                 <input name="s" class="input" type="text" size="26" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                             </p>
