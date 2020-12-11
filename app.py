@@ -129,7 +129,7 @@ middleware = [
 
 # Application
 app = Starlette(
-                debug=True, # set to false in production
+                debug=True, # set to false when not working
                 middleware=middleware,
                 on_startup=[initialize_korona],
                 on_shutdown=[clean_up_korona]
