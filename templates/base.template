@@ -142,9 +142,9 @@
         </div>
         <div class="columns is-centered is-hidden-tablet"><!-- mobile  -->
            <form action="https://sjekk.kommune.nu/" method="get">
-            <div class="field has-addons pt-3">
+            <div class="field ml-4 has-addons pt-3">
                 <p class="control is-hidden-tablet"><!-- mobile -->
-                    <input name="s" class="input" type="text" size="28" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
+                    <input name="s" class="input" type="text" size="27" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                 </p>
                 <p class="control is-hidden-tablet">
                     <button type="submit" class="button is-primary">S&oslash;k</button>
