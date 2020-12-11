@@ -31,24 +31,24 @@
     </div>
     <div class="tile is-4">
         <div class="container has-text-centered">
-            <div class="level has-text-centered">
+            <div class="level has-text-centered is-mobile">
                 {% if utvalg == 0 %}
-                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp til s&oslash;k" class="button is-light">S&oslash;k</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-info"><strong>Kommuner</strong></a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
                 {% elif utvalg == 1 %}
-                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp til søk" class="button is-light">S&oslash;k</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-info"><strong>Fylker</strong></a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
                 {% elif utvalg == 2 %}
-                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-light">Nøkler</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp til søk class="button is-light">S&oslash;k</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-info"><strong>Egendefinert</strong></a></p>
                 {% else %}
-                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp med nøkler" class="button is-info"><strong>Nøkler</strong></a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="HHjelp til søk" class="button is-info"><strong>S&oslash;k</strong></a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
@@ -145,7 +145,7 @@
                             </p>
                         </div>
                     </form>
-                </div>            
+                </div>              
                 <h2 class="subtitle">Søkeord / nøkler</h2>
                 I utgangspunktet støtter søkemotoren følgende type oppslag:
                 <div class="content">
