@@ -108,13 +108,32 @@ async def robots_txt(request):
     """ simple robots.txt file """
     return PlainTextResponse("User-agent: * Disallow:")
 
+
 async def robots_nodebug_txt(request):
     """ simple deny-all robots.txt file """
     return PlainTextResponse("User-agent: * Disallow: /debug_info")
 
+
 async def norobots_txt(request):
     """ simple deny-all robots.txt file """
     return PlainTextResponse("User-agent: * Disallow: /")
+
+
+async def plot_trend_for(muncips: list) -> Type[bytes]:
+    """
+    TODO
+    diff_n for all cities in 'muncips' list
+    """
+
+    s, _ = get_template_vars()
+
+    # TODO
+    big_book = pd.DataFrame(s.book['ro'])
+    df = big_book.loc[ muncips , : ]
+
+    # # TODO:
+    pass
+
 
 
 def mini_plot_risk(pro100k:float) -> Type[bytes]:
@@ -487,6 +506,7 @@ def subdomain_fylke(flist:list, fname:str, request):
 
 
 async def subdomain_endpoint(template:str, response_dat:dict):
+    """ Dummy for async/sync compatibility, not in use atm """
     return templates.TemplateResponse(template, response_dat)
 
 
