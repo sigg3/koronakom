@@ -25,8 +25,6 @@
 
 
 {% block sector_1 %}
-<!-- <div class="tile is-ancestor mt-4 pt-4 pb-4"> -->
-<!-- <div class="block is-hidden-mobile">&nbsp;</div> -->
 <div class="tile is-ancestor pb-4">
     <div class="tile is-4">
         &nbsp;
@@ -76,7 +74,7 @@
     <div class="tile is-4">&nbsp;</div>
     <div class="tile is-4">
     {% endif %}
-        <div class="container pl-2 pr-2">
+        <div class="container ml-2 mr-2 pl-2 pr-2">
             {% if utvalg == 0 %}
                 {% for f, k in fylker.items() %}
                 <h1 class="title">{{ f }}</h3>
