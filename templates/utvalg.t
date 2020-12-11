@@ -36,22 +36,22 @@
                 <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp til s&oslash;k" class="button is-light">S&oslash;k</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-info"><strong>Kommuner</strong></a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
-                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egen</a></p>
                 {% elif utvalg == 1 %}
                 <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp til søk" class="button is-light">S&oslash;k</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-info"><strong>Fylker</strong></a></p>
-                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egen</a></p>
                 {% elif utvalg == 2 %}
                 <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp til søk class="button is-light">S&oslash;k</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
-                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-info"><strong>Egendefinert</strong></a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-info"><strong>Egen</strong></a></p>
                 {% else %}
                 <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="HHjelp til søk" class="button is-info"><strong>S&oslash;k</strong></a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommuner</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylker</a></p>
-                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egendefinert</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egen</a></p>
                 {% endif %}
             </div>
         </div>
