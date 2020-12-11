@@ -226,6 +226,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
 async def debug_output_state(request):
     """ Simple debug output for korona.py """
     s, response_dat = get_template_vars() # Get session
+    datapoints = s.datapoints
     data, _ = korona.app_query(['5401', '3007'])
     response_dat.update(
         {
@@ -233,12 +234,11 @@ async def debug_output_state(request):
         "data": data
         }
     )
-    #print(response_dat.items()) # debug in cli
     print("Debug: Outputting data dict to web viewer")
     dbgstr = ""
     for k,v in data.items(): dbgstr += f"{k} = {v} \n"
     dbgstr += f"datapoints:\n"
-    dbgstr += print(s.datapoints)
+    dbgstr += print(datapoints)
     return PlainTextResponse(f"{dbgstr}")
 
 
