@@ -138,7 +138,7 @@
                     <form action="https://sjekk.kommune.nu/" method="get">
                         <div class="field ml-4 has-addons pt-3">
                             <p class="control is-hidden-tablet"><!-- mobile -->
-                                <input name="s" class="input" type="text" size="26" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
+                                <input name="s" class="input" type="text" size="25" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                             </p>
                             <p class="control is-hidden-tablet">
                                 <button type="submit" class="button is-primary">S&oslash;k</button>
