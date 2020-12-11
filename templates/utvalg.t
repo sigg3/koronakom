@@ -33,22 +33,22 @@
         <div class="container has-text-centered pl-1 pr-1">
             <div class="level has-text-centered is-mobile">
                 {% if utvalg == 0 %}
-                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp til s&oslash;k" class="button is-light">S&oslash;k</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/" title="Hjelp til s&oslash;k" class="button is-light">S&oslash;k</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-info"><strong>Kommune</strong></a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylke</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egen</a></p>
                 {% elif utvalg == 1 %}
-                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp til s&oslash;k" class="button is-light">S&oslash;k</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/" title="Hjelp til s&oslash;k" class="button is-light">S&oslash;k</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommune</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-info"><strong>Fylke</strong></a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egen</a></p>
                 {% elif utvalg == 2 %}
-                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="Hjelp til s&oslash;k" class="button is-light">S&oslash;k</a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/" title="Hjelp til s&oslash;k" class="button is-light">S&oslash;k</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommune</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylke</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-info"><strong>Egen</strong></a></p>
                 {% else %}
-                <p class="level-item"><a href="https://sjekk.kommune.nu/hjelp" title="HHjelp til s&oslash;k" class="button is-info"><strong>S&oslash;k</strong></a></p>
+                <p class="level-item"><a href="https://sjekk.kommune.nu/" title="HHjelp til s&oslash;k" class="button is-info"><strong>S&oslash;k</strong></a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/utvalg" title="Velk kommuner enkeltvis" class="button is-light">Kommune</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/fylker" title="Velg etter fylke" class="button is-light">Fylke</a></p>
                 <p class="level-item"><a href="https://sjekk.kommune.nu/egen" title="Egendefinert utvalg" class="button is-light">Egen</a></p>
@@ -137,8 +137,9 @@
                 <div class="columns is-centered is-hidden-tablet"><!-- mobile  -->
                     <form action="https://sjekk.kommune.nu/" method="get">
                         <div class="field has-addons pt-3">
+                            <p class="control is-hidden-tablet">&nbsp;</p>
                             <p class="control is-hidden-tablet"><!-- mobile -->
-                                <input name="s" class="input" type="text" size="28" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
+                                <input name="s" class="input" type="text" size="26" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
                             </p>
                             <p class="control is-hidden-tablet">
                                 <button type="submit" class="button is-primary">S&oslash;k</button>
