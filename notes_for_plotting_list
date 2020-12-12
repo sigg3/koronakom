@@ -17,3 +17,5 @@ df = bbok.loc[ selection , : ]
 
 
 pd.DataFrame(df['b'].tolist(), index=df.index)   
+
+meh
