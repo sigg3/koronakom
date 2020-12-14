@@ -233,7 +233,13 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     plt.yticks()
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
 
+    plt.ylabel('')
+    plt.xlabel('')
+
+
     # detect and correct negative y-axis
+    # still does not work :(
+    # TODO
     current_y = ax.get_ylim()
     print(f"current_y ylim = {current_y}") # debug
     flat_line = (-0.05500000000000001, 0.05500000000000001)
@@ -247,13 +253,12 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     if change_ylim:
     # set_ylim [bottom, top]
         print(f"correcting ylim => {list(change_ylim)}")  # debug
-        plt.ylim(list(change_ylim))
-        #ax.set_ylim(change_ylim[0],change_ylim[1])
+        #plt.ylim(list(change_ylim))
+        ymin, ymax = change_ylim
+        ax.set_ylim(ymin, ymax)
         #change_ylim[0], change
         #sns.set_ylim = change_ylim
 
-    plt.ylabel('')
-    plt.xlabel('')
     plt.title("Tilfeller per 100K per dag", fontsize='x-small')
     fig.tight_layout()
     img = io.BytesIO()
