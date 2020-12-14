@@ -238,7 +238,6 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
 
 
     # detect and correct negative y-axis
-    # still does not work :(
     # TODO
     # current_y = ax.get_ylim()
     # print(f"current_y ylim = {current_y}") # debug
