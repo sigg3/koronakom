@@ -232,15 +232,15 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     print(f"current_y ylim = {current_y}") # debug
     flat_line = (-0.05500000000000001, 0.05500000000000001)
     if current_y == flat_line:
-        change_ylim = (0, 3.5)
+        change_ylim = (-0.05, 4.00)
     elif current_y[0] < -0.5:
-        change_ylim = (-0.5, current_y[1])
+        change_ylim = (-0.05, current_y[1])
     else:
         change_ylim = False
 
     if change_ylim:
         # set_ylim [bottom, top]
-        print(f"correcting ylim => {change_ylim}")  # debug
+        print(f"correcting ylim => {list(change_ylim)}")  # debug
         plt.ylim(list(change_ylim))
         #change_ylim[0], change
         #sns.set_ylim = change_ylim
