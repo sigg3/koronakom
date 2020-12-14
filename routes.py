@@ -203,7 +203,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     #print(f"data control: df_kid = {df_kid}")
 
     fig, ax = plt.subplots(figsize=(6,3))
-    sns.lineplot(ax=ax, x="dato", y="diff_kom", data=df_kid, linewidth=5)
+    sns.lineplot(ax=ax, x="dato", y="diff_kom", ylim=0, data=df_kid, linewidth=5)
     #sns.set_style("whitegrid")
     sns.set_style("white")
     sns.set_context("talk")
@@ -231,17 +231,17 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     current_y = ax.get_ylim()
     print(f"current_y ylim = {current_y}") # debug
     flat_line = (-0.05500000000000001, 0.05500000000000001)
-    if current_y == flat_line:
-        change_ylim = (-0.05, 4.00)
-    elif current_y[0] < -0.5:
-        change_ylim = (-0.05, current_y[1])
-    else:
-        change_ylim = False
-
-    if change_ylim:
+#    if current_y == flat_line:
+#        change_ylim = (-0.05, 4.00)
+#    elif current_y[0] < -0.5:
+#        change_ylim = (-0.05, current_y[1])
+#    else:
+#        change_ylim = False
+#
+#    if change_ylim:
         # set_ylim [bottom, top]
-        print(f"correcting ylim => {list(change_ylim)}")  # debug
-        plt.ylim(list(change_ylim))
+#        print(f"correcting ylim => {list(change_ylim)}")  # debug
+#        plt.ylim(list(change_ylim))
         #change_ylim[0], change
         #sns.set_ylim = change_ylim
 
