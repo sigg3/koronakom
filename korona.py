@@ -1000,18 +1000,23 @@ async def check_data_integrity():
         corrupted = await missing_data(pls_check, data)
         if corrupted:
             print('Result: data corrupted')
-            # TODO restart dyno or remove file and dict (start anew)
         else:
             print('Result: data OK')
     else:
-        print('Result: skipped (no data file present)')
+        print('Result: no data file present')
+        corrupted = True
+
+    if corrupted:
+        print("Data corrupted or missing, crash app to restart")
+        raise Exception("KAMIKAZE: crashing app to force restart")
+
 
 
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
-    asyncio.run(check_data_integrity())
     asyncio.run(setup(is_local=True))
+    asyncio.run(check_data_integrity())
 
 async def setup(**kwargs):
     """
