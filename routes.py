@@ -228,6 +228,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     #print(f"use_tic: {use_tic}")
 
     # Note: ticks are not handled correctly when the lim is set before the ticks are set.
+    # Issue: https://github.com/matplotlib/matplotlib/issues/4131
     ax.set_xticklabels([xtics_nor[0], xtics_nor[1]])
     plt.yticks()
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
@@ -246,8 +247,8 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     if change_ylim:
     # set_ylim [bottom, top]
         print(f"correcting ylim => {list(change_ylim)}")  # debug
-        plt.ylim(list(change_ylim))
-        ax.set_ylim(list(change_ylim))
+        #plt.ylim(list(change_ylim))
+        ax.set_ylim(change_ylim[0],change_ylim[1])
         #change_ylim[0], change
         #sns.set_ylim = change_ylim
 
