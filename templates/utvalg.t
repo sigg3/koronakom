@@ -147,12 +147,12 @@
                     </form>
                 </div>              
                 <h2 class="subtitle">Søkeord / nøkler</h2>
-                I utgangspunktet støtter søkemotoren følgende type oppslag:
+                Har kan du gjøre følgende oppslag:
                 <div class="content">
                     <ul>
                         <li>navn på kommune (enkelt-oppslag)</li>
                         <li>&quot;&lt;kommune 1&gt; og &lt;kommune 2&gt;&quot; (sammenligning)</li>
-                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, &lt;kommune 3&gt;, &lt;kommune 4&gt;&quot; (liste)</li>
+                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, &lt;kommune 3&gt;, (liste)</li>
                         <li>firesifret kommunenummer, e.g. 0301 for Oslo</li>
                         <li>N + firesifret postnummer, e.g. både N3401 (Lier) og N3411 (Sylling) går til Lier (primær kommune)</li>
                         <li>navn på fylke (gir liste over kommunene)</li>
