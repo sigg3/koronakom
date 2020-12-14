@@ -241,8 +241,8 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     if change_ylim:
     # set_ylim [bottom, top]
         print(f"correcting ylim => {list(change_ylim)}")  # debug
-        plt.ylim(change_ylim[0], change_ylim[1])
-        ax.set_ylim(change_ylim[0],change_ylim[1])
+        plt.ylim(list(change_ylim))
+        ax.set_ylim(list(change_ylim))
         #change_ylim[0], change
         #sns.set_ylim = change_ylim
 
