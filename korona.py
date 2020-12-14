@@ -65,22 +65,13 @@ class Session():
         self.list_custom = list(self.custom.keys())
 
     def get_store_target(self) -> str:
-        """ implements HEROKU config var for storage file name """
-        # TODO ugly workaround, just set heroku config vars
-        CLOUD = Path.cwd() / ".env"
-        if CLOUD.is_file():
-            store_in = None
-            with open(CLOUD, 'r') as f:
-                cloud_environment = f.read()
-            f.close()
-            _, store_in = cloud_environment.split(sep="=")
-            if store_in is None:
-                store_in = 'storage.pkl'
-            else:
-                store_in = store_in.replace("\n", "").replace(" ", "_")
-        else:
-            store_in = 'storage.pkl'
-        return store_in
+        """ heroky config var for storage file name """
+        try:
+            store_in = os.environ["cloud_storage_loc"]
+        except:
+            store_in = "storage.pkl"
+        finally:
+            return store_in
 
     def custom_queries(self) -> dict:
         """ key store for custom queries we call with GET """
