@@ -227,10 +227,21 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     #print(f"lab slice: {xtic_lab[1]},{xtic_lab[-1]}")
     #print(f"use_tic: {use_tic}")
 
-    # debug negative y-axis
-    current_y = ax.get_ylim()
+    # detect and correct negative y-axis
     print(f"current_y ylim = {current_y}")
+    current_y = ax.get_ylim()
+    flat_line = (-0.05500000000000001, 0.05500000000000001)
+    if current_y == flat_line:
+        change_ylim = (0, 3.5)
+    elif current_y[0] < -0.5:
+        change_ylim = (-0.5, current_y[1])
+    else:
+        change_ylim = False
 
+    if change_ylim:
+        # set_ylim [bottom, top]
+        print(f"correcting ylim => {change_ylim}")
+        ax.set_ylim = change_ylim
 
     ax.set_xticklabels([xtics_nor[0], xtics_nor[1]])
 
