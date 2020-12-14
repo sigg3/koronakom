@@ -227,6 +227,11 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     #print(f"lab slice: {xtic_lab[1]},{xtic_lab[-1]}")
     #print(f"use_tic: {use_tic}")
 
+    # Note: ticks are not handled correctly when the lim is set before the ticks are set.
+    ax.set_xticklabels([xtics_nor[0], xtics_nor[1]])
+    plt.yticks()
+    plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
+
     # detect and correct negative y-axis
     current_y = ax.get_ylim()
     print(f"current_y ylim = {current_y}") # debug
@@ -246,10 +251,6 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
         #change_ylim[0], change
         #sns.set_ylim = change_ylim
 
-    ax.set_xticklabels([xtics_nor[0], xtics_nor[1]])
-
-    plt.yticks()
-    plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
     plt.ylabel('')
     plt.xlabel('')
     plt.title("Tilfeller per 100K per dag", fontsize='x-small')
