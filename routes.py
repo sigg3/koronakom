@@ -227,6 +227,11 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     #print(f"lab slice: {xtic_lab[1]},{xtic_lab[-1]}")
     #print(f"use_tic: {use_tic}")
 
+    # debug negative y-axis
+    current_y = ax.get_ylim()
+    print(f"current_y ylim = {current_y}")
+
+
     ax.set_xticklabels([xtics_nor[0], xtics_nor[1]])
 
     plt.yticks()
