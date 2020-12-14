@@ -241,7 +241,7 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     if change_ylim:
         # set_ylim [bottom, top]
         print(f"correcting ylim => {change_ylim}")  # debug
-        ax.set_ylim = change_ylim
+        plt.set_ylim = change_ylim
 
     ax.set_xticklabels([xtics_nor[0], xtics_nor[1]])
 
