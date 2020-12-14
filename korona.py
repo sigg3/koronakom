@@ -10,6 +10,7 @@ import asyncio
 from io import StringIO
 from pathlib import Path
 from norway import Norway
+import os
 
 
 # >  R O A D M A P <
@@ -665,6 +666,11 @@ def query_data(
             if skip_calc_counter >= 10:
                 break
 
+    # Integrity check
+    if len(skipped_items) == len(selection):
+        asyncio.run(check_data_integrity())
+    elif skip_calc_counter >= 10:
+        asyncio.run(check_data_integrity())
 
     # national info
     # Using dummy key '0000' for the Kingdom of Norway
