@@ -524,7 +524,8 @@ def query_data(
                 small_book[kid] = query_object.data[kid]
             except KeyError as e:
                 # TBD, we can look it up etc. TODO
-                print(f"Key not in query_object: {e} (skipping)")
+                    asyncio.run(check_data_integrity())
+    print(f"Key not in query_object: {e} (skipping)")
                 continue # skip
 
         # set kommune name to k
@@ -657,10 +658,24 @@ def query_data(
                 break
 
     # Integrity check
+    run_integrity_check = False
     if len(skipped_items) == len(selection):
-        asyncio.run(check_data_integrity())
+        run_integrity_check = True
     elif skip_calc_counter >= 10:
-        asyncio.run(check_data_integrity())
+        run_integrity_check = True        
+
+    if run_integrity_check:
+        try:
+            is_cloud = os.environ["heroku_is_cloud"]
+            is_cloud = True if is_cloud == "1" else False
+        except:
+            is_cloud = False
+
+        if is_cloud:
+            pass # leave it to scheduled task
+        else:
+            asyncio.run(check_data_integrity())
+
 
     # national info
     # Using dummy key '0000' for the Kingdom of Norway
