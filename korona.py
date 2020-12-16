@@ -12,7 +12,6 @@ from pathlib import Path
 from norway import Norway
 import os
 
-
 # >  R O A D M A P <
 # 0. get code on github                                 [ OK ]
 # 1. get heroku dyno up (hobby)                         [ OK ]
@@ -1009,11 +1008,23 @@ async def check_data_integrity():
 
 
 
-async def main():
+def main():
     """ Original main() used to setup stuff """
-    print("run setup() from __main__ (background task)")
-    await check_data_integrity()
-    await setup(is_local=True)
+    try:
+        is_cloud = os.environ["heroku_is_cloud"]
+        is_cloud = True if is_cloud == "1" else False
+    except:
+        is_cloud = False
+
+    if is_cloud:
+        await check_data_integrity()
+        print("run setup() from __main__ (background task)")
+        await setup(is_local=False)
+    else:
+        asyncio.run(check_data_integrity)
+        print("run setup() from __main__ (localhost)")
+        asyncio.run(is_local=True)
+
 
 async def setup(**kwargs):
     """
@@ -1101,4 +1112,4 @@ async def setup(**kwargs):
     print(f"finished in {elapsed} seconds")
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
