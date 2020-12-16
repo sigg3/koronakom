@@ -10,6 +10,7 @@ import asyncio
 from io import StringIO
 from pathlib import Path
 from norway import Norway
+import os
 
 
 # >  R O A D M A P <
@@ -64,22 +65,13 @@ class Session():
         self.list_custom = list(self.custom.keys())
 
     def get_store_target(self) -> str:
-        """ implements HEROKU config var for storage file name """
-        # TODO ugly workaround, just set heroku config vars
-        CLOUD = Path.cwd() / ".env"
-        if CLOUD.is_file():
-            store_in = None
-            with open(CLOUD, 'r') as f:
-                cloud_environment = f.read()
-            f.close()
-            _, store_in = cloud_environment.split(sep="=")
-            if store_in is None:
-                store_in = 'storage.pkl'
-            else:
-                store_in = store_in.replace("\n", "").replace(" ", "_")
-        else:
-            store_in = 'storage.pkl'
-        return store_in
+        """ heroky config var for storage file name """
+        try:
+            store_in = os.environ["cloud_storage_loc"]
+        except:
+            store_in = "storage.pkl"
+        finally:
+            return store_in
 
     def custom_queries(self) -> dict:
         """ key store for custom queries we call with GET """
@@ -665,6 +657,11 @@ def query_data(
             if skip_calc_counter >= 10:
                 break
 
+    # Integrity check
+    if len(skipped_items) == len(selection):
+        asyncio.run(check_data_integrity())
+    elif skip_calc_counter >= 10:
+        asyncio.run(check_data_integrity())
 
     # national info
     # Using dummy key '0000' for the Kingdom of Norway
@@ -1000,11 +997,16 @@ async def check_data_integrity():
         corrupted = await missing_data(pls_check, data)
         if corrupted:
             print('Result: data corrupted')
-            # TODO restart dyno or remove file and dict (start anew)
         else:
             print('Result: data OK')
     else:
-        print('Result: skipped (no data file present)')
+        print('Result: no data file present')
+        corrupted = True
+
+    if corrupted:
+        print("Data corrupted or missing, crash app to restart")
+        raise Exception("KAMIKAZE: crashing app to force restart")
+
 
 
 async def main():

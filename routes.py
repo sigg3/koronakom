@@ -227,12 +227,37 @@ def mini_plot_trend(kid:str) -> Type[bytes]:
     #print(f"lab slice: {xtic_lab[1]},{xtic_lab[-1]}")
     #print(f"use_tic: {use_tic}")
 
+    # Note: ticks are not handled correctly when the lim is set before the ticks are set.
+    # Issue: https://github.com/matplotlib/matplotlib/issues/4131
     ax.set_xticklabels([xtics_nor[0], xtics_nor[1]])
-
     plt.yticks()
     plt.tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=True)
+
     plt.ylabel('')
     plt.xlabel('')
+
+
+    # detect and correct negative y-axis
+    # TODO
+    # current_y = ax.get_ylim()
+    # print(f"current_y ylim = {current_y}") # debug
+    # flat_line = (-0.05500000000000001, 0.05500000000000001)
+    # if current_y == flat_line:
+    #     change_ylim = (-0.05, 4.00)
+    # elif current_y[0] < -0.5:
+    #     change_ylim = (-0.05, current_y[1])
+    # else:
+    #     change_ylim = False
+    #
+    # if change_ylim:
+    # # set_ylim [bottom, top]
+    #     print(f"correcting ylim => {list(change_ylim)}")  # debug
+    #     #plt.ylim(list(change_ylim))
+    #     ymin, ymax = change_ylim
+    #     ax.set_ylim(ymin, ymax)
+    #     #change_ylim[0], change
+    #     #sns.set_ylim = change_ylim
+
     plt.title("Tilfeller per 100K per dag", fontsize='x-small')
     fig.tight_layout()
     img = io.BytesIO()
