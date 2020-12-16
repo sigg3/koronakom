@@ -1025,7 +1025,7 @@ async def check_data_integrity():
 def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (localhost)")
-    asyncio.run(is_local=True)
+    asyncio.run(setup(is_local=True))
 
 
 async def main_cloud():
@@ -1128,6 +1128,6 @@ if __name__ == "__main__":
         is_cloud = False
 
     if is_cloud:
-        await main_cloud()
+        asyncio.run(main_cloud())
     else:
         main()
