@@ -1007,11 +1007,11 @@ async def check_data_integrity():
         print('Result: skipped (no data file present)')
 
 
-def main():
+async def main():
     """ Original main() used to setup stuff """
     print("run setup() from __main__ (background task)")
-    asyncio.run(check_data_integrity())
-    asyncio.run(setup(is_local=True))
+    await check_data_integrity()
+    await setup(is_local=True)
 
 async def setup(**kwargs):
     """
@@ -1099,4 +1099,4 @@ async def setup(**kwargs):
     print(f"finished in {elapsed} seconds")
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
