@@ -524,8 +524,8 @@ def query_data(
                 small_book[kid] = query_object.data[kid]
             except KeyError as e:
                 # TBD, we can look it up etc. TODO
-                    asyncio.run(check_data_integrity())
-    print(f"Key not in query_object: {e} (skipping)")
+                print(f"Key not in query_object: {e} (skipping)")
+                skipped_items.append((kid, None))
                 continue # skip
 
         # set kommune name to k
@@ -662,7 +662,7 @@ def query_data(
     if len(skipped_items) == len(selection):
         run_integrity_check = True
     elif skip_calc_counter >= 10:
-        run_integrity_check = True        
+        run_integrity_check = True
 
     if run_integrity_check:
         try:
