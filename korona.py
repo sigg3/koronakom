@@ -1022,23 +1022,17 @@ async def check_data_integrity():
         raise Exception("KAMIKAZE: crashing app to force restart")
 
 
-
 def main():
     """ Original main() used to setup stuff """
-    try:
-        is_cloud = os.environ["heroku_is_cloud"]
-        is_cloud = True if is_cloud == "1" else False
-    except:
-        is_cloud = False
+    print("run setup() from __main__ (localhost)")
+    asyncio.run(is_local=True)
 
-    if is_cloud:
-        await check_data_integrity()
-        print("run setup() from __main__ (background task)")
-        await setup(is_local=False)
-    else:
-        asyncio.run(check_data_integrity)
-        print("run setup() from __main__ (localhost)")
-        asyncio.run(is_local=True)
+
+async def main_cloud():
+    """ heroku main() used to setup stuff """
+    await check_data_integrity()
+    print("run setup() from __main__ (background task)")
+    await setup(is_local=False)
 
 
 async def setup(**kwargs):
@@ -1127,4 +1121,13 @@ async def setup(**kwargs):
     print(f"finished in {elapsed} seconds")
 
 if __name__ == "__main__":
-    main()
+    try:
+        is_cloud = os.environ["heroku_is_cloud"]
+        is_cloud = True if is_cloud == "1" else False
+    except:
+        is_cloud = False
+
+    if is_cloud:
+        await main_cloud()
+    else:
+        main()
