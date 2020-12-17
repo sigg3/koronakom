@@ -84,10 +84,10 @@
                         <h2 class="subtitle">
                             Vis alle i {{ f }} fylke:
                             <label class="radio">
-                                <input type="radio" name="{{ f }}"> Ja
+                                <input type="radio" id="show" name="{{ f }}"> Ja
                             </label>
                             <label class="radio">
-                                <input type="radio" name="{{ f }}" checked> Nei
+                                <input type="radio" id="ignore" name="{{ f }}" checked> Nei
                             </label>
                             <span class="has-text-grey-light">(overstyrer)</span>
                         </h2>
@@ -146,8 +146,7 @@
                             </p>
                         </div>
                     </form>
-                </div>              
-                <p>Oppslag:</p>
+                </div>
                 <div class="content">
                     <ul>
                         <li>navn på kommune (enkelt-oppslag)</li>
