@@ -681,7 +681,7 @@ async def search_parser(request):
         print("got to req method check, is POST")
         gimme = []
         for k, v in data.items():
-            if v == 1: gimme.append(k)
+            if v == "1": gimme.append(k)
 
         print(f"len of gimme = {len(gimme)}")
         # Setup basics
@@ -692,7 +692,7 @@ async def search_parser(request):
 
         if len(items) == 0:
             # This should not happen on controlled input. Just redirect
-            return RedirectResponse(url="/")
+            return RedirectResponse(url="/hjelp") # no POST on /hjelp
 
         print(f"len items={len(items)}")
         data, skipped_items = korona.app_query(items)
