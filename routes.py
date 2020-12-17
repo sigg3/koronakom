@@ -677,6 +677,7 @@ async def search_parser(request):
     if request.method == "POST":
         # get data from form (requires value="1" in template)
         sort_by = input_form.pop('sort_results')
+        sort_by = int(sort_by)
 
         gimme = [ k for k,v in input_form.items() if v == "1"]
 
