@@ -742,7 +742,7 @@ async def search_parser(request):
                         "only_one": only_one,
                         "exactly_two": exactly_two,
                         "menu_selected": 2, # 1 = hjem, 2=sp, 3=om
-                        "show_list": list_results, # determines table or list
+                        "show_list": list_results, # table or list
                         "green_orange_red": []
                         }
         )
