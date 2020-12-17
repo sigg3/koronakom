@@ -175,7 +175,7 @@
 </div>
 {% if utvalg < 2 %}
 <div class="tile is-ancestor mt-2">
-    <div class="tile is-4">&nbsp;</div>
+    <div class="tile is-3">&nbsp;</div>
     <div class="tile is-4">
         <p class="control">
             <button type="submit" class="button is-primary">Kj&oslash;r sp&oslash;rring</button>
