@@ -150,8 +150,8 @@
                 <div class="content">
                     <ul>
                         <li>navn på kommune (enkelt-oppslag)</li>
-                        <li>&quot;&lt;kommune 1&gt; og &lt;kommune 2&gt;&quot; (sammenligning)</li>
-                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, <wbr>&lt;kommune 3&gt;, (liste)</li>
+                        <li>&quot;Tana og T&oslash;nsberg&quot; (sammenligning)</li>
+                        <li>&quot;Osen, Oslo, Osterøy&quot; (liste)</li>
                         <li>firesifret kommunenummer, <wbr>e.g. 0301 for Oslo</li>
                         <li>N + firesifret postnummer, e.g. postnummer <wbr>N3401 (Lier) og N3411 (Sylling) går til Lier (primær kommune)</li>
                         <li>navn på fylke (gir liste over kommunene)</li>
