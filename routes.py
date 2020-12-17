@@ -681,8 +681,8 @@ async def search_parser(request):
         # required bools
         sort_by = int(input_form['sort_results'])
         list_results = int(input_form['list_results'])
-        del input_form['sort_results']
-        del input_form['list_results']
+        input_form['sort_results'] = 0 # make ineligible for
+        input_form['list_results'] = 0 # inclusion in gimme
 
         # create list of desired objects from input
         gimme = [ k for k,v in input_form.items() if v == "1"]
@@ -717,7 +717,12 @@ async def search_parser(request):
             # overwrite
             data = data_sorted
 
+        # determine output template type
+        if list_results > 0:
 
+            pass
+        else:
+            pass
 
 
         # template toggle bools
