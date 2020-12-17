@@ -84,10 +84,10 @@
                         <h2 class="subtitle">
                             Vis alle i {{ f }} fylke:
                             <label class="radio">
-                                <input type="radio" id="show" name="{{ f }}"> Ja
+                                <input type="radio" value="1" name="{{ f }}"> Ja
                             </label>
                             <label class="radio">
-                                <input type="radio" id="ignore" checked> Nei
+                                <input type="radio" value="0" name="{{ f }}" checked> Nei
                             </label>
                             <span class="has-text-grey-light">(overstyrer)</span>
                         </h2>
