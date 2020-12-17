@@ -340,9 +340,6 @@ async def subdomain_vvhf(request):
 
         # Sort by cases per 100k # TODO simplify this
         # Can prolly do this with a quick lambda
-        # print("debug")
-        # print(f"data = {data}")
-
         by_risk = {}
         for item in data.keys():
             if item == '0000': continue
@@ -676,10 +673,12 @@ async def hjem(request):
 
 async def search_parser(request):
     """ GET/POST conditional for sjekk.kommune.nu subdomain"""
-    data = await request.form()
+    input_form = await request.form()
     if request.method == "POST":
         # get data from form (requires value="1" in template)
-        gimme = [ k for k,v in data.items() if v == "1"]
+        sort_by = input_form.pop('sort_results')
+
+        gimme = [ k for k,v in input_form.items() if v == "1"]
 
         # Setup basics
         s, response_dat = get_template_vars()
@@ -691,8 +690,31 @@ async def search_parser(request):
             # Should not happen. Just redirect to no POST site /hjelp
             return RedirectResponse(url="/hjelp")
 
+
         data, skipped_items = korona.app_query(items)
         _kingdom = data.pop('0000')
+
+        # sort data (if user so requested)
+        if sort_by > 0:
+            by_risk = {}
+            for item in data.keys():
+                score = data[item]['diff_100k'][0]
+                by_risk.update({item: score})
+
+            if sort_by == 1:
+                data_ordering = sorted(by_risk, key=by_risk.get, reverse=True)
+            else:
+                data_ordering = sorted(by_risk, key=by_risk.get, reverse=False)
+
+            data_sorted = {}
+            for item in data_ordering:
+                data_sorted[item] = data[item]
+
+            # overwrite
+            data = data_sorted
+
+
+
 
         # template toggle bools
         only_one = True if len(data) == 1 else False
@@ -969,6 +991,9 @@ async def utvalg(request):
     data = await request.form()
     s, response_dat = get_template_vars()
     if request.method == "POST":
+        return PlainTextResponse("this does never happen")
+
+        # Remove
         gimme = []
         _ = [ gimme.append(k) for k,v in data.items() if v == 1 ]
 
