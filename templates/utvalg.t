@@ -161,6 +161,9 @@
                         </label>
                     </p>
                 </div>
+                <p class="control">
+                    <button type="submit" class="button is-primary">Kj&oslash;r sp&oslash;rring</button>
+                </p>
             </div>
             {% elif utvalg == 2 %}
                 <h2 class="subtitle">Egendefinerte sp&oslash;rringer</h2>
@@ -220,7 +223,7 @@
         &nbsp;
     </div>
 </div>
-{% if utvalg < 2 %}
+{% if utvalg == 0 or utvalg == 2%}
 <div class="tile is-ancestor mt-2">
     <div class="tile is-3">&nbsp;</div>
     <div class="tile is-4">
@@ -231,6 +234,8 @@
     </div>
 </div>
 <div class="block">&nbsp;</div>
+{% elif utvalg == 1 }
+</form>
 {% endif %}
 
 {% endblock %}
