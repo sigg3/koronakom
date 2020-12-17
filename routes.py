@@ -685,13 +685,18 @@ async def search_parser(request):
         s, response_dat = get_template_vars()
 
         # Get results data
-        items, item_type = korona.app_get_items(gimme)
+        items, _ = korona.app_get_items(gimme)
 
         if len(items) == 0:
             # Should not happen. Just redirect to no POST site /hjelp
             return RedirectResponse(url="/hjelp")
 
         data, skipped_items = korona.app_query(items)
+
+        print("debug")
+        print(f"gimme = {gimme}")
+        print(f"skipped = {skipped_items}")
+        print(f"data = {data}")
 
         # template toggle bools
         only_one = True if len(data) == 1 else False
