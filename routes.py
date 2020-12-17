@@ -678,12 +678,9 @@ async def search_parser(request):
     """ GET/POST conditional for sjekk.kommune.nu subdomain"""
     data = await request.form()
     if request.method == "POST":
-        print("got to req method check, is POST")
-        gimme = []
-        for k, v in data.items():
-            if v == "1": gimme.append(k)
+        # get data from form (requires value="1" in template)
+        gimme = [ k for k,v in data.items() if v == "1"]
 
-        print(f"len of gimme = {len(gimme)}")
         # Setup basics
         s, response_dat = get_template_vars()
 
@@ -691,10 +688,9 @@ async def search_parser(request):
         items, item_type = korona.app_get_items(gimme)
 
         if len(items) == 0:
-            # This should not happen on controlled input. Just redirect
-            return RedirectResponse(url="/hjelp") # no POST on /hjelp
+            # Should not happen. Just redirect to no POST site /hjelp
+            return RedirectResponse(url="/hjelp")
 
-        print(f"len items={len(items)}")
         data, skipped_items = korona.app_query(items)
 
         # template toggle bools
