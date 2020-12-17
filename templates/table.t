@@ -205,8 +205,9 @@
 </div>
 
 {% else %}
+<!-- more than 2 hits -->
 {% if show_list %}
-
+<!-- show_list: true -->
 <div class="block">&nbsp;</div>
 <div class="container">
     <div class="columns">
@@ -271,9 +272,12 @@
         </div>
     </div>
 </div>
+
 {% else %}
+<!-- show_list: false -->
+
 <section class="section pt-2 pb-1">
-<div class="tile is-ancestor">
+    <div class="tile is-ancestor">
         <div class="tile is-3">&nbsp;</div>
         <div class="tile is-6">
             <div class="block">&nbsp;</div>            
