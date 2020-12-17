@@ -68,8 +68,8 @@
 {% endif %}
 <div class="tile is-ancestor mt-2">
     {% if utvalg == 0 %}
-    <div class="tile is-2">&nbsp;</div>
-    <div class="tile is-9">
+    <div class="tile is-3">&nbsp;</div>
+    <div class="tile is-8">
     {% else %}
     <div class="tile is-4">&nbsp;</div>
     <div class="tile is-4">
@@ -146,7 +146,7 @@
                         </div>
                     </form>
                 </div>              
-                <p>De vanligste oppslagene:</p>
+                <p>Oppslag:</p>
                 <div class="content">
                     <ul>
                         <li>navn på kommune (enkelt-oppslag)</li>
@@ -157,7 +157,7 @@
                         <li>navn på fylke (gir liste over kommunene)</li>
                     </ul>
                 </div>
-                <p>Altarnative oppslag:</p>
+                <p>Altarnativer:</p>
                 <div class="content">
                     <ul>
                         <li>Man kan bruke <a href="https://sjekk.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</li>
