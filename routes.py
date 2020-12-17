@@ -680,8 +680,10 @@ async def search_parser(request):
     if request.method == "POST":
         print("got to req method check, is POST")
         gimme = []
-        _ = [ gimme.append(k) for k,v in data.items() if v == 1 ]
+        for k, v in data.items():
+            if v == 1: gimme.append(k)
 
+        print(f"len of gimme = {len(gimme)}")
         # Setup basics
         s, response_dat = get_template_vars()
 
