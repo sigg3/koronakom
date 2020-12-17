@@ -133,7 +133,7 @@
 
                     {% for f, k in fylker.items() %}
                     <label class="checkbox" style="display: block;">
-                        <input type="checkbox" name="{{ f }}">
+                        <input type="checkbox" value="1" name="{{ f }}">
                         <a href="https://sjekk.kommune.nu/?s={{ f }}" title="{{ f }}">{{ f }}</a>
                     </label>
                     {% endfor %}
@@ -236,6 +236,7 @@
 <div class="block">&nbsp;</div>
 {% elif utvalg == 1 %}
 </form>
+<div class="block">&nbsp;</div>
 {% endif %}
 
 {% endblock %}
