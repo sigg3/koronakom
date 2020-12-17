@@ -96,7 +96,7 @@
                 {% endif %}
                 {% for kommune in k %}
                 <label class="checkbox" style="width: 14em;">
-                    <input type="checkbox" name="{{ kommune[1] }}">
+                    <input type="checkbox" value="1" name="{{ kommune[1] }}">
                     <a href="https://{{ kommune[2] }}" title="{{ kommune[0] }}">{{ kommune[0] }}</a>
                 </label>
                 {% endfor %}
@@ -151,7 +151,7 @@
                     <ul>
                         <li>navn på kommune (enkelt-oppslag)</li>
                         <li>&quot;Tana og T&oslash;nsberg&quot; (sammenligning)</li>
-                        <li>&quot;Osen, Oslo, Osterøy&quot; (liste)</li>
+                        <li>&quot;Osen, Oslo, Oster&oslash;y&quot; (liste)</li>
                         <li>firesifret kommunenummer, <wbr>e.g. 0301 for Oslo</li>
                         <li>N + firesifret postnummer, e.g. postnummer <wbr>N3401 (Lier) og N3411 (Sylling) går til Lier (primær kommune)</li>
                         <li>navn på fylke (gir liste over kommunene)</li>
@@ -177,10 +177,13 @@
 <div class="tile is-ancestor mt-2">
     <div class="tile is-4">&nbsp;</div>
     <div class="tile is-4">
-        <input type="submit">
+        <p class="control">
+            <button type="submit" class="button is-primary">S&oslash;k</button>
+        </p>
         </form>
     </div>
 </div>
+<div class="block">&nbsp;</div>
 {% endif %}
 
 {% endblock %}
