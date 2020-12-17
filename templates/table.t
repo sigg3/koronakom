@@ -355,6 +355,7 @@
     </div>
 </section>
 {% endif %}
+{% endif %}
 {% endfor %}
 
 <div class="tile is-ancestor mt-4 pt-8">
