@@ -98,6 +98,7 @@ def get_template_vars() -> Tuple[korona.Session, dict]:
                  "html_lang": lang,
                  "lang_selector": selector,
                  "languages": langs,
+                 "show_list": True, # default way to show >2 results
                  "menu_selected": 0 # 1 = hjem, 2=sp, 3=om
                  }
 
@@ -678,14 +679,12 @@ async def search_parser(request):
         # Setup basics
         s, response_dat = get_template_vars()
 
-        # required bools
-        sort_by = int(input_form['sort_results'])
-        list_results = int(input_form['list_results'])
-        input_form['sort_results'] = 0 # make ineligible for
-        input_form['list_results'] = 0 # inclusion in gimme
+        # required parameters for results display
+        sort_by = input_form['sort_results']
+        list_results = bool(input_form['list_results'])
 
         # create list of desired objects from input
-        gimme = [ k for k,v in input_form.items() if v == "1"]
+        gimme = [ k for k,v in input_form.items() if v == "1" ]
 
         # Translate input to muncipality IDs
         items, _ = korona.app_get_items(gimme)
@@ -694,18 +693,18 @@ async def search_parser(request):
             # Should not happen. Just redirect to no POST site /hjelp
             return RedirectResponse(url="/hjelp")
 
-
+        # Get the data we want
         data, skipped_items = korona.app_query(items)
-        _kingdom = data.pop('0000')
+        _kingdom = data.pop('0000') # don't want
 
         # sort data (if user so requested)
-        if sort_by > 0:
+        if sort_by != "def":
             by_risk = {}
             for item in data.keys():
                 score = data[item]['diff_100k'][0]
                 by_risk.update({item: score})
 
-            if sort_by == 1:
+            if sort_by == "desc":
                 data_ordering = sorted(by_risk, key=by_risk.get, reverse=True)
             else:
                 data_ordering = sorted(by_risk, key=by_risk.get, reverse=False)
@@ -716,14 +715,6 @@ async def search_parser(request):
 
             # overwrite
             data = data_sorted
-
-        # determine output template type
-        if list_results > 0:
-
-            pass
-        else:
-            pass
-
 
         # template toggle bools
         only_one = True if len(data) == 1 else False
@@ -751,6 +742,7 @@ async def search_parser(request):
                         "only_one": only_one,
                         "exactly_two": exactly_two,
                         "menu_selected": 2, # 1 = hjem, 2=sp, 3=om
+                        "show_list": list_results, # determines table or list
                         "green_orange_red": []
                         }
         )

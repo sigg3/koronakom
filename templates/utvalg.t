@@ -107,22 +107,22 @@
                     <h2 class="subtitle">
                         Vis i rekkefølge:
                         <label class="radio" checked>
-                            <input type="radio" value="0" name="sort_results" checked> utvalg
+                            <input type="radio" value="def" name="sort_results" checked> utvalg
                         </label>
                         <label class="radio">
-                            <input type="radio" value="1" name="sort_results"> synkende (høy-lav)
+                            <input type="radio" value="desc" name="sort_results"> synkende (høy-lav)
                         </label>
                         <label class="radio">
-                            <input type="radio" value="2" name="sort_results"> stigende (lav-høy)
+                            <input type="radio" value="asc" name="sort_results"> stigende (lav-høy)
                         </label>
                     </h2>
                     <h2 class="subtitle">
                         Visningstype (for &gt;2):
                         <label class="radio" checked>
-                            <input type="radio" value="1" name="list_results" checked> liste
+                            <input type="radio" value="True" name="list_results" checked> liste
                         </label>
                         <label class="radio">
-                            <input type="radio" value="0" name="list_results"> tabell
+                            <input type="radio" value="False" name="list_results"> tabell
                         </label>
                     </h2>
                 </div>
@@ -142,22 +142,22 @@
                 <div class="control">
                     <p>Vis i rekkefølge:
                         <label class="radio" checked>
-                            <input type="radio" value="0" name="sort_results" checked> utvalg
+                            <input type="radio" value="def" name="sort_results" checked> utvalg
                         </label>
                         <label class="radio">
-                            <input type="radio" value="1" name="sort_results"> synkende (høy-lav)
+                            <input type="radio" value="desc" name="sort_results"> synkende (høy-lav)
                         </label>
                         <label class="radio">
-                            <input type="radio" value="2" name="sort_results"> stigende (lav-høy)
+                            <input type="radio" value="asc" name="sort_results"> stigende (lav-høy)
                         </label>
                     </p>
                     <p>
                         Visningstype (for &gt;2):
                         <label class="radio" checked>
-                            <input type="radio" value="1" name="list_results" checked> liste
+                            <input type="radio" value="True" name="list_results" checked> liste
                         </label>
                         <label class="radio">
-                            <input type="radio" value="0" name="list_results"> tabell
+                            <input type="radio" value="False" name="list_results"> tabell
                         </label>
                     </p>
                 </div>
