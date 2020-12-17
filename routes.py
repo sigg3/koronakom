@@ -676,10 +676,52 @@ async def hjem(request):
 
 async def search_parser(request):
     """ GET/POST conditional for sjekk.kommune.nu subdomain"""
-    await request.form()
+    data = await request.form()
     if request.method == "POST":
-        return PlainTextResponse("Nothing to see here..")
-        # TODO
+        s, response_dat = get_template_vars()
+        gimme = []
+        _ = [ gimme.append(k) for k,v in data.items() if v == 1 ]
+
+        # Get results data
+        items, item_type = korona.app_get_items(gimme)
+
+        if len(items) == 0:
+            # This should not happen on controlled input. Just redirect
+            return RedirectResponse(url="/")
+
+        data, skipped_items = korona.app_query(items)
+
+        # template toggle bools
+        only_one = True if len(data) == 1 else False
+        exactly_two = True if len(data) == 2 else False
+
+        # set header and template strings
+        head_title = "sjekk.kommune.nu"
+        hero_link = head_title
+        hero_title = "sjekk"
+        hero_isurl = True
+        nordate = response_dat['nordate']
+        hero_subtitle = f"Aktuelle tall for oppslag (data fra {nordate})"
+
+        # Build response dict
+        response_dat.update(
+                        {
+                        "request": request,
+                        "head_title": head_title,
+                        "hero_title": hero_title,
+                        "hero_isurl": hero_isurl,
+                        "hero_link": hero_link,
+                        "hero_subtitle": hero_subtitle,
+                        "skipped_items": skipped_items,
+                        "result_dict": data,
+                        "only_one": only_one,
+                        "exactly_two": exactly_two,
+                        "menu_selected": 2, # 1 = hjem, 2=sp, 3=om
+                        "green_orange_red": []
+                        }
+        )
+        return templates.TemplateResponse('table.t', response_dat)
+
     else:
         try:
             # See if we're searching
