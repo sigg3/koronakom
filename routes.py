@@ -692,11 +692,7 @@ async def search_parser(request):
             return RedirectResponse(url="/hjelp")
 
         data, skipped_items = korona.app_query(items)
-
-        print("debug")
-        print(f"gimme = {gimme}")
-        print(f"skipped = {skipped_items}")
-        print(f"data = {data}")
+        _kingdom = data.pop('0000')
 
         # template toggle bools
         only_one = True if len(data) == 1 else False
