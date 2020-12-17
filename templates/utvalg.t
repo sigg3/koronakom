@@ -1,6 +1,7 @@
 {% extends "base.template" %}
 
 
+<!-- remove this entire block when finished -->
 {% block tweety %}
 {% if utvalg == 3 %}
 <div class="block">&nbsp;</div>
@@ -81,14 +82,14 @@
                 {% if f != "Oslo" %}
                     <div class="control">
                         <h2 class="subtitle">
-                            Vis alle kommuner i {{ f }} fylke:
+                            Vis alle i {{ f }} fylke:
                             <label class="radio">
                                 <input type="radio" name="{{ f }}"> Ja
                             </label>
                             <label class="radio">
                                 <input type="radio" name="{{ f }}" checked> Nei
                             </label>
-                            <span class="has-text-grey-light">(overstyrer boksene)</span>
+                            <span class="has-text-grey-light">(overstyrer)</span>
                         </h2>
                     </div>
                 <div class="block">&nbsp;</div>
@@ -126,7 +127,7 @@
                     <form action="https://sjekk.kommune.nu/" method="get">
                         <div class="field has-addons pt-3">
                             <p class="control is-hidden-mobile"><!-- desktop -->
-                                <input name="s" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
+                                <input name="s" class="input is-large" type="text" placeholder="Kommune, fylke eller nøkkel*">
                             </p>
                             <p class="control is-hidden-mobile">
                                 <button type="submit" class="button is-large is-primary">S&oslash;k</button>
@@ -138,7 +139,7 @@
                     <form action="https://sjekk.kommune.nu/" method="get">
                         <div class="field ml-4 has-addons pt-3">
                             <p class="control is-hidden-tablet"><!-- mobile -->
-                                <input name="s" class="input" type="text" size="25" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
+                                <input name="s" class="input" type="text" size="25" placeholder="Kommune, fylke eller nøkkel*">
                             </p>
                             <p class="control is-hidden-tablet">
                                 <button type="submit" class="button is-primary">S&oslash;k</button>
@@ -174,8 +175,13 @@
     </div>
 </div>
 {% if utvalg < 2 %}
-<input type="submit">
-</form>
+<div class="tile is-ancestor mt-2">
+    <div class="tile is-4">&nbsp;</div>
+    <div class="tile is-4">
+        <input type="submit">
+        </form>
+    </div>
+</div>
 {% endif %}
 
 {% endblock %}
