@@ -117,12 +117,18 @@
                         </label>
                     </h2>
                     <h2 class="subtitle">
-                        Visningstype: (kommer)
+                        Visningstype (for &gt;2):
+                        <label class="radio" checked>
+                            <input type="radio" value="1" name="list_results" checked> liste
+                        </label>
+                        <label class="radio">
+                            <input type="radio" value="0" name="list_results"> tabell
+                        </label>
                     </h2>
                 </div>
             {% elif utvalg == 1 %}
             <div class="container has-text-centered">
-                <h2 class="subtitle">La meg se p&aring;:</h1>
+                <h2 class="subtitle">La meg se p&aring;:</h2>
                      <div class="control has-text-left ml-6 ">
 
                     {% for f, k in fylker.items() %}
@@ -131,6 +137,29 @@
                         <a href="https://sjekk.kommune.nu/?s={{ f }}" title="{{ f }}">{{ f }}</a>
                     </label>
                     {% endfor %}
+                    </div>
+                <h2 class="subtitle">Tilpasninger</h1>
+                <div class="control">
+                    <p>Vis i rekkefølge:
+                        <label class="radio" checked>
+                            <input type="radio" value="0" name="sort_results" checked> utvalg
+                        </label>
+                        <label class="radio">
+                            <input type="radio" value="1" name="sort_results"> synkende (høy-lav)
+                        </label>
+                        <label class="radio">
+                            <input type="radio" value="2" name="sort_results"> stigende (lav-høy)
+                        </label>
+                    </p>
+                    <p>
+                        Visningstype (for &gt;2):
+                        <label class="radio" checked>
+                            <input type="radio" value="1" name="list_results" checked> liste
+                        </label>
+                        <label class="radio">
+                            <input type="radio" value="0" name="list_results"> tabell
+                        </label>
+                    </p>
                 </div>
             </div>
             {% elif utvalg == 2 %}
