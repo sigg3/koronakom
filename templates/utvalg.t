@@ -142,11 +142,16 @@
             </div>
             {% elif utvalg == 2 %}
                 <h2 class="subtitle">Egendefinerte sp&oslash;rringer</h2>
-                <p>Alle kommunene i Norge har en fire-sifret kode (f.eks. har Oslo 0301).</p>
                 <p>&nbsp;</p>
                 <p>Denne siden er ikke ferdig utviklet.</p>
                 <p>&nbsp;</p>
-                <p>Legg inn spørring for EU-risk-assessment</p>
+                <p>Eksisterende spesialsøk:</p>
+                <div class="content">
+                    <ul>
+                        <li>E6: viser alle kommunene langs E6 (sørover)</li>
+                        <li>byer: viser alle byene i norge</li>
+                    </ul>
+                </div>
             {% else %}
                 <div class="columns is-centered is-hidden-mobile"><!-- desktop  -->
                     <form action="https://sjekk.kommune.nu/" method="get">
@@ -198,7 +203,7 @@
         &nbsp;
     </div>
 </div>
-{% if utvalg == 0 or utvalg == 2 %}
+{% if utvalg == 0 %}
 <div class="tile is-ancestor mt-2">
     <div class="tile is-3">&nbsp;</div>
     <div class="tile is-4">
@@ -211,6 +216,8 @@
 <div class="block">&nbsp;</div>
 {% elif utvalg == 1 %}
 </form>
+<div class="block">&nbsp;</div>
+{% else %}
 <div class="block">&nbsp;</div>
 {% endif %}
 
