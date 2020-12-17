@@ -206,9 +206,9 @@
 </div>
 {% endfor %}
 {% else %}
-{% for table in result_dict.keys() %}
 <!-- more than 2 hits -->
 {% if show_list %}
+{% for table in result_dict.keys() %}
 <!-- show_list: true -->
 <div class="block">&nbsp;</div>
 <div class="container">
