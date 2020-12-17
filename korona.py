@@ -1003,22 +1003,18 @@ async def check_data_integrity():
     """ Same as setup, but will delete big_book if corrupted """
     s = app_verify_setup()
     print('Data integrity check (n=10)')
-    if Path(s.store).is_file():
-        pls_check = ['4214','4215','1144','3812','5414',
-                     '3813','1135','5439','5440','3007']
-        data, _ = app_query(pls_check)
-        _kingdom = data.pop('0000')
-        corrupted = await missing_data(pls_check, data)
-        if corrupted:
-            print('Result: data corrupted')
-        else:
-            print('Result: data OK')
-    else:
-        print('Result: no data file present')
-        corrupted = True
-
+    pls_check = ['4214','4215','1144','3812','5414',
+                 '3813','1135','5439','5440','3007']
+    data, _ = app_query(pls_check)
+    _kingdom = data.pop('0000')
+    corrupted = await missing_data(pls_check, data)
     if corrupted:
-        print("Data corrupted or missing, crash app to restart")
+        print('Result: data corrupted')
+    else:
+        print('Result: data OK')
+    
+    if corrupted:
+        print("Data corrupted, crash app to restart")
         raise Exception("KAMIKAZE: crashing app to force restart")
 
 
