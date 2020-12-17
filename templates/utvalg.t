@@ -65,7 +65,7 @@
 
 {% block sector_2 %}
 {% if utvalg < 2 %}
-<form method="POST">
+<form action="https://sjekk.kommune.nu/" method="POST">
 {% endif %}
 <div class="tile is-ancestor mt-2">
     {% if utvalg == 0 %}
@@ -102,12 +102,12 @@
                 {% endfor %}
                 <div class="block">&nbsp;</div>
                 {% endfor %}
-                <h1>Tilpasninger</h1>
+                <h1 class="title">Tilpasninger</h1>
                 <div class="control">
                     <h2 class="subtitle">
                         Vis i rekkefølge:
                         <label class="radio" checked>
-                            <input type="radio" value="0" name="sort_results"> utvalg
+                            <input type="radio" value="0" name="sort_results" checked> utvalg
                         </label>
                         <label class="radio">
                             <input type="radio" value="1" name="sort_results"> synkende (høy-lav)
