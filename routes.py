@@ -690,6 +690,7 @@ async def search_parser(request):
         items, _ = korona.app_get_items(gimme)
 
         if len(items) == 0:
+            print("debug: 0-length query ..")
             # Should not happen. Just redirect to no POST site /hjelp
             return RedirectResponse(url="/hjelp")
 
