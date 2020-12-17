@@ -681,7 +681,8 @@ async def search_parser(request):
 
         # required parameters for results display
         sort_by = input_form['sort_results']
-        list_results = bool(input_form['list_results'])
+        do_list = input_form['list_results']
+        show_list = True if do_list == "True" else False
 
         # create list of desired objects from input
         gimme = [ k for k,v in input_form.items() if v == "1" ]
@@ -742,7 +743,7 @@ async def search_parser(request):
                         "only_one": only_one,
                         "exactly_two": exactly_two,
                         "menu_selected": 2, # 1 = hjem, 2=sp, 3=om
-                        "show_list": list_results, # table or list
+                        "show_list": show_list, # table or list
                         "green_orange_red": []
                         }
         )
