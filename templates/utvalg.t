@@ -1,30 +1,5 @@
 {% extends "base.template" %}
 
-
-<!-- remove this entire block when finished -->
-{% block tweety %}
-{% if utvalg == 3 %}
-<div class="block">&nbsp;</div>
-{% else %}
-<div class="tile is-ancestor">
-    <div class="tile is-4">&nbsp;</div>
-    <div class="tile is-4">
-        <div class="notification is-warning">
-          <strong>Beklager!</strong>
-          Denne delen av siden er dessverre ikke ferdig utviklet.
-          Det kan hende noe fungerer og andre ting ikke gjør det.
-          Lykke til :)
-        </div>
-    </div>
-    <div class="tile is-4">&nbsp;</div>
-</div>
-
-<div class="block">&nbsp;</div>
-{% endif %}
-{% endblock %}
-
-
-
 {% block sector_1 %}
 <div class="tile is-ancestor pb-4">
     <div class="tile is-4">
