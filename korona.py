@@ -1027,9 +1027,10 @@ def main():
 
 async def main_cloud():
     """ heroku main() used to setup stuff """
-    await check_data_integrity()
-    print("run setup() from __main__ (background task)")
+    print("run setup() from __main__ (cloud)")
     await setup(is_local=False)
+    await check_data_integrity()
+
 
 
 async def setup(**kwargs):
