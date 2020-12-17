@@ -223,7 +223,7 @@
         &nbsp;
     </div>
 </div>
-{% if utvalg == 0 or utvalg == 2%}
+{% if utvalg == 0 or utvalg == 2 %}
 <div class="tile is-ancestor mt-2">
     <div class="tile is-3">&nbsp;</div>
     <div class="tile is-4">
@@ -234,7 +234,7 @@
     </div>
 </div>
 <div class="block">&nbsp;</div>
-{% elif utvalg == 1 }
+{% elif utvalg == 1 %}
 </form>
 {% endif %}
 
