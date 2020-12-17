@@ -102,6 +102,24 @@
                 {% endfor %}
                 <div class="block">&nbsp;</div>
                 {% endfor %}
+                <h1>Tilpasninger</h1>
+                <div class="control">
+                    <h2 class="subtitle">
+                        Vis i rekkefølge:
+                        <label class="radio" checked>
+                            <input type="radio" value="0" name="sort_results"> utvalg
+                        </label>
+                        <label class="radio">
+                            <input type="radio" value="1" name="sort_results"> synkende (høy-lav)
+                        </label>
+                        <label class="radio">
+                            <input type="radio" value="2" name="sort_results"> stigende (lav-høy)
+                        </label>
+                    </h2>
+                    <h2 class="subtitle">
+                        Visningstype: (kommer)
+                    </h2>
+                </div>
             {% elif utvalg == 1 %}
             <div class="container has-text-centered">
                 <h2 class="subtitle">La meg se p&aring;:</h1>
@@ -109,7 +127,7 @@
 
                     {% for f, k in fylker.items() %}
                     <label class="checkbox" style="display: block;">
-                        <input type="checkbox" value="1" name="{{ f }}">
+                        <input type="checkbox" name="{{ f }}">
                         <a href="https://sjekk.kommune.nu/?s={{ f }}" title="{{ f }}">{{ f }}</a>
                     </label>
                     {% endfor %}
