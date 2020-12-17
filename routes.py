@@ -931,7 +931,7 @@ async def om_tjenesten(request):
     return templates.TemplateResponse('about.t', response_dat)
 
 async def utvalg(request):
-    await request.form()
+    data = await request.form()
     if request.method == "POST":
         return PlainTextResponse(f"{data}")
     else:
