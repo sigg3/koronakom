@@ -934,9 +934,8 @@ async def utvalg(request):
     data = await request.form()
     if request.method == "POST":
         print("debugging utvalg POST")
-        print(type(data))
-        print(dir(data))
-        
+        for k,v in data.items():
+            print(f"{k} = {v}")
         return PlainTextResponse(f"{data}")
     else:
         # get language settings
