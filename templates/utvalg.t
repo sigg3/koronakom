@@ -146,8 +146,7 @@
                         </div>
                     </form>
                 </div>              
-                <h2 class="subtitle">Søkeord / nøkler</h2>
-                Har kan du gjøre følgende oppslag:
+                <p>De vanligste oppslagene:</p>
                 <div class="content">
                     <ul>
                         <li>navn på kommune (enkelt-oppslag)</li>
@@ -158,7 +157,7 @@
                         <li>navn på fylke (gir liste over kommunene)</li>
                     </ul>
                 </div>
-                <p>Andre måter å gjøre oppslag på:</p>
+                <p>Altarnative oppslag:</p>
                 <div class="content">
                     <ul>
                         <li>Man kan bruke <a href="https://sjekk.kommune.nu/utvalg" title="Utvalg">Kommune-velgeren</a> til å gjøre større utvalg manuelt.</li>
