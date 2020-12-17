@@ -87,7 +87,7 @@
                                 <input type="radio" id="show" name="{{ f }}"> Ja
                             </label>
                             <label class="radio">
-                                <input type="radio" id="ignore" name="{{ f }}" checked> Nei
+                                <input type="radio" id="ignore" checked> Nei
                             </label>
                             <span class="has-text-grey-light">(overstyrer)</span>
                         </h2>
@@ -151,9 +151,9 @@
                     <ul>
                         <li>navn på kommune (enkelt-oppslag)</li>
                         <li>&quot;&lt;kommune 1&gt; og &lt;kommune 2&gt;&quot; (sammenligning)</li>
-                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, &lt;kommune 3&gt;, (liste)</li>
-                        <li>firesifret kommunenummer, e.g. 0301 for Oslo</li>
-                        <li>N + firesifret postnummer, e.g. både N3401 (Lier) og N3411 (Sylling) går til Lier (primær kommune)</li>
+                        <li>&quot;&lt;kommune 1&gt;, &lt;kommune 2&gt;, <wbr>&lt;kommune 3&gt;, (liste)</li>
+                        <li>firesifret kommunenummer, <wbr>e.g. 0301 for Oslo</li>
+                        <li>N + firesifret postnummer, e.g. postnummer <wbr>N3401 (Lier) og N3411 (Sylling) går til Lier (primær kommune)</li>
                         <li>navn på fylke (gir liste over kommunene)</li>
                     </ul>
                 </div>
