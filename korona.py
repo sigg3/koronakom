@@ -1003,6 +1003,11 @@ async def missing_data(control: list, data: dict) -> bool:
 async def check_data_integrity():
     """ Same as setup, but will delete big_book if corrupted """
     s = app_verify_setup()
+    if Path(s.store).is_file():
+        print(f'Data file: {s.store}')
+    else:
+        print(f'Data file: {s.store} (missing)')
+     
     print('Data integrity check (n=10)')
     pls_check = ['4214','4215','1144','3812','5414',
                  '3813','1135','5439','5440','3007']
