@@ -789,9 +789,6 @@ def fritekst(request):
     #await request.form()
     try:
         ui = html.escape(request.query_params['s'])
-        # /?sok=Salangen
-        if type(ui) != "str":
-            print(f"debug: GET query param not a string, type = {type(ui)}")
         # TODO if list we can just do ui = ui[0] no?
     except Exception as e:
         # could not get input ..? => bail!
