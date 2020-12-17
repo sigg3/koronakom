@@ -933,6 +933,10 @@ async def om_tjenesten(request):
 async def utvalg(request):
     data = await request.form()
     if request.method == "POST":
+        print("debugging utvalkg POST")
+        print(type(data))
+        for k,v in data:
+            print(f"{k}={v}")
         return PlainTextResponse(f"{data}")
     else:
         # get language settings
