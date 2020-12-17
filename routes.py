@@ -675,15 +675,19 @@ async def search_parser(request):
     """ GET/POST conditional for sjekk.kommune.nu subdomain"""
     input_form = await request.form()
     if request.method == "POST":
-        # get data from form (requires value="1" in template)
-        sort_by = int(input_form['sort_results'])
-
-        gimme = [ k for k,v in input_form.items() if v == "1"]
-
         # Setup basics
         s, response_dat = get_template_vars()
 
-        # Get results data
+        # required bools
+        sort_by = int(input_form['sort_results'])
+        list_results = int(input_form['list_results'])
+        del input_form['sort_results']
+        del input_form['list_results']
+
+        # create list of desired objects from input
+        gimme = [ k for k,v in input_form.items() if v == "1"]
+
+        # Translate input to muncipality IDs
         items, _ = korona.app_get_items(gimme)
 
         if len(items) == 0:
