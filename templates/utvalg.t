@@ -178,7 +178,7 @@
     <div class="tile is-4">&nbsp;</div>
     <div class="tile is-4">
         <p class="control">
-            <button type="submit" class="button is-primary">S&oslash;k</button>
+            <button type="submit" class="button is-primary">Kj&oslash;r sp&oslash;rring</button>
         </p>
         </form>
     </div>
