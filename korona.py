@@ -546,6 +546,7 @@ def query_data(
                 except KeyError as e:
                     print(f"got keyerror on: {str(e)}")
                     print(f"was searching big_book['ro'][{date}][{kid}]")
+                    print(f"date is {type(date)} and kid is {type(kid)}")
                     enn, population, pro100k = 'NA', 'NA', 'NA'
                     skipped_items.append((kid, date))
 
@@ -1012,7 +1013,7 @@ async def check_data_integrity():
         print('Result: data corrupted')
     else:
         print('Result: data OK')
-    
+
     if corrupted:
         print("Data corrupted, crash app to restart")
         raise Exception("KAMIKAZE: crashing app to force restart")
