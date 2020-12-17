@@ -40,8 +40,8 @@
 
 
 {% block sector_1 %}
-{% for table in result_dict.keys() %}
 {% if only_one %}
+{% for table in result_dict.keys() %}
 <div class="columns is-mobile is-centered is-gapless">
     <div class="column is-three-fifths">
         <img src="data:image/png;base64,{{ trend_plot }}" style="width: 600px;height: 300px;" class="is-pulled-right" />
@@ -119,8 +119,9 @@
     </div>
 </div>
 
-
+{% endfor %}
 {% elif exactly_two %}
+{% for table in result_dict.keys() %}
 <div class="block">&nbsp;</div>
 <div class="tile is-ancestor">
     <div class="tile is-1">
@@ -203,8 +204,9 @@
         &nbsp;
     </div>
 </div>
-
+{% endfor %}
 {% else %}
+{% for table in result_dict.keys() %}
 <!-- more than 2 hits -->
 {% if show_list %}
 <!-- show_list: true -->
@@ -272,7 +274,7 @@
         </div>
     </div>
 </div>
-
+{% endfor %}
 {% else %}
 <!-- show_list: false -->
 
@@ -360,7 +362,7 @@
 </section>
 {% endif %}
 {% endif %}
-{% endfor %}
+
 
 <div class="tile is-ancestor mt-4 pt-8">
     <div class="tile is-2">&nbsp;</div>
