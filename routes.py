@@ -931,40 +931,44 @@ async def om_tjenesten(request):
     return templates.TemplateResponse('about.t', response_dat)
 
 async def utvalg(request):
-    # get language settings
-    s, response_dat = get_template_vars()
+    await request.form()
+    if request.method == "POST":
+        return PlainTextResponse(f"{data}")
+    else:
+        # get language settings
+        s, response_dat = get_template_vars()
 
-    # Individual muncipalities by fylke
-    try:
-        big_list = s.list_of_muncipalities
-    except:
-        big_list = {}
-        for f, klist in s.norge.fylker.items():
-            big_list[f] = []
-            for k in klist:
-                kid = s.norge.id[k]
-                url = s.norge.data[kid]['url']
-                big_list[f].append((k, kid, url))
+        # Individual muncipalities by fylke
+        try:
+            big_list = s.list_of_muncipalities
+        except:
+            big_list = {}
+            for f, klist in s.norge.fylker.items():
+                big_list[f] = []
+                for k in klist:
+                    kid = s.norge.id[k]
+                    url = s.norge.data[kid]['url']
+                    big_list[f].append((k, kid, url))
 
-        s.list_of_muncipalities = big_list
+            s.list_of_muncipalities = big_list
 
-    #print(f"debug = {big_list}")
-    #print(f"request is {request}")
+        #print(f"debug = {big_list}")
+        #print(f"request is {request}")
 
-    response_dat.update(
-            {
-                "request": request,
-                "head_title": "sjekk.kommune.nu korona spørring",
-                "hero_title": "sjekk",
-                "hero_isurl": True,
-                "hero_subtitle": "Velg hvilke kommuner du vil se",
-                "hero_link": "sjekk.kommune.nu/utvalg",
-                "fylker": big_list,
-                "utvalg": 0,
-                "menu_selected": 2 # 1 = hjem, 2=sp, 3=om
-            }
-    )
-    return templates.TemplateResponse('utvalg.t', response_dat)
+        response_dat.update(
+                {
+                    "request": request,
+                    "head_title": "sjekk.kommune.nu korona spørring",
+                    "hero_title": "sjekk",
+                    "hero_isurl": True,
+                    "hero_subtitle": "Velg hvilke kommuner du vil se",
+                    "hero_link": "sjekk.kommune.nu/utvalg",
+                    "fylker": big_list,
+                    "utvalg": 0,
+                    "menu_selected": 2 # 1 = hjem, 2=sp, 3=om
+                }
+        )
+        return templates.TemplateResponse('utvalg.t', response_dat)
 
 async def utvalg_fylker(request):
     if request.method == "POST":
