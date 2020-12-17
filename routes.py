@@ -683,6 +683,10 @@ async def search_parser(request):
         sort_by = input_form['sort_results']
         list_results = bool(input_form['list_results'])
 
+        print("input_form:")
+        for k,v in input_form.items():
+            print(f"{k} = {v}")
+
         # create list of desired objects from input
         gimme = [ k for k,v in input_form.items() if v == "1" ]
 
