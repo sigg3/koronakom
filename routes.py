@@ -672,7 +672,7 @@ async def hjem(request):
     response_dat.update(
         {
             "request": request,
-            "canary": canary,
+            "canary": bytes(canary),
             "menu_selected": 1 # 1 = hjem, 2=sp, 3=om
         }
     )
