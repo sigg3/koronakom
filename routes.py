@@ -666,13 +666,13 @@ async def hjem(request):
     green = response_dat.get('green')
     orange = response_dat.get('orange')
     red = response_dat.get('red')
-    canary = f"<!-- stats: {red}/{orange}/{green} -->"
+    canary = f"stats: {red}/{orange}/{green}"
 
     # construct rest of index vars
     response_dat.update(
         {
             "request": request,
-            "canary": bytes(canary),
+            "canary": canary,
             "menu_selected": 1 # 1 = hjem, 2=sp, 3=om
         }
     )
