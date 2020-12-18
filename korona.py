@@ -915,11 +915,6 @@ def app_query(query_items: list) -> dict:
     source = s.book
     lookup = s.norge
 
-    #print(f"DEBUG:")
-    #print(f"dates  = {get_dates}")
-    #print(f"src    = {source}")
-    #print(f"lookup = {lookup}")
-
     # Query sources and return dictionary to app
     data, skipped_items = query_data(get_dates, source, query_items, lookup)
     return data, skipped_items
@@ -1002,26 +997,46 @@ async def missing_data(control: list, data: dict) -> bool:
 
 async def check_data_integrity():
     """ Same as setup, but will delete big_book if corrupted """
-    s = app_verify_setup()
-    if Path(s.store).is_file():
-        print(f'Data file: {s.store}')
+    # datetime.datetime.now().isoformat()
+    #print('Data integrity check (n=10)')
+    #pls_check = ['4214','4215','1144','3812','5414',
+    #             '3813','1135','5439','5440','3007']
+    # running app_query also runs verify setup()
+    #data, _ = app_query(pls_check)
+    #_kingdom = data.pop('0000')
+
+    # file check
+    #if Path(s.store).is_file():
+    #    print(f'Data file: {s.store}')
+    #else:
+    #    print(f'Data file: {s.store} (missing)')
+
+    # dict check
+    #corrupted = await missing_data(pls_check, data)
+    #if corrupted:
+    #    print('Result: data corrupted')
+    #else:
+    #    print('Result: data OK')
+
+    # web page check (stale cache or something)
+    corrupted = False
+    print("Testing debug_info data using httpx.get")
+    debug_page = "https://sjekk.kommune.nu/debug_info"
+    async with httpx.AsyncClient() as client:
+        site = await client.get(debug_page)
+
+    if site.is_error:
+        pass # Not sure we should pass or set to reboot
     else:
-        print(f'Data file: {s.store} (missing)')
-     
-    print('Data integrity check (n=10)')
-    pls_check = ['4214','4215','1144','3812','5414',
-                 '3813','1135','5439','5440','3007']
-    data, _ = app_query(pls_check)
-    _kingdom = data.pop('0000')
-    corrupted = await missing_data(pls_check, data)
-    if corrupted:
-        print('Result: data corrupted')
-    else:
-        print('Result: data OK')
+        if site.text.count("NA") > 8:
+            corrupted = True
 
     if corrupted:
-        print("Data corrupted, crash app to restart")
-        raise Exception("KAMIKAZE: crashing app to force restart")
+        print("Cache is stale/dead, force app restart")
+        right_now = datetime.datetime.now().isoformat()
+        os.environ["heroku_app_restart"] = right_now
+        # Changing conf var should trigger heroku restart
+
 
 
 def main():
