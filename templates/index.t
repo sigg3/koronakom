@@ -1,5 +1,5 @@
 {% extends "base.template" %}
-<span id="canary" style="visibility: hidden; display: none;">stats:{{ diff_n }}/{{ infected }}/{{ red }}/{{ orange }}/{{ green }}</span>
+<div id="canary" style="display: none;">stats:{{ diff_n }}/{{ infected }}/{{ red }}/{{ orange }}/{{ green }}</div>
 {% block tweety %}
 <nav class="level">
   <div class="level-item has-text-centered">
