@@ -66,10 +66,12 @@ def get_language_settings() -> Tuple[LanguageTracker, list, str, int]:
     l_num = len(l_list)
     return (user_lang, l_list, selector, l_num)
 
+
 def get_real_today() -> str:
     """ Output iso 8601 date """
     today = datetime.datetime.today()
     return today.isoformat().split(sep="T")[0]
+
 
 def get_template_vars() -> Tuple[korona.Session, dict]:
     """ Output default template vars for jinja """
@@ -603,7 +605,6 @@ async def hjem(request):
     # fetch minimal data
     s, response_dat = get_template_vars()
     today = s.datapoints[0]
-
     await request.send_push_promise("/css/bulma.min.css")
 
     # check subdomain
@@ -641,6 +642,7 @@ async def hjem(request):
                 today = None
             else:
                 today = datapoint
+                break
 
         if today is None:
             response_dat.update(
@@ -660,10 +662,17 @@ async def hjem(request):
 
             response_dat.update(s.book['ro']['0000'][today])
 
+    # heroku cache stale canary
+    green = response_dat.get('green')
+    orange = response_dat.get('orange')
+    red = response_dat.get('red')
+    canary = f"<!-- stats: {red}/{orange}/{green} -->"
+
     # construct rest of index vars
     response_dat.update(
         {
             "request": request,
+            "canary": canary,
             "menu_selected": 1 # 1 = hjem, 2=sp, 3=om
         }
     )
