@@ -1,6 +1,5 @@
 {% extends "base.template" %}
-<!-- stats:{{ diff_n }}/{{ infected }}/{{ red }}/{{ orange }}/{{ green }} -->
-
+{# stats:{{ diff_n }}/{{ infected }}/{{ red }}/{{ orange }}/{{ green }} #}
 {% block tweety %}
 <nav class="level">
   <div class="level-item has-text-centered">
