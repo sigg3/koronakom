@@ -1,5 +1,4 @@
 {% extends "base.template" %}
-<p id="canary" style="display: none;">{{ canary }}</p>
 {% block tweety %}
 <nav class="level">
   <div class="level-item has-text-centered">

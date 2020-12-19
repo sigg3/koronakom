@@ -662,17 +662,10 @@ async def hjem(request):
 
             response_dat.update(s.book['ro']['0000'][today])
 
-    # heroku cache stale canary
-    green = response_dat.get('green')
-    orange = response_dat.get('orange')
-    red = response_dat.get('red')
-    canary = f"stats: {red}/{orange}/{green}"
-
     # construct rest of index vars
     response_dat.update(
         {
             "request": request,
-            "canary": canary,
             "menu_selected": 1 # 1 = hjem, 2=sp, 3=om
         }
     )
