@@ -281,7 +281,7 @@ async def debug_output_state(request):
         "data": data
         }
     )
-    print("Debug: Outputting data dict to web viewer")
+    print("Debug: received request for debug info")
     dbgstr = ""
     for k,v in data.items(): dbgstr += f"{k} = {v} \n"
     dbgstr += f"\n datapoints:\n{datapoints}"
