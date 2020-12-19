@@ -1021,7 +1021,7 @@ async def check_data_integrity():
     # web page check (stale cache or something)
     corrupted = False
     print("Data integrity: Test front page data")
-    intro_page = "https://sjekk.kommune.nu/debug_info"
+    intro_page = "https://korona.kommune.nu"
     async with httpx.AsyncClient() as client:
         front = await client.get(intro_page)
 
