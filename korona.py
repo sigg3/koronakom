@@ -1026,9 +1026,9 @@ async def check_data_integrity():
         front = await client.get(intro_page)
 
     if front.is_error:
-        corrupted = True
+        print("Could not reach front page")
     else:
-        if front.text.count("NA") > 0:
+        if front.text.count("NA") > 1:
             corrupted = True
 
     if corrupted:
