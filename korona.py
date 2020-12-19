@@ -1020,24 +1020,16 @@ async def check_data_integrity():
 
     # web page check (stale cache or something)
     corrupted = False
-    print("Testing debug_info data using httpx.get")
-    debug_page = "https://sjekk.kommune.nu/debug_info"
-    intro_page = "https://korona.kommune.nu"
+    print("Data integrity: Test front page data")
+    intro_page = "https://sjekk.kommune.nu/debug_info"
     async with httpx.AsyncClient() as client:
-        site = await client.get(debug_page)
         front = await client.get(intro_page)
 
-    if site.is_error:
-        pass # Not sure we should pass or set to reboot
+    if front.is_error:
+        corrupted = True
     else:
-        if site.text.count("NA") > 8:
+        if front.text.count("NA") > 0:
             corrupted = True
-        else:
-            if front.is_error:
-                corrupted = True
-            else:
-                if front.text.count("NA") > 0:
-                    corrupted = True
 
     if corrupted:
         print("Cache is stale/dead, force app restart")
