@@ -1,6 +1,6 @@
 {% extends "base.template" %}
 {% block tweety %}
-<nav class="level">
+<nav class="level is-hidden-mobile"><!-- desktop -->
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Nye smittede</p>
@@ -13,6 +13,40 @@
       <p class="title">{{ infected }}</p>
     </div>
   </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Røde</p>
+      <p class="title">{{ red }}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Oransje</p>
+      <p class="title">{{ orange }}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Gr&oslash;nne</p>
+      <p class="title">{{ green }}</p>
+    </div>
+  </div>
+</nav>
+<nav class="level is-hidden-tablet"><!-- mobile-->
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Nye smittede</p>
+      <p class="title">{{ diff_n }}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Kommuner med smitte</p>
+      <p class="title">{{ infected }}</p>
+    </div>
+  </div>
+</nav>
+<nav class="level is-hidden-tablet"><!-- mobile-->
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Røde</p>
