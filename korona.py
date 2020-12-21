@@ -1022,14 +1022,19 @@ async def check_data_integrity():
     corrupted = False
     print("Data integrity: Test front page data")
     intro_page = "https://korona.kommune.nu"
+    debug_page = "https://sjekk.kommune.nu/debug_info"
     async with httpx.AsyncClient() as client:
         front = await client.get(intro_page)
+        back = await client.get(debug_page)
 
-    if front.is_error:
-        print("Could not reach front page")
+    if front.is_error or back.is_error:
+        print("Error: page down?")
     else:
         if front.text.count("NA") > 1:
             corrupted = True
+        else:
+            if back.text.count("NA") > 8:
+                corrupted = True
 
     if corrupted:
         print("Cache is stale/dead, force app restart")
