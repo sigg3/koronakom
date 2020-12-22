@@ -997,6 +997,10 @@ async def missing_data(control: list, data: dict) -> bool:
 
 async def check_data_integrity():
     """ Same as setup, but will delete big_book if corrupted """
+
+    print("one-off SystemExit test")
+    raise SystemExit # nuclear option
+
     # datetime.datetime.now().isoformat()
     #print('Data integrity check (n=10)')
     #pls_check = ['4214','4215','1144','3812','5414',
@@ -1040,6 +1044,7 @@ async def check_data_integrity():
         print("Cache is stale/dead, force app restart")
         right_now = datetime.datetime.now().isoformat()
         os.environ["heroku_app_restart"] = right_now
+        raise SystemExit # nuclear option
         # Changing conf var should trigger heroku restart
 
 
