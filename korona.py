@@ -996,11 +996,10 @@ async def missing_data(control: list, data: dict) -> bool:
 
 
 async def check_data_integrity():
-    """ Same as setup, but will delete big_book if corrupted """
-
-    print("one-off SystemExit test")
-    raise SystemExit # nuclear option
-
+    """
+    Test that web site is not stale, if so restart dynos.
+    Heroku's lazy restart sometimes entail stale cache..
+    """
     # datetime.datetime.now().isoformat()
     #print('Data integrity check (n=10)')
     #pls_check = ['4214','4215','1144','3812','5414',
@@ -1024,7 +1023,7 @@ async def check_data_integrity():
 
     # web page check (stale cache or something)
     corrupted = False
-    print("Data integrity: Test front page data")
+    print("Data integrity: Testing web site ..")
     intro_page = "https://korona.kommune.nu"
     debug_page = "https://sjekk.kommune.nu/debug_info"
     async with httpx.AsyncClient() as client:
@@ -1041,11 +1040,21 @@ async def check_data_integrity():
                 corrupted = True
 
     if corrupted:
-        print("Cache is stale/dead, force app restart")
-        right_now = datetime.datetime.now().isoformat()
-        os.environ["heroku_app_restart"] = right_now
-        raise SystemExit # nuclear option
-        # Changing conf var should trigger heroku restart
+        print("Data integrity: cache/page stale, restarting ..")
+        try:
+            api_token = os.environ["koronakom_api"]
+        except:
+            print("Err: could not access token :(")
+        else:
+            dynos = "https://api.heroku.com/apps/koronakom/dynos"
+            api_settings = {
+                "Content-Type": "application/json",
+                "Accept": "application/vnd.heroku+json; version=3",
+                "Authorization": f"Bearer {api_token}"
+            }
+            httpx.delete(dynos, headers=api_settings)
+    else:
+        print("Data integrity: all OK")
 
 
 
