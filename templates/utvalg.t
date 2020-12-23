@@ -1,7 +1,7 @@
 {% extends "base.template" %}
 
 {% block sector_1 %}
-<div class="tile is-ancestor mt-4 pb-4">
+<div class="tile is-ancestor mt-2 pb-1">
     <div class="tile is-4">
         &nbsp;
     </div>
