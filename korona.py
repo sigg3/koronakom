@@ -766,9 +766,18 @@ def get_datapoints(
         query_object.fresh = is_fresh_data(todays_data)
         #print(f"fresh_data available: {query_object.fresh}")
 
+    # Bad dates (bugfix for Norwegian holidays)
+    nor_holidays = ['2020-12-24', '2020-12-25', '2021-01-01']
+
     # Set artificial today
     today = datetime.datetime.today()
+    while today.isoformat().split(sep="T")[0] in nor_holidays:
+        today = today + datetime.timedelta(days=-1)
     today = get_nearest_businessday(today)
+
+    # Bad dates
+
+    if today.isoformat
 
     # push back 1 day if source is stale
     if not query_object.fresh:
