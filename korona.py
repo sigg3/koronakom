@@ -771,13 +771,10 @@ def get_datapoints(
 
     # Set artificial today
     today = datetime.datetime.today()
+    # skip "bad" (no-data) days
     while today.isoformat().split(sep="T")[0] in nor_holidays:
         today = today + datetime.timedelta(days=-1)
     today = get_nearest_businessday(today)
-
-    # Bad dates
-
-    if today.isoformat
 
     # push back 1 day if source is stale
     if not query_object.fresh:
