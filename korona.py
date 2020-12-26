@@ -749,7 +749,10 @@ def get_nearest_businessday(day:datetime) -> datetime:
         day = day + datetime.timedelta(days=-1)
 
     # Bad dates (bugfix for Norwegian holidays)
-    nor_holidays = ['2020-12-24', '2020-12-25', '2021-01-01']
+    nor_holidays = [
+                    '2020-12-24', '2020-12-25', '2020-12-26',
+                    '2020-12-31', '2021-01-01'
+                    ]
     while day.isoformat().split(sep="T")[0] in nor_holidays:
         day = day + datetime.timedelta(days=-1)
 
@@ -773,7 +776,11 @@ def get_datapoints(
         #print(f"fresh_data available: {query_object.fresh}")
 
     # Bad dates (bugfix for Norwegian holidays)
-    nor_holidays = ['2020-12-24', '2020-12-25', '2021-01-01']
+    nor_holidays = [
+                    '2020-12-24', '2020-12-25', '2020-12-26',
+                    '2020-12-31', '2021-01-01'
+                    ]
+
 
     # Set artificial today
     today = datetime.datetime.today()
