@@ -119,6 +119,13 @@
 {% block tweety %}
 {% endblock %}
 
+<!-- xmas holiday missing data notification -->
+<div class="notification is-warning">
+På grunn av juleferie mangler det tallmateriale fra FHI.
+Normal drift forventes fra medio januar 20201.
+</div>
+<!-- remove after we resume data gathering -->
+
 {% block sector_1 %}&nbsp;
 {% endblock %}
 
