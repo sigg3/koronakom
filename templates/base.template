@@ -120,9 +120,8 @@
 {% endblock %}
 
 <!-- xmas holiday missing data notification -->
-<div class="notification is-warning is-centered">
-På grunn av juleferie hos FHI mangler tallmateriale for enkelte dager.
-Normal drift forventes medio januar 2021.
+<div class="notification is-warning has-text-centered">
+På grunn av juleferie hos FHI mangler tallmateriale for enkelte dager. Normal drift forventes medio januar 2021.
 </div>
 <!-- remove after we resume data gathering -->
 
