@@ -1019,28 +1019,13 @@ async def check_data_integrity():
     Test that web site is not stale, if so restart dynos.
     Heroku's lazy restart sometimes entail stale cache..
     """
-    # datetime.datetime.now().isoformat()
-    #print('Data integrity check (n=10)')
-    #pls_check = ['4214','4215','1144','3812','5414',
-    #             '3813','1135','5439','5440','3007']
-    # running app_query also runs verify setup()
-    #data, _ = app_query(pls_check)
-    #_kingdom = data.pop('0000')
-
-    # file check
-    #if Path(s.store).is_file():
-    #    print(f'Data file: {s.store}')
-    #else:
-    #    print(f'Data file: {s.store} (missing)')
-
-    # dict check
-    #corrupted = await missing_data(pls_check, data)
-    #if corrupted:
-    #    print('Result: data corrupted')
-    #else:
-    #    print('Result: data OK')
-
     # web page check (stale cache or something)
+
+    # remove after mid January 2021
+    print("Abort data integrity check: X-mas holiday ..")
+    print(" => (remove after mid January 2021)"  )
+    return None
+
     corrupted = False
     print("Data integrity: Testing web site ..")
     intro_page = "https://korona.kommune.nu"
