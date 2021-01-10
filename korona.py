@@ -170,7 +170,7 @@ class Folkehelseinstituttet():
     def __init__(self, store:str):
         self.git = "https://raw.githubusercontent.com"
         self.fhi = "folkehelseinstituttet"
-        self.surveillance_data = "surveillance_data/master/covid19/"
+        self.surveillance_data = "surveillance_data/master/covid19"
         self.name = self.fhi.capitalize()
         #self.store = HDFStore('storage.h5') # on-disk store
         self.store = store
