@@ -562,8 +562,12 @@ def subdomain_kommune(kid:str, request):
         trend_plot = zerofill_plot()
         level_plot = zerofill_plot()
     else:
-        trend_plot = mini_plot_trend(kid)
-        level_plot = mini_plot_risk(diff_pro100k)
+        try:
+            trend_plot = mini_plot_trend(kid)
+            level_plot = mini_plot_risk(diff_pro100k)
+        except:
+            trend_plot = zerofill_plot()
+            level_plot = zerofill_plot()
 
     # Set strings
     hero_title = mini_dict['name']
