@@ -1021,11 +1021,6 @@ async def check_data_integrity():
     """
     # web page check (stale cache or something)
 
-    # remove after mid January 2021
-    print("Abort data integrity check: X-mas holiday ..")
-    print(" => (remove after mid January 2021)"  )
-    return None
-
     corrupted = False
     print("Data integrity: Testing web site ..")
     intro_page = "https://korona.kommune.nu"
