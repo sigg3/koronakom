@@ -690,8 +690,13 @@ def query_data(
             n, po, *pro = big_book['ro'][today]['0000']
             pro = pro[0]
             try:
-#                diff_n = big_book['ro']['2020-11-11']['0000'][0] # WTF
-                diff_n = big_book['ro'][two_weeks_ago]['0000'][0]
+                # legend
+                # big_book['ro']['2021-01-21']['0000']
+                # (59887, 5367580, 1115.71695251864, 'Norge')
+
+                # diff_n = big_book['ro']['2020-11-11']['0000'][0] # WTF
+                # diff_n = big_book['ro'][two_weeks_ago]['0000'][0] # 2 weeks                
+                diff_n = big_book['ro'][yesterday]['0000'][0] # last 24 hrs
                 if type(diff_n) is str:
                     pass
                 else:
