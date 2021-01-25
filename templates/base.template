@@ -119,12 +119,6 @@
 {% block tweety %}
 {% endblock %}
 
-<!-- xmas holiday missing data notification -->
-<div class="notification is-warning has-text-centered">
-På grunn av juleferie hos FHI mangler endel tallmateriale. Normal drift forventes f.o.m. uke 3-4.
-</div>
-<!-- remove after we resume data gathering -->
-
 {% block sector_1 %}&nbsp;
 {% endblock %}
 
