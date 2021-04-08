@@ -38,7 +38,7 @@
     <div class="container">
         <h1 class="title"><em>din</em>.kommune.nu</h1>
         <h2 class="subtitle">
-            Dette er en oppslagstjeneste for &aring; enkelt kunne <strong>sjekke gjeldende korona status</strong> for din kommune, ditt fylke eller landet forøvrig.
+            Dette er en oppslagstjeneste for &aring; enkelt kunne <strong>sjekke gjeldende koronastatus</strong> for din kommune, ditt fylke eller landet forøvrig.
             Tallene hentes daglig fra Folkehelseinstituttet og ble 
             {% if updated == real_today %}
             <span class="tag is-success is-light is-medium">
@@ -56,7 +56,7 @@
   <div class="container">
     <h1 class="title">Statistikk over fylker og kommuner i Norge</h1>
     <h2 class="subtitle">
-         Siden 2020 er det 11 fylker og 356 kommuner i landet v&aring;rt. Klikk p&aring; ditt fylke for &aring; se de mest relevante korona-tallene:
+         Siden 2020 er det 11 fylker og 356 kommuner i landet v&aring;rt. Klikk p&aring; ditt fylke for &aring; se de mest relevante koronatallene:
          <a href="https://agder-fylke.kommune.nu" title="Agder">Agder</a>,
          <a href="https://innlandet-fylke.kommune.nu" title="Innlandet">Innlandet</a>,
          <a href="https://more-og-romsdal-fylke.kommune.nu" title="M&oslash;re og Romsdal">Møre og Romsdal</a>,
