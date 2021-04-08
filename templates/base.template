@@ -112,7 +112,7 @@
         {% endif %}
       </h1>      
       <h2 class="subtitle is-3 is-hidden-mobile">{{ hero_subtitle }}</h2><!-- desktop -->
-      <!--<h2 class="subtitle is-4 is-hidden-tablet">{{ hero_subtitle }}</h2><!-- mobile  --> -->
+      <!--<h2 class="subtitle is-4 is-hidden-tablet">{{ hero_subtitle }}</h2><!-- mobile  -->
       <form action="https://sjekk.kommune.nu/" class="is-hidden-tablet" method="get">
             <div class="field ml-4 has-addons pt-3">
                 <p class="control is-hidden-tablet"><!-- mobile -->
