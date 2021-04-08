@@ -158,7 +158,7 @@
 {% endblock %}
 
 {% block sector_2 %}&nbsp;
-{% endblock %
+{% endblock %}
 
 
 <footer class="footer has-background-info-light pb-3 mb-0">
