@@ -119,6 +119,12 @@
 {% block tweety %}
 {% endblock %}
 
+{% block sector_1 %}&nbsp;
+{% endblock %}
+
+{% block sector_2 %}&nbsp;
+{% endblock %}
+
 {% block se_bottom %}
 <section">
     <div class="container pl-1 pr-1">
@@ -152,12 +158,6 @@
     </div>
   </div>
 </section>
-{% endblock %}
-
-{% block sector_1 %}&nbsp;
-{% endblock %}
-
-{% block sector_2 %}&nbsp;
 {% endblock %}
 
 
