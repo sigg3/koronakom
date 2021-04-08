@@ -112,18 +112,19 @@
         {% endif %}
       </h1>      
       <h2 class="subtitle is-3 is-hidden-mobile">{{ hero_subtitle }}</h2><!-- desktop -->
-      <!--<h2 class="subtitle is-4 is-hidden-tablet">{{ hero_subtitle }}</h2><!-- mobile  -->
+      <h2 class="subtitle is-4 is-hidden-tablet">{{ hero_subtitle }}</h2><!-- mobile  -->
+      <!--
       <form action="https://sjekk.kommune.nu/" class="is-hidden-tablet" method="get">
             <div class="field ml-4 has-addons pt-3">
-                <p class="control is-hidden-tablet"><!-- mobile -->
-                    <input name="s" class="input" type="text" size="13" placeholder="Kommune, fylke eller nøkkel*"><!-- use size=13 to keep in place -->
+                <p class="control is-hidden-tablet">
+                    <input name="s" class="input" type="text" size="13" placeholder="Kommune, fylke eller nøkkel*">
                 </p>
                 <p class="control is-hidden-tablet">
                     <button type="submit" class="button">S&oslash;k</button>
                 </p>
             </div>
        </form>
-      
+      -->
     </div>
   </div>
 </section>
