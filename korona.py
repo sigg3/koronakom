@@ -695,7 +695,7 @@ def query_data(
                 # (59887, 5367580, 1115.71695251864, 'Norge')
 
                 # diff_n = big_book['ro']['2020-11-11']['0000'][0] # WTF
-                # diff_n = big_book['ro'][two_weeks_ago]['0000'][0] # 2 weeks                
+                # diff_n = big_book['ro'][two_weeks_ago]['0000'][0] # 2 weeks
                 diff_n = big_book['ro'][yesterday]['0000'][0] # last 24 hrs
                 if type(diff_n) is str:
                     pass
@@ -756,7 +756,8 @@ def get_nearest_businessday(day:datetime) -> datetime:
     # Bad dates (bugfix for Norwegian holidays)
     nor_holidays = [
                     '2020-12-24', '2020-12-25', '2020-12-26',
-                    '2020-12-31', '2021-01-01'
+                    '2020-12-31', '2021-01-01', '2021-12-24',
+                    '2021-12-31'
                     ]
     while day.isoformat().split(sep="T")[0] in nor_holidays:
         day = day + datetime.timedelta(days=-1)
@@ -783,7 +784,8 @@ def get_datapoints(
     # Bad dates (bugfix for Norwegian holidays)
     nor_holidays = [
                     '2020-12-24', '2020-12-25', '2020-12-26',
-                    '2020-12-31', '2021-01-01'
+                    '2020-12-31', '2021-01-01', '2021-12-24',
+                    '2021-12-31'
                     ]
 
 
