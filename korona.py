@@ -641,7 +641,7 @@ def query_data(
                                 risk = 1 # orange
 
                             # save it
-                            big_book[kid]["risk"] =risk
+                            big_book[kid]["risk"] = risk
 
                             if doing_all:
                                 categories_count[risk] +=1
@@ -707,12 +707,20 @@ def query_data(
         except:
             n, po, pro, diff_n = 'NA', 'NA', 'NA', 'NA'
 
+        infected_counties = categories_count[3]
+        if categories_count[3] >= 356:
+            print(f"infected counties: {categories_count[3]} exceed total: 356") # debug
+            print("reset counter to maximum: 356 (might be ugly data in)") # TODO
+            infected_counties = 356
+            # must calcluate
+
+
         summary = {
                     'total_n': n,
                     'total_pop': po,
                     'total_pro100k': pro,
                     'diff_n': diff_n,
-                    'infected': categories_count[3],
+                    'infected': infected_counties, #categories_count[3],
                     'green': categories_count[0],
                     'orange': categories_count[1],
                     'red': categories_count[2]
@@ -739,6 +747,7 @@ def query_data(
                         'red': 'NA'
                        }
     # infected: muncipalities with positive diff since yesterday
+    # This ^ counter seems to receive some bogus data. Double count?
 
     # save to end-user
     small_book['0000'] = summary
