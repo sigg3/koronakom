@@ -653,6 +653,7 @@ async def hjem(request):
             response_dat.update(
                     {
                     'diff_n': 'NA', # number of new infected people last 24 hrs
+                    'outbreaks': 'NA', # classified red or orange
                     'infected': 'NA', # muncipalities with infected (bool)
                     'orange': 'NA',
                     'green': 'NA', # muncipalities
