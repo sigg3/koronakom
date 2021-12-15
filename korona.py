@@ -622,8 +622,10 @@ def query_data(
                     big_book[kid][dtitle] = [0 if x < 0 else x for x in diffs]
 
                     # Update if we're doing all
-                    if doing_all and diff_one > 0:
-                        categories_count[3] += 1
+                    if doing_all:
+                        categories_count[4] += 1
+                        if diff_one > 0:
+                            categories_count[3] += 1
 
                     # EU risk assessment (pro100k diff last 14 days)
                     if dtype == "total_pro100k":
@@ -707,12 +709,18 @@ def query_data(
         except:
             n, po, pro, diff_n = 'NA', 'NA', 'NA', 'NA'
 
+
+        # categories_count: green, orange, red, infected, N
+
+        calc_max = categories_count[0] + categories_count[1] + categories_count[2]
         infected_counties = categories_count[3]
-        if categories_count[3] >= 356:
-            print(f"infected counties: {categories_count[3]} exceed total: 356") # debug
+        if categories_count[3] >= calc_max:
+            print(f"infected counties: {categories_count[3]} exceed total: {calc_max}") # debug
+            if calc_max > 356: print("calculated max exceeding 356 limit too")
             print("reset counter to maximum: 356 (might be ugly data in)") # TODO
             infected_counties = 356
-            # must calcluate
+            print(f"debug: doing all N was {categories_count[4]}")
+            # must check sources
 
 
         summary = {
