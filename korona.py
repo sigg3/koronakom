@@ -624,8 +624,8 @@ def query_data(
                     # Update if we're doing all
                     if doing_all:
                         categories_count[4] += 1
-                        if diff_one == 0:
-                            categories_count[3] += 1 # count green ones
+                        if diff_one > 0:
+                            categories_count[3] += 1 # county with infected last 24 hrs
 
                     # EU risk assessment (pro100k diff last 14 days)
                     if dtype == "total_pro100k":
@@ -710,10 +710,26 @@ def query_data(
             n, po, pro, diff_n = 'NA', 'NA', 'NA', 'NA'
 
 
-
+        # TODO
+        # This gave us the wrong numbers:
+        # It gaves us number of counties with NEW CASES last 24hrs ONLY.
         calc_max = categories_count[0] + categories_count[1] + categories_count[2]
-        infected_counties = calc_max - categories_count[3]
-        if categories_count[3] >= 356:
+        # infected_counties = calc_max - categories_count[3]
+        #
+        # We want something like "Counties with infected" instead, i.e.
+        # categories_count[0] + categories_count[1] + categories_count[3]
+        # where we subtract counties in 0 and 1 from the count in 3...!
+        # This means re-working the counter logic a bit. # TODO:
+        #   Make counter that
+
+        infected_counties = categories_count[3]
+        # categories_count[3] == county with infected last 24 hrs
+        # ^^ This is too low, some counties are red but no new infected today
+        # but they will still count to the semantics of "Kommuner med smitte" and
+        # "Kommune med registrert smitte"... It's a semantic interpretation that
+        # goes beyond the red/orange/green categorizations.
+
+        if infected_counties >= calc_max:
             print(f"infected counties: {categories_count[3]} exceed total: {calc_max}") # debug
             if calc_max > 356: print("calculated max exceeding 356 limit too")
             print("reset counter to maximum: 356 (might be ugly data in)") # TODO
