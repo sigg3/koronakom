@@ -592,9 +592,6 @@ def query_data(
                 diff_ten = big_book[kid][two_weeks_ago][dtype]
                 skip_calc = False
 
-                # Avoid counting county as infected twice
-                infected_not_counted = True
-
                 # check before calc
                 for ins in now, diff_one, diff_three, diff_five, diff_ten:
                     if type(ins) is str: skip_calc = True ; break
@@ -626,9 +623,7 @@ def query_data(
 
                     # Update if we're doing all
                     if doing_all and diff_one > 0:
-                        if infected_not_counted:
-                            categories_count[3] += 1
-                            infected_not_counted = False
+                        categories_count[3] += 1
 
                     # EU risk assessment (pro100k diff last 14 days)
                     if dtype == "total_pro100k":
@@ -648,9 +643,8 @@ def query_data(
                             # save it
                             big_book[kid]["risk"] =risk
 
-                            if doing_all and infected_not_counted:
-                                categories_count[risk] +=1
-                                infected_not_counted = False
+                            # if doing_all:
+                            #     categories_count[risk] +=1
 
                 # Save to small book too
                 small_book[kid][dtitle] = big_book[kid][dtitle]
