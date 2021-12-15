@@ -643,8 +643,8 @@ def query_data(
                             # save it
                             big_book[kid]["risk"] =risk
 
-                            # if doing_all:
-                            #     categories_count[risk] +=1
+                            if doing_all:
+                                categories_count[risk] +=1
 
                 # Save to small book too
                 small_book[kid][dtitle] = big_book[kid][dtitle]
