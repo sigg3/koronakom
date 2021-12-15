@@ -10,7 +10,7 @@
   <div class="level-item has-text-centered is-hidden-mobile">
     <div>
       <p class="heading">Kommuner med smitte</p>
-      <p class="title">{{ infected }}</p>
+      <p class="title">{{ outbreaks }}</p>
     </div>
   </div>
   <div class="level-item has-text-centered">
