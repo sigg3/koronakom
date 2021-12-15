@@ -710,13 +710,16 @@ def query_data(
             n, po, pro, diff_n = 'NA', 'NA', 'NA', 'NA'
 
 
+        # legend categories_count:
+        # green, orange, red, greens with virus, any with virus
+
         # all_counties total
         calc_max = categories_count[0] + categories_count[1] + categories_count[2]
 
         # We want something like "Counties with infected" instead
 
         #infected_counties = categories_count[3]
-        outbreak_counties = categories_count[0] + categories_count[1]
+        outbreak_counties = categories_count[1] + categories_count[2]
 
         # categories_count[3] == green counties with virus last 24 hrs
         infection_present = outbreak_counties + categories_count[3]
@@ -725,11 +728,14 @@ def query_data(
         infected_now = categories_count[4]
 
         # This debug info might be unnecessary
-        if infection_present >= calc_max:
-            print(f"infected counties: {categories_count[3]} exceed total: {calc_max}") # debug
+        if infection_present < calc_max:
+            infected_counties = infection_present
+        else:
+            print(f"infected counties: {infection_present} exceed total: {calc_max}") # debug
             if calc_max > 356: print("calculated max exceeding 356 limit too")
             if outbreak_counties < calc_max:
-                print(f"set counter to == outbreak_counties {outbreak_counties}")
+                print(f"reset counter to outbreak_counties {outbreak_counties}")
+                infected_counties = outbreak_counties
             else:
                 print("reset counter to hard coded 356 (might be ugly data in)") # TODO
                 infected_counties = 356
@@ -741,7 +747,7 @@ def query_data(
                     'total_pro100k': pro,
                     'diff_n': diff_n,
                     'outbreaks': outbreak_counties,
-                    'infected': infection_present, # last 24 hours + red and orange
+                    'infected': infected_counties, # last 24 hours + red and orange
                     'green': categories_count[0],
                     'orange': categories_count[1],
                     'red': categories_count[2]
