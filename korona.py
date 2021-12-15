@@ -622,10 +622,8 @@ def query_data(
                     big_book[kid][dtitle] = [0 if x < 0 else x for x in diffs]
 
                     # Update if we're doing all
-                    if doing_all:
-                        categories_count[4] += 1
-                        if diff_one > 0:
-                            categories_count[3] += 1 # county with infected last 24 hrs
+                    if doing_all and diff_one > 0:
+                        categories_count[4] += 1 # counties with infection last 24 hrs
 
                     # EU risk assessment (pro100k diff last 14 days)
                     if dtype == "total_pro100k":
@@ -637,6 +635,8 @@ def query_data(
                         else:
                             if diff_test < 25:
                                 risk = 0 # green
+                                if doing_all and diff_one > 0:
+                                    categories_count[3] +=1 # green counties with virus last 24 hrs
                             elif diff_test > 150:
                                 risk = 2 # red
                             else:
@@ -710,36 +710,29 @@ def query_data(
             n, po, pro, diff_n = 'NA', 'NA', 'NA', 'NA'
 
 
-        # TODO
-        # This gave us the wrong numbers:
-        # It gaves us number of counties with NEW CASES last 24hrs ONLY.
+        # all_counties total
         calc_max = categories_count[0] + categories_count[1] + categories_count[2]
-        # infected_counties = calc_max - categories_count[3]
-        #
-        # We want something like "Counties with infected" instead, i.e.
-        # categories_count[0] + categories_count[1] + categories_count[3]
-        # where we subtract counties in 0 and 1 from the count in 3...!
-        # This means re-working the counter logic a bit. # TODO:
-        #   Make counter that
 
-        infected_counties = categories_count[3]
-        red_and_orange = categories_count[0] + categories_count[1]
-        # categories_count[3] == county with infected last 24 hrs
-        # ^^ This is too low, some counties are red but no new infected today
-        # but they will still count to the semantics of "Kommuner med smitte" and
-        # "Kommune med registrert smitte"... It's a semantic interpretation that
-        # goes beyond the red/orange/green categorizations.
+        # We want something like "Counties with infected" instead
 
-        if infected_counties < red_and_orange:
-            infected_counties = red_and_orange # alright workaround
+        #infected_counties = categories_count[3]
+        outbreak_counties = categories_count[0] + categories_count[1]
 
-        if infected_counties >= calc_max:
+        # categories_count[3] == green counties with virus last 24 hrs
+        infection_present = outbreak_counties + categories_count[3]
+
+        # categories_count[4] == counties with infection last 24 hrs
+        infected_now = categories_count[4]
+
+        # This debug info might be unnecessary
+        if infection_present >= calc_max:
             print(f"infected counties: {categories_count[3]} exceed total: {calc_max}") # debug
             if calc_max > 356: print("calculated max exceeding 356 limit too")
-            print("reset counter to maximum: 356 (might be ugly data in)") # TODO
-            infected_counties = 356
-            print(f"debug: doing all N was {categories_count[4]}")
-            # must check sources
+            if outbreak_counties < calc_max:
+                print(f"set counter to == outbreak_counties {outbreak_counties}")
+            else:
+                print("reset counter to hard coded 356 (might be ugly data in)") # TODO
+                infected_counties = 356
 
 
         summary = {
@@ -747,7 +740,8 @@ def query_data(
                     'total_pop': po,
                     'total_pro100k': pro,
                     'diff_n': diff_n,
-                    'infected': infected_counties, #categories_count[3],
+                    'outbreaks': outbreak_counties,
+                    'infected': infection_present, # last 24 hours + red and orange
                     'green': categories_count[0],
                     'orange': categories_count[1],
                     'red': categories_count[2]
@@ -768,6 +762,7 @@ def query_data(
                         'total_pop': 'NA',
                         'total_pro100k': 'NA',
                         'diff_n': 'NA', # number of new infected people last 24 hrs
+                        'outbreaks': 'NA',
                         'infected': 'NA', # muncipalities with infected (bool)
                         'green': 'NA', # muncipalities
                         'orange': 'NA',
