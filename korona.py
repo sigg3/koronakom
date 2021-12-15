@@ -728,7 +728,7 @@ def query_data(
         infected_now = categories_count[4]
 
         # This debug info might be unnecessary
-        if infection_present < calc_max:
+        if infection_present <= calc_max:
             infected_counties = infection_present
         else:
             print(f"infected counties: {infection_present} exceed total: {calc_max}") # debug
