@@ -723,11 +723,15 @@ def query_data(
         #   Make counter that
 
         infected_counties = categories_count[3]
+        red_and_orange = categories_count[0] + categories_count[1]
         # categories_count[3] == county with infected last 24 hrs
         # ^^ This is too low, some counties are red but no new infected today
         # but they will still count to the semantics of "Kommuner med smitte" and
         # "Kommune med registrert smitte"... It's a semantic interpretation that
         # goes beyond the red/orange/green categorizations.
+
+        if infected_counties < red_and_orange:
+            infected_counties = red_and_orange # alright workaround
 
         if infected_counties >= calc_max:
             print(f"infected counties: {categories_count[3]} exceed total: {calc_max}") # debug
